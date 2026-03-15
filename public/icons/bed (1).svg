@@ -1,0 +1,15 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M69.5033 9.62012H24.4967L2 49.6201L24.4967 89.6201H69.5033L92 49.6201L69.5033 9.62012Z" fill="#F6F0F0"/>
+<path d="M51 19.2092V40.5456C51 42.5781 50.2098 44.5274 48.8033 45.9646C47.3968 47.4018 45.4891 48.2092 43.5 48.2092C41.5109 48.2092 39.6032 47.4018 38.1967 45.9646C36.7902 44.5274 36 42.5781 36 40.5456V38.5621" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M51 19.2092V40.5456C51 42.5781 51.8428 44.5274 53.3431 45.9646C54.8434 47.4018 56.8783 48.2092 59 48.2092C61.1217 48.2092 63.1566 47.4018 64.6569 45.9646C66.1572 44.5274 67 42.5781 67 40.5456V38.5621" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M42 37.2092H30L31.0597 27.2092H40.9403L42 37.2092Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M30 35.2092H42" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M73 37.2094H61L62.0597 27.2094H71.9403L73 37.2094Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M61 35.2094H72" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M42.0023 14.2094H61V14.5804C61 15.5428 60.5759 16.4659 59.821 17.1464C59.0662 17.827 58.0424 18.2094 56.9748 18.2094H46.0252C44.9576 18.2094 43.9338 17.827 43.1789 17.1464C42.424 16.4659 42 15.5428 42 14.5804V14.2094H42.0023Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M42.8595 76.5525H36V83.412H42.8595V76.5525Z" stroke="black" stroke-width="0.7" stroke-miterlimit="10"/>
+<path d="M37.291 76.5525L36.0039 64.9104L39.4337 76.5525L42.2235 66.8812L42.4502 76.8268" stroke="black" stroke-width="0.7" stroke-linejoin="bevel"/>
+<path d="M38.4922 73.3679L39.9584 62L41.0078 70.7206" stroke="black" stroke-width="0.7" stroke-linejoin="bevel"/>
+<path d="M26 83.5H46" stroke="black" stroke-miterlimit="10"/>
+<path d="M74.9838 10.2505H29.9772L7.48047 50.2471L29.9772 90.2505H74.9838L97.4805 50.2471L74.9838 10.2505Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
