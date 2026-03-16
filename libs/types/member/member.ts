@@ -1,7 +1,6 @@
 import { MemberAuthType, MemberStatus, MemberType } from '../../enums/member.enum';
-import { MeFollowed } from '../follow/follow';
-import { MeLiked } from '../like/like';
-import { TotalCounter } from '../common';
+import { LikedByMe } from '../like/like';
+import { FollowedByMe } from '../follow/follow';
 
 export interface Member {
 	_id: string;
@@ -12,10 +11,10 @@ export interface Member {
 	memberNick: string;
 	memberPassword?: string;
 	memberFullName?: string;
-	memberImage?: string;
+	memberImage: string;
 	memberAddress?: string;
 	memberDesc?: string;
-	memberFurnitures: number;
+	memberDesigns: number;
 	memberArticles: number;
 	memberFollowers: number;
 	memberFollowings: number;
@@ -30,8 +29,14 @@ export interface Member {
 	createdAt: Date;
 	updatedAt: Date;
 	accessToken?: string;
-	meLiked?: MeLiked[];
-	meFollowed?: MeFollowed[];
+
+	/** from aggregation **/
+	likedByMe?: LikedByMe[];
+	followedByMe?: FollowedByMe[];
+}
+
+export interface TotalCounter {
+	total: number;
 }
 
 export interface Members {
