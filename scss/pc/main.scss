@@ -2,6 +2,7 @@
 @use './about/about';
 @use './service/service';
 @use './furniture/furniture-detail';
+@use './furniture/furniture-list';
 
 // ==============================
 // GLOBAL LAYOUT
@@ -234,8 +235,10 @@
 			display: flex;
 			align-items: center;
 			justify-content: flex-end;
+			gap: 24px;
 
 			img {
+				width: 70px;
 				height: 40px;
 				object-fit: contain;
 			}

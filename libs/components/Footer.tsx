@@ -74,8 +74,8 @@ const Footer = () => {
 						<Stack className="footer-mobile-section">
 							<Typography className="footer-col-title">Get on mobile</Typography>
 							<Stack className="footer-app-links" gap="12px">
-								<img src="/icons/apple_store.svg" alt="App Store" className="app-badge" />
 								<img src="/icons/Google play store.svg" alt="Google Play" className="app-badge" />
+								<img src="/icons/apple_store.svg" alt="App Store" className="app-badge" />
 							</Stack>
 						</Stack>
 						<Stack className="footer-social-icons" direction="row" gap="12px" alignItems="center">
@@ -91,13 +91,17 @@ const Footer = () => {
 				<Stack className="footer-bottom-row" direction="row" justifyContent="space-between" alignItems="center">
 					<Stack direction="row" alignItems="center" gap="8px">
 						<Typography className="footer-copyright">
-							<span className="highlight">StyleCasa </span>
+							© <span className="highlight">StyleCasa </span>
 							2023 All right reserved.
 						</Typography>
 					</Stack>
-					<Box className="footer-payment-logos">
-						<img src="/icons/original 1.svg" alt="Payment methods" />
-					</Box>
+					<Stack className="footer-payment-logos" direction="row" alignItems="center" gap="24px">
+						<img src="/img/payment_logo/world_pay.png" alt="WorldPay" />
+						<img src="/img/payment_logo/amazon_logo.png" alt="Amazon" />
+						<img src="/img/payment_logo/pay_pal.png" alt="PayPal" />
+						<img src="/img/payment_logo/visa_pay.png" alt="VISA" />
+						<img src="/img/payment_logo/master_card.png" alt="MasterCard" />
+					</Stack>
 				</Stack>
 			</Box>
 		</Stack>
