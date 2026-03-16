@@ -12,14 +12,14 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ furniture, onLike }: ProductCardProps) => {
-	const isLiked = furniture.meLiked?.[0]?.myFavorite ?? false;
+	const isLiked = furniture.likedByMe?.[0]?.myFavorite ?? false;
 	const imagePath = furniture.furnitureImages?.[0]
 		? `${REACT_APP_API_URL}/${furniture.furnitureImages[0]}`
 		: '/img/furniture/placeholder.png';
 
-	const hasDiscount = furniture.furnitureClearancePrice && furniture.furnitureClearancePrice < furniture.furniturePrice;
+	const hasDiscount = furniture.furnitureLastChancePrice && furniture.furnitureLastChancePrice < furniture.furniturePrice;
 	const discountPercent = hasDiscount
-		? Math.round(((furniture.furniturePrice - furniture.furnitureClearancePrice!) / furniture.furniturePrice) * 100)
+		? Math.round(((furniture.furniturePrice - furniture.furnitureLastChancePrice!) / furniture.furniturePrice) * 100)
 		: 0;
 
 	return (
@@ -46,7 +46,7 @@ const ProductCard = ({ furniture, onLike }: ProductCardProps) => {
 				</Link>
 				<Stack direction="row" alignItems="center" gap={1}>
 					<Typography variant="body1" fontWeight={600} className="product-price">
-						${hasDiscount ? furniture.furnitureClearancePrice?.toFixed(2) : furniture.furniturePrice.toFixed(2)}
+						${hasDiscount ? furniture.furnitureLastChancePrice?.toFixed(2) : furniture.furniturePrice.toFixed(2)}
 					</Typography>
 					{hasDiscount && (
 						<Typography variant="body2" className="product-price-old">

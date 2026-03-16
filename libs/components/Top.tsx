@@ -74,8 +74,17 @@ const Top = () => {
 						<Link href="/furniture" className={router.pathname.includes('/furniture') ? 'active' : ''}>
 							Shop
 						</Link>
+						<Link href="/designers" className={router.pathname.includes('/designers') ? 'active' : ''}>
+							Designers
+						</Link>
 						<Link href="/community" className={router.pathname.includes('/community') ? 'active' : ''}>
 							Blog
+						</Link>
+						<Link href="/about" className={router.pathname.includes('/about') ? 'active' : ''}>
+							About
+						</Link>
+						<Link href="/cs" className={router.pathname.includes('/cs') ? 'active' : ''}>
+							Help
 						</Link>
 					</Stack>
 				</Stack>

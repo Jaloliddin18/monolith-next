@@ -1,4 +1,13 @@
+import React from 'react';
+import { Stack } from '@mui/material';
+import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+
 const Community = () => {
-  return <div>COMMUNITY</div>;
+	return (
+		<Stack className="community-page">
+			<div>Community</div>
+		</Stack>
+	);
 };
-export default Community;
+
+export default withLayoutBasic(Community);

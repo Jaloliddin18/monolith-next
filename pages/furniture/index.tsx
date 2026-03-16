@@ -1,4 +1,13 @@
+import React from 'react';
+import { Stack } from '@mui/material';
+import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+
 const FurnitureList = () => {
-  return <div>Furniture List</div>;
+	return (
+		<Stack className="furniture-list-page">
+			<div>Furniture List</div>
+		</Stack>
+	);
 };
-export default FurnitureList;
+
+export default withLayoutBasic(FurnitureList);
