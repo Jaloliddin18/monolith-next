@@ -1,0 +1,832 @@
+// ==============================
+// ABOUT PAGE
+// ==============================
+.about-page {
+	font-family: 'Jost', sans-serif;
+}
+
+// ==============================
+// ABOUT HERO (Title + Video)
+// ==============================
+.about-hero {
+	padding: 60px 0 0;
+	text-align: center;
+
+	.about-hero-content {
+		max-width: 746px;
+		margin: 0 auto;
+		padding: 0 40px;
+	}
+
+	.about-hero-title {
+		font-family: 'Jost', sans-serif;
+		font-size: 40px;
+		font-weight: 500;
+		line-height: 1;
+		color: #000;
+		margin-bottom: 24px;
+	}
+
+	.about-hero-subtitle {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 27px;
+		color: #999;
+		max-width: 559px;
+		margin: 0 auto;
+	}
+
+	.about-hero-video {
+		width: 100%;
+		height: 700px;
+		background: #bfbfbf;
+		margin-top: 40px;
+		position: relative;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.video-overlay {
+			position: absolute;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.15);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.play-btn {
+			width: 60px;
+			height: 60px;
+			background: rgba(168, 100, 100, 0.8);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: background 0.3s;
+
+			svg {
+				color: #fff;
+				font-size: 28px;
+				margin-left: 3px;
+			}
+
+			&:hover {
+				background: rgba(168, 100, 100, 1);
+			}
+		}
+	}
+}
+
+// ==============================
+// PARTNER LOGOS
+// ==============================
+.about-partners {
+	padding: 30px 0;
+	max-width: 1140px;
+	margin: 0 auto;
+	opacity: 0.4;
+
+	.partner-logo {
+		height: 60px;
+		display: flex;
+		align-items: center;
+
+		img {
+			max-height: 100%;
+			object-fit: contain;
+		}
+	}
+}
+
+// ==============================
+// WHY CHOOSE US
+// ==============================
+.about-why-choose {
+	padding: 60px 150px;
+
+	.why-choose-container {
+		max-width: 1140px;
+		margin: 0 auto;
+		gap: 60px;
+	}
+
+	.why-choose-image {
+		width: 655px;
+		height: 450px;
+		background: #000;
+		overflow: hidden;
+		flex-shrink: 0;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.why-choose-content {
+		.why-choose-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #0f1928;
+			margin-bottom: 12px;
+		}
+
+		.why-choose-desc {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #999;
+			max-width: 425px;
+			margin-bottom: 40px;
+		}
+	}
+
+	.why-choose-features {
+		.feature-item {
+			padding: 14px 0;
+			gap: 24px;
+			width: 364px;
+
+			.feature-icon {
+				width: 40px;
+				height: 40px;
+				flex-shrink: 0;
+
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			.feature-text {
+				font-family: 'Jost', sans-serif;
+				font-size: 20px;
+				font-weight: 400;
+				line-height: 30px;
+				color: #0f1928;
+			}
+		}
+	}
+}
+
+// ==============================
+// STATS ROW
+// ==============================
+.about-stats {
+	max-width: 1140px;
+	margin: 0 auto;
+	padding: 0 150px 60px;
+
+	.stat-item {
+		padding: 24px;
+		width: 170px;
+
+		.stat-value {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #a86464;
+			line-height: 1;
+			margin-bottom: 12px;
+		}
+
+		.stat-label {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #000;
+		}
+	}
+}
+
+// ==============================
+// AWARDS SECTION
+// ==============================
+.about-awards {
+	background: #f9f9f9;
+	padding: 60px 150px;
+
+	.awards-container {
+		max-width: 1140px;
+		margin: 0 auto;
+		gap: 76px;
+	}
+
+	.awards-image {
+		width: 461px;
+		height: 500px;
+		background: #000;
+		overflow: hidden;
+		flex-shrink: 0;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.awards-content {
+		.awards-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #000;
+			margin-bottom: 50px;
+		}
+	}
+
+	.awards-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.awards-row {
+		display: flex;
+		gap: 69px;
+	}
+
+	.award-item {
+		width: 267px;
+
+		.award-year {
+			font-family: 'Jost', sans-serif;
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 30px;
+			color: #a86464;
+			margin-bottom: 12px;
+		}
+
+		.award-name {
+			font-family: 'Jost', sans-serif;
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 30px;
+			color: #000;
+		}
+	}
+}
+
+// ==============================
+// SHOP BY CATEGORY (About page variant)
+// ==============================
+.about-category {
+	padding: 60px 150px;
+	background: #fff;
+
+	.about-category-container {
+		max-width: 1140px;
+		margin: 0 auto;
+	}
+
+	.category-header {
+		margin-bottom: 50px;
+
+		.category-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #000;
+		}
+
+		.category-view-all {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 500;
+			color: #a86464;
+			text-decoration: none;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			svg {
+				font-size: 20px;
+			}
+		}
+	}
+
+	.category-items {
+		gap: 24px;
+
+		.category-item {
+			width: 170px;
+			height: 170px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-end;
+			padding-bottom: 24px;
+			gap: 10px;
+
+			.category-icon {
+				width: 100px;
+				height: 100px;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+				}
+			}
+
+			.category-name {
+				font-family: 'Jost', sans-serif;
+				font-size: 18px;
+				font-weight: 500;
+				line-height: 27px;
+				color: #000;
+				text-align: center;
+			}
+		}
+	}
+}
+
+// ==============================
+// FURNITURE SERVICES
+// ==============================
+.about-services {
+	padding: 60px 150px;
+
+	.about-services-container {
+		max-width: 1140px;
+		margin: 0 auto;
+	}
+
+	.services-header {
+		margin-bottom: 50px;
+
+		.services-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #0f1928;
+		}
+
+		.services-nav {
+			gap: 24px;
+
+			.nav-arrow {
+				cursor: pointer;
+				color: #000;
+				font-size: 24px;
+			}
+		}
+	}
+
+	.services-cards {
+		gap: 24px;
+	}
+
+	.service-card-item {
+		width: 364px;
+		height: 314px;
+		border: 1px solid #e6e6e6;
+		background: #fff;
+		padding: 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+
+		.service-card-icon {
+			width: 60px;
+			height: 60px;
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.service-card-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 30px;
+			color: #0f1928;
+			margin-bottom: 8px;
+		}
+
+		.service-card-desc {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #999;
+			max-width: 300px;
+		}
+
+		.service-card-link {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 500;
+			color: #a86464;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 14px 0;
+
+			svg {
+				font-size: 20px;
+			}
+		}
+	}
+}
+
+// ==============================
+// WIDE RANGE OF SELECTION
+// ==============================
+.about-wide-range {
+	padding: 60px 150px;
+
+	.wide-range-container {
+		max-width: 1140px;
+		margin: 0 auto;
+		gap: 24px;
+	}
+
+	.wide-range-left {
+		flex-shrink: 0;
+
+		.wide-range-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #000;
+			margin-bottom: 24px;
+		}
+
+		.wide-range-desc {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #999;
+			max-width: 529px;
+			margin-bottom: 40px;
+		}
+	}
+
+	.room-list {
+		width: 558px;
+
+		.room-item {
+			border-top: 1px solid #e6e6e6;
+			padding: 24px 40px;
+			cursor: pointer;
+			transition: color 0.3s;
+
+			.room-name {
+				font-family: 'Jost', sans-serif;
+				font-size: 24px;
+				font-weight: 500;
+				line-height: 36px;
+				color: #000;
+			}
+
+			&.active .room-name,
+			&:hover .room-name {
+				color: #a86464;
+			}
+
+			svg {
+				font-size: 24px;
+				color: #000;
+			}
+		}
+	}
+
+	.btn-view-collection {
+		background: #a86464 !important;
+		color: #fff !important;
+		font-family: 'Jost', sans-serif !important;
+		font-size: 18px !important;
+		font-weight: 500 !important;
+		padding: 14px 32px !important;
+		border-radius: 0 !important;
+		text-transform: uppercase !important;
+		margin-top: 40px;
+	}
+
+	.wide-range-image {
+		flex: 1;
+		height: 744px;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+// ==============================
+// FEEDBACK / TESTIMONIALS
+// ==============================
+.about-feedback {
+	padding: 60px 0 60px 150px;
+
+	.feedback-header {
+		max-width: 1140px;
+		margin-bottom: 50px;
+
+		.feedback-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #0f1928;
+		}
+
+		.feedback-nav {
+			gap: 24px;
+
+			.nav-arrow {
+				cursor: pointer;
+				color: #000;
+				font-size: 24px;
+			}
+		}
+	}
+
+	.feedback-cards {
+		gap: 24px;
+		overflow-x: auto;
+		padding-right: 40px;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	.feedback-card {
+		width: 364px;
+		min-width: 364px;
+		height: 222px;
+		border: 1px solid #e6e6e6;
+		background: #fff;
+		padding: 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+
+		.feedback-user {
+			gap: 14px;
+
+			.feedback-avatar {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background: #ddd;
+				overflow: hidden;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+
+			.feedback-user-name {
+				font-family: 'Jost', sans-serif;
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 27px;
+				color: #000;
+			}
+
+			.feedback-user-role {
+				font-family: 'Jost', sans-serif;
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 20px;
+				color: #999;
+			}
+		}
+
+		.feedback-stars {
+			display: flex;
+			gap: 0;
+
+			svg {
+				font-size: 20px;
+				color: #f89c01;
+			}
+		}
+
+		.feedback-text {
+			font-family: 'Jost', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 24px;
+			color: #999;
+			max-width: 300px;
+		}
+	}
+}
+
+// ==============================
+// FEATURES ROW (Free Shipping, etc.)
+// ==============================
+.about-features {
+	padding: 60px 150px 150px;
+
+	.features-container {
+		max-width: 1140px;
+		margin: 0 auto;
+		gap: 24px;
+	}
+
+	.feature-box {
+		width: 267px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 14px;
+
+		.feature-box-icon {
+			width: 100px;
+			height: 100px;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+
+		.feature-box-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 24px;
+			font-weight: 500;
+			line-height: 36px;
+			color: #000;
+		}
+
+		.feature-box-desc {
+			font-family: 'Jost', sans-serif;
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 24px;
+			color: #737373;
+		}
+	}
+}
+
+// ==============================
+// NEWSLETTER BANNER
+// ==============================
+.about-newsletter {
+	max-width: 1140px;
+	margin: 0 auto;
+	padding: 0 150px;
+	position: relative;
+
+	.newsletter-container {
+		background: #fef5e6;
+		padding: 40px;
+		padding-left: 420px;
+		position: relative;
+	}
+
+	.newsletter-icon {
+		position: absolute;
+		left: 161px;
+		top: 12px;
+		width: 58px;
+		height: 58px;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.newsletter-title {
+		font-family: 'Jost', sans-serif;
+		font-size: 30px;
+		font-weight: 500;
+		color: #000;
+		margin-bottom: 24px;
+
+		.highlight {
+			color: #ff1e1e;
+		}
+	}
+
+	.newsletter-form {
+		gap: 12px;
+
+		.newsletter-input {
+			width: 350px;
+			padding: 14px;
+			border: none;
+			background: #fff;
+			font-family: 'Jost', sans-serif;
+			font-size: 16px;
+			color: #000;
+			outline: none;
+
+			&::placeholder {
+				color: #999;
+			}
+		}
+
+		.btn-subscribe {
+			background: #a86464 !important;
+			color: #e1efe1 !important;
+			font-family: 'Jost', sans-serif !important;
+			font-size: 18px !important;
+			font-weight: 500 !important;
+			padding: 14px 32px !important;
+			border-radius: 0 !important;
+			text-transform: uppercase !important;
+		}
+	}
+}
+
+// ==============================
+// INSTAGRAM (About page variant)
+// ==============================
+.about-instagram {
+	padding: 60px 150px;
+	max-width: 1440px;
+	margin: 0 auto;
+
+	.instagram-header {
+		max-width: 1140px;
+		margin: 0 auto 50px;
+
+		.instagram-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #000;
+		}
+
+		.btn-follow {
+			border: 1px solid #e6e6e6 !important;
+			color: #000 !important;
+			font-family: 'Jost', sans-serif !important;
+			font-size: 18px !important;
+			font-weight: 500 !important;
+			padding: 14px 32px !important;
+			border-radius: 0 !important;
+			text-transform: uppercase !important;
+		}
+	}
+
+	.instagram-grid {
+		width: 100%;
+		gap: 24px;
+
+		.instagram-item {
+			width: 220px;
+			height: 220px;
+			background: #f5f5f5;
+			overflow: hidden;
+			position: relative;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.instagram-overlay {
+				position: absolute;
+				inset: 0;
+				background: rgba(0, 0, 0, 0.3);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				opacity: 0;
+				transition: opacity 0.3s;
+
+				svg {
+					color: #fff;
+					font-size: 40px;
+				}
+			}
+
+			&:hover .instagram-overlay {
+				opacity: 1;
+			}
+		}
+	}
+}
