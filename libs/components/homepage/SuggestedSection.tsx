@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from './ProductCard';
 
@@ -10,12 +11,15 @@ interface SuggestedSectionProps {
 
 const SuggestedSection = ({ furnitures, onLike }: SuggestedSectionProps) => {
 	return (
-		<Stack className="suggested-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={4}>
-				Suggested for you
-			</Typography>
-
-			<Stack direction="row" className="product-grid" gap={3} justifyContent="center">
+		<Stack className="suggested-section" gap="50px">
+			<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
+				<Typography className="section-title-text">Suggested for you</Typography>
+				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
+					<Typography>View All product</Typography>
+					<ArrowOutwardIcon sx={{ fontSize: 20 }} />
+				</Stack>
+			</Stack>
+			<Stack direction="row" gap="24px">
 				{furnitures.slice(0, 3).map((furniture) => (
 					<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
 				))}

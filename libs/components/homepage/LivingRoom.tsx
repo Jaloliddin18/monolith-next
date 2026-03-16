@@ -1,44 +1,31 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
-import { Furniture } from '../../types/furniture/furniture';
-import ProductCard from './ProductCard';
+import { Box, Stack, Typography, Button } from '@mui/material';
 
-interface LivingRoomProps {
-	furnitures: Furniture[];
-	onLike: (id: string) => void;
-}
-
-const LivingRoom = ({ furnitures, onLike }: LivingRoomProps) => {
+const LivingRoom = () => {
 	return (
-		<Stack className="living-room-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={4}>
-				Living Room Furniture to Suit Your Lifestyle
-			</Typography>
-
-			<Stack direction="row" gap={3}>
-				{/* Featured Large Card */}
-				<Box className="living-featured">
-					<Box className="living-featured-img">
-						<img src="/img/furniture/placeholder.png" alt="Lounge Chair" />
-					</Box>
-					<Typography variant="h6" mt={1}>Lounge Chair</Typography>
-					<Typography variant="body2" color="primary" fontWeight={600}>$32.10</Typography>
+		<Stack className="living-room-section" alignItems="center" gap="50px">
+			<Typography className="section-title-text">Living Room Furniture to Suit Your Lifestyle</Typography>
+			<Stack direction="row" gap="24px">
+				<Box className="living-room-image">
+					<img src="/img/furniture/living_room_1.jpg" alt="Living Room 1" />
+					<Box className="living-dot" sx={{ left: '70%', top: '56%' }} />
+					<Box className="living-dot" sx={{ left: '51%', top: '71%' }} />
 				</Box>
-
-				{/* Sidebar Filters + Grid */}
-				<Box className="living-grid-area">
-					<Stack direction="row" gap={2} mb={3} className="living-filters">
-						{['Top selection', 'Categories', 'Color', 'NewArrivals', 'MustHaves'].map((filter) => (
-							<Typography key={filter} variant="body2" className="filter-tab">
-								{filter}
-							</Typography>
-						))}
-					</Stack>
-
-					<Stack direction="row" flexWrap="wrap" gap={2}>
-						{furnitures.slice(0, 6).map((furniture) => (
-							<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
-						))}
+				<Box className="living-room-image">
+					<img src="/img/furniture/living_room_2.jpg" alt="Living Room 2" />
+					<Box className="living-dot" sx={{ left: '35%', top: '62%' }} />
+					<Box className="living-dot" sx={{ left: '90%', top: '64%' }} />
+					<Box className="living-dot" sx={{ left: '84%', top: '17%' }} />
+					{/* Product popup tooltip */}
+					<Stack className="living-product-popup" alignItems="center" gap="24px">
+						<Stack alignItems="center" gap="12px">
+							<Typography className="popup-name">Lounge Chair</Typography>
+							<Typography className="popup-price">$ 32.10</Typography>
+						</Stack>
+						<Button className="btn-buy-now" variant="contained">
+							BUY NOW
+						</Button>
+						<Box className="popup-arrow" />
 					</Stack>
 				</Box>
 			</Stack>

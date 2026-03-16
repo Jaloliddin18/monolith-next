@@ -1,90 +1,101 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Button } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
-import HeadsetMicOutlinedIcon from '@mui/icons-material/HeadsetMicOutlined';
 
 const AwesomeServices = () => {
 	return (
-		<Stack className="awesome-services-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={5}>
-				Our Awesome Services
-			</Typography>
-
-			{/* Top Row - 2 big cards */}
-			<Stack className="awesome-top-row" direction="row" gap={3}>
-				<Box className="awesome-card big">
-					<img src="/img/furniture/service-selection.png" alt="Product Selection" />
-					<Box className="awesome-card-content">
-						<Typography variant="h5" fontWeight={600}>
-							Extensive Product Selection
-						</Typography>
-						<Typography variant="body2" color="text.secondary">
-							The diverse product selection allows customers to find furniture pieces that align with their style.
-						</Typography>
-						<Stack direction="row" alignItems="center" gap={1} className="card-link">
-							<Typography variant="body2">Learn More</Typography>
-							<ArrowForwardIcon sx={{ fontSize: 16 }} />
-						</Stack>
+		<Stack className="awesome-section" alignItems="center">
+			<Typography className="awesome-title">Our Awesome Services</Typography>
+			<Stack className="awesome-grid" direction="row" gap="24px">
+				{/* Left Column - 2 service cards */}
+				<Stack gap="24px">
+					<Box className="svc-card">
+						<Box className="svc-card-icon">
+							<img src="/icons/Package.svg" alt="Product Selection" width={60} height={60} />
+						</Box>
+						<Box>
+							<Typography className="svc-card-title">Extensive Product Selection</Typography>
+							<Typography className="svc-card-desc">
+								The diverse product selection allows customers to find furniture pieces that align with their style.
+							</Typography>
+							<Box className="svc-card-link">
+								<span>Learn more</span>
+								<ArrowForwardIcon />
+							</Box>
+						</Box>
 					</Box>
-				</Box>
-
-				<Box className="awesome-card big">
-					<img src="/img/furniture/service-design.png" alt="Design Assistance" />
-					<Box className="awesome-card-content">
-						<Typography variant="h5" fontWeight={600}>
-							Personalized Design Assistance
-						</Typography>
-						<Typography variant="body2" color="text.secondary">
-							To assist customers in creating their dream home, StyleCasa provides personalized design assistance.
-						</Typography>
-						<Stack direction="row" alignItems="center" gap={1} className="card-link">
-							<Typography variant="body2">Learn More</Typography>
-							<ArrowForwardIcon sx={{ fontSize: 16 }} />
-						</Stack>
+					<Box className="svc-card">
+						<Box className="svc-card-icon">
+							<img src="/icons/cube_icon.svg" alt="Design Assistance" width={60} height={60} />
+						</Box>
+						<Box>
+							<Typography className="svc-card-title">Personalized Design Assistance</Typography>
+							<Typography className="svc-card-desc">
+								To assist customers in creating their dream home, StyleCasa provides personalized design assistance.
+							</Typography>
+							<Box className="svc-card-link">
+								<span>Learn more</span>
+								<ArrowForwardIcon />
+							</Box>
+						</Box>
 					</Box>
-				</Box>
-			</Stack>
+				</Stack>
 
-			{/* Bottom Row - sale banner + 2 small cards */}
-			<Stack className="awesome-bottom-row" direction="row" gap={3} mt={3}>
-				<Box className="sale-banner">
-					<Typography className="sale-text" variant="h4">
-						Get 50% off
-					</Typography>
-					<Typography variant="body2">world of stylish furniture</Typography>
-					<Stack direction="row" alignItems="center" gap={2} mt={2}>
-						<Typography className="sale-price old">$45.99</Typography>
-						<Typography className="sale-price new">$21.99</Typography>
+				{/* Center - Sale Banner */}
+				<Stack className="awesome-sale-card" alignItems="center">
+					<Stack className="awesome-sale-content" alignItems="center">
+						<Typography className="awesome-sale-title">
+							Get <span className="green">50%</span> off
+						</Typography>
+						<Stack className="awesome-sale-details" alignItems="center">
+							<Typography className="awesome-sale-subtitle">world of stylish furniture</Typography>
+							<Stack direction="row" alignItems="center" gap="14px">
+								<Typography className="awesome-sale-old">$45.99</Typography>
+								<Typography className="awesome-sale-price">$21.99</Typography>
+							</Stack>
+						</Stack>
+						<Button className="btn-shop-now" variant="contained">
+							SHOP NOW
+						</Button>
 					</Stack>
-					<Box className="sale-image">
-						<img src="/img/furniture/sale-chair.png" alt="Sale" />
+					<Box className="awesome-sale-image">
+						<img src="/img/furniture/soft_chair.png" alt="Sale Chair" />
 					</Box>
-				</Box>
+				</Stack>
 
-				<Box className="awesome-card small">
-					<Box className="awesome-card-content">
-						<SecurityOutlinedIcon sx={{ fontSize: 40, color: '#a0616a' }} />
-						<Typography variant="h6" fontWeight={600} mt={1}>
-							Secure Payment Options
-						</Typography>
-						<Typography variant="body2" color="text.secondary">
-							Customer information and payment details are protected through secure encryption protocols.
-						</Typography>
+				{/* Right Column - 2 service cards */}
+				<Stack gap="24px">
+					<Box className="svc-card">
+						<Box className="svc-card-icon">
+							<img src="/icons/security.svg" alt="Secure Payment" width={60} height={60} />
+						</Box>
+						<Box>
+							<Typography className="svc-card-title">Secure Payment Options</Typography>
+							<Typography className="svc-card-desc">
+								Customer information and payment details are protected through secure encryption protocols.
+							</Typography>
+							<Box className="svc-card-link">
+								<span>Learn more</span>
+								<ArrowForwardIcon />
+							</Box>
+						</Box>
 					</Box>
-				</Box>
-
-				<Box className="awesome-card small">
-					<Box className="awesome-card-content">
-						<HeadsetMicOutlinedIcon sx={{ fontSize: 40, color: '#a0616a' }} />
-						<Typography variant="h6" fontWeight={600} mt={1}>
-							Customer Support
-						</Typography>
-						<Typography variant="body2" color="text.secondary">
-							Interacting with customers through social media platforms or newsletters to share updates.
-						</Typography>
+					<Box className="svc-card">
+						<Box className="svc-card-icon">
+							<img src="/icons/c_icon.svg" alt="Customer Support" width={60} height={60} />
+						</Box>
+						<Box>
+							<Typography className="svc-card-title">Customer Support</Typography>
+							<Typography className="svc-card-desc">
+								Interacting with customers through social media platforms or newsletters to share updates
+							</Typography>
+							<Box className="svc-card-link">
+								<span>Learn more</span>
+								<ArrowForwardIcon />
+							</Box>
+						</Box>
 					</Box>
-				</Box>
+				</Stack>
 			</Stack>
 		</Stack>
 	);

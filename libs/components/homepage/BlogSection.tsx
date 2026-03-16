@@ -18,7 +18,7 @@ const blogs = [
 	{
 		category: 'Workshop to Home',
 		date: 'Jun 27, 2023',
-		title: 'Masters of Wood: Meet the Visionary Carpenters Transforming',
+		title: 'Masters of Wood: Meet the Visionary Carpenters Transforming ',
 		image: '/img/furniture/blog-3.png',
 	},
 	{
@@ -31,32 +31,23 @@ const blogs = [
 
 const BlogSection = () => {
 	return (
-		<Stack className="blog-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={4}>
-				Our Latest Blog
-			</Typography>
-
-			<Stack direction="row" className="blog-grid" gap={3}>
+		<Stack className="blog-section" alignItems="center" gap="50px">
+			<Typography className="section-title-text">Our Latest Blog</Typography>
+			<Stack direction="row" flexWrap="wrap" gap="24px" sx={{ width: 1140 }}>
 				{blogs.map((blog, index) => (
 					<Box key={index} className="blog-card">
 						<Box className="blog-card-img">
 							<img src={blog.image} alt={blog.title} />
 						</Box>
-						<Box className="blog-card-content">
-							<Stack direction="row" gap={2} mb={1}>
-								<Typography variant="caption" className="blog-category">
-									{blog.category}
-								</Typography>
-								<Typography variant="caption" color="text.secondary">
-									{blog.date}
-								</Typography>
+						<Stack className="blog-card-content" gap="10px">
+							<Stack direction="row" gap="14px" alignItems="center">
+								<Typography className="blog-category">{blog.category}</Typography>
+								<Typography className="blog-date">{blog.date}</Typography>
 							</Stack>
 							<Link href="/community">
-								<Typography variant="body1" fontWeight={500} className="blog-title">
-									{blog.title}
-								</Typography>
+								<Typography className="blog-title">{blog.title}</Typography>
 							</Link>
-						</Box>
+						</Stack>
 					</Box>
 				))}
 			</Stack>

@@ -1,8 +1,6 @@
-import React from 'react';
 import { Stack } from '@mui/material';
 import withLayoutHome from '../libs/components/layout/LayoutHome';
 
-// Homepage sections
 import HeroSection from '../libs/components/homepage/HeroSection';
 import IntroSection from '../libs/components/homepage/IntroSection';
 import ServicesSection from '../libs/components/homepage/ServicesSection';
@@ -27,13 +25,13 @@ const Home = () => {
 			<IntroSection />
 			<ServicesSection />
 			<AwesomeServices />
-			<NewestChair newFurnitures={[]} onLike={() => {}} />
+			<NewestChair />
 			<TrendingNow trendFurnitures={[]} onLike={() => {}} />
-			<ShopByCategory furnitures={[]} onLike={() => {}} />
+			<ShopByCategory />
 			<SuggestedSection furnitures={[]} onLike={() => {}} />
 			<SaleBanner />
 			<TopRated furnitures={[]} onLike={() => {}} />
-			<LivingRoom furnitures={[]} onLike={() => {}} />
+			<LivingRoom />
 			<TopSelection furnitures={[]} onLike={() => {}} />
 			<StoreFinder />
 			<FaqSection />

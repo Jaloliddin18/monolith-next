@@ -1,6 +1,7 @@
-import React from 'react';
-import { Box, Stack, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React, { useState } from 'react';
+import { Box, Stack, Typography } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowDownwardIcon from '@mui/icons-material/SouthWest';
 
 const faqs = [
 	{
@@ -10,7 +11,8 @@ const faqs = [
 	},
 	{
 		question: 'How long will it take to receive my order?',
-		answer: 'Delivery times vary based on your location and chosen shipping method. Standard delivery typically takes 5-10 business days.',
+		answer:
+			'Delivery times vary based on your location and chosen shipping method. Standard delivery typically takes 5-10 business days.',
 	},
 	{
 		question: 'What is your return policy?',
@@ -23,28 +25,32 @@ const faqs = [
 ];
 
 const FaqSection = () => {
-	return (
-		<Stack className="faq-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={4}>
-				Frequently asked questions
-			</Typography>
+	const [expanded, setExpanded] = useState(0);
 
-			<Box className="faq-container">
+	return (
+		<Stack className="faq-section" alignItems="center" gap="50px">
+			<Typography className="section-title-text">Frequently asked questions</Typography>
+			<Stack className="faq-list">
 				{faqs.map((faq, index) => (
-					<Accordion key={index} className="faq-accordion" defaultExpanded={index === 0}>
-						<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-							<Typography variant="body1" fontWeight={500}>
-								{faq.question}
-							</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography variant="body2" color="text.secondary">
-								{faq.answer}
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
+					<Box
+						key={index}
+						className={`faq-item ${expanded === index ? 'faq-item-expanded' : ''}`}
+						onClick={() => setExpanded(expanded === index ? -1 : index)}
+					>
+						<Stack className="faq-question" direction="row" justifyContent="space-between" alignItems="center">
+							<Typography className="faq-question-text">{faq.question}</Typography>
+							{expanded === index ? (
+								<ArrowDownwardIcon sx={{ fontSize: 32, color: '#000' }} />
+							) : (
+								<ArrowForwardIcon sx={{ fontSize: 32, color: '#000' }} />
+							)}
+						</Stack>
+						{expanded === index && (
+							<Typography className="faq-answer">{faq.answer}</Typography>
+						)}
+					</Box>
 				))}
-			</Box>
+			</Stack>
 		</Stack>
 	);
 };

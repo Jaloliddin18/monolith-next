@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Button } from '@mui/material';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from './ProductCard';
 
@@ -10,14 +10,20 @@ interface TopRatedProps {
 
 const TopRated = ({ furnitures, onLike }: TopRatedProps) => {
 	return (
-		<Stack className="top-rated-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={4}>
-				Top Rated Furniture
-			</Typography>
-
-			<Stack direction="row" className="product-grid" gap={3} justifyContent="center">
+		<Stack className="top-rated-section" direction="row" justifyContent="space-between" alignItems="center">
+			<Stack className="top-rated-left" gap="40px">
+				<Typography className="section-title-text">
+					Top Rated
+					<br />
+					Furniture
+				</Typography>
+				<Button className="btn-outline-brown" variant="outlined">
+					View All
+				</Button>
+			</Stack>
+			<Stack direction="row" gap="24px">
 				{furnitures.slice(0, 3).map((furniture) => (
-					<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
+					<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} size="small" />
 				))}
 			</Stack>
 		</Stack>

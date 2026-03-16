@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Stack, Typography, Button } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from './ProductCard';
 
@@ -10,23 +11,16 @@ interface TrendingNowProps {
 
 const TrendingNow = ({ trendFurnitures, onLike }: TrendingNowProps) => {
 	return (
-		<Stack className="trending-section">
-			<Stack direction="row" justifyContent="space-between" alignItems="center" className="section-header">
-				<Box>
-					<Typography variant="h5" color="primary">
-						Trendsetting Designs
-					</Typography>
-					<Typography className="section-title" variant="h2">
-						Upgrade Your Seating Game
-					</Typography>
-				</Box>
-				<Button variant="outlined" className="btn-view-all">
-					Trending Now
-				</Button>
+		<Stack className="trending-section" gap="50px">
+			<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
+				<Typography className="section-title-text">Trending Now</Typography>
+				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
+					<Typography>View All product</Typography>
+					<ArrowOutwardIcon sx={{ fontSize: 20 }} />
+				</Stack>
 			</Stack>
-
-			<Stack direction="row" className="product-grid" gap={3}>
-				{trendFurnitures.map((furniture) => (
+			<Stack direction="row" flexWrap="wrap" gap="24px">
+				{trendFurnitures.slice(0, 6).map((furniture) => (
 					<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
 				))}
 			</Stack>

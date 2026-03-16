@@ -1,0 +1,692 @@
+// ==============================
+// FURNITURE DETAIL PAGE
+// ==============================
+.furniture-detail-page {
+	font-family: 'Jost', sans-serif;
+}
+
+// ==============================
+// BREADCRUMB
+// ==============================
+.detail-breadcrumb {
+	padding: 24px 150px;
+	font-family: 'Jost', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+
+	a {
+		color: #000;
+		transition: color 0.3s;
+
+		&:hover {
+			color: #a86464;
+		}
+	}
+
+	span {
+		color: #999;
+		margin-left: 8px;
+
+		&.current {
+			color: #000;
+		}
+	}
+}
+
+// ==============================
+// MAIN PRODUCT SECTION
+// ==============================
+.detail-main {
+	padding: 24px 150px;
+	max-width: 1440px;
+	gap: 24px;
+}
+
+// Left: Image Gallery
+.detail-images {
+	width: 558px;
+	flex-shrink: 0;
+	gap: 24px;
+	align-items: center;
+
+	.detail-main-image {
+		width: 558px;
+		height: 450px;
+		background: #f9f9f9;
+		overflow: hidden;
+		position: relative;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		.expand-btn {
+			position: absolute;
+			top: 14px;
+			right: 14px;
+			width: 40px;
+			height: 40px;
+			background: #fff;
+			border-radius: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+		}
+
+		.image-dots {
+			position: absolute;
+			bottom: 14px;
+			left: 50%;
+			transform: translateX(-50%);
+			gap: 6px;
+
+			.dot {
+				width: 6px;
+				height: 6px;
+				border-radius: 50px;
+				background: #d9d9d9;
+				cursor: pointer;
+
+				&.active {
+					background: #000;
+				}
+			}
+		}
+	}
+
+	.detail-thumbnails {
+		width: 558px;
+		gap: 24px;
+		align-items: center;
+		position: relative;
+
+		.thumb-nav-btn {
+			position: absolute;
+			left: -12px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 24px;
+			height: 24px;
+			background: #fff;
+			border-radius: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 5px 5px 20px 0px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			z-index: 2;
+		}
+
+		.thumbnail {
+			flex: 1;
+			height: 121px;
+			background: #f9f9f9;
+			overflow: hidden;
+			cursor: pointer;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			&.active {
+				border: 2px solid #a86464;
+			}
+		}
+	}
+}
+
+// Right: Product Info
+.detail-info {
+	flex: 1;
+
+	.detail-info-main {
+		display: flex;
+		flex-direction: column;
+		gap: 28px;
+		padding-bottom: 24px;
+	}
+
+	.detail-top-row {
+		width: 558px;
+	}
+
+	.rating-badge {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		background: #379237;
+		border-radius: 4px;
+		padding: 3px 6px;
+
+		span {
+			font-family: 'Jost', sans-serif;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 20px;
+			color: #fff;
+		}
+	}
+
+	.review-count {
+		font-family: 'Jost', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 20px;
+		color: #999;
+	}
+
+	.detail-title {
+		font-family: 'Jost', sans-serif;
+		font-size: 30px;
+		font-weight: 500;
+		color: #000;
+		width: 558px;
+	}
+
+	.detail-subtitle {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 27px;
+		color: #9c9c9c;
+		width: 558px;
+	}
+
+	.detail-price-row {
+		align-items: center;
+	}
+
+	.detail-price {
+		font-family: 'Jost', sans-serif;
+		font-size: 30px;
+		font-weight: 500;
+		color: #000;
+	}
+
+	.detail-price-old {
+		font-family: 'Jost', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 20px;
+		color: #999;
+		text-decoration: line-through;
+	}
+
+	.detail-discount {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 27px;
+		color: #379237;
+	}
+
+	// Countdown
+	.detail-countdown-section {
+		gap: 14px;
+	}
+
+	.countdown-label {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 27px;
+		color: #a86464;
+	}
+
+	.countdown-timer {
+		gap: 4px;
+	}
+
+	.countdown-circle {
+		width: 60px;
+		height: 60px;
+		background: #f6f0f0;
+		border-radius: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		span {
+			font-family: 'Jost', sans-serif;
+			font-size: 20px;
+			font-weight: 600;
+			line-height: 30px;
+			color: #a86464;
+		}
+	}
+
+	.countdown-colon {
+		font-family: 'Jost', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		color: #000;
+	}
+
+	.countdown-labels {
+		span {
+			width: 60px;
+			text-align: center;
+			font-family: 'Jost', sans-serif;
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 18px;
+			color: #4c2d2d;
+		}
+	}
+
+	.detail-label {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 27px;
+		color: #999;
+	}
+
+	// Quantity
+	.quantity-selector {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 24px;
+		border: 1px solid #e6e6e6;
+		padding: 6px 12px;
+
+		.quantity-value {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 27px;
+			color: #000;
+		}
+	}
+
+	// Color swatches
+	.color-swatch {
+		width: 24px;
+		height: 24px;
+		cursor: pointer;
+		transition: box-shadow 0.3s;
+
+		&.active {
+			border: 2px solid #000;
+			box-shadow: 0px 5px 10px 2px rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	.stock-label {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 27px;
+		color: #999;
+	}
+
+	// Add to cart
+	.btn-add-to-cart {
+		background: #a86464 !important;
+		color: #fff !important;
+		font-family: 'Jost', sans-serif !important;
+		font-size: 18px !important;
+		font-weight: 500 !important;
+		line-height: 27px !important;
+		padding: 14px 32px !important;
+		border-radius: 0 !important;
+		text-transform: uppercase !important;
+		box-shadow: none !important;
+		width: 558px;
+
+		&:hover {
+			background: #8f5555 !important;
+		}
+	}
+
+	// Delivery
+	.detail-delivery {
+		.delivery-title-row {
+			padding: 14px 0;
+		}
+
+		.delivery-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 500;
+			line-height: 27px;
+			color: #000;
+		}
+
+		.delivery-input {
+			width: 364px;
+			background: #f9f9f9;
+			padding: 13px 12px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.placeholder {
+				font-family: 'Jost', sans-serif;
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 24px;
+				color: #bfbfbf;
+			}
+
+			.check-btn {
+				font-family: 'Jost', sans-serif;
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 24px;
+				color: #a86464;
+				cursor: pointer;
+			}
+		}
+	}
+
+	// Trust badges
+	.detail-trust-badges {
+		gap: 14px;
+
+		.trust-text {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #000;
+		}
+	}
+
+	// Offers section
+	.detail-offers {
+		border-top: 1px solid #e6e6e6;
+		padding: 24px 0;
+		gap: 14px;
+
+		.offers-list {
+			list-style: disc;
+			padding-left: 27px;
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+
+			li {
+				font-family: 'Jost', sans-serif;
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 27px;
+				color: #000;
+				max-width: 558px;
+			}
+		}
+	}
+
+	// Description section
+	.detail-description {
+		border-top: 1px solid #e6e6e6;
+		padding: 24px 0;
+		gap: 14px;
+
+		.desc-text {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #999;
+			max-width: 558px;
+		}
+	}
+
+	.section-heading {
+		font-family: 'Jost', sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 36px;
+		color: #000;
+	}
+}
+
+// ==============================
+// SHARED SECTION STYLES
+// ==============================
+.section-header-row {
+	max-width: 1140px;
+	width: 100%;
+}
+
+.section-title-lg {
+	font-family: 'Jost', sans-serif;
+	font-size: 40px;
+	font-weight: 500;
+	color: #000;
+}
+
+.btn-all-reviews {
+	border-color: #e6e6e6 !important;
+	color: #000 !important;
+	font-family: 'Jost', sans-serif !important;
+	font-size: 16px !important;
+	font-weight: 500 !important;
+	text-transform: uppercase !important;
+	border-radius: 0 !important;
+	padding: 14px 24px !important;
+}
+
+// ==============================
+// REVIEWS SECTION
+// ==============================
+.detail-reviews-section {
+	padding: 60px 150px;
+	gap: 50px;
+
+	.reviews-list {
+		max-width: 1140px;
+		width: 100%;
+	}
+
+	.review-item {
+		display: flex;
+		gap: 24px;
+		padding: 40px 0;
+		border-bottom: 1px solid #e6e6e6;
+
+		&:first-child {
+			padding-top: 0;
+		}
+	}
+
+	.review-user-col {
+		width: 200px;
+		flex-shrink: 0;
+		gap: 8px;
+	}
+
+	.review-user-name {
+		font-family: 'Jost', sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 36px;
+		color: #000;
+	}
+
+	.review-content-col {
+		flex: 1;
+		gap: 14px;
+	}
+
+	.review-title {
+		font-family: 'Jost', sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 36px;
+		color: #000;
+	}
+
+	.review-date {
+		font-family: 'Jost', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 20px;
+		color: #999;
+	}
+
+	.review-text {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		line-height: 27px;
+		color: #000;
+		max-width: 752px;
+	}
+
+	.review-images {
+		margin-top: 14px;
+	}
+
+	.review-img-thumb {
+		width: 170px;
+		height: 120px;
+		border-radius: 8px;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+// ==============================
+// PRODUCT CARDS (Favourites / Similar)
+// ==============================
+.detail-favourites-section,
+.detail-similar-section {
+	padding: 60px 150px;
+	gap: 50px;
+
+	.products-row {
+		max-width: 1140px;
+		width: 100%;
+	}
+}
+
+.product-card-sm {
+	width: 267px;
+	flex-shrink: 0;
+
+	.product-card-sm-img {
+		width: 267px;
+		height: 267px;
+		background: #f9f9f9;
+		overflow: hidden;
+		margin-bottom: 24px;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.product-card-sm-info {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.rating-badge-sm {
+		display: flex;
+		align-items: center;
+		gap: 2px;
+		background: #379237;
+		border-radius: 4px;
+		padding: 3px 6px;
+
+		span {
+			font-family: 'Jost', sans-serif;
+			font-size: 12px;
+			font-weight: 500;
+			color: #fff;
+		}
+	}
+
+	.rating-count-sm {
+		font-family: 'Jost', sans-serif;
+		font-size: 12px;
+		font-weight: 400;
+		color: #999;
+	}
+
+	.product-sm-title {
+		font-family: 'Jost', sans-serif;
+		font-size: 20px;
+		font-weight: 500;
+		line-height: 30px;
+		color: #000;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.product-sm-price {
+		font-family: 'Jost', sans-serif;
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 27px;
+		color: #000;
+	}
+
+	.product-sm-old-price {
+		font-family: 'Jost', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 20px;
+		color: #999;
+		text-decoration: line-through;
+	}
+}
+
+// ==============================
+// FAQ SECTION
+// ==============================
+.detail-faq-section {
+	padding: 60px 150px;
+	gap: 50px;
+
+	.faq-list {
+		max-width: 1140px;
+		width: 100%;
+	}
+
+	.faq-item {
+		border-bottom: 1px solid #e6e6e6;
+		padding: 30px 0;
+		cursor: pointer;
+
+		.faq-question-row {
+			width: 100%;
+		}
+
+		.faq-question {
+			font-family: 'Jost', sans-serif;
+			font-size: 24px;
+			font-weight: 400;
+			line-height: 36px;
+			color: #000;
+		}
+
+		.faq-answer {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #999;
+			max-width: 940px;
+			margin-top: 14px;
+		}
+	}
+}

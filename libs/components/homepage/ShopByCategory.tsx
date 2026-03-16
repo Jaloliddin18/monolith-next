@@ -1,39 +1,34 @@
-import React, { useState } from 'react';
-import { Box, Stack, Typography, Button } from '@mui/material';
-import { Furniture } from '../../types/furniture/furniture';
-import ProductCard from './ProductCard';
+import React from 'react';
+import { Box, Stack, Typography } from '@mui/material';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
-const categories = ['Lamp', 'Desks', 'Chair', 'Sofas', 'Bed', 'Table'];
+const categories = [
+	{ icon: '/icons/bed.svg', label: 'Lemp' },
+	{ icon: '/icons/oval_icon.svg', label: 'Desks' },
+	{ icon: '/icons/chair.svg', label: 'Chair' },
+	{ icon: '/icons/window_icon.svg', label: 'Sofas' },
+	{ icon: '/icons/bed.svg', label: 'Bed' },
+	{ icon: '/icons/oval_icon.svg', label: 'Table' },
+];
 
-interface ShopByCategoryProps {
-	furnitures: Furniture[];
-	onLike: (id: string) => void;
-}
-
-const ShopByCategory = ({ furnitures, onLike }: ShopByCategoryProps) => {
-	const [activeCategory, setActiveCategory] = useState('Chair');
-
+const ShopByCategory = () => {
 	return (
-		<Stack className="category-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={4}>
-				Shop by Category
-			</Typography>
-
-			<Stack direction="row" justifyContent="center" gap={2} className="category-tabs" mb={4}>
-				{categories.map((cat) => (
-					<Button
-						key={cat}
-						className={`category-tab ${activeCategory === cat ? 'active' : ''}`}
-						onClick={() => setActiveCategory(cat)}
-					>
-						{cat}
-					</Button>
-				))}
+		<Stack className="category-section" alignItems="center" gap="50px">
+			<Stack className="category-header" direction="row" justifyContent="space-between" alignItems="center">
+				<Typography className="section-title-text">Shop by Category</Typography>
+				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
+					<Typography>View All </Typography>
+					<ArrowOutwardIcon sx={{ fontSize: 20 }} />
+				</Stack>
 			</Stack>
-
-			<Stack direction="row" className="product-grid" gap={3} justifyContent="center">
-				{furnitures.slice(0, 4).map((furniture) => (
-					<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
+			<Stack className="category-grid" direction="row" gap="24px">
+				{categories.map((cat) => (
+					<Stack key={cat.label} className="category-item" alignItems="center" justifyContent="flex-end" gap="10px">
+						<Box className="category-icon">
+							<img src={cat.icon} alt={cat.label} width={100} height={100} />
+						</Box>
+						<Typography className="category-label">{cat.label}</Typography>
+					</Stack>
 				))}
 			</Stack>
 		</Stack>

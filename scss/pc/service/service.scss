@@ -1,0 +1,299 @@
+// ==============================
+// SERVICE PAGE
+// ==============================
+.service-page {
+	font-family: 'Jost', sans-serif;
+}
+
+// ==============================
+// OUR AWESOME SERVICES (6-card grid)
+// ==============================
+.svc-awesome {
+	padding: 60px 150px;
+	text-align: center;
+
+	.svc-awesome-title {
+		font-family: 'Jost', sans-serif;
+		font-size: 40px;
+		font-weight: 500;
+		color: #0f1928;
+		margin-bottom: 50px;
+	}
+
+	.svc-awesome-grid {
+		max-width: 1140px;
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+	}
+
+	.svc-card {
+		width: 364px;
+		height: 314px;
+		border: 1px solid #e6e6e6;
+		background: #fff;
+		padding: 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		text-align: left;
+
+		.svc-card-icon {
+			width: 60px;
+			height: 60px;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+
+		.svc-card-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 20px;
+			font-weight: 500;
+			line-height: 30px;
+			color: #0f1928;
+			margin-bottom: 8px;
+		}
+
+		.svc-card-desc {
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			font-weight: 400;
+			line-height: 27px;
+			color: #999;
+			max-width: 300px;
+		}
+
+		.svc-card-link {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 14px 0;
+			cursor: pointer;
+
+			span {
+				font-family: 'Jost', sans-serif;
+				font-size: 18px;
+				font-weight: 500;
+				color: #a86464;
+			}
+
+			svg {
+				font-size: 20px;
+				color: #a86464;
+			}
+		}
+	}
+}
+
+// ==============================
+// OUR WORKING PROGRESS
+// ==============================
+.svc-progress {
+	padding: 60px 150px;
+
+	.svc-progress-title {
+		font-family: 'Jost', sans-serif;
+		font-size: 40px;
+		font-weight: 500;
+		color: #0f1928;
+		text-align: center;
+		margin-bottom: 60px;
+	}
+
+	.svc-progress-container {
+		max-width: 1140px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 60px;
+	}
+
+	.progress-step {
+		display: flex;
+		gap: 50px;
+		align-items: center;
+
+		&.reverse {
+			flex-direction: row-reverse;
+			gap: 101px;
+		}
+	}
+
+	.progress-image {
+		width: 558px;
+		height: 400px;
+		background: #bfbfbf;
+		overflow: hidden;
+		flex-shrink: 0;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.progress-content {
+		flex: 1;
+		padding: 10px;
+
+		.progress-step-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 30px;
+			font-weight: 500;
+			color: #000;
+			margin-bottom: 24px;
+		}
+
+		.progress-bullets {
+			list-style: disc;
+			padding-left: 27px;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+
+			li {
+				font-family: 'Jost', sans-serif;
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 27px;
+				color: #999;
+				max-width: 461px;
+			}
+		}
+	}
+}
+
+// ==============================
+// SALE BANNER (with countdown)
+// ==============================
+.svc-sale-banner {
+	position: relative;
+	width: 100%;
+
+	.sale-bg {
+		width: 100%;
+		height: 453px;
+		background: #e4cfcf;
+	}
+
+	.sale-content-wrap {
+		position: absolute;
+		top: 50px;
+		left: 150px;
+		display: flex;
+		gap: 50px;
+	}
+
+	.sale-image {
+		width: 558px;
+		height: 697px;
+		background: #f6f0f0;
+		overflow: hidden;
+		flex-shrink: 0;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.sale-info {
+		display: flex;
+		flex-direction: column;
+		gap: 90px;
+
+		.sale-top {
+			display: flex;
+			flex-direction: column;
+			gap: 40px;
+		}
+
+		.sale-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #000;
+			line-height: 1;
+		}
+	}
+
+	.countdown-row {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+
+		.countdown-circle {
+			width: 80px;
+			height: 80px;
+			background: #fff;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			span {
+				font-family: 'Jost', sans-serif;
+				font-size: 30px;
+				font-weight: 500;
+				color: #000;
+			}
+		}
+
+		.countdown-colon {
+			font-family: 'Jost', sans-serif;
+			font-size: 14px;
+			color: #fff;
+		}
+	}
+
+	.countdown-labels {
+		display: flex;
+		gap: 32px;
+
+		span {
+			width: 80px;
+			text-align: center;
+			font-family: 'Jost', sans-serif;
+			font-size: 12px;
+			font-weight: 400;
+			color: #000;
+		}
+	}
+
+	.btn-shop-now {
+		background: #a86464 !important;
+		color: #fff !important;
+		font-family: 'Jost', sans-serif !important;
+		font-size: 18px !important;
+		font-weight: 500 !important;
+		padding: 14px 32px !important;
+		border-radius: 0 !important;
+		text-transform: uppercase !important;
+		align-self: flex-start;
+	}
+
+	.sale-thumbnails {
+		display: flex;
+		gap: 24px;
+
+		.sale-thumb {
+			width: 254px;
+			height: 254px;
+			background: #000;
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
+}

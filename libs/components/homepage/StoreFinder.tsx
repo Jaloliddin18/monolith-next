@@ -1,25 +1,21 @@
 import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const StoreFinder = () => {
 	return (
-		<Stack className="store-finder-section">
-			<Typography className="section-title" variant="h2" textAlign="center" mb={3}>
-				Find Furniture store
-			</Typography>
-			<Stack direction="row" justifyContent="center" alignItems="center" gap={2} className="store-finder-form">
-				<Box className="store-input">
-					<Typography variant="caption" color="text.secondary">
-						City
-					</Typography>
-					<Stack direction="row" alignItems="center" gap={1}>
-						<LocationOnOutlinedIcon sx={{ fontSize: 18, color: '#999' }} />
-						<Typography variant="body2">add location</Typography>
+		<Stack className="store-finder-section" direction="row" justifyContent="space-between" alignItems="center">
+			<Typography className="store-finder-title">Find Furniture store</Typography>
+			<Stack className="store-finder-form" direction="row" alignItems="center" justifyContent="space-between">
+				<Stack direction="row" alignItems="center" gap="20px">
+					<Stack className="store-city-dropdown" direction="row" alignItems="center" gap="10px">
+						<Typography className="city-text">City</Typography>
+						<KeyboardArrowDownIcon sx={{ fontSize: 24, color: '#000' }} />
 					</Stack>
-				</Box>
-				<Button variant="contained" className="btn-find-store">
-					Find Store
+					<Typography className="store-location-placeholder">add location</Typography>
+				</Stack>
+				<Button className="btn-search" variant="contained">
+					SEARCH
 				</Button>
 			</Stack>
 		</Stack>
