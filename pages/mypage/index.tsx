@@ -1,12 +1,13 @@
 import React from 'react';
-import { Stack } from '@mui/material';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+import MyPageLayout from '../../libs/components/mypage/MyPageLayout';
+import PersonalInfo from '../../libs/components/mypage/PersonalInfo';
 
 const MyPage = () => {
 	return (
-		<Stack className="mypage">
-			<div>My Page</div>
-		</Stack>
+		<MyPageLayout>
+			<PersonalInfo />
+		</MyPageLayout>
 	);
 };
 

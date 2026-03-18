@@ -5,6 +5,7 @@ export interface CustomJwtPayload {
 	memberAuthType: string;
 	memberNick: string;
 	memberImage: string;
+	memberAddress: string;
 	memberFurnitures: number;
 	memberRank: number;
 }

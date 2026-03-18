@@ -53,6 +53,24 @@ export const LIKE_TARGET_MEMBER = gql`
 	}
 `;
 
+/** MEMBER */
+export const UPDATE_MEMBER = gql`
+	mutation UpdateMember($input: MemberUpdate!) {
+		updateMember(input: $input) {
+			_id
+			memberType
+			memberStatus
+			memberNick
+			memberFullName
+			memberPhone
+			memberImage
+			memberAddress
+			memberDesc
+			accessToken
+		}
+	}
+`;
+
 /** FOLLOW */
 export const SUBSCRIBE = gql`
 	mutation Subscribe($input: String!) {

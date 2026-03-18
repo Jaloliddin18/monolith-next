@@ -109,16 +109,10 @@ const Top = () => {
               About
             </Link>
             <Link
-              href="/service"
-              className={router.pathname.includes("/service") ? "active" : ""}
+              href="/mypage"
+              className={router.pathname.includes("/mypage") ? "active" : ""}
             >
-              Service
-            </Link>
-            <Link
-              href="/cs"
-              className={router.pathname.includes("/cs") ? "active" : ""}
-            >
-              Help
+              My Page
             </Link>
           </Stack>
         </Stack>

@@ -80,6 +80,8 @@ export const GET_MEMBER = gql`
 			memberType
 			memberStatus
 			memberNick
+			memberFullName
+			memberPhone
 			memberImage
 			memberAddress
 			memberDesc

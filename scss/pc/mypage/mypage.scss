@@ -1,0 +1,489 @@
+#mypage-page {
+	max-width: 1200px;
+	margin: 0 auto;
+	width: 100%;
+	padding: 60px 150px;
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+	min-height: 600px;
+
+	.mypage-sidebar {
+		width: 316px;
+		min-width: 316px;
+		border-right: 1px solid #e6e6e6;
+		display: flex;
+		flex-direction: column;
+		padding-right: 24px;
+
+		.sidebar-profile {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 16px;
+			padding-bottom: 24px;
+
+			.profile-avatar {
+				width: 80px;
+				height: 80px;
+				min-width: 80px;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+
+			.profile-info {
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+
+				.profile-name {
+					font-family: 'Syne', sans-serif;
+					font-size: 18px;
+					font-weight: 600;
+					color: #000;
+				}
+
+				.profile-location {
+					font-family: 'Syne', sans-serif;
+					font-size: 14px;
+					font-weight: 400;
+					color: #848484;
+				}
+			}
+		}
+
+		.sidebar-nav {
+			display: flex;
+			flex-direction: column;
+
+			.nav-section {
+				border-bottom: 1px solid #e6e6e6;
+				padding: 24px 0;
+
+				.nav-item {
+					display: flex;
+					align-items: center;
+					gap: 14px;
+					padding: 10px 0;
+					cursor: pointer;
+					font-family: 'Jost', sans-serif;
+					font-size: 18px;
+					font-weight: 400;
+					color: #000;
+					transition: color 0.2s;
+					text-decoration: none;
+
+					&:hover {
+						color: #a86464;
+					}
+
+					&.active {
+						color: #a86464;
+						font-weight: 500;
+					}
+
+					.nav-icon {
+						font-size: 24px;
+						display: flex;
+						align-items: center;
+					}
+				}
+
+				.nav-sub-items {
+					padding-left: 38px;
+					display: flex;
+					flex-direction: column;
+					gap: 4px;
+
+					.sub-item {
+						font-family: 'Jost', sans-serif;
+						font-size: 16px;
+						font-weight: 400;
+						color: #000;
+						cursor: pointer;
+						padding: 6px 0;
+						text-decoration: none;
+						display: flex;
+						align-items: center;
+						gap: 8px;
+						transition: color 0.2s;
+
+						&::before {
+							content: '•';
+							font-size: 16px;
+						}
+
+						&:hover {
+							color: #a86464;
+						}
+
+						&.active {
+							color: #a86464;
+							font-weight: 500;
+						}
+					}
+				}
+			}
+
+			.nav-footer {
+				padding: 24px 0;
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+
+				.footer-link {
+					font-family: 'Jost', sans-serif;
+					font-size: 18px;
+					font-weight: 400;
+					color: #000;
+					cursor: pointer;
+					padding: 6px 0;
+					text-decoration: none;
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					transition: color 0.2s;
+
+					&::before {
+						content: '•';
+						font-size: 18px;
+					}
+
+					&:hover {
+						color: #a86464;
+					}
+				}
+			}
+
+			.nav-logout {
+				border-top: 1px solid #e6e6e6;
+				padding: 24px 0;
+
+				.logout-btn {
+					display: flex;
+					align-items: center;
+					gap: 14px;
+					cursor: pointer;
+					font-family: 'Jost', sans-serif;
+					font-size: 18px;
+					font-weight: 400;
+					color: #000;
+					background: none;
+					border: none;
+					padding: 10px 0;
+					transition: color 0.2s;
+
+					&:hover {
+						color: #a86464;
+					}
+
+					.nav-icon {
+						font-size: 24px;
+						display: flex;
+						align-items: center;
+					}
+				}
+			}
+		}
+	}
+
+	.mypage-content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+		padding-left: 24px;
+
+		.content-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 30px;
+			font-weight: 500;
+			color: #000;
+		}
+
+		.personal-info-form {
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+
+			.form-section-title {
+				font-family: 'Jost', sans-serif;
+				font-size: 20px;
+				font-weight: 500;
+				color: #000;
+			}
+
+			.upload-profile {
+				display: flex;
+				align-items: center;
+				gap: 20px;
+
+				.upload-avatar {
+					width: 80px;
+					height: 80px;
+					border-radius: 50%;
+					object-fit: cover;
+				}
+
+				.upload-btn {
+					font-family: 'Jost', sans-serif;
+					font-size: 14px;
+					font-weight: 500;
+					color: #a86464;
+					border: 1px solid #a86464;
+					border-radius: 4px;
+					padding: 8px 20px;
+					cursor: pointer;
+					background: #fff;
+					text-transform: none;
+
+					&:hover {
+						background: #fdf0ef;
+					}
+				}
+			}
+
+			.form-row {
+				display: flex;
+				gap: 24px;
+
+				.form-field {
+					flex: 1;
+
+					&.full-width {
+						flex: 1 1 100%;
+					}
+					display: flex;
+					flex-direction: column;
+					gap: 8px;
+
+					.field-label {
+						font-family: 'Jost', sans-serif;
+						font-size: 14px;
+						font-weight: 500;
+						color: #333;
+					}
+
+					.field-input {
+						background: #f9f9f9;
+						border: 1px solid #e6e6e6;
+						border-radius: 4px;
+						padding: 12px 16px;
+						font-family: 'Jost', sans-serif;
+						font-size: 16px;
+						color: #333;
+						outline: none;
+						transition: border-color 0.2s;
+
+						&:focus {
+							border-color: #a86464;
+						}
+
+						&::placeholder {
+							color: #999;
+						}
+
+						&.field-textarea {
+							resize: vertical;
+							min-height: 80px;
+							line-height: 1.5;
+						}
+					}
+
+					.field-select {
+						background: #f9f9f9;
+						border-radius: 4px;
+						font-family: 'Jost', sans-serif;
+						font-size: 16px;
+						color: #333;
+
+						.MuiSelect-select {
+							padding: 12px 16px;
+						}
+
+						.MuiOutlinedInput-notchedOutline {
+							border-color: #e6e6e6;
+						}
+
+						&:hover .MuiOutlinedInput-notchedOutline {
+							border-color: #a86464;
+						}
+
+						&.Mui-focused .MuiOutlinedInput-notchedOutline {
+							border-color: #a86464;
+						}
+
+						.select-placeholder {
+							color: #999;
+						}
+					}
+				}
+			}
+
+			.gender-section {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+
+				.field-label {
+					font-family: 'Jost', sans-serif;
+					font-size: 14px;
+					font-weight: 500;
+					color: #333;
+				}
+
+				.MuiRadio-root {
+					color: #a86464;
+
+					&.Mui-checked {
+						color: #a86464;
+					}
+				}
+
+				.MuiFormControlLabel-label {
+					font-family: 'Jost', sans-serif;
+					font-size: 16px;
+				}
+			}
+		}
+
+		.form-actions {
+			display: flex;
+			gap: 16px;
+			padding-top: 16px;
+
+			.save-btn {
+				background: #a86464;
+				color: #fff;
+				font-family: 'Jost', sans-serif;
+				font-size: 16px;
+				font-weight: 500;
+				padding: 12px 40px;
+				border-radius: 4px;
+				text-transform: none;
+				border: 1px solid #a86464;
+
+				&:hover {
+					background: #8f5555;
+				}
+			}
+
+			.cancel-btn {
+				background: #fff;
+				color: #a86464;
+				font-family: 'Jost', sans-serif;
+				font-size: 16px;
+				font-weight: 500;
+				padding: 12px 40px;
+				border-radius: 4px;
+				text-transform: none;
+				border: 1px solid #a86464;
+
+				&:hover {
+					background: #fdf0ef;
+				}
+			}
+		}
+
+		.placeholder-content {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 400px;
+			font-family: 'Jost', sans-serif;
+			font-size: 18px;
+			color: #999;
+		}
+
+		.payment-form {
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+
+			.payment-method-option {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				border: 1px solid #e6e6e6;
+				border-radius: 4px;
+				padding: 16px 20px;
+				margin-bottom: 8px;
+				cursor: pointer;
+				transition: border-color 0.2s;
+
+				&.selected {
+					border-color: #a86464;
+				}
+
+				.MuiFormControlLabel-label {
+					font-family: 'Jost', sans-serif;
+					font-size: 16px;
+					font-weight: 500;
+					color: #000;
+				}
+
+				.payment-logos {
+					display: flex;
+					align-items: center;
+					gap: 12px;
+
+					.payment-logo {
+						height: 28px;
+						object-fit: contain;
+					}
+				}
+			}
+
+			.form-row {
+				display: flex;
+				gap: 24px;
+
+				.form-field {
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					gap: 8px;
+
+					&.full-width {
+						flex: 1 1 100%;
+					}
+
+					.field-label {
+						font-family: 'Jost', sans-serif;
+						font-size: 14px;
+						font-weight: 500;
+						color: #333;
+					}
+
+					.field-input {
+						background: #f9f9f9;
+						border: 1px solid #e6e6e6;
+						border-radius: 4px;
+						padding: 12px 16px;
+						font-family: 'Jost', sans-serif;
+						font-size: 16px;
+						color: #333;
+						outline: none;
+						transition: border-color 0.2s;
+
+						&:focus {
+							border-color: #a86464;
+						}
+
+						&::placeholder {
+							color: #999;
+						}
+					}
+				}
+			}
+
+			.save-card-checkbox {
+				.MuiFormControlLabel-label {
+					font-family: 'Jost', sans-serif;
+					font-size: 14px;
+					color: #848484;
+				}
+			}
+		}
+	}
+}
