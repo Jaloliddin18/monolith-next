@@ -1,707 +1,1013 @@
 #mypage-page {
-	max-width: 1200px;
-	margin: 0 auto;
-	width: 100%;
-	padding: 60px 150px;
-	display: flex;
-	flex-direction: row;
-	gap: 24px;
-	min-height: 600px;
-
-	.mypage-sidebar {
-		width: 316px;
-		min-width: 316px;
-		border-right: 1px solid #e6e6e6;
-		display: flex;
-		flex-direction: column;
-		padding-right: 24px;
-
-		.sidebar-profile {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			gap: 16px;
-			padding-bottom: 24px;
-
-			.profile-avatar {
-				width: 80px;
-				height: 80px;
-				min-width: 80px;
-				border-radius: 50%;
-				object-fit: cover;
-			}
-
-			.profile-info {
-				display: flex;
-				flex-direction: column;
-				gap: 4px;
-
-				.profile-name {
-					font-family: 'Syne', sans-serif;
-					font-size: 18px;
-					font-weight: 600;
-					color: #000;
-				}
-
-				.profile-location {
-					font-family: 'Syne', sans-serif;
-					font-size: 14px;
-					font-weight: 400;
-					color: #848484;
-				}
-			}
-		}
-
-		.sidebar-nav {
-			display: flex;
-			flex-direction: column;
-
-			.nav-section {
-				border-bottom: 1px solid #e6e6e6;
-				padding: 24px 0;
-
-				.nav-item {
-					display: flex;
-					align-items: center;
-					gap: 14px;
-					padding: 10px 0;
-					cursor: pointer;
-					font-family: 'Jost', sans-serif;
-					font-size: 18px;
-					font-weight: 400;
-					color: #000;
-					transition: color 0.2s;
-					text-decoration: none;
-
-					&:hover {
-						color: #a86464;
-					}
-
-					&.active {
-						color: #a86464;
-						font-weight: 500;
-					}
-
-					.nav-icon {
-						font-size: 24px;
-						display: flex;
-						align-items: center;
-					}
-				}
-
-				.nav-sub-items {
-					padding-left: 38px;
-					display: flex;
-					flex-direction: column;
-					gap: 4px;
-
-					.sub-item {
-						font-family: 'Jost', sans-serif;
-						font-size: 16px;
-						font-weight: 400;
-						color: #000;
-						cursor: pointer;
-						padding: 6px 0;
-						text-decoration: none;
-						display: flex;
-						align-items: center;
-						gap: 8px;
-						transition: color 0.2s;
-
-						&::before {
-							content: '•';
-							font-size: 16px;
-						}
-
-						&:hover {
-							color: #a86464;
-						}
-
-						&.active {
-							color: #a86464;
-							font-weight: 500;
-						}
-					}
-				}
-			}
-
-			.nav-footer {
-				padding: 24px 0;
-				display: flex;
-				flex-direction: column;
-				gap: 4px;
-
-				.footer-link {
-					font-family: 'Jost', sans-serif;
-					font-size: 18px;
-					font-weight: 400;
-					color: #000;
-					cursor: pointer;
-					padding: 6px 0;
-					text-decoration: none;
-					display: flex;
-					align-items: center;
-					gap: 8px;
-					transition: color 0.2s;
-
-					&::before {
-						content: '•';
-						font-size: 18px;
-					}
-
-					&:hover {
-						color: #a86464;
-					}
-				}
-			}
-
-			.nav-logout {
-				border-top: 1px solid #e6e6e6;
-				padding: 24px 0;
-
-				.logout-btn {
-					display: flex;
-					align-items: center;
-					gap: 14px;
-					cursor: pointer;
-					font-family: 'Jost', sans-serif;
-					font-size: 18px;
-					font-weight: 400;
-					color: #000;
-					background: none;
-					border: none;
-					padding: 10px 0;
-					transition: color 0.2s;
-
-					&:hover {
-						color: #a86464;
-					}
-
-					.nav-icon {
-						font-size: 24px;
-						display: flex;
-						align-items: center;
-					}
-				}
-			}
-		}
-	}
-
-	.mypage-content {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		gap: 40px;
-		padding-left: 24px;
-
-		.content-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 30px;
-			font-weight: 500;
-			color: #000;
-		}
-
-		.personal-info-form {
-			display: flex;
-			flex-direction: column;
-			gap: 24px;
-
-			.form-section-title {
-				font-family: 'Jost', sans-serif;
-				font-size: 20px;
-				font-weight: 500;
-				color: #000;
-			}
-
-			.upload-profile {
-				display: flex;
-				align-items: center;
-				gap: 20px;
-
-				.upload-avatar {
-					width: 80px;
-					height: 80px;
-					border-radius: 50%;
-					object-fit: cover;
-				}
-
-				.upload-btn {
-					font-family: 'Jost', sans-serif;
-					font-size: 14px;
-					font-weight: 500;
-					color: #a86464;
-					border: 1px solid #a86464;
-					border-radius: 4px;
-					padding: 8px 20px;
-					cursor: pointer;
-					background: #fff;
-					text-transform: none;
-
-					&:hover {
-						background: #fdf0ef;
-					}
-				}
-			}
-
-			.form-row {
-				display: flex;
-				gap: 24px;
-
-				.form-field {
-					flex: 1;
-
-					&.full-width {
-						flex: 1 1 100%;
-					}
-					display: flex;
-					flex-direction: column;
-					gap: 8px;
-
-					.field-label {
-						font-family: 'Jost', sans-serif;
-						font-size: 14px;
-						font-weight: 500;
-						color: #333;
-					}
-
-					.field-input {
-						background: #f9f9f9;
-						border: 1px solid #e6e6e6;
-						border-radius: 4px;
-						padding: 12px 16px;
-						font-family: 'Jost', sans-serif;
-						font-size: 16px;
-						color: #333;
-						outline: none;
-						transition: border-color 0.2s;
-
-						&:focus {
-							border-color: #a86464;
-						}
-
-						&::placeholder {
-							color: #999;
-						}
-
-						&.field-textarea {
-							resize: vertical;
-							min-height: 80px;
-							line-height: 1.5;
-						}
-					}
-
-					.field-select {
-						background: #f9f9f9;
-						border-radius: 4px;
-						font-family: 'Jost', sans-serif;
-						font-size: 16px;
-						color: #333;
-
-						.MuiSelect-select {
-							padding: 12px 16px;
-						}
-
-						.MuiOutlinedInput-notchedOutline {
-							border-color: #e6e6e6;
-						}
-
-						&:hover .MuiOutlinedInput-notchedOutline {
-							border-color: #a86464;
-						}
-
-						&.Mui-focused .MuiOutlinedInput-notchedOutline {
-							border-color: #a86464;
-						}
-
-						.select-placeholder {
-							color: #999;
-						}
-					}
-				}
-			}
-
-			.gender-section {
-				display: flex;
-				flex-direction: column;
-				gap: 8px;
-
-				.field-label {
-					font-family: 'Jost', sans-serif;
-					font-size: 14px;
-					font-weight: 500;
-					color: #333;
-				}
-
-				.MuiRadio-root {
-					color: #a86464;
-
-					&.Mui-checked {
-						color: #a86464;
-					}
-				}
-
-				.MuiFormControlLabel-label {
-					font-family: 'Jost', sans-serif;
-					font-size: 16px;
-				}
-			}
-		}
-
-		.form-actions {
-			display: flex;
-			gap: 16px;
-			padding-top: 16px;
-
-			.save-btn {
-				background: #a86464;
-				color: #fff;
-				font-family: 'Jost', sans-serif;
-				font-size: 16px;
-				font-weight: 500;
-				padding: 12px 40px;
-				border-radius: 4px;
-				text-transform: none;
-				border: 1px solid #a86464;
-
-				&:hover {
-					background: #8f5555;
-				}
-			}
-
-			.cancel-btn {
-				background: #fff;
-				color: #a86464;
-				font-family: 'Jost', sans-serif;
-				font-size: 16px;
-				font-weight: 500;
-				padding: 12px 40px;
-				border-radius: 4px;
-				text-transform: none;
-				border: 1px solid #a86464;
-
-				&:hover {
-					background: #fdf0ef;
-				}
-			}
-		}
-
-		.placeholder-content {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			min-height: 400px;
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			color: #999;
-		}
-
-		.payment-form {
-			display: flex;
-			flex-direction: column;
-			gap: 24px;
-
-			.payment-method-option {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				border: 1px solid #e6e6e6;
-				border-radius: 4px;
-				padding: 16px 20px;
-				margin-bottom: 8px;
-				cursor: pointer;
-				transition: border-color 0.2s;
-
-				&.selected {
-					border-color: #a86464;
-				}
-
-				.MuiFormControlLabel-label {
-					font-family: 'Jost', sans-serif;
-					font-size: 16px;
-					font-weight: 500;
-					color: #000;
-				}
-
-				.payment-logos {
-					display: flex;
-					align-items: center;
-					gap: 12px;
-
-					.payment-logo {
-						height: 28px;
-						object-fit: contain;
-					}
-				}
-			}
-
-			.form-row {
-				display: flex;
-				gap: 24px;
-
-				.form-field {
-					flex: 1;
-					display: flex;
-					flex-direction: column;
-					gap: 8px;
-
-					&.full-width {
-						flex: 1 1 100%;
-					}
-
-					.field-label {
-						font-family: 'Jost', sans-serif;
-						font-size: 14px;
-						font-weight: 500;
-						color: #333;
-					}
-
-					.field-input {
-						background: #f9f9f9;
-						border: 1px solid #e6e6e6;
-						border-radius: 4px;
-						padding: 12px 16px;
-						font-family: 'Jost', sans-serif;
-						font-size: 16px;
-						color: #333;
-						outline: none;
-						transition: border-color 0.2s;
-
-						&:focus {
-							border-color: #a86464;
-						}
-
-						&::placeholder {
-							color: #999;
-						}
-					}
-				}
-			}
-
-			.save-card-checkbox {
-				.MuiFormControlLabel-label {
-					font-family: 'Jost', sans-serif;
-					font-size: 14px;
-					color: #848484;
-				}
-			}
-		}
-
-		.wishlist-content {
-			display: flex;
-			flex-direction: column;
-			gap: 0;
-		}
-
-		.wishlist-loading {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			min-height: 400px;
-		}
-
-		.wishlist-items {
-			display: flex;
-			flex-direction: column;
-
-			.wishlist-item {
-				display: flex;
-				flex-direction: row;
-				gap: 24px;
-				padding: 24px 0;
-				border-bottom: 1px solid #e6e6e6;
-
-				&:first-child {
-					padding-top: 0;
-				}
-
-				.wishlist-item-image {
-					position: relative;
-					width: 150px;
-					min-width: 150px;
-					height: 150px;
-					overflow: hidden;
-
-					img {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
-					}
-
-					.out-of-stock-badge {
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						transform: translate(-50%, -50%);
-
-						p {
-							font-family: 'Jost', sans-serif;
-							font-size: 14px;
-							font-weight: 500;
-							color: #379237;
-							white-space: nowrap;
-						}
-					}
-
-					.move-to-cart-btn {
-						position: absolute;
-						bottom: 8px;
-						left: 8px;
-						right: 8px;
-						background: #000;
-						color: #fff;
-						font-family: 'Jost', sans-serif;
-						font-size: 12px;
-						font-weight: 500;
-						padding: 6px 12px;
-						border-radius: 0;
-						text-transform: uppercase;
-						letter-spacing: 0.5px;
-						min-width: unset;
-
-						&:hover {
-							background: #333;
-						}
-					}
-				}
-
-				.wishlist-item-details {
-					flex: 1;
-
-					.item-top-row {
-						width: 100%;
-					}
-
-					.rating-badge {
-						display: inline-flex;
-						align-items: center;
-						gap: 4px;
-						background: #e1efe1;
-						padding: 3px 6px;
-						border-radius: 4px;
-
-						.rating-value {
-							font-family: 'Jost', sans-serif;
-							font-size: 14px;
-							font-weight: 600;
-							color: #379237;
-						}
-					}
-
-					.review-count {
-						font-family: 'Jost', sans-serif;
-						font-size: 14px;
-						font-weight: 400;
-						color: #848484;
-					}
-
-					.item-title {
-						font-family: 'Jost', sans-serif;
-						font-size: 16px;
-						font-weight: 400;
-						color: #000;
-						text-decoration: none;
-						cursor: pointer;
-
-						&:hover {
-							color: #a86464;
-						}
-					}
-
-					.item-price {
-						font-family: 'Jost', sans-serif;
-						font-size: 20px;
-						font-weight: 600;
-						color: #000;
-					}
-
-					.item-price-old {
-						font-family: 'Jost', sans-serif;
-						font-size: 14px;
-						font-weight: 400;
-						color: #999;
-						text-decoration: line-through;
-					}
-
-					.item-discount {
-						font-family: 'Jost', sans-serif;
-						font-size: 14px;
-						font-weight: 500;
-						color: #379237;
-					}
-
-					.delete-btn {
-						padding: 4px;
-
-						&:hover {
-							background: #fdf0ef;
-						}
-					}
-				}
-			}
-		}
-
-		.continues-shopping-btn {
-			margin-top: 32px;
-			background: #000;
-			color: #fff;
-			font-family: 'Jost', sans-serif;
-			font-size: 16px;
-			font-weight: 500;
-			padding: 14px 40px;
-			border-radius: 0;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			width: 100%;
-
-			&:hover {
-				background: #333;
-			}
-		}
-	}
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 60px 150px;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  min-height: 600px;
+
+  .mypage-sidebar {
+    width: 316px;
+    min-width: 316px;
+    border-right: 1px solid #e6e6e6;
+    display: flex;
+    flex-direction: column;
+    padding-right: 24px;
+
+    .sidebar-profile {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 24px;
+
+      .profile-avatar {
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .profile-name {
+          font-family: "Syne", sans-serif;
+          font-size: 18px;
+          font-weight: 600;
+          color: #000;
+        }
+
+        .profile-location {
+          font-family: "Syne", sans-serif;
+          font-size: 14px;
+          font-weight: 400;
+          color: #848484;
+        }
+      }
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+
+      .nav-section {
+        border-bottom: 1px solid #e6e6e6;
+        padding: 24px 0;
+
+        .nav-item {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 10px 0;
+          cursor: pointer;
+          font-family: "Jost", sans-serif;
+          font-size: 18px;
+          font-weight: 400;
+          color: #000;
+          transition: color 0.2s;
+          text-decoration: none;
+
+          &:hover {
+            color: #a86464;
+          }
+
+          &.active {
+            color: #a86464;
+            font-weight: 500;
+          }
+
+          .nav-icon {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+          }
+        }
+
+        .nav-sub-items {
+          padding-left: 38px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+
+          .sub-item {
+            font-family: "Jost", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
+            cursor: pointer;
+            padding: 6px 0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s;
+
+            &::before {
+              content: "•";
+              font-size: 16px;
+            }
+
+            &:hover {
+              color: #a86464;
+            }
+
+            &.active {
+              color: #a86464;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .nav-footer {
+        padding: 24px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .footer-link {
+          font-family: "Jost", sans-serif;
+          font-size: 18px;
+          font-weight: 400;
+          color: #000;
+          cursor: pointer;
+          padding: 6px 0;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: color 0.2s;
+
+          &::before {
+            content: "•";
+            font-size: 18px;
+          }
+
+          &:hover {
+            color: #a86464;
+          }
+        }
+      }
+
+      .nav-logout {
+        border-top: 1px solid #e6e6e6;
+        padding: 24px 0;
+
+        .logout-btn {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          cursor: pointer;
+          font-family: "Jost", sans-serif;
+          font-size: 18px;
+          font-weight: 400;
+          color: #000;
+          background: none;
+          border: none;
+          padding: 10px 0;
+          transition: color 0.2s;
+
+          &:hover {
+            color: #a86464;
+          }
+
+          .nav-icon {
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+
+  .mypage-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-left: 24px;
+
+    .content-title {
+      font-family: "Jost", sans-serif;
+      font-size: 30px;
+      font-weight: 500;
+      color: #000;
+    }
+
+    .personal-info-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .form-section-title {
+        font-family: "Jost", sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .upload-profile {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .upload-avatar {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .upload-btn {
+          font-family: "Jost", sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: #a86464;
+          border: 1px solid #a86464;
+          border-radius: 4px;
+          padding: 8px 20px;
+          cursor: pointer;
+          background: #fff;
+          text-transform: none;
+
+          &:hover {
+            background: #fdf0ef;
+          }
+        }
+      }
+
+      .form-row {
+        display: flex;
+        gap: 24px;
+
+        .form-field {
+          flex: 1;
+
+          &.full-width {
+            flex: 1 1 100%;
+          }
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          .field-label {
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+          }
+
+          .field-input {
+            background: #f9f9f9;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-family: "Jost", sans-serif;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+
+            &:focus {
+              border-color: #a86464;
+            }
+
+            &::placeholder {
+              color: #999;
+            }
+
+            &.field-textarea {
+              resize: vertical;
+              min-height: 80px;
+              line-height: 1.5;
+            }
+          }
+
+          .field-select {
+            background: #f9f9f9;
+            border-radius: 4px;
+            font-family: "Jost", sans-serif;
+            font-size: 16px;
+            color: #333;
+
+            .MuiSelect-select {
+              padding: 12px 16px;
+            }
+
+            .MuiOutlinedInput-notchedOutline {
+              border-color: #e6e6e6;
+            }
+
+            &:hover .MuiOutlinedInput-notchedOutline {
+              border-color: #a86464;
+            }
+
+            &.Mui-focused .MuiOutlinedInput-notchedOutline {
+              border-color: #a86464;
+            }
+
+            .select-placeholder {
+              color: #999;
+            }
+          }
+        }
+      }
+
+      .gender-section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .field-label {
+          font-family: "Jost", sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: #333;
+        }
+
+        .MuiRadio-root {
+          color: #a86464;
+
+          &.Mui-checked {
+            color: #a86464;
+          }
+        }
+
+        .MuiFormControlLabel-label {
+          font-family: "Jost", sans-serif;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 16px;
+      padding-top: 16px;
+
+      .save-btn {
+        background: #a86464;
+        color: #fff;
+        font-family: "Jost", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 12px 40px;
+        border-radius: 4px;
+        text-transform: none;
+        border: 1px solid #a86464;
+
+        &:hover {
+          background: #8f5555;
+        }
+      }
+
+      .cancel-btn {
+        background: #fff;
+        color: #a86464;
+        font-family: "Jost", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 12px 40px;
+        border-radius: 4px;
+        text-transform: none;
+        border: 1px solid #a86464;
+
+        &:hover {
+          background: #fdf0ef;
+        }
+      }
+    }
+
+    .placeholder-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      font-family: "Jost", sans-serif;
+      font-size: 18px;
+      color: #999;
+    }
+
+    .payment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .payment-method-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        padding: 16px 20px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        transition: border-color 0.2s;
+
+        &.selected {
+          border-color: #a86464;
+        }
+
+        .MuiFormControlLabel-label {
+          font-family: "Jost", sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+          color: #000;
+        }
+
+        .payment-logos {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .payment-logo {
+            height: 28px;
+            object-fit: contain;
+          }
+        }
+      }
+
+      .form-row {
+        display: flex;
+        gap: 24px;
+
+        .form-field {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          &.full-width {
+            flex: 1 1 100%;
+          }
+
+          .field-label {
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+          }
+
+          .field-input {
+            background: #f9f9f9;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            padding: 12px 16px;
+            font-family: "Jost", sans-serif;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+
+            &:focus {
+              border-color: #a86464;
+            }
+
+            &::placeholder {
+              color: #999;
+            }
+          }
+        }
+      }
+
+      .save-card-checkbox {
+        .MuiFormControlLabel-label {
+          font-family: "Jost", sans-serif;
+          font-size: 14px;
+          color: #848484;
+        }
+      }
+    }
+
+    .wishlist-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .wishlist-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+
+    .wishlist-items {
+      display: flex;
+      flex-direction: column;
+
+      .wishlist-item {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        padding: 24px 0;
+        border-bottom: 1px solid #e6e6e6;
+
+        &:first-child {
+          padding-top: 0;
+        }
+
+        .wishlist-item-image {
+          position: relative;
+          width: 150px;
+          min-width: 150px;
+          height: 150px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .out-of-stock-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            p {
+              font-family: "Jost", sans-serif;
+              font-size: 14px;
+              font-weight: 500;
+              color: #379237;
+              white-space: nowrap;
+            }
+          }
+
+          .move-to-cart-btn {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            right: 8px;
+            background: #000;
+            color: #fff;
+            font-family: "Jost", sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: unset;
+
+            &:hover {
+              background: #333;
+            }
+          }
+        }
+
+        .wishlist-item-details {
+          flex: 1;
+
+          .item-top-row {
+            width: 100%;
+          }
+
+          .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #e1efe1;
+            padding: 3px 6px;
+            border-radius: 4px;
+
+            .rating-value {
+              font-family: "Jost", sans-serif;
+              font-size: 14px;
+              font-weight: 600;
+              color: #379237;
+            }
+          }
+
+          .review-count {
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #848484;
+          }
+
+          .item-title {
+            font-family: "Jost", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+              color: #a86464;
+            }
+          }
+
+          .item-price {
+            font-family: "Jost", sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+          }
+
+          .item-price-old {
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #999;
+            text-decoration: line-through;
+          }
+
+          .item-discount {
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #379237;
+          }
+
+          .delete-btn {
+            padding: 4px;
+
+            &:hover {
+              background: #fdf0ef;
+            }
+          }
+        }
+      }
+    }
+
+    .continues-shopping-btn {
+      margin-top: 32px;
+      background: #000;
+      color: #fff;
+      font-family: "Jost", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 14px 40px;
+      border-radius: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: 100%;
+
+      &:hover {
+        background: #333;
+      }
+    }
+  }
+}
+
+// ==============================
+// CART PAGE (standalone, no sidebar)
+// ==============================
+#cart-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 150px 60px;
+  font-family: "Jost", sans-serif;
+
+  .cart-breadcrumb {
+    padding-bottom: 24px;
+
+    .breadcrumb-link {
+      font-size: 14px;
+      color: #999;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        color: #a86464;
+      }
+    }
+
+    .breadcrumb-sep {
+      font-size: 14px;
+      color: #999;
+    }
+
+    .breadcrumb-current {
+      font-size: 14px;
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  .cart-content {
+    width: 100%;
+    align-items: flex-start;
+    gap: 200px;
+
+    .cart-items-section {
+      flex: 1;
+      gap: 40px;
+
+      .content-title {
+        font-family: "Jost", sans-serif;
+        font-size: 30px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .cart-items {
+        .cart-item {
+          display: flex;
+          gap: 40px;
+          align-items: center;
+          padding: 24px 0;
+          border-top: 1px solid #e6e6e6;
+
+          .cart-item-image {
+            position: relative;
+            width: 170px;
+            min-width: 170px;
+            height: 170px;
+            background: #f9f9f9;
+            overflow: hidden;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+
+            .out-of-stock-overlay {
+              position: absolute;
+              inset: 0;
+              background: #000;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              p {
+                font-family: "Jost", sans-serif;
+                font-size: 18px;
+                font-weight: 500;
+                color: #ff1e1e;
+              }
+            }
+          }
+
+          .cart-item-details {
+            flex: 1;
+
+            .item-title {
+              font-size: 18px;
+              font-weight: 400;
+              color: #000;
+            }
+
+            .item-price {
+              font-size: 24px;
+              font-weight: 500;
+              color: #000;
+            }
+
+            .item-price-old {
+              font-size: 14px;
+              font-weight: 400;
+              color: #999;
+              text-decoration: line-through;
+            }
+
+            .item-discount {
+              font-size: 14px;
+              font-weight: 500;
+              color: #ff1e1e;
+            }
+
+            .quantity-control {
+              display: flex;
+              align-items: center;
+              gap: 24px;
+              border: 1px solid #e6e6e6;
+              padding: 6px 12px;
+              width: fit-content;
+
+              .qty-btn {
+                padding: 0;
+              }
+
+              .qty-value {
+                font-size: 18px;
+                font-weight: 600;
+                color: #000;
+                min-width: 20px;
+                text-align: center;
+              }
+            }
+
+            .delete-btn {
+              padding: 4px;
+
+              &:hover {
+                background: #fdf0ef;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .billing-summary {
+      width: 364px;
+      min-width: 364px;
+      background: #f9f9f9;
+      padding: 24px;
+      gap: 0;
+      position: sticky;
+      top: 24px;
+
+      .billing-title {
+        font-size: 20px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .billing-timer {
+        padding: 24px 0 32px;
+        gap: 14px;
+
+        .timer-label {
+          font-size: 18px;
+          font-weight: 400;
+          color: #a86464;
+        }
+
+        .timer-badge {
+          width: 60px;
+          height: 60px;
+          background: #f6f0f0;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            font-size: 20px;
+            font-weight: 600;
+            color: #a86464;
+          }
+        }
+
+        .timer-colon {
+          font-size: 14px;
+          font-weight: 400;
+          color: #000;
+        }
+
+        .timer-unit {
+          font-size: 12px;
+          font-weight: 400;
+          color: #4c2d2d;
+          width: 60px;
+          text-align: center;
+        }
+      }
+
+      .billing-details {
+        padding: 24px 0;
+        gap: 14px;
+
+        .coupon-input {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #fff;
+          padding: 13px 12px;
+
+          input {
+            border: none;
+            outline: none;
+            background: none;
+            font-family: "Jost", sans-serif;
+            font-size: 16px;
+            color: #333;
+            flex: 1;
+
+            &::placeholder {
+              color: #bfbfbf;
+            }
+          }
+
+          .apply-btn {
+            font-family: "Jost", sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #a86464;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .summary-label {
+          font-size: 18px;
+          font-weight: 400;
+          color: #000;
+        }
+
+        .summary-count {
+          font-size: 14px;
+          font-weight: 400;
+          color: #999;
+        }
+
+        .summary-value {
+          font-size: 18px;
+          font-weight: 400;
+          color: #000;
+          text-align: right;
+        }
+
+        .summary-value-green {
+          font-size: 18px;
+          font-weight: 400;
+          color: #379237;
+          text-align: right;
+        }
+      }
+
+      .billing-total {
+        border-top: 1px solid #e6e6e6;
+        padding: 24px 0;
+
+        .total-label,
+        .total-value {
+          font-size: 20px;
+          font-weight: 600;
+          color: #000;
+        }
+      }
+
+      .checkout-btn {
+        background: #a86464;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 14px 32px;
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 100%;
+
+        &:hover {
+          background: #8f5555;
+        }
+      }
+    }
+  }
 }
 
 // ==============================
 // RECENTLY VIEWED (mypage context)
 // ==============================
 .recently-viewed-section {
-	max-width: 1200px;
-	margin: 0 auto;
-	width: 100%;
-	padding: 60px 150px;
-	gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 60px 150px;
+  gap: 50px;
 
-	.recently-viewed-header {
-		width: 100%;
+  .recently-viewed-header {
+    width: 100%;
 
-		.section-title-text {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
-			color: #000;
-		}
+    .section-title-text {
+      font-family: "Jost", sans-serif;
+      font-size: 40px;
+      font-weight: 500;
+      color: #000;
+    }
 
-		.nav-arrow {
-			padding: 4px;
-			border-radius: 0;
-			background: none;
+    .nav-arrow {
+      padding: 4px;
+      border-radius: 0;
+      background: none;
 
-			&:hover {
-				background: rgba(0, 0, 0, 0.04);
-			}
+      &:hover {
+        background: rgba(0, 0, 0, 0.04);
+      }
 
-			&:disabled {
-				opacity: 0.3;
-			}
-		}
-	}
+      &:disabled {
+        opacity: 0.3;
+      }
+    }
+  }
 
-	.recently-viewed-content {
-		.product-card-sm {
-			width: 267px;
+  .recently-viewed-content {
+    .product-card-sm {
+      width: 267px;
 
-			.product-card-img {
-				height: 267px;
-			}
-		}
-	}
+      .product-card-img {
+        height: 267px;
+      }
+    }
+  }
 }
