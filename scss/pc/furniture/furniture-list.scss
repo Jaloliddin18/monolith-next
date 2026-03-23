@@ -441,40 +441,34 @@
 	// ==============================
 	.recently-viewed-section {
 		padding: 60px 150px;
-		gap: 40px;
+		gap: 50px;
 
 		.recently-viewed-header {
 			width: 1140px;
 
-			.view-all-text {
+			.section-title-text {
 				font-family: 'Jost', sans-serif;
-				font-size: 18px;
+				font-size: 40px;
 				font-weight: 500;
-				color: #a86464;
-				cursor: pointer;
-
-				&:hover {
-					text-decoration: underline;
-				}
+				color: #000;
 			}
-		}
 
-		.recently-viewed-content {
 			.nav-arrow {
-				width: 40px;
-				height: 40px;
-				background: #f9f9f9;
-				border-radius: 50%;
+				padding: 4px;
+				border-radius: 0;
+				background: none;
 
 				&:hover {
-					background: #e6e6e6;
+					background: rgba(0, 0, 0, 0.04);
 				}
 
 				&:disabled {
 					opacity: 0.3;
 				}
 			}
+		}
 
+		.recently-viewed-content {
 			.product-card-sm {
 				width: 267px;
 

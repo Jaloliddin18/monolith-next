@@ -108,6 +108,84 @@ export const GET_MEMBER = gql`
 	}
 `;
 
+/** FAVORITES */
+export const GET_FAVORITES = gql`
+	query GetFavorites($input: OrdinaryInquiry!) {
+		getFavorites(input: $input) {
+			list {
+				_id
+				furnitureType
+				furnitureStatus
+				furnitureCategory
+				furnitureTitle
+				furniturePrice
+				furnitureClearancePrice
+				furnitureImages
+				furnitureDesc
+				furnitureViews
+				furnitureLikes
+				furnitureComments
+				furnitureRank
+				memberId
+				createdAt
+				updatedAt
+				memberData {
+					_id
+					memberNick
+					memberImage
+				}
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
+/** VISITED */
+export const GET_VISITED = gql`
+	query GetVisited($input: OrdinaryInquiry!) {
+		getVisited(input: $input) {
+			list {
+				_id
+				furnitureType
+				furnitureStatus
+				furnitureCategory
+				furnitureTitle
+				furniturePrice
+				furnitureClearancePrice
+				furnitureImages
+				furnitureDesc
+				furnitureViews
+				furnitureLikes
+				furnitureComments
+				furnitureRank
+				memberId
+				createdAt
+				updatedAt
+				memberData {
+					_id
+					memberNick
+					memberImage
+				}
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;
+
 /** BOARD ARTICLE */
 export const GET_BOARD_ARTICLES = gql`
 	query GetBoardArticles($input: BoardArticlesInquiry!) {

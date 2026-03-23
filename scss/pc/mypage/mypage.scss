@@ -485,5 +485,223 @@
 				}
 			}
 		}
+
+		.wishlist-content {
+			display: flex;
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.wishlist-loading {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 400px;
+		}
+
+		.wishlist-items {
+			display: flex;
+			flex-direction: column;
+
+			.wishlist-item {
+				display: flex;
+				flex-direction: row;
+				gap: 24px;
+				padding: 24px 0;
+				border-bottom: 1px solid #e6e6e6;
+
+				&:first-child {
+					padding-top: 0;
+				}
+
+				.wishlist-item-image {
+					position: relative;
+					width: 150px;
+					min-width: 150px;
+					height: 150px;
+					overflow: hidden;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+
+					.out-of-stock-badge {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+
+						p {
+							font-family: 'Jost', sans-serif;
+							font-size: 14px;
+							font-weight: 500;
+							color: #379237;
+							white-space: nowrap;
+						}
+					}
+
+					.move-to-cart-btn {
+						position: absolute;
+						bottom: 8px;
+						left: 8px;
+						right: 8px;
+						background: #000;
+						color: #fff;
+						font-family: 'Jost', sans-serif;
+						font-size: 12px;
+						font-weight: 500;
+						padding: 6px 12px;
+						border-radius: 0;
+						text-transform: uppercase;
+						letter-spacing: 0.5px;
+						min-width: unset;
+
+						&:hover {
+							background: #333;
+						}
+					}
+				}
+
+				.wishlist-item-details {
+					flex: 1;
+
+					.item-top-row {
+						width: 100%;
+					}
+
+					.rating-badge {
+						display: inline-flex;
+						align-items: center;
+						gap: 4px;
+						background: #e1efe1;
+						padding: 3px 6px;
+						border-radius: 4px;
+
+						.rating-value {
+							font-family: 'Jost', sans-serif;
+							font-size: 14px;
+							font-weight: 600;
+							color: #379237;
+						}
+					}
+
+					.review-count {
+						font-family: 'Jost', sans-serif;
+						font-size: 14px;
+						font-weight: 400;
+						color: #848484;
+					}
+
+					.item-title {
+						font-family: 'Jost', sans-serif;
+						font-size: 16px;
+						font-weight: 400;
+						color: #000;
+						text-decoration: none;
+						cursor: pointer;
+
+						&:hover {
+							color: #a86464;
+						}
+					}
+
+					.item-price {
+						font-family: 'Jost', sans-serif;
+						font-size: 20px;
+						font-weight: 600;
+						color: #000;
+					}
+
+					.item-price-old {
+						font-family: 'Jost', sans-serif;
+						font-size: 14px;
+						font-weight: 400;
+						color: #999;
+						text-decoration: line-through;
+					}
+
+					.item-discount {
+						font-family: 'Jost', sans-serif;
+						font-size: 14px;
+						font-weight: 500;
+						color: #379237;
+					}
+
+					.delete-btn {
+						padding: 4px;
+
+						&:hover {
+							background: #fdf0ef;
+						}
+					}
+				}
+			}
+		}
+
+		.continues-shopping-btn {
+			margin-top: 32px;
+			background: #000;
+			color: #fff;
+			font-family: 'Jost', sans-serif;
+			font-size: 16px;
+			font-weight: 500;
+			padding: 14px 40px;
+			border-radius: 0;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			width: 100%;
+
+			&:hover {
+				background: #333;
+			}
+		}
+	}
+}
+
+// ==============================
+// RECENTLY VIEWED (mypage context)
+// ==============================
+.recently-viewed-section {
+	max-width: 1200px;
+	margin: 0 auto;
+	width: 100%;
+	padding: 60px 150px;
+	gap: 50px;
+
+	.recently-viewed-header {
+		width: 100%;
+
+		.section-title-text {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #000;
+		}
+
+		.nav-arrow {
+			padding: 4px;
+			border-radius: 0;
+			background: none;
+
+			&:hover {
+				background: rgba(0, 0, 0, 0.04);
+			}
+
+			&:disabled {
+				opacity: 0.3;
+			}
+		}
+	}
+
+	.recently-viewed-content {
+		.product-card-sm {
+			width: 267px;
+
+			.product-card-img {
+				height: 267px;
+			}
+		}
 	}
 }

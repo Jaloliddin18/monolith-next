@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Stack, Typography, IconButton } from '@mui/material';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from '../homepage/ProductCard';
 
@@ -25,21 +25,20 @@ const RecentlyViewed = ({ furnitures, onLike }: RecentlyViewedProps) => {
 	return (
 		<Stack className="recently-viewed-section" alignItems="center">
 			<Stack className="recently-viewed-header" direction="row" justifyContent="space-between" alignItems="center">
-				<Typography className="section-title-text">Recently view</Typography>
-				<Typography className="view-all-text">View all product</Typography>
-			</Stack>
-			<Stack className="recently-viewed-content" direction="row" alignItems="center" gap="24px">
-				<IconButton className="nav-arrow nav-arrow-left" onClick={handlePrev} disabled={offset === 0}>
-					<ArrowBackIosNewIcon sx={{ fontSize: 20 }} />
-				</IconButton>
-				<Stack direction="row" gap="24px">
-					{visibleFurnitures.map((furniture) => (
-						<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} size="small" />
-					))}
+				<Typography className="section-title-text">Recently View</Typography>
+				<Stack direction="row" gap="24px" alignItems="center">
+					<IconButton className="nav-arrow" onClick={handlePrev} disabled={offset === 0}>
+						<ArrowBackIcon sx={{ fontSize: 24, color: '#000' }} />
+					</IconButton>
+					<IconButton className="nav-arrow" onClick={handleNext} disabled={offset >= maxOffset}>
+						<ArrowForwardIcon sx={{ fontSize: 24, color: '#000' }} />
+					</IconButton>
 				</Stack>
-				<IconButton className="nav-arrow nav-arrow-right" onClick={handleNext} disabled={offset >= maxOffset}>
-					<ArrowForwardIosIcon sx={{ fontSize: 20 }} />
-				</IconButton>
+			</Stack>
+			<Stack className="recently-viewed-content" direction="row" gap="24px">
+				{visibleFurnitures.map((furniture) => (
+					<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} size="small" />
+				))}
 			</Stack>
 		</Stack>
 	);

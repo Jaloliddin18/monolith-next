@@ -17,7 +17,7 @@ interface ProductCardProps {
 const ProductCard = ({ furniture, onLike, size = 'large' }: ProductCardProps) => {
 	const imagePath = furniture.furnitureImages?.[0]
 		? `${REACT_APP_API_URL}/${furniture.furnitureImages[0]}`
-		: '/img/furniture/placeholder.png';
+		: '/img/furniture/luxury_chair.jpg';
 
 	const hasDiscount =
 		furniture.furnitureLastChancePrice && furniture.furnitureLastChancePrice < furniture.furniturePrice;
