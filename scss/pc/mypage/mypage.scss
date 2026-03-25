@@ -699,7 +699,7 @@
   .cart-content {
     width: 100%;
     align-items: flex-start;
-    gap: 200px;
+    gap: 80px;
 
     .cart-items-section {
       flex: 1;
@@ -715,10 +715,12 @@
       .cart-items {
         .cart-item {
           display: flex;
-          gap: 40px;
-          align-items: center;
+          width: 752px;
           padding: 24px 0;
+          align-items: center;
+          gap: 40px;
           border-top: 1px solid #e6e6e6;
+          margin-left: -100px;
 
           .cart-item-image {
             position: relative;
