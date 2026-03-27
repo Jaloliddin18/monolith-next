@@ -178,7 +178,7 @@ const MyCart = () => {
 					<Typography className="total-value">${total.toFixed(2)}</Typography>
 				</Stack>
 
-				<Button className="checkout-btn">CHECK OUT</Button>
+				<Button className="checkout-btn" onClick={() => router.push('/checkout')}>CHECK OUT</Button>
 			</Stack>
 		</Stack>
 	);

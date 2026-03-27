@@ -206,7 +206,7 @@ const MiniCart = ({ open, onClose }: MiniCartProps) => {
 								<Link href="/mypage/cart" className="btn-view-cart" onClick={onClose}>
 									VIEW MY CART
 								</Link>
-								<button className="btn-checkout">CHECK OUT</button>
+								<Link href="/checkout" className="btn-checkout" onClick={onClose}>CHECK OUT</Link>
 							</div>
 						</div>
 					</>
