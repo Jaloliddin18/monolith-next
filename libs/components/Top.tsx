@@ -19,11 +19,13 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
+import MiniCart from "./cart/MiniCart";
 
 const Top = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openCart, setOpenCart] = useState(false);
 
   useEffect(() => {
     const token = getJwtToken();
@@ -157,13 +159,16 @@ const Top = () => {
             </Badge>
           </IconButton>
 
-          <IconButton>
-            <Badge badgeContent={0} color="primary">
+          <IconButton onClick={() => setOpenCart(true)}>
+            <Badge badgeContent={3} color="primary">
               <ShoppingCartOutlinedIcon />
             </Badge>
           </IconButton>
         </Stack>
       </Stack>
+
+      {/* Mini Cart Sidebar */}
+      <MiniCart open={openCart} onClose={() => setOpenCart(false)} />
     </Stack>
   );
 };

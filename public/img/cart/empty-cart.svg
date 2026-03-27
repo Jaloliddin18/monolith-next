@@ -1,0 +1,62 @@
+<svg width="570" height="370" viewBox="0 0 570 370" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Decorative dashed arc top -->
+  <path d="M180 30 Q320 -20 420 60 Q480 110 500 200 Q510 250 480 280" stroke="#C4908F" stroke-width="1.5" stroke-dasharray="6 4" fill="none"/>
+
+  <!-- Dollar sign decorative - top left -->
+  <circle cx="95" cy="55" r="12" stroke="#C4908F" stroke-width="1.2" fill="none"/>
+  <text x="91" y="60" font-family="Jost, sans-serif" font-size="14" fill="#C4908F">$</text>
+
+  <!-- Dollar sign decorative - right -->
+  <circle cx="478" cy="235" r="12" stroke="#C4908F" stroke-width="1.2" fill="none"/>
+  <text x="474" y="240" font-family="Jost, sans-serif" font-size="14" fill="#C4908F">$</text>
+
+  <!-- Cart handle -->
+  <path d="M130 85 L170 85" stroke="#C4908F" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="130" y="80" width="40" height="10" rx="3" fill="#E4CFCF" opacity="0.6"/>
+
+  <!-- Cart body outline -->
+  <path d="M170 85 L190 245 L420 245 L445 100 L170 100" stroke="#B07272" stroke-width="2" fill="none"/>
+
+  <!-- Cart body - left side -->
+  <line x1="170" y1="100" x2="190" y2="245" stroke="#B07272" stroke-width="2"/>
+
+  <!-- Cart body - right side -->
+  <line x1="445" y1="100" x2="420" y2="245" stroke="#B07272" stroke-width="2"/>
+
+  <!-- Cart horizontal lines -->
+  <line x1="175" y1="135" x2="440" y2="135" stroke="#C4908F" stroke-width="1.5"/>
+  <line x1="180" y1="170" x2="435" y2="170" stroke="#C4908F" stroke-width="1.5"/>
+  <line x1="183" y1="205" x2="427" y2="205" stroke="#C4908F" stroke-width="1.5"/>
+
+  <!-- Cart vertical lines -->
+  <line x1="240" y1="100" x2="230" y2="245" stroke="#C4908F" stroke-width="1.5"/>
+  <line x1="310" y1="100" x2="305" y2="245" stroke="#C4908F" stroke-width="1.5"/>
+  <line x1="375" y1="100" x2="365" y2="245" stroke="#C4908F" stroke-width="1.5"/>
+
+  <!-- Inner shaded boxes -->
+  <rect x="233" y="138" width="72" height="32" fill="#E4CFCF" opacity="0.4"/>
+  <rect x="233" y="173" width="72" height="32" fill="#F2E8E8" opacity="0.4"/>
+  <rect x="307" y="138" width="58" height="32" fill="#F2E8E8" opacity="0.3"/>
+
+  <!-- Cart bottom bar -->
+  <line x1="190" y1="245" x2="420" y2="245" stroke="#B07272" stroke-width="2.5"/>
+
+  <!-- Cart base / undercarriage -->
+  <path d="M200 245 L220 280 L380 280 L400 245" stroke="#B07272" stroke-width="2" fill="none"/>
+  <line x1="220" y1="280" x2="380" y2="280" stroke="#B07272" stroke-width="2"/>
+
+  <!-- Left wheel -->
+  <circle cx="240" cy="310" r="22" stroke="#B07272" stroke-width="2.5" fill="none"/>
+  <circle cx="240" cy="310" r="8" fill="#B07272"/>
+
+  <!-- Right wheel -->
+  <circle cx="370" cy="310" r="22" stroke="#B07272" stroke-width="2.5" fill="none"/>
+  <circle cx="370" cy="310" r="8" fill="#B07272"/>
+
+  <!-- Wheel connectors -->
+  <line x1="240" y1="288" x2="240" y2="280" stroke="#B07272" stroke-width="2"/>
+  <line x1="370" y1="288" x2="370" y2="280" stroke="#B07272" stroke-width="2"/>
+
+  <!-- Small decorative star bottom-left -->
+  <path d="M100 270 L103 265 L106 270 L103 275 Z" fill="#C4908F" opacity="0.5"/>
+</svg>
