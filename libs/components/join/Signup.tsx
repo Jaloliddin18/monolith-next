@@ -1,36 +1,65 @@
 import React, { useState } from "react";
 import { Stack } from "@mui/material";
 import { useRouter } from "next/router";
-import { logIn } from "../../auth";
+import { useMutation } from "@apollo/client";
+import { SIGN_UP } from "../../../apollo/user/mutation";
+import { updateStorage, updateUserInfo } from "../../auth";
 import {
   sweetMixinErrorAlert,
   sweetTopSmallSuccessAlert,
 } from "../../sweetAlert";
 
-const Login = () => {
+const Signup = () => {
   const router = useRouter();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [memberNick, setMemberNick] = useState("");
   const [memberPassword, setMemberPassword] = useState("");
+  const [memberPhone, setMemberPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [agreeTerms, setAgreeTerms] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const [signup] = useMutation(SIGN_UP);
+
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (!memberNick || !memberPassword) {
+      if (!memberNick || !memberPassword || !memberPhone) {
         await sweetMixinErrorAlert("Please fill in all fields");
         return;
       }
-      await logIn(memberNick, memberPassword);
-      await sweetTopSmallSuccessAlert("Login successful!", 800);
-      await router.push("/");
+      if (!agreeTerms) {
+        await sweetMixinErrorAlert(
+          "Please agree to Terms & Conditions"
+        );
+        return;
+      }
+
+      const result = await signup({
+        variables: {
+          input: {
+            memberNick,
+            memberPassword,
+            memberPhone,
+          },
+        },
+        fetchPolicy: "network-only",
+      });
+
+      const jwtToken = result?.data?.signup?.accessToken;
+      if (jwtToken) {
+        updateStorage({ jwtToken });
+        updateUserInfo(jwtToken);
+        await sweetTopSmallSuccessAlert("Account created!", 800);
+        await router.push("/");
+      }
     } catch (err: any) {
       await sweetMixinErrorAlert(err.message);
     }
   };
 
   return (
-    <Stack className="login-page">
+    <Stack className="login-page signup-page">
       <div className="login-container">
         {/* Left Panel - Form */}
         <div className="login-form-panel">
@@ -38,8 +67,10 @@ const Login = () => {
             <div className="login-form-wrapper">
               {/* Header */}
               <div className="login-header">
-                <h1 className="login-title">Log In</h1>
-                <p className="login-subtitle">Enter detailes to log In</p>
+                <h1 className="login-title">Create Account</h1>
+                <p className="login-subtitle">
+                  Enter details to create account
+                </p>
               </div>
 
               {/* Social Login Buttons */}
@@ -72,19 +103,54 @@ const Login = () => {
               </div>
 
               {/* Form Fields */}
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleSignup}>
                 <div className="form-fields">
+                  {/* Full Name */}
                   <div className="form-group">
-                    <label className="form-label">Email Address</label>
+                    <label className="form-label">Full Name</label>
+                    <div className="form-row">
+                      <input
+                        className="form-input"
+                        type="text"
+                        placeholder="First name"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                      />
+                      <input
+                        className="form-input"
+                        type="text"
+                        placeholder="Last name"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Nick */}
+                  <div className="form-group">
+                    <label className="form-label">Username</label>
                     <input
                       className="form-input"
                       type="text"
-                      placeholder="example@gmail.com"
+                      placeholder="Enter your username"
                       value={memberNick}
                       onChange={(e) => setMemberNick(e.target.value)}
                     />
                   </div>
 
+                  {/* Phone */}
+                  <div className="form-group">
+                    <label className="form-label">Phone Number</label>
+                    <input
+                      className="form-input"
+                      type="tel"
+                      placeholder="01012345678"
+                      value={memberPhone}
+                      onChange={(e) => setMemberPhone(e.target.value)}
+                    />
+                  </div>
+
+                  {/* Password */}
                   <div className="form-group">
                     <label className="form-label">Password</label>
                     <div className="password-input-wrapper">
@@ -93,7 +159,9 @@ const Login = () => {
                         type={showPassword ? "text" : "password"}
                         placeholder="********"
                         value={memberPassword}
-                        onChange={(e) => setMemberPassword(e.target.value)}
+                        onChange={(e) =>
+                          setMemberPassword(e.target.value)
+                        }
                       />
                       <button
                         className="password-toggle"
@@ -110,37 +178,39 @@ const Login = () => {
                     </div>
                   </div>
 
-                  {/* Remember Me & Forgot Password */}
-                  <div className="form-options">
+                  {/* Terms & Conditions */}
+                  <div className="terms-check">
                     <label className="remember-me">
                       <input
                         type="checkbox"
-                        checked={rememberMe}
-                        onChange={(e) => setRememberMe(e.target.checked)}
+                        checked={agreeTerms}
+                        onChange={(e) =>
+                          setAgreeTerms(e.target.checked)
+                        }
                       />
                       <span className="custom-checkbox" />
-                      <span className="remember-text">Remember me</span>
+                      <span className="remember-text">
+                        I agree with Terms &amp; Conditions before
+                        Signing up.
+                      </span>
                     </label>
-                    <button type="button" className="forgot-password">
-                      Forgot Password?
-                    </button>
                   </div>
                 </div>
 
-                {/* Login Button */}
+                {/* Signup Button */}
                 <div className="login-actions">
                   <button className="login-btn" type="submit">
-                    LOGIN
+                    SIGN UP
                   </button>
                   <p className="signup-link">
                     <span className="signup-text">
-                      Don&apos;t have an account?
+                      Already have an account?
                     </span>{" "}
                     <span
                       className="signup-action"
-                      onClick={() => router.push("/account/signup")}
+                      onClick={() => router.push("/account/join")}
                     >
-                      Create Account
+                      LogIn
                     </span>
                   </p>
                 </div>
@@ -162,4 +232,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

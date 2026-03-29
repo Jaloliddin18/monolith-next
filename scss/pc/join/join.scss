@@ -3,12 +3,12 @@
 // ==============================
 .login-page {
 	width: 100%;
-	min-height: 100vh;
+	min-height: calc(100vh - 152px);
 
 	.login-container {
 		display: flex;
 		width: 100%;
-		min-height: 100vh;
+		min-height: calc(100vh - 152px);
 	}
 
 	// ─── Left Panel (Form) ─────────────────
@@ -345,7 +345,7 @@
 	// ─── Right Panel (Image) ───────────────
 	.login-image-panel {
 		width: 500px;
-		min-height: 100vh;
+		min-height: calc(100vh - 152px);
 		background: #e3e9df;
 		flex-shrink: 0;
 		overflow: hidden;
@@ -358,5 +358,21 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+
+	// ─── Signup-specific: side-by-side name fields ──
+	.form-row {
+		display: flex;
+		gap: 24px;
+
+		.form-input {
+			flex: 1;
+		}
+	}
+
+	.terms-check {
+		.remember-me {
+			align-items: flex-start;
+		}
 	}
 }
