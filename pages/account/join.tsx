@@ -1,13 +1,8 @@
 import React from 'react';
-import { Stack } from '@mui/material';
-import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+import Login from '../../libs/components/join/Login';
 
 const Join = () => {
-	return (
-		<Stack className="join-page">
-			<div>Join</div>
-		</Stack>
-	);
+	return <Login />;
 };
 
-export default withLayoutBasic(Join);
+export default Join;
