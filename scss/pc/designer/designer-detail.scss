@@ -1,0 +1,586 @@
+// ==============================
+// DESIGNER DETAIL / PROFILE PAGE
+// ==============================
+.designer-detail-page {
+	width: 100%;
+
+	// ─── Profile Hero Section ──────────────
+	.designer-profile-hero {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.designer-profile-cover {
+		width: 100%;
+		height: 300px;
+		background: linear-gradient(135deg, #f6f0f0 0%, #e3d9d9 50%, #d4c5c5 100%);
+		position: relative;
+	}
+
+	.designer-profile-cover-overlay {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.06) 100%);
+	}
+
+	.designer-profile-hero-content {
+		max-width: 1140px;
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: -80px;
+		padding: 0 0 60px;
+		gap: 24px;
+	}
+
+	.designer-profile-avatar {
+		width: 160px;
+		height: 160px;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 5px solid #fff;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+		background: #f6f0f0;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.designer-profile-info {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.designer-profile-badge {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 13px;
+		line-height: 20px;
+		color: #a86464;
+		background: rgba(168, 100, 100, 0.08);
+		padding: 4px 16px;
+		border-radius: 20px;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+
+	.designer-profile-name {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 40px;
+		line-height: normal;
+		color: #000;
+		margin: 0;
+	}
+
+	.designer-profile-location {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		color: #999;
+		margin: 0;
+	}
+
+	.designer-profile-stats-row {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		margin-top: 8px;
+	}
+
+	.designer-profile-stat {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2px;
+	}
+
+	.designer-profile-stat-value {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 24px;
+		line-height: 36px;
+		color: #000;
+	}
+
+	.designer-profile-stat-label {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 13px;
+		line-height: 20px;
+		color: #999;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.designer-profile-stat-divider {
+		width: 1px;
+		height: 40px;
+		background: #e6e6e6;
+	}
+
+	.designer-profile-actions {
+		display: flex;
+		gap: 16px;
+		margin-top: 8px;
+	}
+
+	.designer-follow-btn {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #fff;
+		background: #a86464;
+		border: none;
+		padding: 12px 40px;
+		cursor: pointer;
+		transition: background 0.2s;
+
+		&:hover {
+			background: #955858;
+		}
+	}
+
+	.designer-contact-btn {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #a86464;
+		background: transparent;
+		border: 1px solid #a86464;
+		padding: 12px 40px;
+		cursor: pointer;
+		transition: background 0.2s, color 0.2s;
+
+		&:hover {
+			background: #a86464;
+			color: #fff;
+		}
+	}
+
+	// ─── About Section ────────────────────
+	.designer-about-section {
+		max-width: 1140px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 60px 0;
+		border-top: 1px solid #e6e6e6;
+	}
+
+	.designer-section-title {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 32px;
+		line-height: normal;
+		color: #000;
+		margin: 0;
+	}
+
+	.designer-about-grid {
+		display: flex;
+		gap: 80px;
+	}
+
+	.designer-about-bio {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.designer-about-text {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 30px;
+		color: #999;
+		margin: 0;
+	}
+
+	.designer-about-quote {
+		background: #f9f9f9;
+		padding: 32px 40px;
+		margin-top: 12px;
+		position: relative;
+	}
+
+	.quote-mark {
+		font-family: 'Jost', sans-serif;
+		font-weight: 700;
+		font-size: 64px;
+		line-height: 1;
+		color: #a86464;
+		opacity: 0.3;
+		position: absolute;
+		top: 12px;
+		left: 20px;
+	}
+
+	.quote-text {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 30px;
+		color: #000;
+		font-style: italic;
+		margin: 0;
+	}
+
+	.quote-author {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 20px;
+		color: #a86464;
+		margin-top: 12px;
+		display: block;
+	}
+
+	// ─── Sidebar (Specialties & Achievements) ──
+	.designer-about-sidebar {
+		width: 340px;
+		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.designer-sidebar-title {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 30px;
+		color: #000;
+		margin: 0 0 16px;
+	}
+
+	.specialties-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.specialty-tag {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		color: #a86464;
+		background: rgba(168, 100, 100, 0.08);
+		padding: 8px 16px;
+		transition: background 0.2s;
+
+		&:hover {
+			background: rgba(168, 100, 100, 0.15);
+		}
+	}
+
+	.achievements-list {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.achievement-item {
+		display: flex;
+		gap: 16px;
+		align-items: flex-start;
+	}
+
+	.achievement-year {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 22px;
+		color: #a86464;
+		flex-shrink: 0;
+		min-width: 40px;
+	}
+
+	.achievement-title {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 22px;
+		color: #666;
+	}
+
+	// ─── Portfolio Section ─────────────────
+	.designer-portfolio-section {
+		max-width: 1140px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 60px 0;
+		border-top: 1px solid #e6e6e6;
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.designer-portfolio-header {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.designer-portfolio-subtitle {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 27px;
+		color: #999;
+		margin: 0;
+	}
+
+	.designer-portfolio-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 24px;
+	}
+
+	.portfolio-item {
+		cursor: pointer;
+		transition: transform 0.3s;
+
+		&:hover {
+			transform: translateY(-4px);
+
+			.portfolio-item-image img {
+				transform: scale(1.05);
+			}
+
+			.portfolio-item-overlay {
+				opacity: 1;
+			}
+		}
+	}
+
+	.portfolio-item-image {
+		width: 100%;
+		height: 320px;
+		overflow: hidden;
+		background: #f6f0f0;
+		position: relative;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.4s;
+		}
+	}
+
+	.portfolio-item-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.35);
+		display: flex;
+		align-items: flex-end;
+		padding: 20px;
+		opacity: 0;
+		transition: opacity 0.3s;
+	}
+
+	.portfolio-item-category {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 13px;
+		line-height: 20px;
+		color: #fff;
+		background: rgba(255, 255, 255, 0.2);
+		padding: 4px 12px;
+		backdrop-filter: blur(4px);
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.portfolio-item-info {
+		padding: 16px 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.portfolio-item-title {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 27px;
+		color: #000;
+		margin: 0;
+	}
+
+	.portfolio-item-year {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		color: #999;
+	}
+
+	// ─── Comments / Reviews Section ───────
+	.designer-comments-section {
+		max-width: 1140px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 60px 0 100px;
+		border-top: 1px solid #e6e6e6;
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.designer-comments-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.designer-comments-summary {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.review-stars-row {
+		display: flex;
+		gap: 4px;
+	}
+
+	.review-star {
+		font-size: 18px;
+		line-height: 1;
+
+		&.filled {
+			color: #f5a623;
+		}
+
+		&.empty {
+			color: #e6e6e6;
+		}
+	}
+
+	.review-average {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #000;
+	}
+
+	.review-count {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		color: #999;
+	}
+
+	.designer-comments-list {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.designer-review-item {
+		display: flex;
+		gap: 32px;
+		padding: 32px 0;
+		border-bottom: 1px solid #e6e6e6;
+
+		&:first-child {
+			padding-top: 0;
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+
+	.designer-review-author {
+		width: 220px;
+		flex-shrink: 0;
+		display: flex;
+		gap: 16px;
+		align-items: flex-start;
+	}
+
+	.review-author-avatar {
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		overflow: hidden;
+		flex-shrink: 0;
+		background: #f6f0f0;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.review-author-info {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.review-author-name {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #000;
+		margin: 0;
+	}
+
+	.review-author-role {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 13px;
+		line-height: 20px;
+		color: #999;
+	}
+
+	.designer-review-content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.review-content-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.review-date {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		color: #999;
+	}
+
+	.review-text {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 30px;
+		color: #666;
+		margin: 0;
+	}
+}

@@ -1,0 +1,303 @@
+// ==============================
+// BLOG / COMMUNITY PAGE
+// ==============================
+
+// ─── Reusable: BlogCard (horizontal) ──────
+.blog-card {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	padding: 14px;
+	background: #fff;
+	border: 1px solid #f6ece5;
+	cursor: pointer;
+	transition: box-shadow 0.2s, border-color 0.2s;
+
+	&:hover {
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+		border-color: #e0d5cc;
+	}
+
+	.blog-card-image {
+		width: 150px;
+		height: 150px;
+		flex-shrink: 0;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.blog-card-content {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.blog-card-meta {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+	}
+
+	.blog-card-category {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #a86464;
+	}
+
+	.blog-card-date {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 12px;
+		line-height: 18px;
+		color: #999;
+	}
+
+	.blog-card-title {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 27px;
+		color: #000;
+		margin: 0;
+		max-width: 356px;
+	}
+}
+
+// ─── Reusable: BlogArticleCard (vertical/trending) ──
+.blog-article-card {
+	background: #fff;
+	padding: 20px;
+	width: 364px;
+	cursor: pointer;
+	transition: box-shadow 0.2s;
+
+	&:hover {
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+	}
+
+	.blog-article-card-image {
+		width: 324px;
+		height: 223px;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.blog-article-card-content {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin-top: 24px;
+	}
+
+	.blog-article-card-meta {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.blog-article-card-badge {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 20px;
+		color: #fff;
+		background: #a86464;
+		padding: 4px 8px;
+		border-radius: 4px;
+		white-space: nowrap;
+	}
+
+	.blog-article-card-date {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		color: #999;
+	}
+
+	.blog-article-card-title {
+		font-family: 'Jost', sans-serif;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 27px;
+		color: #000;
+		margin: 0;
+	}
+}
+
+// ─── Blog Page Layout ──────────────────────
+.community-page {
+	width: 100%;
+
+	// ─── Blog List Section ─────────────────
+	.blog-list-section {
+		max-width: 1140px;
+		width: 100%;
+		margin: 0 auto;
+		padding: 60px 0 120px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 50px;
+
+		> .section-title {
+			font-family: 'Jost', sans-serif;
+			font-weight: 500;
+			font-size: 40px;
+			line-height: normal;
+			color: #000;
+			margin: 0;
+		}
+
+		.blog-grid {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 50px 24px;
+			width: 100%;
+		}
+
+		.blog-card {
+			width: calc(50% - 12px);
+		}
+
+		.blog-pagination {
+			display: flex;
+			justify-content: center;
+
+			.MuiPagination-ul {
+				gap: 8px;
+
+				.MuiPaginationItem-root {
+					font-family: 'Jost', sans-serif;
+					font-weight: 400;
+					font-size: 16px;
+					color: #999;
+					border: none;
+					min-width: 32px;
+					height: 32px;
+
+					&.Mui-selected {
+						background: #000;
+						color: #fff;
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+	}
+
+	// ─── Trending Articles Section ─────────
+	.trending-articles-section {
+		background: #f6f0f0;
+		padding: 60px 150px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 50px;
+
+		> .section-title {
+			font-family: 'Jost', sans-serif;
+			font-weight: 500;
+			font-size: 40px;
+			line-height: normal;
+			color: #000;
+			margin: 0;
+			text-align: center;
+		}
+
+		.trending-grid {
+			display: flex;
+			gap: 24px;
+			width: 1140px;
+		}
+	}
+
+	// ─── Instagram Section ─────────────────
+	.instagram-section {
+		padding: 60px 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 50px;
+		max-width: 1140px;
+		margin: 0 auto;
+
+		.instagram-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+
+			.section-title {
+				font-family: 'Jost', sans-serif;
+				font-weight: 500;
+				font-size: 40px;
+				line-height: normal;
+				color: #000;
+				margin: 0;
+			}
+
+			.instagram-handle {
+				font-family: 'Jost', sans-serif;
+				font-weight: 500;
+				font-size: 18px;
+				line-height: 27px;
+				color: #a86464;
+				padding: 14px 32px;
+				border: 1px solid #a86464;
+				text-decoration: none;
+				transition: background 0.2s, color 0.2s;
+
+				&:hover {
+					background: #a86464;
+					color: #fff;
+				}
+			}
+		}
+
+		.instagram-grid {
+			display: flex;
+			gap: 24px;
+		}
+
+		.instagram-item {
+			width: 220px;
+			height: 220px;
+			overflow: hidden;
+			position: relative;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.instagram-overlay {
+				position: absolute;
+				inset: 0;
+				background: rgba(0, 0, 0, 0.5);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				img {
+					width: 40px;
+					height: 40px;
+					filter: brightness(0) invert(1);
+				}
+			}
+		}
+	}
+}

@@ -1,11 +1,16 @@
 import React from 'react';
 import { Stack } from '@mui/material';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+import BlogListSection from '../../libs/components/blog/BlogListSection';
+import TrendingArticlesSection from '../../libs/components/blog/TrendingArticlesSection';
+import InstagramSection from '../../libs/components/blog/InstagramSection';
 
 const Community = () => {
 	return (
 		<Stack className="community-page">
-			<div>Community</div>
+			<BlogListSection />
+			<TrendingArticlesSection />
+			<InstagramSection />
 		</Stack>
 	);
 };
