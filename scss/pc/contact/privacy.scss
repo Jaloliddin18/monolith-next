@@ -1,0 +1,147 @@
+// ==============================
+// PRIVACY POLICY PAGE
+// ==============================
+
+.privacy-page {
+	font-family: 'Jost', sans-serif;
+	width: 100%;
+
+	.privacy-content {
+		padding: 60px 150px;
+		gap: 50px;
+
+		// Header
+		.privacy-header {
+			width: 1140px;
+
+			.privacy-title {
+				font-family: 'Jost', sans-serif;
+				font-size: 40px;
+				font-weight: 500;
+				color: #000;
+				line-height: normal;
+			}
+
+			.privacy-date {
+				font-family: 'Jost', sans-serif;
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 27px;
+				color: #000;
+				margin-top: 14px;
+			}
+
+			.need-help {
+				gap: 8px;
+				padding: 14px 0;
+
+				.help-icon {
+					font-size: 24px;
+					color: #0079ff;
+				}
+
+				.help-text {
+					font-family: 'Jost', sans-serif;
+					font-size: 14px;
+					font-weight: 500;
+					line-height: 20px;
+					color: #0079ff;
+					cursor: pointer;
+				}
+			}
+		}
+
+		// Body - sidebar + content
+		.privacy-body {
+			gap: 24px;
+			width: 1140px;
+
+			// Left sidebar with right border
+			.privacy-sidebar {
+				width: 364px;
+				flex-shrink: 0;
+				border-right: 1px solid #e6e6e6;
+
+				.sidebar-list {
+					display: flex;
+					flex-direction: column;
+					gap: 24px;
+					padding: 24px 0;
+					padding-left: 30px;
+					margin: 0;
+					list-style-type: decimal;
+
+					.sidebar-item {
+						font-family: 'Jost', sans-serif;
+						font-size: 20px;
+						font-weight: 400;
+						line-height: 30px;
+						color: #000;
+						cursor: pointer;
+						transition: color 0.2s;
+
+						&:hover {
+							color: #a86464;
+						}
+
+						&.active {
+							color: #a86464;
+							font-weight: 500;
+						}
+					}
+				}
+			}
+
+			// Right content
+			.privacy-detail {
+				padding-left: 24px;
+				display: flex;
+				flex-direction: column;
+				gap: 14px;
+
+				.detail-title {
+					font-family: 'Jost', sans-serif;
+					font-size: 24px;
+					font-weight: 500;
+					line-height: 36px;
+					color: #000;
+				}
+
+				.detail-paragraph {
+					font-family: 'Jost', sans-serif;
+					font-size: 18px;
+					font-weight: 400;
+					line-height: 27px;
+					color: #999;
+					max-width: 744px;
+				}
+
+				.detail-bullets {
+					list-style-type: disc;
+					padding-left: 27px;
+					margin: 0;
+					max-width: 744px;
+					display: flex;
+					flex-direction: column;
+					gap: 16px;
+
+					li {
+						font-family: 'Jost', sans-serif;
+						font-size: 18px;
+						font-weight: 400;
+						line-height: 27px;
+
+						.bullet-label {
+							color: #000;
+							font-weight: 400;
+						}
+
+						.bullet-text {
+							color: #999;
+						}
+					}
+				}
+			}
+		}
+	}
+}
