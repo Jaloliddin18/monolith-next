@@ -1,0 +1,144 @@
+// ==============================
+// FAQ PAGE
+// ==============================
+
+.faq-page {
+	font-family: 'Jost', sans-serif;
+	width: 100%;
+
+	.faq-content {
+		padding: 60px 150px;
+		gap: 50px;
+		width: 1140px;
+		margin: 0 auto;
+
+		.faq-title {
+			font-family: 'Jost', sans-serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: #000;
+			line-height: normal;
+		}
+
+		// Search + Categories
+		.faq-controls {
+			gap: 24px;
+			width: 100%;
+
+			.faq-search {
+				background: #f9f9f9;
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				padding: 14px;
+				width: 800px;
+
+				.search-icon {
+					font-size: 24px;
+					color: #999;
+				}
+
+				input {
+					border: none;
+					outline: none;
+					width: 100%;
+					font-family: 'Jost', sans-serif;
+					font-size: 18px;
+					font-weight: 400;
+					line-height: 27px;
+					color: #000;
+					background: transparent;
+
+					&::placeholder {
+						color: #ccc;
+					}
+				}
+			}
+
+			.faq-categories {
+				gap: 40px;
+
+				.category-item {
+					gap: 14px;
+					padding: 8px 0;
+					cursor: pointer;
+
+					.category-radio {
+						width: 16px;
+						height: 16px;
+						border-radius: 50px;
+						border: 1px solid #999;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						transition: border-color 0.2s;
+					}
+
+					.radio-dot {
+						width: 8px;
+						height: 8px;
+						border-radius: 50%;
+						background: #a86464;
+					}
+
+					&.active {
+						.category-radio {
+							border: 5px solid #a86464;
+						}
+
+						.category-label {
+							color: #000;
+						}
+					}
+
+					.category-label {
+						font-family: 'Jost', sans-serif;
+						font-size: 18px;
+						font-weight: 400;
+						line-height: 27px;
+						color: #999;
+						transition: color 0.2s;
+					}
+				}
+			}
+		}
+
+		// FAQ Items
+		.faq-list {
+			width: 1140px;
+
+			.faq-item {
+				border-bottom: 1px solid #e6e6e6;
+				padding: 30px 0;
+
+				.faq-question {
+					cursor: pointer;
+					width: 100%;
+
+					.faq-q-text {
+						font-family: 'Jost', sans-serif;
+						font-size: 24px;
+						font-weight: 500;
+						line-height: 36px;
+						color: #000;
+					}
+
+					.faq-icon {
+						font-size: 32px;
+						color: #000;
+					}
+				}
+
+				.faq-answer {
+					font-family: 'Jost', sans-serif;
+					font-size: 18px;
+					font-weight: 400;
+					line-height: 27px;
+					color: #999;
+					max-width: 940px;
+					margin-top: 14px;
+				}
+			}
+		}
+	}
+}

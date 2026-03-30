@@ -34,7 +34,7 @@ const MyPageSidebar = () => {
       <Box className="sidebar-profile">
         <img
           className="profile-avatar"
-          src={avatarSrc}
+          src={"/icons/user_profile.png"}
           alt="Profile"
         />
         <Box className="profile-info">
