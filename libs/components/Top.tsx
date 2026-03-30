@@ -104,18 +104,36 @@ const Top = () => {
             >
               Blog
             </Link>
-            <Link
-              href="/about"
-              className={router.pathname.includes("/about") ? "active" : ""}
-            >
-              About
-            </Link>
+            <Box className={`nav-dropdown ${router.pathname.includes("/about") || router.pathname.includes("/service") ? "active" : ""}`}>
+              <Link
+                href="/about"
+                className={`nav-dropdown-trigger ${router.pathname.includes("/about") || router.pathname.includes("/service") ? "active" : ""}`}
+              >
+                About
+              </Link>
+              <Box className="nav-dropdown-menu">
+                <Link href="/about" className="dropdown-item">About Us</Link>
+                <Link href="/cs/contact" className="dropdown-item">Contact Us</Link>
+              </Box>
+            </Box>
             <Link
               href="/mypage"
               className={router.pathname.includes("/mypage") ? "active" : ""}
             >
               My Page
             </Link>
+            <Box className={`nav-dropdown ${router.pathname.includes("/cs") ? "active" : ""}`}>
+              <span className={`nav-dropdown-trigger ${router.pathname.includes("/cs") ? "active" : ""}`}>
+                CS
+              </span>
+              <Box className="nav-dropdown-menu">
+                <Link href="/cs" className="dropdown-item">Customer Service</Link>
+                <Link href="/service" className="dropdown-item">Service</Link>
+                <Link href="/cs/faq" className="dropdown-item">FAQ</Link>
+                <Link href="/cs/terms" className="dropdown-item">Terms & Conditions</Link>
+                <Link href="/cs/privacy" className="dropdown-item">Privacy Policy</Link>
+              </Box>
+            </Box>
           </Stack>
         </Stack>
 

@@ -142,16 +142,6 @@ const MyPageSidebar = () => {
           </Link>
         </Box>
 
-        {/* Footer links */}
-        <Box className="nav-footer">
-          <Link href="/service" className="footer-link">
-            Service
-          </Link>
-          <Link href="/cs" className="footer-link">
-            Help
-          </Link>
-        </Box>
-
         {/* Logout */}
         <Box className="nav-logout">
           <button className="logout-btn" onClick={logOut}>
