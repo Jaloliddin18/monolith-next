@@ -157,7 +157,7 @@ export const updateUserInfo = (jwtToken: any) => {
         : claims.memberImage,
     memberAddress: claims.memberAddress ?? "",
     memberDesc: claims.memberDesc ?? "",
-    memberFurnitures: claims.memberFurnitures,
+    memberDesigns: claims.memberDesigns,
     memberRank: claims.memberRank,
     memberArticles: claims.memberArticles,
     memberPoints: claims.memberPoints,
@@ -171,7 +171,7 @@ export const updateUserInfo = (jwtToken: any) => {
 export const logOut = () => {
   deleteStorage();
   deleteUserInfo();
-  window.location.reload();
+  window.location.href = '/';
 };
 
 const deleteStorage = () => {
@@ -191,7 +191,7 @@ const deleteUserInfo = () => {
     memberImage: "",
     memberAddress: "",
     memberDesc: "",
-    memberFurnitures: 0,
+    memberDesigns: 0,
     memberRank: 0,
     memberArticles: 0,
     memberPoints: 0,

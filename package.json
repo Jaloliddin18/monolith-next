@@ -23,6 +23,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "sass": "^1.98.0",
+    "subscriptions-transport-ws": "0.9.19",
     "sweetalert2": "^11.26.22",
     "swiper": "^12.1.2"
   },

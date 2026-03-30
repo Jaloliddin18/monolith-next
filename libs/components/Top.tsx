@@ -5,6 +5,7 @@ import { useReactiveVar } from "@apollo/client";
 import { userVar } from "../../apollo/store";
 import { getJwtToken, updateUserInfo, logOut } from "../auth";
 import {
+  Avatar,
   Box,
   Stack,
   Typography,
@@ -12,7 +13,6 @@ import {
   Badge,
   Menu,
   MenuItem,
-  Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -122,12 +122,12 @@ const Top = () => {
                 </Link>
               </Box>
             </Box>
-            <Link
+            {/* <Link
               href="/mypage"
               className={router.pathname.includes("/mypage") ? "active" : ""}
             >
               My Page
-            </Link>
+            </Link> */}
             <Box
               className={`nav-dropdown ${router.pathname.includes("/cs") ? "active" : ""}`}
             >
@@ -164,8 +164,16 @@ const Top = () => {
 
           {user?._id ? (
             <>
-              <IconButton onClick={handleMenuOpen}>
-                <PersonOutlineIcon />
+              <IconButton onClick={handleMenuOpen} sx={{ p: 0 }}>
+                <Avatar
+                  src={
+                    user.memberImage && !user.memberImage.startsWith("/img/")
+                      ? `${process.env.REACT_APP_API_URL}/${user.memberImage}`
+                      : user.memberImage || "/img/profile/defaultUser.svg"
+                  }
+                  alt={user.memberNick}
+                  sx={{ width: 36, height: 36 }}
+                />
               </IconButton>
               <Menu
                 anchorEl={anchorEl}
@@ -184,9 +192,13 @@ const Top = () => {
               </Menu>
             </>
           ) : (
-            <IconButton onClick={() => router.push("/account/join")}>
-              <PersonOutlineIcon />
-            </IconButton>
+            <Box
+              className="login-register-btn"
+              onClick={() => router.push("/account/join")}
+            >
+              <PersonOutlineIcon sx={{ fontSize: 20 }} />
+              <span>Login / Register</span>
+            </Box>
           )}
 
           <IconButton>

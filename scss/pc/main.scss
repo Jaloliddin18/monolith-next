@@ -1,339 +1,369 @@
-@use './homepage/homepage';
-@use './about/about';
-@use './service/service';
-@use './furniture/furniture-detail';
-@use './furniture/furniture-list';
-@use './mypage/mypage';
-@use './cart/cart';
-@use './checkout/checkout';
-@use './join/join';
-@use './blog/blog';
-@use './blog/blog-detail';
-@use './designer/designer';
-@use './designer/designer-detail';
-@use './contact/contact';
-@use './contact/faq';
-@use './contact/terms';
-@use './contact/privacy';
+@use "./homepage/homepage";
+@use "./about/about";
+@use "./service/service";
+@use "./furniture/furniture-detail";
+@use "./furniture/furniture-list";
+@use "./mypage/mypage";
+@use "./cart/cart";
+@use "./checkout/checkout";
+@use "./join/join";
+@use "./blog/blog";
+@use "./blog/blog-detail";
+@use "./designer/designer";
+@use "./designer/designer-detail";
+@use "./contact/contact";
+@use "./contact/faq";
+@use "./contact/terms";
+@use "./contact/privacy";
 
 // ==============================
 // GLOBAL LAYOUT
 // ==============================
 #pc-wrap {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 // ==============================
 // TOP / NAVBAR
 // ==============================
 #top {
-	position: sticky;
-	top: 0;
-	z-index: 1000;
-	background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
 
-	.top-banner {
-		background: #fdf0ef;
-		padding: 10px 0;
-		text-align: center;
+  .top-banner {
+    background: #fdf0ef;
+    padding: 10px 0;
+    text-align: center;
 
-		.highlight {
-			color: #a0616a;
-			font-weight: 600;
-		}
-	}
+    .highlight {
+      color: #a0616a;
+      font-weight: 600;
+    }
+  }
 
-	.navbar {
-		max-width: 1200px;
-		margin: 0 auto;
-		width: 100%;
-		padding: 20px 40px;
+  .navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px 40px;
 
-		.logo {
-			display: flex;
-			align-items: center;
-		}
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
-		.nav-links {
-			align-items: center;
+    .nav-links {
+      align-items: center;
 
-			a {
-				font-size: 15px;
-				font-weight: 500;
-				color: #333;
-				position: relative;
-				padding-bottom: 4px;
-				transition: color 0.3s;
+      a {
+        font-size: 15px;
+        font-weight: 500;
+        color: #333;
+        position: relative;
+        padding-bottom: 4px;
+        transition: color 0.3s;
 
-				&:hover,
-				&.active {
-					color: #a0616a;
-				}
+        &:hover,
+        &.active {
+          color: #a0616a;
+        }
 
-				&.active::after {
-					content: '';
-					position: absolute;
-					bottom: 0;
-					left: 0;
-					width: 100%;
-					height: 2px;
-					background: #a0616a;
-				}
-			}
+        &.active::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: #a0616a;
+        }
+      }
 
-			// Dropdown nav items
-			.nav-dropdown {
-				position: relative;
+      // Dropdown nav items
+      .nav-dropdown {
+        position: relative;
 
-				.nav-dropdown-trigger {
-					font-size: 15px;
-					font-weight: 500;
-					color: #333;
-					position: relative;
-					padding-bottom: 4px;
-					transition: color 0.3s;
-					cursor: pointer;
-					text-decoration: none;
+        .nav-dropdown-trigger {
+          font-size: 15px;
+          font-weight: 500;
+          color: #333;
+          position: relative;
+          padding-bottom: 4px;
+          transition: color 0.3s;
+          cursor: pointer;
+          text-decoration: none;
 
-					&:hover,
-					&.active {
-						color: #a0616a;
-					}
+          &:hover,
+          &.active {
+            color: #a0616a;
+          }
 
-					&.active::after {
-						content: '';
-						position: absolute;
-						bottom: 0;
-						left: 0;
-						width: 100%;
-						height: 2px;
-						background: #a0616a;
-					}
-				}
+          &.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #a0616a;
+          }
+        }
 
-				.nav-dropdown-menu {
-					position: absolute;
-					top: 100%;
-					left: 50%;
-					transform: translateX(-50%);
-					background: #fff;
-					border: 1px solid #e6e6e6;
-					border-radius: 8px;
-					padding: 8px 0;
-					min-width: 180px;
-					box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-					opacity: 0;
-					visibility: hidden;
-					max-height: 0;
-					overflow: hidden;
-					transition: opacity 0.3s ease, visibility 0.3s ease, max-height 0.4s ease;
-					z-index: 100;
-					margin-top: 4px;
+        .nav-dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #fff;
+          border: 1px solid #e6e6e6;
+          border-radius: 8px;
+          padding: 8px 0;
+          min-width: 180px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          opacity: 0;
+          visibility: hidden;
+          max-height: 0;
+          overflow: hidden;
+          transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease,
+            max-height 0.4s ease;
+          z-index: 100;
+          margin-top: 4px;
 
-					.dropdown-item {
-						display: block;
-						padding: 10px 20px;
-						font-family: 'Jost', sans-serif;
-						font-size: 14px;
-						font-weight: 400;
-						color: #333;
-						text-decoration: none;
-						transition: background 0.2s, color 0.2s;
-						white-space: nowrap;
+          .dropdown-item {
+            display: block;
+            padding: 10px 20px;
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            text-decoration: none;
+            transition:
+              background 0.2s,
+              color 0.2s;
+            white-space: nowrap;
 
-						&:hover {
-							background: #fdf0ef;
-							color: #a0616a;
-						}
-					}
-				}
+            &:hover {
+              background: #fdf0ef;
+              color: #a0616a;
+            }
+          }
+        }
 
-				&:hover {
-					.nav-dropdown-menu {
-						opacity: 1;
-						visibility: visible;
-						max-height: 300px;
-					}
-				}
-			}
-		}
+        &:hover {
+          .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            max-height: 300px;
+          }
+        }
+      }
+    }
 
-		.search-box {
-			display: flex;
-			align-items: center;
-			gap: 8px;
-			border: 1px solid #e0e0e0;
-			border-radius: 8px;
-			padding: 8px 16px;
-			min-width: 200px;
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 8px 16px;
+      min-width: 200px;
 
-			input {
-				border: none;
-				font-size: 14px;
-				width: 100%;
-				color: #333;
+      input {
+        border: none;
+        font-size: 14px;
+        width: 100%;
+        color: #333;
 
-				&::placeholder {
-					color: #999;
-				}
-			}
-		}
-	}
+        &::placeholder {
+          color: #999;
+        }
+      }
+    }
+
+    .login-register-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid #333;
+      border-radius: 50px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition:
+        background 0.2s,
+        color 0.2s,
+        border-color 0.2s;
+      white-space: nowrap;
+
+      span {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      svg {
+        color: #333;
+      }
+    }
+  }
 }
 
 // ==============================
 // FOOTER
 // ==============================
 #footer {
-	font-family: 'Jost', sans-serif;
+  font-family: "Jost", sans-serif;
 
-	.footer-main {
-		padding: 80px 150px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 100px;
-	}
+  .footer-main {
+    padding: 80px 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+  }
 
-	.footer-top-row {
-		width: 1140px;
-		gap: 144px;
-	}
+  .footer-top-row {
+    width: 1140px;
+    gap: 144px;
+  }
 
-	// Brand column (logo + guarantee texts)
-	.footer-brand-col {
-		width: 354px;
-		gap: 40px;
-		flex-shrink: 0;
+  // Brand column (logo + guarantee texts)
+  .footer-brand-col {
+    width: 354px;
+    gap: 40px;
+    flex-shrink: 0;
 
-		.footer-logo {
-			img {
-				object-fit: contain;
-			}
-		}
+    .footer-logo {
+      img {
+        object-fit: contain;
+      }
+    }
 
-		.footer-brand-name {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
-			line-height: 27px;
-			color: #000;
-		}
+    .footer-brand-name {
+      font-family: "Jost", sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 27px;
+      color: #000;
+    }
 
-		.footer-guarantee-text {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
-			line-height: 27px;
-			color: #000;
-			max-width: 280px;
+    .footer-guarantee-text {
+      font-family: "Jost", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 27px;
+      color: #000;
+      max-width: 280px;
 
-			.highlight {
-				color: #a86464;
-			}
-		}
-	}
+      .highlight {
+        color: #a86464;
+      }
+    }
+  }
 
-	// Link columns (About Us, Get help, Order & Purchase)
-	.footer-link-col {
-		gap: 24px;
+  // Link columns (About Us, Get help, Order & Purchase)
+  .footer-link-col {
+    gap: 24px;
 
-		.footer-col-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
-			line-height: 27px;
-			color: #000;
-		}
+    .footer-col-title {
+      font-family: "Jost", sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 27px;
+      color: #000;
+    }
 
-		.footer-col-links {
-			gap: 12px;
+    .footer-col-links {
+      gap: 12px;
 
-			a {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 400;
-				line-height: 27px;
-				color: #999;
-				transition: color 0.3s;
+      a {
+        font-family: "Jost", sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 27px;
+        color: #999;
+        transition: color 0.3s;
 
-				&:hover {
-					color: #000;
-				}
+        &:hover {
+          color: #000;
+        }
 
-				&.active-link {
-					color: #a86464;
-				}
-			}
-		}
-	}
+        &.active-link {
+          color: #a86464;
+        }
+      }
+    }
+  }
 
-	// Get on mobile + social icons column
-	.footer-mobile-col {
-		gap: 40px;
+  // Get on mobile + social icons column
+  .footer-mobile-col {
+    gap: 40px;
 
-		.footer-mobile-section {
-			gap: 24px;
-		}
+    .footer-mobile-section {
+      gap: 24px;
+    }
 
-		.footer-col-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
-			line-height: 27px;
-			color: #000;
-		}
+    .footer-col-title {
+      font-family: "Jost", sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 27px;
+      color: #000;
+    }
 
-		.app-badge {
-			width: 107px;
-			height: auto;
-		}
+    .app-badge {
+      width: 107px;
+      height: auto;
+    }
 
-		.footer-social-icons {
-			img {
-				cursor: pointer;
-				transition: opacity 0.3s;
+    .footer-social-icons {
+      img {
+        cursor: pointer;
+        transition: opacity 0.3s;
 
-				&:hover {
-					opacity: 0.7;
-				}
-			}
-		}
-	}
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
 
-	// Bottom row (copyright + payment logos)
-	.footer-bottom-row {
-		width: 1140px;
-		padding: 24px 0;
-		border-top: 1px solid #e6e6e6;
+  // Bottom row (copyright + payment logos)
+  .footer-bottom-row {
+    width: 1140px;
+    padding: 24px 0;
+    border-top: 1px solid #e6e6e6;
 
-		.footer-copyright {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
-			line-height: 27px;
-			color: #999;
+    .footer-copyright {
+      font-family: "Jost", sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 27px;
+      color: #999;
 
-			.highlight {
-				color: #a86464;
-			}
-		}
+      .highlight {
+        color: #a86464;
+      }
+    }
 
-		.footer-payment-logos {
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
-			gap: 24px;
+    .footer-payment-logos {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 24px;
 
-			img {
-				width: 70px;
-				height: 40px;
-				object-fit: contain;
-			}
-		}
-	}
+      img {
+        width: 70px;
+        height: 40px;
+        object-fit: contain;
+      }
+    }
+  }
 }
 
 // Product card and section styles are in homepage.scss
