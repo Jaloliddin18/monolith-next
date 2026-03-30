@@ -104,7 +104,9 @@ const Top = () => {
             >
               Blog
             </Link>
-            <Box className={`nav-dropdown ${router.pathname.includes("/about") || router.pathname.includes("/service") ? "active" : ""}`}>
+            <Box
+              className={`nav-dropdown ${router.pathname.includes("/about") || router.pathname.includes("/service") ? "active" : ""}`}
+            >
               <Link
                 href="/about"
                 className={`nav-dropdown-trigger ${router.pathname.includes("/about") || router.pathname.includes("/service") ? "active" : ""}`}
@@ -112,8 +114,12 @@ const Top = () => {
                 About
               </Link>
               <Box className="nav-dropdown-menu">
-                <Link href="/about" className="dropdown-item">About Us</Link>
-                <Link href="/cs/contact" className="dropdown-item">Contact Us</Link>
+                <Link href="/about" className="dropdown-item">
+                  About
+                </Link>
+                <Link href="/cs/contact" className="dropdown-item">
+                  Contact Us
+                </Link>
               </Box>
             </Box>
             <Link
@@ -122,16 +128,28 @@ const Top = () => {
             >
               My Page
             </Link>
-            <Box className={`nav-dropdown ${router.pathname.includes("/cs") ? "active" : ""}`}>
-              <span className={`nav-dropdown-trigger ${router.pathname.includes("/cs") ? "active" : ""}`}>
+            <Box
+              className={`nav-dropdown ${router.pathname.includes("/cs") ? "active" : ""}`}
+            >
+              <Link
+                href="/cs"
+                className={`nav-dropdown-trigger ${router.pathname.includes("/cs") ? "active" : ""}`}
+              >
                 CS
-              </span>
+              </Link>
               <Box className="nav-dropdown-menu">
-                <Link href="/cs" className="dropdown-item">Customer Service</Link>
-                <Link href="/service" className="dropdown-item">Service</Link>
-                <Link href="/cs/faq" className="dropdown-item">FAQ</Link>
-                <Link href="/cs/terms" className="dropdown-item">Terms & Conditions</Link>
-                <Link href="/cs/privacy" className="dropdown-item">Privacy Policy</Link>
+                <Link href="/cs" className="dropdown-item">
+                  Customer Service
+                </Link>
+                <Link href="/cs/faq" className="dropdown-item">
+                  FAQ
+                </Link>
+                <Link href="/cs/terms" className="dropdown-item">
+                  Terms & Conditions
+                </Link>
+                <Link href="/cs/privacy" className="dropdown-item">
+                  Privacy Policy
+                </Link>
               </Box>
             </Box>
           </Stack>
