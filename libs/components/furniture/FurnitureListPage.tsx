@@ -175,19 +175,13 @@ const FurnitureListPage = ({
 			<Stack className="main-content" direction="row" gap="23px">
 				<FilterSidebar searchFilter={searchFilter} onFilterChange={onFilterChange} />
 				<ProductGrid
-					furnitures={furnitures}
-					total={total}
-					page={page}
-					limit={limit}
-					sortValue={sortValue}
 					onPageChange={onPageChange}
-					onSortChange={onSortChange}
 					onLike={onLike}
 				/>
 			</Stack>
 
 			{/* Recently Viewed */}
-			<RecentlyViewed furnitures={furnitures.slice(0, 8)} onLike={onLike} />
+			<RecentlyViewed onLike={onLike} />
 
 			{/* Reviews */}
 			<ReviewSection />

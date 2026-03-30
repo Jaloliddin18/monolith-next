@@ -384,27 +384,30 @@
 		}
 
 		.grid-cards {
+			gap: 24px;
+			row-gap: 50px;
+
 			.grid-card-wrapper {
-				width: 235px;
+				width: calc((100% - 48px) / 3);
 
 				.product-card {
-					width: 235px;
+					width: 100%;
 
 					&.product-card-sm {
-						width: 235px;
+						width: 100%;
 
 						.product-card-img {
-							height: 235px;
+							height: 300px;
 						}
 
 						.product-title {
-							font-size: 16px !important;
-							line-height: 24px !important;
+							font-size: 18px !important;
+							line-height: 27px !important;
 						}
 					}
 
 					.product-card-img {
-						height: 235px;
+						height: 300px;
 					}
 				}
 			}
