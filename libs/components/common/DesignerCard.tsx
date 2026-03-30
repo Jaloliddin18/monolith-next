@@ -14,7 +14,7 @@ const DesignerCard = ({ id, image, name, role, designs, followers }: DesignerCar
 	const router = useRouter();
 
 	const handleClick = () => {
-		router.push(`/member?memberId=${id}`);
+		router.push(`/member/detail?memberId=${id}`);
 	};
 
 	return (
