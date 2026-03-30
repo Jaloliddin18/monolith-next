@@ -20,12 +20,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
 import MiniCart from "./cart/MiniCart";
+import MiniWishlist from "./cart/MiniWishlist";
 
 const Top = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openCart, setOpenCart] = useState(false);
+  const [openWishlist, setOpenWishlist] = useState(false);
 
   useEffect(() => {
     const token = getJwtToken();
@@ -201,11 +203,11 @@ const Top = () => {
             </Box>
           )}
 
-          <IconButton>
-            <Badge badgeContent={0} color="primary">
+          {user?._id && (
+            <IconButton onClick={() => setOpenWishlist(true)}>
               <FavoriteBorderIcon />
-            </Badge>
-          </IconButton>
+            </IconButton>
+          )}
 
           <IconButton onClick={() => setOpenCart(true)}>
             <Badge badgeContent={3} color="primary">
@@ -217,6 +219,9 @@ const Top = () => {
 
       {/* Mini Cart Sidebar */}
       <MiniCart open={openCart} onClose={() => setOpenCart(false)} />
+
+      {/* Mini Wishlist Sidebar */}
+      <MiniWishlist open={openWishlist} onClose={() => setOpenWishlist(false)} />
     </Stack>
   );
 };
