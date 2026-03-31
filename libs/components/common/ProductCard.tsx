@@ -16,6 +16,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, reviewCount: reviewCountProp, originalPrice, size = 'default' }: ProductCardProps) => {
 	const router = useRouter();
+	if (!furniture) return null;
 	const { _id, furnitureTitle, furniturePrice, furnitureImages, furnitureBestseller, furnitureDiscount } = furniture;
 
 	const image =

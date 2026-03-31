@@ -1,13 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box, Stack, Typography, IconButton, Select, MenuItem, SelectChangeEvent } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Box, Stack, Typography, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import { Furniture } from '../../types/furniture/furniture';
 import { FIsearch } from '../../types/furniture/furniture.input';
 import FilterSidebar from './FilterSidebar';
 import ProductGrid from './ProductGrid';
 import RecentlyViewed from './RecentlyViewed';
+import PopularProducts from './PopularProducts';
 import ReviewSection from './ReviewSection';
+import NewsletterBanner from './NewsletterBanner';
 import InstagramSection from '../homepage/InstagramSection';
 
 interface FurnitureListPageProps {
@@ -108,83 +109,126 @@ const FurnitureListPage = ({
 	return (
 		<Stack className="furniture-list-page" id="furniture-list-page">
 			{/* Hero Banner */}
-			<Stack className="furniture-hero-banner">
-				<Stack className="hero-content" direction="row" justifyContent="space-between" alignItems="center">
-					<Stack className="hero-text-side" gap="20px">
-						<Typography className="hero-discount-label">
-							Up to <span className="highlight">30% Off</span>
-						</Typography>
-						<Typography className="hero-heading">
-							Enhance Your Kitchen with Our Furniture Options
-						</Typography>
+			<Stack className="furniture-hero-banner" direction="row" justifyContent="space-between" alignItems="center">
+				<Stack className="hero-text-side" gap="40px">
+					<Stack gap="24px">
+						<Stack gap="12px">
+							<Typography className="hero-discount-label">
+								Up to <span className="highlight">30% Off</span>
+							</Typography>
+							<Typography className="hero-heading">
+								Enhance Your Kitchen with Our Furniture Options
+							</Typography>
+						</Stack>
 						<Typography className="hero-price">$ 1249.10</Typography>
-						<Link href="/furniture">
-							<Box className="hero-shop-btn">
-								<Typography className="hero-shop-btn-text">SHOP NOW</Typography>
-							</Box>
-						</Link>
 					</Stack>
-					<Box className="hero-image-side">
-						<img src="https://placehold.co/500x420/111/111" alt="Featured furniture" />
-					</Box>
+					<Link href="/furniture">
+						<Box className="hero-shop-btn">
+							<Typography className="hero-shop-btn-text">SHOP NOW</Typography>
+						</Box>
+					</Link>
 				</Stack>
+				<Box className="hero-image-side">
+					<img src="/img/furniture/luxury_chair.jpg" alt="Featured furniture" />
+				</Box>
 			</Stack>
 
 			{/* Active Filters Bar + Sort */}
-			<Stack className="filter-tags-bar" direction="row" justifyContent="space-between" alignItems="center">
-				<Stack className="filter-tags-list" direction="row" flexWrap="wrap" gap="12px" alignItems="center">
-					{activeTags.map((tag, i) => (
-						<Stack key={i} className="filter-tag-chip" direction="row" alignItems="center" gap="8px">
-							{tag.colorHex && (
-								<Box
-									className="tag-color-dot"
-									sx={{ background: tag.colorHex }}
-								/>
-							)}
-							<Typography className="tag-chip-label">{tag.label}</Typography>
-							<IconButton className="tag-chip-close" onClick={() => removeTag(tag)} size="small">
-								<CloseIcon sx={{ fontSize: 14 }} />
-							</IconButton>
-						</Stack>
-					))}
-				</Stack>
-				<Stack direction="row" alignItems="center" gap="12px">
-					<Typography className="sort-label">Short by:</Typography>
-					<Select
-						value={sortValue}
-						onChange={handleSortChange}
-						size="small"
-						className="sort-select"
-						sx={{
-							fontFamily: "'Jost', sans-serif",
-							fontSize: '16px',
-							fontWeight: 600,
-							'& .MuiSelect-select': { padding: '10px 36px 10px 16px' },
-						}}
-					>
-						{sortOptions.map((opt) => (
-							<MenuItem key={opt.value} value={opt.value} sx={{ fontFamily: "'Jost', sans-serif" }}>
-								{opt.label}
-							</MenuItem>
+			<Stack className="filter-tags-bar" gap="14px" alignItems="flex-end">
+				<Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ width: 1140 }}>
+					<Stack className="filter-tags-list" direction="row" flexWrap="wrap" gap="14px" alignItems="center">
+						{activeTags.map((tag, i) => (
+							<Stack key={i} className="filter-tag-chip" direction="row" alignItems="center" gap="12px">
+								{tag.colorHex && (
+									<Box className="tag-color-dot" sx={{ background: tag.colorHex }} />
+								)}
+								<Typography className="tag-chip-label">{tag.label}</Typography>
+								<Box className="tag-chip-close" onClick={() => removeTag(tag)}>×</Box>
+							</Stack>
 						))}
-					</Select>
+					</Stack>
+					<Box className="sort-box" sx={{ position: 'relative' }}>
+						<Stack className="sort-box-inner" direction="row" alignItems="center" justifyContent="space-between">
+							<Stack direction="row" gap="12px" alignItems="center">
+								<Typography className="sort-label">Short by:</Typography>
+								<Typography className="sort-value">
+									{sortOptions.find((o) => o.value === sortValue)?.label ?? 'Recommended'}
+								</Typography>
+							</Stack>
+							<Box component="img" src="/icons/CaretDown.svg" alt="▾" width={24} height={24} />
+						</Stack>
+						<Select
+							value={sortValue}
+							onChange={handleSortChange}
+							className="sort-select-hidden"
+							sx={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }}
+							MenuProps={{
+								PaperProps: {
+									sx: {
+										border: '1px solid #e6e6e6',
+										borderRadius: 0,
+										boxShadow: '0px 10px 30px 0px rgba(0,0,0,0.05)',
+										padding: '24px 32px',
+										minWidth: '200px',
+										'& .MuiList-root': { padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' },
+									},
+								},
+							}}
+						>
+							{sortOptions.map((opt) => (
+								<MenuItem
+									key={opt.value}
+									value={opt.value}
+									sx={{
+										fontFamily: "'Jost', sans-serif",
+										fontSize: '18px',
+										fontWeight: 400,
+										lineHeight: '27px',
+										color: opt.value === sortValue ? '#000' : '#999',
+										padding: 0,
+										minHeight: 'unset',
+										'&:hover': { background: 'none', color: '#000' },
+										'&.Mui-selected': { background: 'none', color: '#000' },
+										'&.Mui-selected:hover': { background: 'none' },
+									}}
+								>
+									{opt.label}
+								</MenuItem>
+							))}
+						</Select>
+					</Box>
 				</Stack>
+				<Typography className="results-count">
+					{total > 0
+						? `Showing ${(page - 1) * limit + 1}-${Math.min(page * limit, total)} of ${total} results`
+						: 'Showing 0 of 0 results'}
+				</Typography>
 			</Stack>
 
 			{/* Main Content: Sidebar + Grid */}
 			<Stack className="main-content" direction="row" gap="23px">
 				<FilterSidebar searchFilter={searchFilter} onFilterChange={onFilterChange} />
 				<ProductGrid
+					furnitures={furnitures}
+					total={total}
+					page={page}
+					limit={limit}
 					onPageChange={onPageChange}
 					onLike={onLike}
 				/>
 			</Stack>
+
+			{/* Popular Products */}
+			<PopularProducts />
 
 			{/* Recently Viewed */}
 			<RecentlyViewed onLike={onLike} />
 
 			{/* Reviews */}
 			<ReviewSection />
+
+			{/* Newsletter Banner */}
+			<NewsletterBanner />
 
 			{/* Instagram */}
 			<InstagramSection />

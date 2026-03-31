@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Stack, Typography, Checkbox, Slider, InputBase, Radio } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import SearchIcon from '@mui/icons-material/Search';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { Box, Stack, Typography, Slider, InputBase, Radio } from '@mui/material';
 import { FurnitureRoom, FurnitureMaterial, FurnitureColor } from '../../enums/furniture.enum';
 import { FIsearch } from '../../types/furniture/furniture.input';
 
@@ -55,7 +51,7 @@ const colorMap: Record<FurnitureColor, string> = {
 	[FurnitureColor.PINK]: '#FFC0CB',
 	[FurnitureColor.PURPLE]: '#800080',
 	[FurnitureColor.NATURAL_WOOD]: '#DEB887',
-	[FurnitureColor.MULTICOLOR]: 'linear-gradient(135deg, #FF0000, #00FF00, #0000FF)',
+	[FurnitureColor.MULTICOLOR]: '#CDAE79',
 };
 
 const VISIBLE_ITEMS = 3;
@@ -68,12 +64,6 @@ const discountOptions = [
 	{ label: '40% and above', value: 40 },
 ];
 
-const compactCheckboxSx = {
-	color: '#999',
-	'&.Mui-checked': { color: '#A86464' },
-	padding: '2px',
-};
-
 const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => {
 	const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
 		categories: true,
@@ -84,7 +74,6 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 		availability: true,
 		price: true,
 	});
-
 	const [showMore, setShowMore] = useState<Record<string, boolean>>({});
 	const [categorySearch, setCategorySearch] = useState('');
 	const [selectedDiscount, setSelectedDiscount] = useState<number>(10);
@@ -141,39 +130,62 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 	const allColors = Object.values(FurnitureColor);
 	const visibleColors = showMore.colors ? allColors : allColors.slice(0, VISIBLE_COLORS);
 
-	const chevron = (key: string) => (
-		<KeyboardArrowDownIcon
-			sx={{ fontSize: 20, transform: expandedSections[key] ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}
+	const Chevron = ({ sectionKey }: { sectionKey: string }) => (
+		<Box
+			component="img"
+			src="/icons/CaretDown.svg"
+			alt="▾"
+			width={24}
+			height={24}
+			sx={{
+				transform: expandedSections[sectionKey] ? 'rotate(180deg)' : 'none',
+				transition: 'transform 0.2s',
+			}}
 		/>
 	);
 
-	const showMoreLink = (key: string, hasMore: boolean) =>
+	const ShowMoreLink = ({ sectionKey, hasMore }: { sectionKey: string; hasMore: boolean }) =>
 		hasMore ? (
-			<Stack className="show-more-link" direction="row" alignItems="center" gap="4px" onClick={() => toggleMore(key)}>
-				<Typography className="show-more-text">{showMore[key] ? 'Show less' : 'Show more'}</Typography>
+			<Stack className="show-more-link" direction="row" alignItems="center" gap="10px" onClick={() => toggleMore(sectionKey)}>
+				<Box
+					component="img"
+					src="/icons/ArrowRight.svg"
+					alt="↓"
+					width={20}
+					height={20}
+					sx={{ transform: 'rotate(90deg)' }}
+				/>
+				<Typography className="show-more-text">
+					{showMore[sectionKey] ? 'Show less' : 'Show more'}
+				</Typography>
 			</Stack>
 		) : null;
+
+	const CustomCheckbox = ({ checked }: { checked: boolean }) => (
+		<Box className={`filter-custom-checkbox${checked ? ' checked' : ''}`} />
+	);
 
 	return (
 		<Stack className="filter-sidebar">
 			{/* Header */}
 			<Stack className="filter-header" direction="row" justifyContent="space-between" alignItems="center">
 				<Typography className="filter-title">Filters</Typography>
-				<Stack className="clear-all-btn" direction="row" alignItems="center" gap="6px" onClick={clearAll}>
+				<Stack className="clear-all-btn" direction="row" alignItems="center" gap="12px" onClick={clearAll}>
 					<Typography className="clear-all-text">CLEAR ALL</Typography>
-					<CloseIcon sx={{ fontSize: 14 }} />
+					<Box sx={{ fontSize: 16, lineHeight: 1, color: '#000', userSelect: 'none' }}>×</Box>
 				</Stack>
 			</Stack>
 
 			{/* Search */}
 			<Stack className="filter-search">
-				<Stack className="filter-search-input" direction="row" alignItems="center" gap="6px">
-					<SearchIcon sx={{ fontSize: 18, color: '#999' }} />
+				<Stack className="filter-search-input" direction="row" alignItems="center" gap="10px">
+					<Box component="img" src="/icons/MagnifyingGlass.svg" alt="search" width={24} height={24} />
 					<InputBase
 						placeholder="Search for categories"
 						value={categorySearch}
 						onChange={(e) => setCategorySearch(e.target.value)}
-						sx={{ flex: 1, fontFamily: "'Jost', sans-serif", fontSize: '13px' }}
+						sx={{ flex: 1, fontFamily: "'Jost', sans-serif", fontSize: '14px', color: '#bfbfbf',
+							'& input::placeholder': { color: '#bfbfbf', opacity: 1 } }}
 					/>
 				</Stack>
 			</Stack>
@@ -182,22 +194,24 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			<Stack className="filter-section">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('categories')}>
 					<Typography className="filter-section-title">Categories</Typography>
-					{chevron('categories')}
+					<Chevron sectionKey="categories" />
 				</Stack>
 				{expandedSections.categories && (
 					<Stack className="filter-section-body">
-						<Stack className="filter-checkbox-row" direction="row" alignItems="center" onClick={toggleAllRooms}>
-							<Checkbox checked={searchFilter.roomList?.length === allRooms.length || false} size="small" sx={compactCheckboxSx} />
-							<Typography className="filter-checkbox-label">All</Typography>
-							<Typography className="filter-checkbox-count">(50505)</Typography>
+						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={toggleAllRooms} sx={{ cursor: 'pointer' }}>
+							<CustomCheckbox checked={searchFilter.roomList?.length === allRooms.length || false} />
+							<Stack direction="row" alignItems="center" gap="8px">
+								<Typography className="filter-checkbox-label">All</Typography>
+								<Typography className="filter-checkbox-count">(50505)</Typography>
+							</Stack>
 						</Stack>
 						{visibleRooms.map((room) => (
-							<Stack key={room} className="filter-checkbox-row" direction="row" alignItems="center" onClick={() => toggleRoom(room)}>
-								<Checkbox checked={searchFilter.roomList?.includes(room) || false} size="small" sx={compactCheckboxSx} />
+							<Stack key={room} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleRoom(room)} sx={{ cursor: 'pointer' }}>
+								<CustomCheckbox checked={searchFilter.roomList?.includes(room) || false} />
 								<Typography className="filter-checkbox-label">{roomLabels[room]}</Typography>
 							</Stack>
 						))}
-						{showMoreLink('categories', filtered.length > VISIBLE_ITEMS)}
+						<ShowMoreLink sectionKey="categories" hasMore={filtered.length > VISIBLE_ITEMS} />
 					</Stack>
 				)}
 			</Stack>
@@ -206,22 +220,24 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			<Stack className="filter-section">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('material')}>
 					<Typography className="filter-section-title">Material</Typography>
-					{chevron('material')}
+					<Chevron sectionKey="material" />
 				</Stack>
 				{expandedSections.material && (
 					<Stack className="filter-section-body">
-						<Stack className="filter-checkbox-row" direction="row" alignItems="center" onClick={toggleAllMaterials}>
-							<Checkbox checked={searchFilter.materialList?.length === allMats.length || false} size="small" sx={compactCheckboxSx} />
-							<Typography className="filter-checkbox-label">All</Typography>
-							<Typography className="filter-checkbox-count">(50505)</Typography>
+						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={toggleAllMaterials} sx={{ cursor: 'pointer' }}>
+							<CustomCheckbox checked={searchFilter.materialList?.length === allMats.length || false} />
+							<Stack direction="row" alignItems="center" gap="8px">
+								<Typography className="filter-checkbox-label">All</Typography>
+								<Typography className="filter-checkbox-count">(50505)</Typography>
+							</Stack>
 						</Stack>
 						{visibleMats.map((mat) => (
-							<Stack key={mat} className="filter-checkbox-row" direction="row" alignItems="center" onClick={() => toggleMaterial(mat)}>
-								<Checkbox checked={searchFilter.materialList?.includes(mat) || false} size="small" sx={compactCheckboxSx} />
+							<Stack key={mat} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleMaterial(mat)} sx={{ cursor: 'pointer' }}>
+								<CustomCheckbox checked={searchFilter.materialList?.includes(mat) || false} />
 								<Typography className="filter-checkbox-label">{materialLabels[mat]}</Typography>
 							</Stack>
 						))}
-						{showMoreLink('material', allMats.length > VISIBLE_ITEMS)}
+						<ShowMoreLink sectionKey="material" hasMore={allMats.length > VISIBLE_ITEMS} />
 					</Stack>
 				)}
 			</Stack>
@@ -230,13 +246,21 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			<Stack className="filter-section">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('rating')}>
 					<Typography className="filter-section-title">Customer rating</Typography>
-					{chevron('rating')}
+					<Chevron sectionKey="rating" />
 				</Stack>
 				{expandedSections.rating && (
 					<Stack className="filter-section-body">
-						<Stack direction="row" alignItems="center" gap="2px" sx={{ padding: '2px 0' }}>
+						<Stack direction="row" alignItems="center" gap="14px" sx={{ padding: '4px 0' }}>
 							{Array.from({ length: 5 }, (_, i) => (
-								<StarBorderIcon key={i} sx={{ fontSize: 20, color: '#999' }} />
+								<Box
+									key={i}
+									component="img"
+									src="/icons/star_icon.svg"
+									alt="star"
+									width={18}
+									height={18}
+									sx={{ opacity: 0.3, cursor: 'pointer', '&:hover': { opacity: 1 } }}
+								/>
 							))}
 						</Stack>
 					</Stack>
@@ -247,25 +271,27 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			<Stack className="filter-section">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('colors')}>
 					<Typography className="filter-section-title">Colors</Typography>
-					{chevron('colors')}
+					<Chevron sectionKey="colors" />
 				</Stack>
 				{expandedSections.colors && (
-					<>
-						<Stack className="filter-colors-grid" direction="row" flexWrap="wrap" gap="8px">
+					<Stack className="filter-section-body">
+						<Stack direction="row" flexWrap="wrap" gap="14px" sx={{ py: '8px' }}>
 							{visibleColors.map((color) => (
 								<Box
 									key={color}
-									className={`filter-color-swatch ${searchFilter.colorList?.includes(color) ? 'selected' : ''}`}
+									className={`filter-color-swatch${searchFilter.colorList?.includes(color) ? ' selected' : ''}`}
 									sx={{
 										background: colorMap[color],
-										border: searchFilter.colorList?.includes(color) ? '2px solid #A86464' : '1px solid #E6E6E6',
+										border: searchFilter.colorList?.includes(color)
+											? '2px solid #A86464'
+											: color === '#FFFFFF' ? '1px solid #e6e6e6' : 'none',
 									}}
 									onClick={() => toggleColor(color)}
 								/>
 							))}
 						</Stack>
-						{showMoreLink('colors', allColors.length > VISIBLE_COLORS)}
-					</>
+						<ShowMoreLink sectionKey="colors" hasMore={allColors.length > VISIBLE_COLORS} />
+					</Stack>
 				)}
 			</Stack>
 
@@ -273,17 +299,19 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			<Stack className="filter-section">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('discount')}>
 					<Typography className="filter-section-title">Discount offer</Typography>
-					{chevron('discount')}
+					<Chevron sectionKey="discount" />
 				</Stack>
 				{expandedSections.discount && (
 					<Stack className="filter-section-body">
 						{discountOptions.map((opt) => (
-							<Stack key={opt.value} className="filter-checkbox-row" direction="row" alignItems="center" onClick={() => setSelectedDiscount(opt.value)}>
-								<Radio checked={selectedDiscount === opt.value} size="small" sx={{ ...compactCheckboxSx, '&.Mui-checked': { color: '#A86464' } }} />
+							<Stack key={opt.value} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => setSelectedDiscount(opt.value)} sx={{ cursor: 'pointer' }}>
+								<Box
+									className={`filter-radio-btn${selectedDiscount === opt.value ? ' selected' : ''}`}
+								/>
 								<Typography className="filter-checkbox-label">{opt.label}</Typography>
 							</Stack>
 						))}
-						{showMoreLink('discount', true)}
+						<ShowMoreLink sectionKey="discount" hasMore={true} />
 					</Stack>
 				)}
 			</Stack>
@@ -292,15 +320,15 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			<Stack className="filter-section">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('availability')}>
 					<Typography className="filter-section-title">Availability</Typography>
-					{chevron('availability')}
+					<Chevron sectionKey="availability" />
 				</Stack>
 				{expandedSections.availability && (
 					<Stack className="filter-section-body">
-						<Stack className="filter-checkbox-row" direction="row" alignItems="center">
-							<Checkbox size="small" sx={compactCheckboxSx} />
+						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" sx={{ py: '12px', cursor: 'pointer' }}>
+							<CustomCheckbox checked={false} />
 							<Typography className="filter-checkbox-label">Include Out of Stock</Typography>
 						</Stack>
-						{showMoreLink('availability', true)}
+						<ShowMoreLink sectionKey="availability" hasMore={true} />
 					</Stack>
 				)}
 			</Stack>
@@ -308,27 +336,55 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			{/* Price Range */}
 			<Stack className="filter-section filter-section-last">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('price')}>
-					<Typography className="filter-section-title">Price range</Typography>
-					{chevron('price')}
+					<Typography className="filter-section-title price-title">Price range</Typography>
+					<Chevron sectionKey="price" />
 				</Stack>
 				{expandedSections.price && (
-					<Stack className="filter-price-range" gap="8px">
-						<Stack direction="row" justifyContent="space-between">
-							<Typography className="filter-price-label">${price.start}</Typography>
-							<Typography className="filter-price-label">${price.end}</Typography>
-						</Stack>
+					<Stack className="filter-price-range">
 						<Slider
 							value={[price.start, price.end]}
 							onChange={handlePrice}
 							min={0}
 							max={5000}
 							step={5}
+							valueLabelDisplay="on"
+							valueLabelFormat={(v) => `$${v}`}
 							sx={{
 								color: '#000',
-								padding: '8px 0',
-								'& .MuiSlider-thumb': { backgroundColor: '#fff', border: '2px solid #000', width: 14, height: 14 },
-								'& .MuiSlider-track': { backgroundColor: '#000' },
-								'& .MuiSlider-rail': { backgroundColor: '#E6E6E6' },
+								mt: '44px',
+								mb: '8px',
+								'& .MuiSlider-thumb': {
+									backgroundColor: '#000',
+									width: 10,
+									height: 10,
+									boxShadow: 'none',
+									'&:hover': { boxShadow: 'none' },
+									'&.Mui-active': { boxShadow: 'none' },
+									'&.Mui-focusVisible': { boxShadow: 'none' },
+									'&::before': { display: 'none' },
+								},
+								'& .MuiSlider-track': { backgroundColor: '#000', border: 'none', height: 2 },
+								'& .MuiSlider-rail': { backgroundColor: '#ccc', height: 2, opacity: 1 },
+								'& .MuiSlider-valueLabel': {
+									backgroundColor: '#fff',
+									color: '#000',
+									fontSize: '12px',
+									fontFamily: "'Jost', sans-serif",
+									fontWeight: 500,
+									lineHeight: '18px',
+									border: '1px solid #e6e6e6',
+									borderRadius: '3px',
+									padding: '3px 8px',
+									boxShadow: 'none',
+									top: 2,
+									'&::before': {
+										width: 8,
+										height: 8,
+										backgroundColor: '#fff',
+										borderRight: '1px solid #e6e6e6',
+										borderBottom: '1px solid #e6e6e6',
+									},
+								},
 							}}
 						/>
 					</Stack>
