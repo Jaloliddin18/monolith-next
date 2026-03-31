@@ -7,12 +7,12 @@ const LivingRoom = () => {
 			<Typography className="section-title-text">Living Room Furniture to Suit Your Lifestyle</Typography>
 			<Stack direction="row" gap="24px">
 				<Box className="living-room-image">
-					<img src="/img/furniture/living_room_1.jpg" alt="Living Room 1" />
+					<img src="/img/furniture/luxury_chair.jpg" alt="Living Room 1" />
 					<Box className="living-dot" sx={{ left: '70%', top: '56%' }} />
 					<Box className="living-dot" sx={{ left: '51%', top: '71%' }} />
 				</Box>
 				<Box className="living-room-image">
-					<img src="/img/furniture/living_room_2.jpg" alt="Living Room 2" />
+					<img src="/img/furniture/luxury_chair.jpg" alt="Living Room 2" />
 					<Box className="living-dot" sx={{ left: '35%', top: '62%' }} />
 					<Box className="living-dot" sx={{ left: '90%', top: '64%' }} />
 					<Box className="living-dot" sx={{ left: '84%', top: '17%' }} />

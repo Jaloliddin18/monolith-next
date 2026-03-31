@@ -88,7 +88,7 @@ const SaleBanner = () => {
 							<Typography className="sale-product-price">{saleProducts[0].price}</Typography>
 						</Stack>
 						<Box className="sale-product-image">
-							<img src="/img/furniture/placeholder.png" alt={saleProducts[0].name} />
+							<img src="/img/furniture/luxury_chair.jpg" alt={saleProducts[0].name} />
 						</Box>
 					</Box>
 					<Box className="sale-product-card sale-card-narrow sale-card-blurred" sx={{ background: saleProducts[1].bg }}>
@@ -104,7 +104,7 @@ const SaleBanner = () => {
 							<Typography className="sale-product-price">{saleProducts[1].price}</Typography>
 						</Stack>
 						<Box className="sale-card-overlay">
-							<Button className="btn-view-all-sale" variant="contained">
+							<Button className="btn-view-all-sale" disableElevation>
 								VIEW ALL
 							</Button>
 						</Box>
@@ -124,7 +124,7 @@ const SaleBanner = () => {
 							<Typography className="sale-product-price">{saleProducts[2].price}</Typography>
 						</Stack>
 						<Box className="sale-product-image">
-							<img src="/img/furniture/placeholder.png" alt={saleProducts[2].name} />
+							<img src="/img/furniture/luxury_chair.jpg" alt={saleProducts[2].name} />
 						</Box>
 					</Box>
 					<Box className="sale-product-card sale-card-wide" sx={{ background: saleProducts[3].bg }}>
@@ -140,7 +140,7 @@ const SaleBanner = () => {
 							<Typography className="sale-product-price">{saleProducts[3].price}</Typography>
 						</Stack>
 						<Box className="sale-product-image">
-							<img src="/img/furniture/placeholder.png" alt={saleProducts[3].name} />
+							<img src="/img/furniture/luxury_chair.jpg" alt={saleProducts[3].name} />
 						</Box>
 					</Box>
 				</Stack>

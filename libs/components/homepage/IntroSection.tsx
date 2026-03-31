@@ -8,8 +8,8 @@ const IntroSection = () => {
 				<Stack className="intro-text">
 					<Typography className="intro-title">Introducing StyleCasa</Typography>
 					<Typography className="intro-desc">
-						StyleCasa is a premier destination for individuals seeking an exceptional online furniture shopping
-						experience.
+						StyleCasa is a premier destination for individuals seeking a harmonious blend of modern aesthetics
+						and timeless sophistication in their home.
 					</Typography>
 				</Stack>
 				<Stack className="intro-stats">

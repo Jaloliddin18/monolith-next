@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const NewestChair = () => {
 	return (
@@ -12,7 +11,7 @@ const NewestChair = () => {
 						<Typography className="newest-card-title">Freshen Up Your Seating</Typography>
 					</Stack>
 					<Box className="newest-card-image">
-						<img src="/img/furniture/placeholder.png" alt="Newest Chair" />
+						<img src="/img/furniture/luxury_chair.jpg" alt="Newest Chair" />
 					</Box>
 				</Box>
 				<Box className="newest-card newest-card-gray">
@@ -24,10 +23,10 @@ const NewestChair = () => {
 						<Typography className="newest-card-title">Modern Swivel Accent Chair</Typography>
 					</Stack>
 					<Box className="newest-card-heart">
-						<FavoriteBorderIcon sx={{ fontSize: 24, color: '#333' }} />
+						<img src="/icons/Heart.svg" alt="Wishlist" width={24} height={24} />
 					</Box>
 					<Box className="newest-card-image">
-						<img src="/img/furniture/placeholder.png" alt="Modern Chair" />
+						<img src="/img/furniture/luxury_chair.jpg" alt="Modern Chair" />
 					</Box>
 				</Box>
 			</Stack>
@@ -40,12 +39,12 @@ const NewestChair = () => {
 						</Stack>
 						<Typography className="newest-card-title">Upgrade Your Seating Game</Typography>
 					</Stack>
-					<Button className="btn-shop-now" variant="contained">
+					<Button className="btn-shop-now" disableElevation>
 						SHOP NOW
 					</Button>
 				</Stack>
 				<Box className="newest-banner-image">
-					<img src="/img/furniture/placeholder.png" alt="Best Seller" />
+					<img src="/img/furniture/luxury_chair.jpg" alt="Best Seller" />
 				</Box>
 			</Box>
 		</Stack>

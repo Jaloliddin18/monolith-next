@@ -385,6 +385,134 @@
       }
     }
 
+    // ==============================
+    // COUPONS
+    // ==============================
+    .coupons-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .coupons-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      .coupon-card {
+        width: 364px;
+        background: #fff;
+        border: 1px dashed #e4cfcf;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+
+        .coupon-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 14px;
+          text-align: center;
+
+          .coupon-title {
+            font-family: "Jost", sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: #000;
+            line-height: 36px;
+            width: 284px;
+            text-align: center;
+          }
+
+          .coupon-subtitle {
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000;
+            line-height: 20px;
+          }
+        }
+
+        .coupon-code-wrapper {
+          width: 316px;
+          border-top: 1px dashed #d9d9d9;
+          padding-top: 40px;
+          align-items: center;
+
+          .coupon-code {
+            font-family: "Jost", sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: #a86464;
+            line-height: 36px;
+            text-align: center;
+            letter-spacing: 2px;
+          }
+        }
+      }
+    }
+
+    .ticket-coupons-row {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+
+      .ticket-coupon {
+        width: 364px;
+        height: 165px;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        border: 1px solid #e4cfcf;
+
+        .ticket-main {
+          flex: 1;
+          padding: 15px 16px 15px 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          border-right: 1px dashed #d9d9d9;
+
+          .ticket-heading-line {
+            font-family: "Jost", sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            color: #ff1e1e;
+            line-height: 1;
+          }
+
+          .ticket-desc {
+            font-family: "Jost", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000;
+            line-height: 20px;
+            margin-top: 4px;
+          }
+        }
+
+        .ticket-stub {
+          width: 78px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .ticket-code {
+            font-family: "Jost", sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #000;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
     .placeholder-content {
       display: flex;
       align-items: center;

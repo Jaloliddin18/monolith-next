@@ -10,13 +10,11 @@ const services = [
 
 const ServicesSection = () => {
 	return (
-		<Stack className="services-section" direction="row" justifyContent="space-between">
+		<Stack className="services-section" direction="row" justifyContent="center">
 			{services.map((svc) => (
 				<Stack className="service-card" key={svc.title} alignItems="center">
 					<Box className="service-icon-box">
-						<Box className="service-icon-inner">
-							<img src={svc.icon} alt={svc.title} width={50} height={50} />
-						</Box>
+						<img src={svc.icon} alt={svc.title} width={100} height={100} />
 					</Box>
 					<Stack className="service-card-text" alignItems="center">
 						<Typography className="service-card-title">{svc.title}</Typography>

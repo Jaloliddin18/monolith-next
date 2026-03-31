@@ -1,28 +1,134 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import { Box, Stack, Typography } from '@mui/material';
 import { Furniture } from '../../types/furniture/furniture';
-import ProductCard from './ProductCard';
+import ProductCard from '../common/ProductCard';
+
+interface HardcodedProduct {
+	_id: string;
+	furnitureTitle: string;
+	furniturePrice: number;
+	furnitureImages: string[];
+	furnitureBestseller: boolean;
+	furnitureDiscount: number;
+	furnitureLikes: number;
+	isOutOfStock: boolean;
+	rating: number;
+	reviewCount: number;
+	originalPrice?: number;
+}
+
+const hardcodedProducts: HardcodedProduct[] = [
+	{
+		_id: 'trending-1',
+		furnitureTitle: 'Upholstered Armchair',
+		furniturePrice: 279.20,
+		furnitureImages: [],
+		furnitureBestseller: true,
+		furnitureDiscount: 0,
+		furnitureLikes: 215,
+		isOutOfStock: false,
+		rating: 4.5,
+		reviewCount: 215,
+		originalPrice: 349,
+	},
+	{
+		_id: 'trending-2',
+		furnitureTitle: 'Wooden Showpiece Table',
+		furniturePrice: 32.10,
+		furnitureImages: [],
+		furnitureBestseller: false,
+		furnitureDiscount: 0,
+		furnitureLikes: 12125,
+		isOutOfStock: false,
+		rating: 4.4,
+		reviewCount: 12125,
+		originalPrice: 68.35,
+	},
+	{
+		_id: 'trending-3',
+		furnitureTitle: 'Leather Reclining',
+		furniturePrice: 799.20,
+		furnitureImages: [],
+		furnitureBestseller: false,
+		furnitureDiscount: 0,
+		furnitureLikes: 1587,
+		isOutOfStock: true,
+		rating: 4.6,
+		reviewCount: 1587,
+		originalPrice: 999,
+	},
+	{
+		_id: 'trending-4',
+		furnitureTitle: 'Rustic Wooden Chair',
+		furniturePrice: 89.99,
+		furnitureImages: [],
+		furnitureBestseller: false,
+		furnitureDiscount: 0,
+		furnitureLikes: 12125,
+		isOutOfStock: false,
+		rating: 4.2,
+		reviewCount: 12125,
+	},
+	{
+		_id: 'trending-5',
+		furnitureTitle: 'Wooden Ceiling Lamp',
+		furniturePrice: 47.20,
+		furnitureImages: [],
+		furnitureBestseller: false,
+		furnitureDiscount: 20,
+		furnitureLikes: 165,
+		isOutOfStock: false,
+		rating: 4.3,
+		reviewCount: 165,
+		originalPrice: 59,
+	},
+	{
+		_id: 'trending-6',
+		furnitureTitle: 'Adjustable Standing Desk',
+		furniturePrice: 159.99,
+		furnitureImages: [],
+		furnitureBestseller: false,
+		furnitureDiscount: 0,
+		furnitureLikes: 8068,
+		isOutOfStock: false,
+		rating: 4.8,
+		reviewCount: 8068,
+	},
+];
 
 interface TrendingNowProps {
-	trendFurnitures: Furniture[];
-	onLike: (id: string) => void;
+	trendFurnitures?: Furniture[];
+	onLike?: (id: string) => void;
 }
 
 const TrendingNow = ({ trendFurnitures, onLike }: TrendingNowProps) => {
+	const products = trendFurnitures && trendFurnitures.length > 0 ? trendFurnitures : null;
+
 	return (
 		<Stack className="trending-section" gap="50px">
 			<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
 				<Typography className="section-title-text">Trending Now</Typography>
 				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
 					<Typography>View All product</Typography>
-					<ArrowOutwardIcon sx={{ fontSize: 20 }} />
+					<Box component="img" src="/icons/ArrowUpRight.svg" alt="→" width={20} height={20} />
 				</Stack>
 			</Stack>
 			<Stack direction="row" flexWrap="wrap" gap="24px">
-				{trendFurnitures.slice(0, 6).map((furniture) => (
-					<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
-				))}
+				{products
+					? products.slice(0, 6).map((furniture) => (
+							<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
+						))
+					: hardcodedProducts.map((item) => (
+							<ProductCard
+								key={item._id}
+								furniture={item as unknown as Furniture}
+								isOutOfStock={item.isOutOfStock}
+								rating={item.rating}
+								reviewCount={item.reviewCount}
+								originalPrice={item.originalPrice}
+								onLike={onLike}
+							/>
+						))}
 			</Stack>
 		</Stack>
 	);

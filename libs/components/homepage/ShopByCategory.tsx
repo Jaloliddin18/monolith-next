@@ -1,14 +1,13 @@
 import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 
 const categories = [
 	{ icon: '/icons/bed.svg', label: 'Lemp' },
-	{ icon: '/icons/oval_icon.svg', label: 'Desks' },
+	{ icon: '/icons/Desk.svg', label: 'Desks' },
 	{ icon: '/icons/chair.svg', label: 'Chair' },
-	{ icon: '/icons/window_icon.svg', label: 'Sofas' },
+	{ icon: '/icons/Sofa.svg', label: 'Sofas' },
 	{ icon: '/icons/bed.svg', label: 'Bed' },
-	{ icon: '/icons/oval_icon.svg', label: 'Table' },
+	{ icon: '/icons/Table.svg', label: 'Table' },
 ];
 
 const ShopByCategory = () => {
@@ -18,7 +17,7 @@ const ShopByCategory = () => {
 				<Typography className="section-title-text">Shop by Category</Typography>
 				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
 					<Typography>View All </Typography>
-					<ArrowOutwardIcon sx={{ fontSize: 20 }} />
+					<Box component="img" src="/icons/ArrowUpRight.svg" alt="→" width={20} height={20} />
 				</Stack>
 			</Stack>
 			<Stack className="category-grid" direction="row" gap="24px">
