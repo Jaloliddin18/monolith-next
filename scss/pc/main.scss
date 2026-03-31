@@ -23,6 +23,9 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 // ==============================
@@ -276,6 +279,7 @@
       font-weight: 500;
       line-height: 27px;
       color: #000;
+      white-space: nowrap;
     }
 
     .footer-col-links {
@@ -314,10 +318,11 @@
       font-weight: 500;
       line-height: 27px;
       color: #000;
+      white-space: nowrap;
     }
 
     .app-badge {
-      width: 107px;
+      width: 140px;
       height: auto;
     }
 

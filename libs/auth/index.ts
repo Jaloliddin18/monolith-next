@@ -153,7 +153,7 @@ export const updateUserInfo = (jwtToken: any) => {
     memberFullName: claims.memberFullName ?? "",
     memberImage:
       claims.memberImage === null || claims.memberImage === undefined
-        ? "/img/profile/defaultUser.svg"
+        ? "/icons/user_profile.png"
         : claims.memberImage,
     memberAddress: claims.memberAddress ?? "",
     memberDesc: claims.memberDesc ?? "",
@@ -171,7 +171,7 @@ export const updateUserInfo = (jwtToken: any) => {
 export const logOut = () => {
   deleteStorage();
   deleteUserInfo();
-  window.location.href = '/';
+  window.location.href = "/";
 };
 
 const deleteStorage = () => {

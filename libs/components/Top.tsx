@@ -171,7 +171,7 @@ const Top = () => {
                   src={
                     user.memberImage && !user.memberImage.startsWith("/img/")
                       ? `${process.env.REACT_APP_API_URL}/${user.memberImage}`
-                      : user.memberImage || "/img/profile/defaultUser.svg"
+                      : user.memberImage || "/icons/user_profile.png"
                   }
                   alt={user.memberNick}
                   sx={{ width: 36, height: 36 }}
@@ -221,7 +221,10 @@ const Top = () => {
       <MiniCart open={openCart} onClose={() => setOpenCart(false)} />
 
       {/* Mini Wishlist Sidebar */}
-      <MiniWishlist open={openWishlist} onClose={() => setOpenWishlist(false)} />
+      <MiniWishlist
+        open={openWishlist}
+        onClose={() => setOpenWishlist(false)}
+      />
     </Stack>
   );
 };

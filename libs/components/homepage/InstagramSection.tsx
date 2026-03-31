@@ -2,12 +2,12 @@ import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
 
 const instagramImages = [
-	'/img/furniture/instagram-1.png',
-	'/img/furniture/instagram-2.png',
-	'/img/furniture/instagram-3.png',
-	'/img/furniture/instagram-4.png',
-	'/img/furniture/instagram-5.png',
-	'/img/furniture/instagram-6.png',
+	'/img/furniture/luxury_chair.jpg',
+	'/img/furniture/luxury_chair.jpg',
+	'/img/furniture/luxury_chair.jpg',
+	'/img/furniture/luxury_chair.jpg',
+	'/img/furniture/luxury_chair.jpg',
+	'/img/furniture/luxury_chair.jpg',
 ];
 
 const InstagramSection = () => {
@@ -15,7 +15,7 @@ const InstagramSection = () => {
 		<Stack className="instagram-section" alignItems="center" gap="50px">
 			<Stack className="instagram-header" direction="row" justifyContent="space-between" alignItems="center">
 				<Typography className="section-title-text">Follow on Instagram</Typography>
-				<Button className="btn-outline-brown" variant="outlined">
+				<Button className="btn-outline-brown" disableElevation>
 					@style_casa
 				</Button>
 			</Stack>

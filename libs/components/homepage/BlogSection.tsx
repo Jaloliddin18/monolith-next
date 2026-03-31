@@ -7,25 +7,25 @@ const blogs = [
 		category: 'Outdoor',
 		date: 'Jun 27, 2023',
 		title: 'Maximizing Small Spaces: Smart Furniture Ideas for Compact Living',
-		image: '/img/furniture/blog-1.png',
+		image: '/img/furniture/luxury_chair.jpg',
 	},
 	{
 		category: 'Masters of Wood',
 		date: 'Jun 27, 2023',
 		title: 'Innovation in Woodworking: Discover the Cutting-Edge',
-		image: '/img/furniture/blog-2.png',
+		image: '/img/furniture/luxury_chair.jpg',
 	},
 	{
 		category: 'Workshop to Home',
 		date: 'Jun 27, 2023',
 		title: 'Masters of Wood: Meet the Visionary Carpenters Transforming ',
-		image: '/img/furniture/blog-3.png',
+		image: '/img/furniture/luxury_chair.jpg',
 	},
 	{
 		category: 'Armchair',
 		date: 'Jun 27, 2023',
 		title: 'Outdoor Oasis: Designing Stylish and Functional Outdoor Furniture Settings',
-		image: '/img/furniture/blog-4.png',
+		image: '/img/furniture/luxury_chair.jpg',
 	},
 ];
 

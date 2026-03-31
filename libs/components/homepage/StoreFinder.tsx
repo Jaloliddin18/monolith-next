@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const StoreFinder = () => {
 	return (
@@ -10,7 +9,7 @@ const StoreFinder = () => {
 				<Stack direction="row" alignItems="center" gap="20px">
 					<Stack className="store-city-dropdown" direction="row" alignItems="center" gap="10px">
 						<Typography className="city-text">City</Typography>
-						<KeyboardArrowDownIcon sx={{ fontSize: 24, color: '#000' }} />
+						<Box component="img" src="/icons/CaretDown.svg" alt="▾" width={24} height={24} />
 					</Stack>
 					<Typography className="store-location-placeholder">add location</Typography>
 				</Stack>
