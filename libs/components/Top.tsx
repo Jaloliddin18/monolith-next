@@ -107,11 +107,11 @@ const Top = () => {
               Blog
             </Link>
             <Box
-              className={`nav-dropdown ${router.pathname.includes("/about") || router.pathname.includes("/service") ? "active" : ""}`}
+              className={`nav-dropdown ${router.pathname.includes("/about") || router.pathname.includes("/service") || router.pathname === "/cs/contact" ? "active" : ""}`}
             >
               <Link
                 href="/about"
-                className={`nav-dropdown-trigger ${router.pathname.includes("/about") || router.pathname.includes("/service") ? "active" : ""}`}
+                className={`nav-dropdown-trigger ${router.pathname.includes("/about") || router.pathname.includes("/service") || router.pathname === "/cs/contact" ? "active" : ""}`}
               >
                 About
               </Link>
@@ -131,11 +131,11 @@ const Top = () => {
               My Page
             </Link> */}
             <Box
-              className={`nav-dropdown ${router.pathname.includes("/cs") ? "active" : ""}`}
+              className={`nav-dropdown ${router.pathname.startsWith("/cs") && router.pathname !== "/cs/contact" ? "active" : ""}`}
             >
               <Link
                 href="/cs"
-                className={`nav-dropdown-trigger ${router.pathname.includes("/cs") ? "active" : ""}`}
+                className={`nav-dropdown-trigger ${router.pathname.startsWith("/cs") && router.pathname !== "/cs/contact" ? "active" : ""}`}
               >
                 CS
               </Link>

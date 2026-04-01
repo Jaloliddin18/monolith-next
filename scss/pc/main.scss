@@ -89,6 +89,8 @@
       // Dropdown nav items
       .nav-dropdown {
         position: relative;
+        display: flex;
+        align-items: center;
 
         .nav-dropdown-trigger {
           font-size: 15px;
