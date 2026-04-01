@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
+import NewsletterBanner from "../../libs/components/furniture/NewsletterBanner";
+import InstagramSection from "../../libs/components/homepage/InstagramSection";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StarIcon from "@mui/icons-material/Star";
@@ -270,7 +272,7 @@ const Service = () => {
                 Don&apos;t Miss Out!
               </Typography>
               <Box>
-                <Stack className="countdown-row">
+                <Stack className="countdown-row" direction="row" alignItems="center">
                   <Box className="countdown-circle">
                     <span>{String(countdown.days).padStart(2, "0")}</span>
                   </Box>
@@ -300,10 +302,10 @@ const Service = () => {
             </Stack>
             <Stack className="sale-thumbnails" direction="row">
               <Box className="sale-thumb">
-                <img src="/img/furniture/soft_chair.png" alt="Product 1" />
+                <img src="/img/furniture/luxury_chair.jpg" alt="Product 1" />
               </Box>
               <Box className="sale-thumb">
-                <img src="/img/furniture/brown_chair.png" alt="Product 2" />
+                <img src="/img/furniture/luxury_chair.jpg" alt="Product 2" />
               </Box>
             </Stack>
           </Stack>
@@ -355,59 +357,10 @@ const Service = () => {
       </Stack>
 
       {/* ===== NEWSLETTER BANNER ===== */}
-      <Stack className="about-newsletter">
-        <Box className="newsletter-container">
-          <Typography className="newsletter-title">
-            Get <span className="highlight">30% Discount</span> Buying First
-            Product
-          </Typography>
-          <Stack
-            className="newsletter-form"
-            direction="row"
-            alignItems="center"
-          >
-            <input
-              className="newsletter-input"
-              type="email"
-              placeholder="example@gmail.com"
-            />
-            <Button variant="contained" className="btn-subscribe">
-              SUBSCRIBE
-            </Button>
-          </Stack>
-        </Box>
-      </Stack>
+      <NewsletterBanner />
 
       {/* ===== INSTAGRAM SECTION ===== */}
-      <Stack className="about-instagram">
-        <Stack
-          className="instagram-header"
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography className="instagram-title">
-            Follow on Instagram
-          </Typography>
-          <Button variant="outlined" className="btn-follow">
-            FOLLOW US
-          </Button>
-        </Stack>
-        <Stack
-          className="instagram-grid"
-          direction="row"
-          justifyContent="center"
-        >
-          {[1, 2, 3, 4, 5, 6].map((item) => (
-            <Box className="instagram-item" key={item}>
-              <img
-                src="/img/furniture/luxury_chair.jpg"
-                alt={`Instagram ${item}`}
-              />
-            </Box>
-          ))}
-        </Stack>
-      </Stack>
+      <InstagramSection />
     </Stack>
   );
 };

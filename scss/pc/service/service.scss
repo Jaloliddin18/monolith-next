@@ -175,6 +175,7 @@
 .svc-sale-banner {
 	position: relative;
 	width: 100%;
+	min-height: 800px;
 
 	.sale-bg {
 		width: 100%;
@@ -188,6 +189,7 @@
 		left: 150px;
 		display: flex;
 		gap: 50px;
+		align-items: flex-start;
 	}
 
 	.sale-image {
@@ -227,11 +229,11 @@
 	.countdown-row {
 		display: flex;
 		align-items: center;
-		gap: 14px;
+		gap: 8px;
 
 		.countdown-circle {
-			width: 80px;
-			height: 80px;
+			width: 60px;
+			height: 60px;
 			background: #fff;
 			border-radius: 50%;
 			display: flex;
@@ -240,7 +242,7 @@
 
 			span {
 				font-family: 'Jost', sans-serif;
-				font-size: 30px;
+				font-size: 22px;
 				font-weight: 500;
 				color: #000;
 			}
@@ -255,10 +257,10 @@
 
 	.countdown-labels {
 		display: flex;
-		gap: 32px;
+		gap: 16px;
 
 		span {
-			width: 80px;
+			width: 60px;
 			text-align: center;
 			font-family: 'Jost', sans-serif;
 			font-size: 12px;
