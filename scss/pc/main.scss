@@ -232,12 +232,12 @@
 
   .footer-top-row {
     width: 1140px;
-    gap: 144px;
+    gap: 56px;
   }
 
   // Brand column (logo + guarantee texts)
   .footer-brand-col {
-    width: 354px;
+    width: 280px;
     gap: 40px;
     flex-shrink: 0;
 
@@ -261,7 +261,7 @@
       font-weight: 400;
       line-height: 27px;
       color: #000;
-      max-width: 280px;
+      max-width: 240px;
 
       .highlight {
         color: #a86464;
