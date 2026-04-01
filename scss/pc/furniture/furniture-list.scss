@@ -648,49 +648,6 @@
 	}
 
 	// ==============================
-	// RECENTLY VIEWED
-	// ==============================
-	.recently-viewed-section {
-		padding: 60px 150px;
-		gap: 50px;
-
-		.recently-viewed-header {
-			width: 1140px;
-
-			.section-title-text {
-				font-family: 'Jost', sans-serif;
-				font-size: 40px;
-				font-weight: 500;
-				color: #000;
-			}
-
-			.nav-arrow {
-				padding: 4px;
-				border-radius: 0;
-				background: none;
-
-				&:hover {
-					background: rgba(0, 0, 0, 0.04);
-				}
-
-				&:disabled {
-					opacity: 0.3;
-				}
-			}
-		}
-
-		.recently-viewed-content {
-			.product-card-sm {
-				width: 267px;
-
-				.product-card-img {
-					height: 267px;
-				}
-			}
-		}
-	}
-
-	// ==============================
 	// REVIEWS SECTION
 	// ==============================
 	.reviews-section {
@@ -699,6 +656,13 @@
 
 		.reviews-header {
 			width: 1140px;
+
+			.section-title-text {
+				font-family: 'Jost', sans-serif;
+				font-size: 40px;
+				font-weight: 500;
+				color: #000;
+			}
 
 			.reviews-sort-link {
 				font-family: 'Jost', sans-serif;

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
+import NewsletterBanner from '../../libs/components/furniture/NewsletterBanner';
+import InstagramSection from '../../libs/components/homepage/InstagramSection';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ArrowUpwardIcon from '@mui/icons-material/NorthEast';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -35,29 +37,19 @@ const About = () => {
 			{/* ===== PARTNER LOGOS ===== */}
 			<Stack className="about-partners" direction="row" alignItems="center" justifyContent="space-between">
 				<Box className="partner-logo">
-					<Typography sx={{ fontFamily: "'Josefin Slab', serif", fontWeight: 600, fontSize: 22, color: '#653c3c', lineHeight: '26px' }}>
-						PineCrest<br />Interiors
-					</Typography>
+					<img src="/icons/about_logo1.svg" alt="Partner 1" />
 				</Box>
 				<Box className="partner-logo">
-					<Typography sx={{ fontFamily: "'Jost', sans-serif", fontWeight: 600, fontSize: 20, color: '#333' }}>
-						Timber & Oak
-					</Typography>
+					<img src="/icons/about_logo2.svg" alt="Partner 2" />
 				</Box>
 				<Box className="partner-logo">
-					<Typography sx={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, fontSize: 18, color: '#333' }}>
-						WillowWood Furnishings
-					</Typography>
+					<img src="/icons/about_logo3.svg" alt="Partner 3" />
 				</Box>
 				<Box className="partner-logo">
-					<Typography sx={{ fontFamily: "'Jost', sans-serif", fontWeight: 600, fontSize: 20, color: '#333' }}>
-						HomeStyle Co.
-					</Typography>
+					<img src="/icons/about_logo4.svg" alt="Partner 4" />
 				</Box>
 				<Box className="partner-logo">
-					<Typography sx={{ fontFamily: "'Jost', sans-serif", fontWeight: 500, fontSize: 16, color: '#333' }}>
-						CedarGrove
-					</Typography>
+					<img src="/icons/about_logo5.svg" alt="Partner 5" />
 				</Box>
 			</Stack>
 
@@ -366,36 +358,10 @@ const About = () => {
 			</Stack>
 
 			{/* ===== NEWSLETTER BANNER ===== */}
-			<Stack className="about-newsletter">
-				<Box className="newsletter-container">
-					<Typography className="newsletter-title">
-						Get <span className="highlight">30% Discount</span> Buying First Product
-					</Typography>
-					<Stack className="newsletter-form" direction="row" alignItems="center">
-						<input className="newsletter-input" type="email" placeholder="example@gmail.com" />
-						<Button variant="contained" className="btn-subscribe">
-							SUBSCRIBE
-						</Button>
-					</Stack>
-				</Box>
-			</Stack>
+			<NewsletterBanner />
 
 			{/* ===== INSTAGRAM SECTION ===== */}
-			<Stack className="about-instagram">
-				<Stack className="instagram-header" direction="row" justifyContent="space-between" alignItems="center">
-					<Typography className="instagram-title">Follow on Instagram</Typography>
-					<Button variant="outlined" className="btn-follow">
-						FOLLOW US
-					</Button>
-				</Stack>
-				<Stack className="instagram-grid" direction="row" justifyContent="center">
-					{[1, 2, 3, 4, 5, 6].map((item) => (
-						<Box className="instagram-item" key={item}>
-							<img src="/img/furniture/luxury_chair.jpg" alt={`Instagram ${item}`} />
-						</Box>
-					))}
-				</Stack>
-			</Stack>
+			<InstagramSection />
 		</Stack>
 	);
 };

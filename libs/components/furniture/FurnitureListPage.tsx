@@ -5,7 +5,6 @@ import { Furniture } from '../../types/furniture/furniture';
 import { FIsearch } from '../../types/furniture/furniture.input';
 import FilterSidebar from './FilterSidebar';
 import ProductGrid from './ProductGrid';
-import RecentlyViewed from './RecentlyViewed';
 import PopularProducts from './PopularProducts';
 import ReviewSection from './ReviewSection';
 import NewsletterBanner from './NewsletterBanner';
@@ -220,9 +219,6 @@ const FurnitureListPage = ({
 
 			{/* Popular Products */}
 			<PopularProducts />
-
-			{/* Recently Viewed */}
-			<RecentlyViewed onLike={onLike} />
 
 			{/* Reviews */}
 			<ReviewSection />
