@@ -14,7 +14,7 @@ import TopRated from '../libs/components/homepage/TopRated';
 import LivingRoom from '../libs/components/homepage/LivingRoom';
 import TopSelection from '../libs/components/homepage/TopSelection';
 import FaqSection from '../libs/components/homepage/FaqSection';
-import InstagramSection from '../libs/components/homepage/InstagramSection';
+import InstagramSection from '../libs/components/common/InstagramSection';
 import BlogSection from '../libs/components/homepage/BlogSection';
 import StoreFinder from '../libs/components/homepage/StoreFinder';
 

@@ -22,6 +22,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+import InstagramSection from '../../libs/components/common/InstagramSection';
 import { GET_FURNITURE, GET_FURNITURES } from '../../apollo/user/query';
 import { LIKE_TARGET_FURNITURE } from '../../apollo/user/mutation';
 import { Furniture } from '../../libs/types/furniture/furniture';
@@ -508,21 +509,7 @@ const FurnitureDetail = () => {
 			</Stack>
 
 			{/* Instagram Section */}
-			<Stack className="about-instagram">
-				<Stack className="instagram-header" direction="row" justifyContent="space-between" alignItems="center">
-					<Typography className="instagram-title">Follow on Instagram</Typography>
-					<Button variant="outlined" className="btn-follow">
-						FOLLOW US
-					</Button>
-				</Stack>
-				<Stack className="instagram-grid" direction="row" justifyContent="center">
-					{[1, 2, 3, 4, 5, 6].map((item) => (
-						<Box className="instagram-item" key={item}>
-							<img src="/img/furniture/luxury_chair.jpg" alt={`Instagram ${item}`} />
-						</Box>
-					))}
-				</Stack>
-			</Stack>
+			<InstagramSection />
 		</Stack>
 	);
 };

@@ -8,7 +8,7 @@ import ProductGrid from './ProductGrid';
 import PopularProducts from './PopularProducts';
 import ReviewSection from './ReviewSection';
 import NewsletterBanner from './NewsletterBanner';
-import InstagramSection from '../homepage/InstagramSection';
+import InstagramSection from '../common/InstagramSection';
 
 interface FurnitureListPageProps {
 	furnitures: Furniture[];

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
 import NewsletterBanner from '../../libs/components/furniture/NewsletterBanner';
-import InstagramSection from '../../libs/components/homepage/InstagramSection';
+import InstagramSection from '../../libs/components/common/InstagramSection';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ArrowUpwardIcon from '@mui/icons-material/NorthEast';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
