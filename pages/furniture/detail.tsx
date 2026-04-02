@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useQuery, useMutation } from '@apollo/client';
 import { useReactiveVar } from '@apollo/client';
 import { Box, Stack, Typography, Button, IconButton } from '@mui/material';
@@ -23,10 +22,9 @@ import StarIcon from '@mui/icons-material/Star';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import InstagramSection from '../../libs/components/common/InstagramSection';
 import ProductReviews from '../../libs/components/furniture/ProductReviews';
-import { GET_FURNITURE, GET_FURNITURES } from '../../apollo/user/query';
+import { GET_FURNITURE } from '../../apollo/user/query';
 import { LIKE_TARGET_FURNITURE } from '../../apollo/user/mutation';
 import { Furniture } from '../../libs/types/furniture/furniture';
-import { REACT_APP_API_URL } from '../../libs/config';
 import { userVar } from '../../apollo/store';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
 
@@ -63,15 +61,9 @@ const FurnitureDetail = () => {
 		fetchPolicy: 'cache-and-network',
 	});
 
-	const { data: similarData } = useQuery(GET_FURNITURES, {
-		variables: { input: { page: 1, limit: 4, sort: 'createdAt', direction: 'DESC', search: {} } },
-		fetchPolicy: 'cache-and-network',
-	});
-
 	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 
 	const furniture: Furniture | undefined = furnitureData?.getFurniture;
-	const similarProducts: Furniture[] = similarData?.getFurnitures?.list ?? [];
 
 	const hasDiscount = furniture?.furnitureLastChancePrice && furniture.furnitureLastChancePrice < furniture.furniturePrice;
 	const currentPrice = hasDiscount ? furniture.furnitureLastChancePrice! : furniture?.furniturePrice ?? 0;
@@ -80,13 +72,7 @@ const FurnitureDetail = () => {
 		: 0;
 	const isLiked = furniture?.likedByMe?.[0]?.myFavorite ?? false;
 
-	const imagePath = useCallback(
-		(idx: number) => {
-			if (!furniture?.furnitureImages?.[idx]) return '/img/furniture/placeholder.png';
-			return `${REACT_APP_API_URL}/${furniture.furnitureImages[idx]}`;
-		},
-		[furniture],
-	);
+	const imagePath = useCallback((_idx: number) => '/img/furniture/luxury_chair.jpg', []);
 
 	useEffect(() => {
 		const timer = setInterval(() => {
@@ -114,14 +100,6 @@ const FurnitureDetail = () => {
 
 	return (
 		<Stack className="furniture-detail-page">
-			{/* Breadcrumb */}
-			<Box className="detail-breadcrumb">
-				<Link href="/">Home</Link>
-				<span>/ shop</span>
-				<span>/ Living room furniture</span>
-				<span className="current">/ {furniture?.furnitureTitle ?? 'Sofa'}</span>
-			</Box>
-
 			{/* Main Product Section */}
 			<Stack className="detail-main" direction="row">
 				{/* Left: Images */}
@@ -132,7 +110,7 @@ const FurnitureDetail = () => {
 							<img src="/icons/ArrowsOutSimple.svg" alt="Expand" width={24} height={24} />
 						</Box>
 						<Stack className="image-dots" direction="row">
-							{(furniture?.furnitureImages ?? ['/placeholder']).map((_, idx) => (
+							{[0, 1, 2, 3].map((_, idx) => (
 								<Box
 									key={idx}
 									className={`dot ${idx === selectedImage ? 'active' : ''}`}
@@ -322,54 +300,6 @@ const FurnitureDetail = () => {
 			{/* Reviews Section */}
 			<ProductReviews />
 
-			{/* Favourites Section */}
-			<Stack className="detail-favourites-section">
-				<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
-					<Typography className="section-title-lg">Favourites from Satisfied Customers</Typography>
-					<Stack direction="row" gap="24px">
-						<IconButton><ArrowBackIcon /></IconButton>
-						<IconButton><ArrowForwardIcon /></IconButton>
-					</Stack>
-				</Stack>
-				<Stack className="products-row" direction="row" gap="24px">
-					{similarProducts.slice(0, 4).map((item) => {
-						const imgSrc = item.furnitureImages?.[0]
-							? `${REACT_APP_API_URL}/${item.furnitureImages[0]}`
-							: '/img/furniture/placeholder.png';
-						const itemDiscount = item.furnitureLastChancePrice && item.furnitureLastChancePrice < item.furniturePrice;
-						return (
-							<Box className="product-card-sm" key={item._id}>
-								<Box className="product-card-sm-img">
-									<Link href={`/furniture/detail?id=${item._id}`}>
-										<img src={imgSrc} alt={item.furnitureTitle} />
-									</Link>
-								</Box>
-								<Box className="product-card-sm-info">
-									<Stack direction="row" alignItems="center" gap="4px">
-										<Box className="rating-badge-sm">
-											<span>4.5</span>
-											<StarIcon sx={{ fontSize: 12, color: '#fff' }} />
-										</Box>
-										<Typography className="rating-count-sm">(20)</Typography>
-									</Stack>
-									<Link href={`/furniture/detail?id=${item._id}`}>
-										<Typography className="product-sm-title">{item.furnitureTitle}</Typography>
-									</Link>
-									<Stack direction="row" alignItems="center" gap="8px">
-										<Typography className="product-sm-price">
-											${itemDiscount ? item.furnitureLastChancePrice?.toFixed(2) : item.furniturePrice.toFixed(2)}
-										</Typography>
-										{itemDiscount && (
-											<Typography className="product-sm-old-price">${item.furniturePrice.toFixed(2)}</Typography>
-										)}
-									</Stack>
-								</Box>
-							</Box>
-						);
-					})}
-				</Stack>
-			</Stack>
-
 			{/* Similar Products */}
 			<Stack className="detail-similar-section">
 				<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
@@ -380,41 +310,34 @@ const FurnitureDetail = () => {
 					</Stack>
 				</Stack>
 				<Stack className="products-row" direction="row" gap="24px">
-					{similarProducts.slice(0, 4).map((item) => {
-						const imgSrc = item.furnitureImages?.[0]
-							? `${REACT_APP_API_URL}/${item.furnitureImages[0]}`
-							: '/img/furniture/placeholder.png';
-						const itemDiscount = item.furnitureLastChancePrice && item.furnitureLastChancePrice < item.furniturePrice;
-						return (
-							<Box className="product-card-sm" key={item._id}>
-								<Box className="product-card-sm-img">
-									<Link href={`/furniture/detail?id=${item._id}`}>
-										<img src={imgSrc} alt={item.furnitureTitle} />
-									</Link>
-								</Box>
-								<Box className="product-card-sm-info">
-									<Stack direction="row" alignItems="center" gap="4px">
-										<Box className="rating-badge-sm">
-											<span>4.3</span>
-											<StarIcon sx={{ fontSize: 12, color: '#fff' }} />
-										</Box>
-										<Typography className="rating-count-sm">(12,125)</Typography>
-									</Stack>
-									<Link href={`/furniture/detail?id=${item._id}`}>
-										<Typography className="product-sm-title">{item.furnitureTitle}</Typography>
-									</Link>
-									<Stack direction="row" alignItems="center" gap="8px">
-										<Typography className="product-sm-price">
-											${itemDiscount ? item.furnitureLastChancePrice?.toFixed(2) : item.furniturePrice.toFixed(2)}
-										</Typography>
-										{itemDiscount && (
-											<Typography className="product-sm-old-price">${item.furniturePrice.toFixed(2)}</Typography>
-										)}
-									</Stack>
-								</Box>
+					{[
+						{ id: 1, title: 'Cloud Nine Sectional Sofa', price: 1299.00, oldPrice: 1599.00, rating: '4.5', reviews: '(128)' },
+						{ id: 2, title: 'Moderno Dining Table', price: 849.00, oldPrice: null, rating: '4.3', reviews: '(64)' },
+						{ id: 3, title: 'DreamScape Bed Frame', price: 999.00, oldPrice: 1199.00, rating: '4.7', reviews: '(92)' },
+						{ id: 4, title: 'LuxeComfort Armchair', price: 549.00, oldPrice: null, rating: '4.2', reviews: '(45)' },
+					].map((item) => (
+						<Box className="product-card-sm" key={item.id}>
+							<Box className="product-card-sm-img">
+								<img src="/img/furniture/luxury_chair.jpg" alt={item.title} />
 							</Box>
-						);
-					})}
+							<Box className="product-card-sm-info">
+								<Stack direction="row" alignItems="center" gap="4px">
+									<Box className="rating-badge-sm">
+										<span>{item.rating}</span>
+										<StarIcon sx={{ fontSize: 12, color: '#fff' }} />
+									</Box>
+									<Typography className="rating-count-sm">{item.reviews}</Typography>
+								</Stack>
+								<Typography className="product-sm-title">{item.title}</Typography>
+								<Stack direction="row" alignItems="center" gap="8px">
+									<Typography className="product-sm-price">${item.price.toFixed(2)}</Typography>
+									{item.oldPrice && (
+										<Typography className="product-sm-old-price">${item.oldPrice.toFixed(2)}</Typography>
+									)}
+								</Stack>
+							</Box>
+						</Box>
+					))}
 				</Stack>
 			</Stack>
 
