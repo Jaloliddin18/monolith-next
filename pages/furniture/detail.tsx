@@ -20,9 +20,9 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import InstagramSection from '../../libs/components/common/InstagramSection';
+import ProductReviews from '../../libs/components/furniture/ProductReviews';
 import { GET_FURNITURE, GET_FURNITURES } from '../../apollo/user/query';
 import { LIKE_TARGET_FURNITURE } from '../../apollo/user/mutation';
 import { Furniture } from '../../libs/types/furniture/furniture';
@@ -39,32 +39,6 @@ const offers = [
 	'Axis Bank Offer: 12% instant discount when you use your Axis Bank card',
 ];
 
-const reviews = [
-	{
-		name: 'Luis M. Manley',
-		stars: 5,
-		title: 'Stylish and Comfortable - The Perfect Sofa',
-		date: '5 days ago',
-		text: "I recently purchased the 'LuxeComfort' sofa from StyleCasa, and I couldn't be happier. The sleek design and luxurious upholstery instantly elevate the look of my living room.",
-		hasImages: true,
-	},
-	{
-		name: 'Maria J. Young',
-		stars: 4,
-		title: "A Relaxing Retreat - The 'DreamScape' Bed",
-		date: '5 days ago',
-		text: "The 'DreamScape' bed from StyleCasa has transformed my bedroom into a peaceful oasis. The contemporary design with its upholstered headboard and sleek frame instantly caught my attention.",
-		hasImages: false,
-	},
-	{
-		name: 'John V. Godwin',
-		stars: 5,
-		title: "Functional and Elegant - The 'Moderno' Dining Table",
-		date: '5 days ago',
-		text: "I was in search of a dining table that could accommodate my large family gatherings and also add a touch of elegance to my dining area. The 'Moderno' dining table from StyleCasa exceeded my expectations.",
-		hasImages: true,
-	},
-];
 
 const faqItems = [
 	{ question: 'How can I place an order on StyleCasa?', answer: 'Placing an order on StyleCasa is easy. Simply browse our website, select the desired products, and add them to your shopping cart. Proceed to the checkout page, provide the necessary information, and complete the payment process. Once your order is confirmed, we will process it and provide you with updates on shipping and delivery.' },
@@ -346,46 +320,7 @@ const FurnitureDetail = () => {
 			</Stack>
 
 			{/* Reviews Section */}
-			<Stack className="detail-reviews-section">
-				<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
-					<Typography className="section-title-lg">Reviews for Popular furniture</Typography>
-					<Button variant="outlined" className="btn-all-reviews">ALL REVIEWS</Button>
-				</Stack>
-				<Stack className="reviews-list">
-					{reviews.map((review, idx) => (
-						<Box className="review-item" key={idx}>
-							<Stack className="review-user-col">
-								<Typography className="review-user-name">{review.name}</Typography>
-								<Stack direction="row" gap="2px">
-									{[...Array(5)].map((_, i) =>
-										i < review.stars ? (
-											<StarIcon key={i} sx={{ fontSize: 16, color: '#f59e0b' }} />
-										) : (
-											<StarBorderIcon key={i} sx={{ fontSize: 16, color: '#f59e0b' }} />
-										),
-									)}
-								</Stack>
-							</Stack>
-							<Stack className="review-content-col">
-								<Stack direction="row" justifyContent="space-between" alignItems="center">
-									<Typography className="review-title">{review.title}</Typography>
-									<Typography className="review-date">{review.date}</Typography>
-								</Stack>
-								<Typography className="review-text">{review.text}</Typography>
-								{review.hasImages && (
-									<Stack direction="row" gap="12px" className="review-images">
-										{[1, 2, 3].map((img) => (
-											<Box className="review-img-thumb" key={img}>
-												<img src="/img/furniture/luxury_chair.jpg" alt={`Review ${img}`} />
-											</Box>
-										))}
-									</Stack>
-								)}
-							</Stack>
-						</Box>
-					))}
-				</Stack>
-			</Stack>
+			<ProductReviews />
 
 			{/* Favourites Section */}
 			<Stack className="detail-favourites-section">

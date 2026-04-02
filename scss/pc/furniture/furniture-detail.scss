@@ -558,6 +558,80 @@
 			object-fit: cover;
 		}
 	}
+
+	// ─── Review Form ───────────────────────
+	.review-form-wrapper {
+		background: #f9f9f9;
+		padding: 50px 97px;
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+	}
+
+	.review-form-title {
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 40px;
+		line-height: normal;
+		color: #000;
+		margin: 0;
+	}
+
+	.review-form {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	.review-form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.review-textarea {
+		width: 100%;
+		min-height: 150px;
+		padding: 12px;
+		background: #fff;
+		border: none;
+		outline: none;
+		font-family: 'Jost', sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		color: #000;
+		resize: vertical;
+
+		&::placeholder {
+			color: #999;
+		}
+	}
+
+	.post-review-btn {
+		align-self: flex-start;
+		font-family: 'Jost', sans-serif;
+		font-weight: 500;
+		font-size: 18px;
+		line-height: 27px;
+		color: #a86464;
+		background: #fff;
+		border: 1px solid #a86464;
+		padding: 14px 32px;
+		cursor: pointer;
+		transition: background 0.2s, color 0.2s;
+
+		&:hover {
+			background: #a86464;
+			color: #fff;
+		}
+	}
+
+	// ─── Reviews Pagination ────────────────
+	.reviews-pagination {
+		display: flex;
+		justify-content: center;
+		padding-top: 20px;
+	}
 }
 
 // ==============================
