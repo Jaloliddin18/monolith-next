@@ -38,15 +38,15 @@
 
         .profile-name {
           font-family: "Syne", sans-serif;
-          font-size: 18px;
-          font-weight: 600;
+          font-size: var(--fs-md);
+          font-weight: var(--fw-semibold);
           color: var(--color-dark);
         }
 
         .profile-location {
           font-family: "Syne", sans-serif;
-          font-size: 14px;
-          font-weight: 400;
+          font-size: var(--fs-sm);
+          font-weight: var(--fw-regular);
           color: #848484;
         }
       }
@@ -66,9 +66,9 @@
           gap: 14px;
           padding: 10px 0;
           cursor: pointer;
-          font-family: "Jost", sans-serif;
-          font-size: 18px;
-          font-weight: 400;
+          font-family: var(--font-ui);
+          font-size: var(--fs-md);
+          font-weight: var(--fw-regular);
           color: var(--color-dark);
           transition: color 0.2s;
           text-decoration: none;
@@ -79,11 +79,11 @@
 
           &.active {
             color: var(--color-primary);
-            font-weight: 500;
+            font-weight: var(--fw-medium);
           }
 
           .nav-icon {
-            font-size: 24px;
+            font-size: var(--fs-xl);
             display: flex;
             align-items: center;
           }
@@ -96,9 +96,9 @@
           gap: 4px;
 
           .sub-item {
-            font-family: "Jost", sans-serif;
-            font-size: 16px;
-            font-weight: 400;
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
+            font-weight: var(--fw-regular);
             color: var(--color-dark);
             cursor: pointer;
             padding: 6px 0;
@@ -110,7 +110,7 @@
 
             &::before {
               content: "•";
-              font-size: 16px;
+              font-size: var(--fs-base);
             }
 
             &:hover {
@@ -119,7 +119,7 @@
 
             &.active {
               color: var(--color-primary);
-              font-weight: 500;
+              font-weight: var(--fw-medium);
             }
           }
         }
@@ -132,9 +132,9 @@
         gap: 4px;
 
         .footer-link {
-          font-family: "Jost", sans-serif;
-          font-size: 18px;
-          font-weight: 400;
+          font-family: var(--font-ui);
+          font-size: var(--fs-md);
+          font-weight: var(--fw-regular);
           color: var(--color-dark);
           cursor: pointer;
           padding: 6px 0;
@@ -146,7 +146,7 @@
 
           &::before {
             content: "•";
-            font-size: 18px;
+            font-size: var(--fs-md);
           }
 
           &:hover {
@@ -164,9 +164,9 @@
           align-items: center;
           gap: 14px;
           cursor: pointer;
-          font-family: "Jost", sans-serif;
-          font-size: 18px;
-          font-weight: 400;
+          font-family: var(--font-ui);
+          font-size: var(--fs-md);
+          font-weight: var(--fw-regular);
           color: var(--color-dark);
           background: none;
           border: none;
@@ -178,7 +178,7 @@
           }
 
           .nav-icon {
-            font-size: 24px;
+            font-size: var(--fs-xl);
             display: flex;
             align-items: center;
           }
@@ -195,9 +195,9 @@
     padding-left: 24px;
 
     .content-title {
-      font-family: "Jost", sans-serif;
-      font-size: 30px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
     }
 
@@ -207,9 +207,9 @@
       gap: 24px;
 
       .form-section-title {
-        font-family: "Jost", sans-serif;
-        font-size: 20px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-lg);
+        font-weight: var(--fw-medium);
         color: var(--color-dark);
       }
 
@@ -226,9 +226,9 @@
         }
 
         .upload-btn {
-          font-family: "Jost", sans-serif;
-          font-size: 14px;
-          font-weight: 500;
+          font-family: var(--font-ui);
+          font-size: var(--fs-sm);
+          font-weight: var(--fw-medium);
           color: var(--color-primary);
           border: 1px solid var(--color-primary);
           border-radius: 4px;
@@ -258,9 +258,9 @@
           gap: 8px;
 
           .field-label {
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
             color: var(--color-text);
           }
 
@@ -269,8 +269,8 @@
             border: 1px solid var(--color-border);
             border-radius: 4px;
             padding: 12px 16px;
-            font-family: "Jost", sans-serif;
-            font-size: 16px;
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
             color: var(--color-text);
             outline: none;
             transition: border-color 0.2s;
@@ -293,8 +293,8 @@
           .field-select {
             background: var(--color-bg-light);
             border-radius: 4px;
-            font-family: "Jost", sans-serif;
-            font-size: 16px;
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
             color: var(--color-text);
 
             .MuiSelect-select {
@@ -326,9 +326,9 @@
         gap: 8px;
 
         .field-label {
-          font-family: "Jost", sans-serif;
-          font-size: 14px;
-          font-weight: 500;
+          font-family: var(--font-ui);
+          font-size: var(--fs-sm);
+          font-weight: var(--fw-medium);
           color: var(--color-text);
         }
 
@@ -341,8 +341,8 @@
         }
 
         .MuiFormControlLabel-label {
-          font-family: "Jost", sans-serif;
-          font-size: 16px;
+          font-family: var(--font-ui);
+          font-size: var(--fs-base);
         }
       }
     }
@@ -355,9 +355,9 @@
       .save-btn {
         background: var(--color-primary);
         color: #fff;
-        font-family: "Jost", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-base);
+        font-weight: var(--fw-medium);
         padding: 12px 40px;
         border-radius: 4px;
         text-transform: none;
@@ -371,9 +371,9 @@
       .cancel-btn {
         background: #fff;
         color: var(--color-primary);
-        font-family: "Jost", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-base);
+        font-weight: var(--fw-medium);
         padding: 12px 40px;
         border-radius: 4px;
         text-transform: none;
@@ -418,9 +418,9 @@
           text-align: center;
 
           .coupon-title {
-            font-family: "Jost", sans-serif;
-            font-size: 24px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-xl);
+            font-weight: var(--fw-medium);
             color: var(--color-dark);
             line-height: 36px;
             width: 284px;
@@ -428,9 +428,9 @@
           }
 
           .coupon-subtitle {
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-regular);
             color: var(--color-dark);
             line-height: 20px;
           }
@@ -443,9 +443,9 @@
           align-items: center;
 
           .coupon-code {
-            font-family: "Jost", sans-serif;
-            font-size: 24px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-xl);
+            font-weight: var(--fw-medium);
             color: var(--color-primary);
             line-height: 36px;
             text-align: center;
@@ -477,17 +477,17 @@
           border-right: 1px dashed #d9d9d9;
 
           .ticket-heading-line {
-            font-family: "Jost", sans-serif;
-            font-size: 40px;
-            font-weight: 600;
+            font-family: var(--font-ui);
+            font-size: var(--fs-3xl);
+            font-weight: var(--fw-semibold);
             color: var(--color-sale);
             line-height: 1;
           }
 
           .ticket-desc {
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-regular);
             color: var(--color-dark);
             line-height: 20px;
             margin-top: 4px;
@@ -501,9 +501,9 @@
           justify-content: center;
 
           .ticket-code {
-            font-family: "Jost", sans-serif;
-            font-size: 18px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-md);
+            font-weight: var(--fw-medium);
             color: var(--color-dark);
             writing-mode: vertical-rl;
             transform: rotate(180deg);
@@ -518,8 +518,8 @@
       align-items: center;
       justify-content: center;
       min-height: 400px;
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
       color: var(--color-text-light);
     }
 
@@ -544,9 +544,9 @@
         }
 
         .MuiFormControlLabel-label {
-          font-family: "Jost", sans-serif;
-          font-size: 16px;
-          font-weight: 500;
+          font-family: var(--font-ui);
+          font-size: var(--fs-base);
+          font-weight: var(--fw-medium);
           color: var(--color-dark);
         }
 
@@ -577,9 +577,9 @@
           }
 
           .field-label {
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
             color: var(--color-text);
           }
 
@@ -588,8 +588,8 @@
             border: 1px solid var(--color-border);
             border-radius: 4px;
             padding: 12px 16px;
-            font-family: "Jost", sans-serif;
-            font-size: 16px;
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
             color: var(--color-text);
             outline: none;
             transition: border-color 0.2s;
@@ -607,8 +607,8 @@
 
       .save-card-checkbox {
         .MuiFormControlLabel-label {
-          font-family: "Jost", sans-serif;
-          font-size: 14px;
+          font-family: var(--font-ui);
+          font-size: var(--fs-sm);
           color: #848484;
         }
       }
@@ -662,9 +662,9 @@
             transform: translate(-50%, -50%);
 
             p {
-              font-family: "Jost", sans-serif;
-              font-size: 14px;
-              font-weight: 500;
+              font-family: var(--font-ui);
+              font-size: var(--fs-sm);
+              font-weight: var(--fw-medium);
               color: var(--color-success);
               white-space: nowrap;
             }
@@ -677,9 +677,9 @@
             right: 8px;
             background: #000;
             color: #fff;
-            font-family: "Jost", sans-serif;
-            font-size: 12px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-xs);
+            font-weight: var(--fw-medium);
             padding: 6px 12px;
             border-radius: 0;
             text-transform: uppercase;
@@ -708,24 +708,24 @@
             border-radius: 4px;
 
             .rating-value {
-              font-family: "Jost", sans-serif;
-              font-size: 14px;
-              font-weight: 600;
+              font-family: var(--font-ui);
+              font-size: var(--fs-sm);
+              font-weight: var(--fw-semibold);
               color: var(--color-success);
             }
           }
 
           .review-count {
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-regular);
             color: #848484;
           }
 
           .item-title {
-            font-family: "Jost", sans-serif;
-            font-size: 16px;
-            font-weight: 400;
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
+            font-weight: var(--fw-regular);
             color: var(--color-dark);
             text-decoration: none;
             cursor: pointer;
@@ -736,24 +736,24 @@
           }
 
           .item-price {
-            font-family: "Jost", sans-serif;
-            font-size: 20px;
-            font-weight: 600;
+            font-family: var(--font-ui);
+            font-size: var(--fs-lg);
+            font-weight: var(--fw-semibold);
             color: var(--color-dark);
           }
 
           .item-price-old {
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-regular);
             color: var(--color-text-light);
             text-decoration: line-through;
           }
 
           .item-discount {
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
             color: var(--color-success);
           }
 
@@ -772,9 +772,9 @@
       margin-top: 32px;
       background: #000;
       color: #fff;
-      font-family: "Jost", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-base);
+      font-weight: var(--fw-medium);
       padding: 14px 40px;
       border-radius: 0;
       text-transform: uppercase;
@@ -796,13 +796,13 @@
   margin: 0 auto;
   width: 100%;
   padding: 24px 150px 60px;
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-ui);
 
   .cart-breadcrumb {
     padding-bottom: 24px;
 
     .breadcrumb-link {
-      font-size: 14px;
+      font-size: var(--fs-sm);
       color: var(--color-text-light);
       text-decoration: none;
       cursor: pointer;
@@ -813,14 +813,14 @@
     }
 
     .breadcrumb-sep {
-      font-size: 14px;
+      font-size: var(--fs-sm);
       color: var(--color-text-light);
     }
 
     .breadcrumb-current {
-      font-size: 14px;
+      font-size: var(--fs-sm);
       color: var(--color-dark);
-      font-weight: 500;
+      font-weight: var(--fw-medium);
     }
   }
 
@@ -834,9 +834,9 @@
       gap: 40px;
 
       .content-title {
-        font-family: "Jost", sans-serif;
-        font-size: 30px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-2xl);
+        font-weight: var(--fw-medium);
         color: var(--color-dark);
       }
 
@@ -873,9 +873,9 @@
               justify-content: center;
 
               p {
-                font-family: "Jost", sans-serif;
-                font-size: 18px;
-                font-weight: 500;
+                font-family: var(--font-ui);
+                font-size: var(--fs-md);
+                font-weight: var(--fw-medium);
                 color: var(--color-sale);
               }
             }
@@ -885,27 +885,27 @@
             flex: 1;
 
             .item-title {
-              font-size: 18px;
-              font-weight: 400;
+              font-size: var(--fs-md);
+              font-weight: var(--fw-regular);
               color: var(--color-dark);
             }
 
             .item-price {
-              font-size: 24px;
-              font-weight: 500;
+              font-size: var(--fs-xl);
+              font-weight: var(--fw-medium);
               color: var(--color-dark);
             }
 
             .item-price-old {
-              font-size: 14px;
-              font-weight: 400;
+              font-size: var(--fs-sm);
+              font-weight: var(--fw-regular);
               color: var(--color-text-light);
               text-decoration: line-through;
             }
 
             .item-discount {
-              font-size: 14px;
-              font-weight: 500;
+              font-size: var(--fs-sm);
+              font-weight: var(--fw-medium);
               color: var(--color-sale);
             }
 
@@ -922,8 +922,8 @@
               }
 
               .qty-value {
-                font-size: 18px;
-                font-weight: 600;
+                font-size: var(--fs-md);
+                font-weight: var(--fw-semibold);
                 color: var(--color-dark);
                 min-width: 20px;
                 text-align: center;
@@ -952,8 +952,8 @@
       top: 24px;
 
       .billing-title {
-        font-size: 20px;
-        font-weight: 500;
+        font-size: var(--fs-lg);
+        font-weight: var(--fw-medium);
         color: var(--color-dark);
       }
 
@@ -962,8 +962,8 @@
         gap: 14px;
 
         .timer-label {
-          font-size: 18px;
-          font-weight: 400;
+          font-size: var(--fs-md);
+          font-weight: var(--fw-regular);
           color: var(--color-primary);
         }
 
@@ -977,21 +977,21 @@
           justify-content: center;
 
           p {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: var(--fs-lg);
+            font-weight: var(--fw-semibold);
             color: var(--color-primary);
           }
         }
 
         .timer-colon {
-          font-size: 14px;
-          font-weight: 400;
+          font-size: var(--fs-sm);
+          font-weight: var(--fw-regular);
           color: var(--color-dark);
         }
 
         .timer-unit {
-          font-size: 12px;
-          font-weight: 400;
+          font-size: var(--fs-xs);
+          font-weight: var(--fw-regular);
           color: #4c2d2d;
           width: 60px;
           text-align: center;
@@ -1013,8 +1013,8 @@
             border: none;
             outline: none;
             background: none;
-            font-family: "Jost", sans-serif;
-            font-size: 16px;
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
             color: var(--color-text);
             flex: 1;
 
@@ -1024,9 +1024,9 @@
           }
 
           .apply-btn {
-            font-family: "Jost", sans-serif;
-            font-size: 16px;
-            font-weight: 500;
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
+            font-weight: var(--fw-medium);
             color: var(--color-primary);
             background: none;
             border: none;
@@ -1040,27 +1040,27 @@
         }
 
         .summary-label {
-          font-size: 18px;
-          font-weight: 400;
+          font-size: var(--fs-md);
+          font-weight: var(--fw-regular);
           color: var(--color-dark);
         }
 
         .summary-count {
-          font-size: 14px;
-          font-weight: 400;
+          font-size: var(--fs-sm);
+          font-weight: var(--fw-regular);
           color: var(--color-text-light);
         }
 
         .summary-value {
-          font-size: 18px;
-          font-weight: 400;
+          font-size: var(--fs-md);
+          font-weight: var(--fw-regular);
           color: var(--color-dark);
           text-align: right;
         }
 
         .summary-value-green {
-          font-size: 18px;
-          font-weight: 400;
+          font-size: var(--fs-md);
+          font-weight: var(--fw-regular);
           color: var(--color-success);
           text-align: right;
         }
@@ -1072,8 +1072,8 @@
 
         .total-label,
         .total-value {
-          font-size: 20px;
-          font-weight: 600;
+          font-size: var(--fs-lg);
+          font-weight: var(--fw-semibold);
           color: var(--color-dark);
         }
       }
@@ -1081,8 +1081,8 @@
       .checkout-btn {
         background: var(--color-primary);
         color: #fff;
-        font-size: 18px;
-        font-weight: 500;
+        font-size: var(--fs-md);
+        font-weight: var(--fw-medium);
         padding: 14px 32px;
         border-radius: 0;
         text-transform: uppercase;
@@ -1110,9 +1110,9 @@
     width: 100%;
 
     .section-title-text {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
     }
 
@@ -1150,13 +1150,13 @@
   margin: 0 auto;
   width: 100%;
   padding: 24px 150px 60px;
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-ui);
 
   .orders-breadcrumb {
     padding-bottom: 24px;
 
     .breadcrumb-link {
-      font-size: 14px;
+      font-size: var(--fs-sm);
       color: var(--color-text-light);
       text-decoration: none;
       cursor: pointer;
@@ -1168,15 +1168,15 @@
     }
 
     .breadcrumb-sep {
-      font-size: 14px;
+      font-size: var(--fs-sm);
       color: var(--color-text-light);
       line-height: 24px;
     }
 
     .breadcrumb-current {
-      font-size: 14px;
+      font-size: var(--fs-sm);
       color: var(--color-dark);
-      font-weight: 400;
+      font-weight: var(--fw-regular);
       line-height: 24px;
     }
   }
@@ -1201,9 +1201,9 @@
       input {
         border: none;
         background: transparent;
-        font-family: "Jost", sans-serif;
-        font-size: 14px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-regular);
         line-height: 20px;
         color: var(--color-dark);
         width: 100%;
@@ -1224,8 +1224,8 @@
       }
 
       .filter-title {
-        font-size: 20px;
-        font-weight: 500;
+        font-size: var(--fs-lg);
+        font-weight: var(--fw-medium);
         line-height: 30px;
         color: var(--color-dark);
       }
@@ -1268,8 +1268,8 @@
       }
 
       .filter-label {
-        font-size: 16px;
-        font-weight: 400;
+        font-size: var(--fs-base);
+        font-weight: var(--fw-regular);
         line-height: 24px;
         color: var(--color-dark);
       }
@@ -1281,8 +1281,8 @@
     flex: 1;
 
     .orders-title {
-      font-size: 30px;
-      font-weight: 500;
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       margin-bottom: 40px;
     }
@@ -1319,15 +1319,15 @@
       }
 
       .order-item-title {
-        font-size: 18px;
-        font-weight: 400;
+        font-size: var(--fs-md);
+        font-weight: var(--fw-regular);
         line-height: 27px;
         color: var(--color-dark);
       }
 
       .order-item-price {
-        font-size: 24px;
-        font-weight: 500;
+        font-size: var(--fs-xl);
+        font-weight: var(--fw-medium);
         line-height: 36px;
         color: var(--color-dark);
       }
@@ -1337,15 +1337,15 @@
       }
 
       .order-status-text {
-        font-size: 14px;
-        font-weight: 400;
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-regular);
         line-height: 20px;
         color: var(--color-dark);
       }
 
       .order-review-text {
-        font-size: 14px;
-        font-weight: 400;
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-regular);
         line-height: 20px;
         color: var(--color-dark);
       }

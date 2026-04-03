@@ -3,7 +3,7 @@
 // ==============================
 
 .privacy-page {
-	font-family: 'Jost', sans-serif;
+	font-family: var(--font-ui);
 	width: 100%;
 
 	.privacy-content {
@@ -15,17 +15,17 @@
 			width: 1140px;
 
 			.privacy-title {
-				font-family: 'Jost', sans-serif;
-				font-size: 40px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-3xl);
+				font-weight: var(--fw-medium);
 				color: var(--color-dark);
 				line-height: normal;
 			}
 
 			.privacy-date {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-regular);
 				line-height: 27px;
 				color: var(--color-dark);
 				margin-top: 14px;
@@ -36,14 +36,14 @@
 				padding: 14px 0;
 
 				.help-icon {
-					font-size: 24px;
+					font-size: var(--fs-xl);
 					color: #0079ff;
 				}
 
 				.help-text {
-					font-family: 'Jost', sans-serif;
-					font-size: 14px;
-					font-weight: 500;
+					font-family: var(--font-ui);
+					font-size: var(--fs-sm);
+					font-weight: var(--fw-medium);
 					line-height: 20px;
 					color: #0079ff;
 					cursor: pointer;
@@ -72,9 +72,9 @@
 					list-style-type: decimal;
 
 					.sidebar-item {
-						font-family: 'Jost', sans-serif;
-						font-size: 20px;
-						font-weight: 400;
+						font-family: var(--font-ui);
+						font-size: var(--fs-lg);
+						font-weight: var(--fw-regular);
 						line-height: 30px;
 						color: var(--color-dark);
 						cursor: pointer;
@@ -86,7 +86,7 @@
 
 						&.active {
 							color: var(--color-primary);
-							font-weight: 500;
+							font-weight: var(--fw-medium);
 						}
 					}
 				}
@@ -100,17 +100,17 @@
 				gap: 14px;
 
 				.detail-title {
-					font-family: 'Jost', sans-serif;
-					font-size: 24px;
-					font-weight: 500;
+					font-family: var(--font-ui);
+					font-size: var(--fs-xl);
+					font-weight: var(--fw-medium);
 					line-height: 36px;
 					color: var(--color-dark);
 				}
 
 				.detail-paragraph {
-					font-family: 'Jost', sans-serif;
-					font-size: 18px;
-					font-weight: 400;
+					font-family: var(--font-ui);
+					font-size: var(--fs-md);
+					font-weight: var(--fw-regular);
 					line-height: 27px;
 					color: var(--color-text-light);
 					max-width: 744px;
@@ -126,14 +126,14 @@
 					gap: 16px;
 
 					li {
-						font-family: 'Jost', sans-serif;
-						font-size: 18px;
-						font-weight: 400;
+						font-family: var(--font-ui);
+						font-size: var(--fs-md);
+						font-weight: var(--fw-regular);
 						line-height: 27px;
 
 						.bullet-label {
 							color: var(--color-dark);
-							font-weight: 400;
+							font-weight: var(--fw-regular);
 						}
 
 						.bullet-text {

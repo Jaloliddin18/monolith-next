@@ -42,18 +42,18 @@
 			gap: 12px;
 
 			h3 {
-				font-family: 'Jost', sans-serif;
-				font-size: 30px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-2xl);
+				font-weight: var(--fw-medium);
 				line-height: normal;
 				color: var(--color-dark);
 				margin: 0;
 			}
 
 			.item-count {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-regular);
 				line-height: 27px;
 				color: var(--color-text-light);
 			}
@@ -111,9 +111,9 @@
 					left: 10px;
 					background: var(--color-success);
 					color: #fff;
-					font-family: 'Jost', sans-serif;
-					font-size: 14px;
-					font-weight: 500;
+					font-family: var(--font-ui);
+					font-size: var(--fs-sm);
+					font-weight: var(--fw-medium);
 					line-height: 20px;
 					padding: 4px 8px;
 					border-radius: 4px;
@@ -133,9 +133,9 @@
 					width: 250px;
 
 					.item-title {
-						font-family: 'Jost', sans-serif;
-						font-size: 18px;
-						font-weight: 400;
+						font-family: var(--font-ui);
+						font-size: var(--fs-md);
+						font-weight: var(--fw-regular);
 						line-height: 27px;
 						color: var(--color-dark);
 						margin: 0;
@@ -147,26 +147,26 @@
 						gap: 8px;
 
 						.current-price {
-							font-family: 'Jost', sans-serif;
-							font-size: 24px;
-							font-weight: 500;
+							font-family: var(--font-ui);
+							font-size: var(--fs-xl);
+							font-weight: var(--fw-medium);
 							line-height: 36px;
 							color: var(--color-dark);
 						}
 
 						.original-price {
-							font-family: 'Jost', sans-serif;
-							font-size: 14px;
-							font-weight: 400;
+							font-family: var(--font-ui);
+							font-size: var(--fs-sm);
+							font-weight: var(--fw-regular);
 							line-height: 20px;
 							color: var(--color-text-light);
 							text-decoration: line-through;
 						}
 
 						.discount {
-							font-family: 'Jost', sans-serif;
-							font-size: 14px;
-							font-weight: 500;
+							font-family: var(--font-ui);
+							font-size: var(--fs-sm);
+							font-weight: var(--fw-medium);
 							line-height: 20px;
 							color: var(--color-sale);
 						}
@@ -197,9 +197,9 @@
 						}
 
 						.quantity-value {
-							font-family: 'Jost', sans-serif;
-							font-size: 18px;
-							font-weight: 600;
+							font-family: var(--font-ui);
+							font-size: var(--fs-md);
+							font-weight: var(--fw-semibold);
 							line-height: 27px;
 							color: var(--color-dark);
 							min-width: 20px;
@@ -241,9 +241,9 @@
 			input {
 				border: none;
 				background: none;
-				font-family: 'Jost', sans-serif;
-				font-size: 16px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-base);
+				font-weight: var(--fw-regular);
 				line-height: 24px;
 				color: var(--color-dark);
 				flex: 1;
@@ -256,9 +256,9 @@
 			.apply-btn {
 				background: none;
 				border: none;
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-medium);
 				line-height: 27px;
 				color: var(--color-primary);
 				cursor: pointer;
@@ -281,24 +281,24 @@
 				justify-content: space-between;
 
 				.pricing-label {
-					font-family: 'Jost', sans-serif;
-					font-size: 24px;
-					font-weight: 400;
+					font-family: var(--font-ui);
+					font-size: var(--fs-xl);
+					font-weight: var(--fw-regular);
 					line-height: 36px;
 					color: var(--color-dark);
 
 					.pricing-count {
-						font-size: 14px;
-						font-weight: 400;
+						font-size: var(--fs-sm);
+						font-weight: var(--fw-regular);
 						line-height: 20px;
 						color: var(--color-text-light);
 					}
 				}
 
 				.pricing-value {
-					font-family: 'Jost', sans-serif;
-					font-size: 24px;
-					font-weight: 400;
+					font-family: var(--font-ui);
+					font-size: var(--fs-xl);
+					font-weight: var(--fw-regular);
 					line-height: 36px;
 					color: var(--color-dark);
 					text-align: right;
@@ -319,9 +319,9 @@
 			margin-top: 10px;
 
 			span {
-				font-family: 'Jost', sans-serif;
-				font-size: 24px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-xl);
+				font-weight: var(--fw-medium);
 				line-height: 36px;
 				color: var(--color-dark);
 			}
@@ -339,9 +339,9 @@
 				padding: 14px 32px;
 				border: 1px solid var(--color-primary);
 				background: #fff;
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-medium);
 				line-height: 27px;
 				color: var(--color-primary);
 				text-decoration: none;
@@ -363,9 +363,9 @@
 				padding: 14px 32px;
 				border: none;
 				background: var(--color-primary);
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-medium);
 				line-height: 27px;
 				color: #fff;
 				cursor: pointer;
@@ -410,18 +410,18 @@
 			text-align: center;
 
 			h3 {
-				font-family: 'Jost', sans-serif;
-				font-size: 30px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-2xl);
+				font-weight: var(--fw-medium);
 				line-height: normal;
 				color: var(--color-dark);
 				margin: 0;
 			}
 
 			p {
-				font-family: 'Jost', sans-serif;
-				font-size: 16px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-base);
+				font-weight: var(--fw-regular);
 				line-height: 24px;
 				color: var(--color-text-light);
 				margin: 0;
@@ -434,9 +434,9 @@
 			justify-content: center;
 			padding: 14px 32px;
 			background: var(--color-primary);
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			line-height: 27px;
 			color: #fff;
 			text-decoration: none;
@@ -461,9 +461,9 @@
 		gap: 40px;
 
 		h4 {
-			font-family: 'Jost', sans-serif;
-			font-size: 24px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-xl);
+			font-weight: var(--fw-medium);
 			line-height: 36px;
 			color: var(--color-dark);
 			margin: 0;
@@ -497,9 +497,9 @@
 						left: 14px;
 						background: var(--color-success);
 						color: #fff;
-						font-family: 'Jost', sans-serif;
-						font-size: 14px;
-						font-weight: 500;
+						font-family: var(--font-ui);
+						font-size: var(--fs-sm);
+						font-weight: var(--fw-medium);
 						line-height: 20px;
 						padding: 4px 8px;
 						border-radius: 4px;
@@ -512,9 +512,9 @@
 					gap: 8px;
 
 					.suggested-title {
-						font-family: 'Jost', sans-serif;
-						font-size: 16px;
-						font-weight: 400;
+						font-family: var(--font-ui);
+						font-size: var(--fs-base);
+						font-weight: var(--fw-regular);
 						line-height: 24px;
 						color: var(--color-dark);
 						margin: 0;
@@ -526,17 +526,17 @@
 						gap: 10px;
 
 						.suggested-price {
-							font-family: 'Jost', sans-serif;
-							font-size: 16px;
-							font-weight: 600;
+							font-family: var(--font-ui);
+							font-size: var(--fs-base);
+							font-weight: var(--fw-semibold);
 							line-height: 24px;
 							color: var(--color-dark);
 						}
 
 						.suggested-original {
-							font-family: 'Jost', sans-serif;
-							font-size: 14px;
-							font-weight: 400;
+							font-family: var(--font-ui);
+							font-size: var(--fs-sm);
+							font-weight: var(--fw-regular);
 							line-height: 20px;
 							color: var(--color-text-light);
 							text-decoration: line-through;
@@ -604,17 +604,17 @@
 			gap: 12px;
 
 			h3 {
-				font-family: 'Jost', sans-serif;
+				font-family: var(--font-ui);
 				font-size: 28px;
-				font-weight: 500;
+				font-weight: var(--fw-medium);
 				color: var(--color-dark);
 				margin: 0;
 			}
 
 			.item-count {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-regular);
 				color: var(--color-text-light);
 			}
 		}
@@ -672,9 +672,9 @@
 					gap: 8px;
 
 					.item-title {
-						font-family: 'Jost', sans-serif;
-						font-size: 16px;
-						font-weight: 400;
+						font-family: var(--font-ui);
+						font-size: var(--fs-base);
+						font-weight: var(--fw-regular);
 						color: var(--color-dark);
 						margin: 0;
 					}
@@ -685,21 +685,21 @@
 						gap: 8px;
 
 						.current-price {
-							font-family: 'Jost', sans-serif;
-							font-size: 16px;
-							font-weight: 500;
+							font-family: var(--font-ui);
+							font-size: var(--fs-base);
+							font-weight: var(--fw-medium);
 							color: var(--color-dark);
 						}
 
 						.original-price {
-							font-family: 'Jost', sans-serif;
-							font-size: 14px;
+							font-family: var(--font-ui);
+							font-size: var(--fs-sm);
 							color: var(--color-text-light);
 							text-decoration: line-through;
 						}
 
 						.discount {
-							font-family: 'Jost', sans-serif;
+							font-family: var(--font-ui);
 							font-size: 13px;
 							color: var(--color-primary);
 						}
@@ -733,9 +733,9 @@
 			padding: 14px 32px;
 			background: var(--color-primary);
 			color: #fff;
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			text-decoration: none;
 			transition: opacity 0.3s;
 
@@ -749,9 +749,9 @@
 			border: 1px solid var(--color-primary);
 			background: #fff;
 			color: var(--color-primary);
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			text-decoration: none;
 			transition: background 0.3s, color 0.3s;
 
@@ -769,8 +769,8 @@
 		padding: 40px;
 
 		.empty-text {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
 			color: var(--color-text-light);
 			margin: 0;
 		}
@@ -779,9 +779,9 @@
 			padding: 14px 32px;
 			background: var(--color-primary);
 			color: #fff;
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			text-decoration: none;
 			transition: opacity 0.3s;
 

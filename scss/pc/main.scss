@@ -44,7 +44,7 @@
 
     .highlight {
       color: var(--color-primary);
-      font-weight: 600;
+      font-weight: var(--fw-semibold);
     }
   }
 
@@ -64,7 +64,7 @@
 
       a {
         font-size: 15px;
-        font-weight: 500;
+        font-weight: var(--fw-medium);
         color: var(--color-text);
         position: relative;
         padding-bottom: 4px;
@@ -94,7 +94,7 @@
 
         .nav-dropdown-trigger {
           font-size: 15px;
-          font-weight: 500;
+          font-weight: var(--fw-medium);
           color: var(--color-text);
           position: relative;
           padding-bottom: 4px;
@@ -143,9 +143,9 @@
           .dropdown-item {
             display: block;
             padding: 10px 20px;
-            font-family: "Jost", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-regular);
             color: var(--color-text);
             text-decoration: none;
             transition:
@@ -181,7 +181,7 @@
 
       input {
         border: none;
-        font-size: 14px;
+        font-size: var(--fs-sm);
         width: 100%;
         color: var(--color-text);
 
@@ -206,8 +206,8 @@
       white-space: nowrap;
 
       span {
-        font-size: 14px;
-        font-weight: 500;
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-medium);
         color: var(--color-text);
       }
 
@@ -222,7 +222,7 @@
 // FOOTER
 // ==============================
 #footer {
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-ui);
 
   .footer-main {
     padding: 80px 150px;
@@ -250,17 +250,17 @@
     }
 
     .footer-brand-name {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-medium);
       line-height: 27px;
       color: var(--color-dark);
     }
 
     .footer-guarantee-text {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       line-height: 27px;
       color: var(--color-dark);
       max-width: 240px;
@@ -276,9 +276,9 @@
     gap: 24px;
 
     .footer-col-title {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-medium);
       line-height: 27px;
       color: var(--color-dark);
       white-space: nowrap;
@@ -288,9 +288,9 @@
       gap: 12px;
 
       a {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-regular);
         line-height: 27px;
         color: var(--color-text-light);
         transition: color 0.3s;
@@ -315,9 +315,9 @@
     }
 
     .footer-col-title {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-medium);
       line-height: 27px;
       color: var(--color-dark);
       white-space: nowrap;
@@ -347,9 +347,9 @@
     border-top: 1px solid var(--color-border);
 
     .footer-copyright {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       line-height: 27px;
       color: var(--color-text-light);
 

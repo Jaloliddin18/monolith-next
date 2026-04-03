@@ -3,7 +3,7 @@
 // ==============================
 
 .faq-page {
-	font-family: 'Jost', sans-serif;
+	font-family: var(--font-ui);
 	width: 100%;
 
 	.faq-content {
@@ -13,9 +13,9 @@
 		margin: 0 auto;
 
 		.faq-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 			line-height: normal;
 		}
@@ -34,7 +34,7 @@
 				width: 800px;
 
 				.search-icon {
-					font-size: 24px;
+					font-size: var(--fs-xl);
 					color: var(--color-text-light);
 				}
 
@@ -42,9 +42,9 @@
 					border: none;
 					outline: none;
 					width: 100%;
-					font-family: 'Jost', sans-serif;
-					font-size: 18px;
-					font-weight: 400;
+					font-family: var(--font-ui);
+					font-size: var(--fs-md);
+					font-weight: var(--fw-regular);
 					line-height: 27px;
 					color: var(--color-dark);
 					background: transparent;
@@ -92,9 +92,9 @@
 					}
 
 					.category-label {
-						font-family: 'Jost', sans-serif;
-						font-size: 18px;
-						font-weight: 400;
+						font-family: var(--font-ui);
+						font-size: var(--fs-md);
+						font-weight: var(--fw-regular);
 						line-height: 27px;
 						color: var(--color-text-light);
 						transition: color 0.2s;
@@ -116,9 +116,9 @@
 					width: 100%;
 
 					.faq-q-text {
-						font-family: 'Jost', sans-serif;
-						font-size: 24px;
-						font-weight: 500;
+						font-family: var(--font-ui);
+						font-size: var(--fs-xl);
+						font-weight: var(--fw-medium);
 						line-height: 36px;
 						color: var(--color-dark);
 					}
@@ -130,9 +130,9 @@
 				}
 
 				.faq-answer {
-					font-family: 'Jost', sans-serif;
-					font-size: 18px;
-					font-weight: 400;
+					font-family: var(--font-ui);
+					font-size: var(--fs-md);
+					font-weight: var(--fw-regular);
 					line-height: 27px;
 					color: var(--color-text-light);
 					max-width: 940px;

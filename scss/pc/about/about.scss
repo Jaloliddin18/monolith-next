@@ -2,7 +2,7 @@
 // ABOUT PAGE
 // ==============================
 .about-page {
-	font-family: 'Jost', sans-serif;
+	font-family: var(--font-ui);
 }
 
 // ==============================
@@ -18,18 +18,18 @@
 	}
 
 	.about-hero-title {
-		font-family: 'Jost', sans-serif;
-		font-size: 40px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-3xl);
+		font-weight: var(--fw-medium);
 		line-height: 1;
 		color: var(--color-dark);
 		margin-bottom: 24px;
 	}
 
 	.about-hero-subtitle {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-regular);
 		line-height: 27px;
 		color: var(--color-text-light);
 		max-width: 559px;
@@ -134,17 +134,17 @@
 
 	.why-choose-content {
 		.why-choose-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 			margin-bottom: 12px;
 		}
 
 		.why-choose-desc {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-text-light);
 			max-width: 425px;
@@ -170,9 +170,9 @@
 			}
 
 			.feature-text {
-				font-family: 'Jost', sans-serif;
-				font-size: 20px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-lg);
+				font-weight: var(--fw-regular);
 				line-height: 30px;
 				color: var(--color-dark);
 			}
@@ -193,18 +193,18 @@
 		width: 170px;
 
 		.stat-value {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-primary);
 			line-height: 1;
 			margin-bottom: 12px;
 		}
 
 		.stat-label {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-dark);
 		}
@@ -240,9 +240,9 @@
 
 	.awards-content {
 		.awards-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 			margin-bottom: 50px;
 		}
@@ -263,18 +263,18 @@
 		width: 267px;
 
 		.award-year {
-			font-family: 'Jost', sans-serif;
-			font-size: 20px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-lg);
+			font-weight: var(--fw-medium);
 			line-height: 30px;
 			color: var(--color-primary);
 			margin-bottom: 12px;
 		}
 
 		.award-name {
-			font-family: 'Jost', sans-serif;
-			font-size: 20px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-lg);
+			font-weight: var(--fw-medium);
 			line-height: 30px;
 			color: var(--color-dark);
 		}
@@ -297,16 +297,16 @@
 		margin-bottom: 50px;
 
 		.category-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 		}
 
 		.category-view-all {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			color: var(--color-primary);
 			text-decoration: none;
 			cursor: pointer;
@@ -315,7 +315,7 @@
 			gap: 10px;
 
 			svg {
-				font-size: 20px;
+				font-size: var(--fs-lg);
 			}
 		}
 	}
@@ -345,9 +345,9 @@
 			}
 
 			.category-name {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-medium);
 				line-height: 27px;
 				color: var(--color-dark);
 				text-align: center;
@@ -371,9 +371,9 @@
 		margin-bottom: 50px;
 
 		.services-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 		}
 
@@ -383,7 +383,7 @@
 			.nav-arrow {
 				cursor: pointer;
 				color: var(--color-dark);
-				font-size: 24px;
+				font-size: var(--fs-xl);
 			}
 		}
 	}
@@ -413,27 +413,27 @@
 		}
 
 		.service-card-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 20px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-lg);
+			font-weight: var(--fw-medium);
 			line-height: 30px;
 			color: var(--color-dark);
 			margin-bottom: 8px;
 		}
 
 		.service-card-desc {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-text-light);
 			max-width: 300px;
 		}
 
 		.service-card-link {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			color: var(--color-primary);
 			cursor: pointer;
 			display: flex;
@@ -442,7 +442,7 @@
 			padding: 14px 0;
 
 			svg {
-				font-size: 20px;
+				font-size: var(--fs-lg);
 			}
 		}
 	}
@@ -464,17 +464,17 @@
 		flex-shrink: 0;
 
 		.wide-range-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 			margin-bottom: 24px;
 		}
 
 		.wide-range-desc {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-text-light);
 			max-width: 529px;
@@ -492,9 +492,9 @@
 			transition: color 0.3s;
 
 			.room-name {
-				font-family: 'Jost', sans-serif;
-				font-size: 24px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-xl);
+				font-weight: var(--fw-medium);
 				line-height: 36px;
 				color: var(--color-dark);
 			}
@@ -505,7 +505,7 @@
 			}
 
 			svg {
-				font-size: 24px;
+				font-size: var(--fs-xl);
 				color: var(--color-dark);
 			}
 		}
@@ -514,9 +514,9 @@
 	.btn-view-collection {
 		background: var(--color-primary) !important;
 		color: #fff !important;
-		font-family: 'Jost', sans-serif !important;
-		font-size: 18px !important;
-		font-weight: 500 !important;
+		font-family: var(--font-ui) !important;
+		font-size: var(--fs-md) !important;
+		font-weight: var(--fw-medium) !important;
 		padding: 14px 32px !important;
 		border-radius: 0 !important;
 		text-transform: uppercase !important;
@@ -547,9 +547,9 @@
 		margin-bottom: 50px;
 
 		.feedback-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 		}
 
@@ -559,7 +559,7 @@
 			.nav-arrow {
 				cursor: pointer;
 				color: var(--color-dark);
-				font-size: 24px;
+				font-size: var(--fs-xl);
 			}
 		}
 	}
@@ -603,17 +603,17 @@
 			}
 
 			.feedback-user-name {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-regular);
 				line-height: 27px;
 				color: var(--color-dark);
 			}
 
 			.feedback-user-role {
-				font-family: 'Jost', sans-serif;
-				font-size: 14px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-sm);
+				font-weight: var(--fw-regular);
 				line-height: 20px;
 				color: var(--color-text-light);
 			}
@@ -624,15 +624,15 @@
 			gap: 0;
 
 			svg {
-				font-size: 20px;
+				font-size: var(--fs-lg);
 				color: #f89c01;
 			}
 		}
 
 		.feedback-text {
-			font-family: 'Jost', sans-serif;
-			font-size: 16px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-base);
+			font-weight: var(--fw-regular);
 			line-height: 24px;
 			color: var(--color-text-light);
 			max-width: 300px;
@@ -672,17 +672,17 @@
 		}
 
 		.feature-box-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 24px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-xl);
+			font-weight: var(--fw-medium);
 			line-height: 36px;
 			color: var(--color-dark);
 		}
 
 		.feature-box-desc {
-			font-family: 'Jost', sans-serif;
-			font-size: 16px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-base);
+			font-weight: var(--fw-regular);
 			line-height: 24px;
 			color: var(--color-text-muted);
 		}
@@ -698,9 +698,9 @@
 	gap: 24px;
 
 	.newsletter-title {
-		font-family: 'Jost', sans-serif;
-		font-size: 30px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-2xl);
+		font-weight: var(--fw-medium);
 		color: var(--color-dark);
 		text-align: center;
 
@@ -731,9 +731,9 @@
 		}
 
 		.newsletter-btn-text {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			color: var(--color-success-bg);
 			line-height: 27px;
 			white-space: nowrap;

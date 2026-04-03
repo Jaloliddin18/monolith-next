@@ -14,7 +14,7 @@ $font-ui: 'Jost', sans-serif;
 // Brand
 $color-primary:       #C46A4A;   // terracotta — buttons, links, accents
 $color-primary-hover: #AA5A3D;   // darker terracotta on hover
-$color-primary-light: #F7F2EE;   // pale terracotta tint
+$color-primary-light: #EDE4D8;   // pale terracotta tint
 
 // Text hierarchy
 $color-dark:          #1C1C1C;   // headings, near-black
@@ -23,7 +23,8 @@ $color-text-muted:    #787878;   // secondary / muted
 $color-text-light:    #ADADAD;   // placeholders, captions
 
 // Backgrounds
-$color-bg-warm:       #F7F2EE;   // unified warm section background
+$color-bg-dark:       #1C1A17;   // dark espresso — footer, dark CTA sections
+$color-bg-warm:       #EDE4D8;   // unified warm section background
 $color-bg-light:      #FAFAFA;   // near-white backgrounds
 $color-bg-white:      #FFFFFF;
 
@@ -44,6 +45,7 @@ $header-height: 152px;
 // Globally available — no @use needed in page SCSS files
 // ==============================
 :root {
+  // Colors
   --color-primary:       #{$color-primary};
   --color-primary-hover: #{$color-primary-hover};
   --color-primary-light: #{$color-primary-light};
@@ -51,6 +53,7 @@ $header-height: 152px;
   --color-text:          #{$color-text};
   --color-text-muted:    #{$color-text-muted};
   --color-text-light:    #{$color-text-light};
+  --color-bg-dark:       #{$color-bg-dark};
   --color-bg-warm:       #{$color-bg-warm};
   --color-bg-light:      #{$color-bg-light};
   --color-bg-white:      #{$color-bg-white};
@@ -58,4 +61,27 @@ $header-height: 152px;
   --color-success:       #{$color-success};
   --color-success-bg:    #{$color-success-bg};
   --color-sale:          #{$color-sale};
+
+  // Font families
+  --font-primary: #{$font-primary};
+  --font-heading: #{$font-heading};
+  --font-ui:      #{$font-ui};
+
+  // Font size scale
+  --fs-xs:   12px;
+  --fs-sm:   14px;
+  --fs-base: 16px;
+  --fs-md:   18px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  30px;
+  --fs-3xl:  40px;
+  --fs-4xl:  48px;
+
+  // Font weights
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
 }

@@ -57,8 +57,8 @@
 	}
 
 	.designer-profile-badge {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-primary);
@@ -70,18 +70,18 @@
 	}
 
 	.designer-profile-name {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 40px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-3xl);
 		line-height: normal;
 		color: var(--color-dark);
 		margin: 0;
 	}
 
 	.designer-profile-location {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: var(--color-text-light);
 		margin: 0;
@@ -134,17 +134,17 @@
 	}
 
 	.designer-profile-stat-value {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 24px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-xl);
 		line-height: 36px;
 		color: var(--color-dark);
 		transition: color 0.2s;
 	}
 
 	.designer-profile-stat-label {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-text-light);
@@ -160,9 +160,9 @@
 	}
 
 	.designer-follow-btn {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: #fff;
 		background: var(--color-primary);
@@ -177,9 +177,9 @@
 	}
 
 	.designer-contact-btn {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: var(--color-primary);
 		background: transparent;
@@ -213,8 +213,8 @@
 	}
 
 	.designer-section-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 32px;
 		line-height: normal;
 		color: var(--color-dark);
@@ -234,9 +234,9 @@
 	}
 
 	.designer-about-text {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-md);
 		line-height: 30px;
 		color: var(--color-text-light);
 		margin: 0;
@@ -250,8 +250,8 @@
 	}
 
 	.quote-mark {
-		font-family: 'Jost', sans-serif;
-		font-weight: 700;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-bold);
 		font-size: 64px;
 		line-height: 1;
 		color: var(--color-primary);
@@ -262,9 +262,9 @@
 	}
 
 	.quote-text {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-md);
 		line-height: 30px;
 		color: var(--color-dark);
 		font-style: italic;
@@ -272,9 +272,9 @@
 	}
 
 	.quote-author {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 		margin-top: 12px;
@@ -291,9 +291,9 @@
 	}
 
 	.designer-sidebar-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 20px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-lg);
 		line-height: 30px;
 		color: var(--color-dark);
 		margin: 0 0 16px;
@@ -306,9 +306,9 @@
 	}
 
 	.specialty-tag {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 		background: rgba(168, 100, 100, 0.08);
@@ -333,9 +333,9 @@
 	}
 
 	.achievement-year {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-sm);
 		line-height: 22px;
 		color: var(--color-primary);
 		flex-shrink: 0;
@@ -343,9 +343,9 @@
 	}
 
 	.achievement-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-sm);
 		line-height: 22px;
 		color: var(--color-text-muted);
 	}
@@ -367,8 +367,8 @@
 	}
 
 	.designs-panel-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 28px;
 		line-height: normal;
 		color: var(--color-dark);
@@ -376,9 +376,9 @@
 	}
 
 	.designs-panel-subtitle {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: var(--color-text-light);
 		margin: 0;
@@ -441,8 +441,8 @@
 	}
 
 	.design-item-category {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 13px;
 		line-height: 20px;
 		color: #fff;
@@ -467,26 +467,26 @@
 	}
 
 	.design-item-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-md);
 		line-height: 27px;
 		color: var(--color-dark);
 		margin: 0;
 	}
 
 	.design-item-year {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-text-light);
 	}
 
 	.design-item-price {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: var(--color-primary);
 	}
@@ -559,8 +559,8 @@
 	}
 
 	.blog-panel-category {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-primary);
@@ -569,16 +569,16 @@
 	}
 
 	.blog-panel-date {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-text-light);
 	}
 
 	.blog-panel-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 22px;
 		line-height: 32px;
 		color: var(--color-dark);
@@ -587,9 +587,9 @@
 	}
 
 	.blog-panel-excerpt {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-base);
 		line-height: 26px;
 		color: var(--color-text-light);
 		margin: 0;
@@ -600,9 +600,9 @@
 	}
 
 	.blog-panel-read-more {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 		margin-top: 4px;
@@ -623,8 +623,8 @@
 	}
 
 	.member-list-col-name {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 15px;
 		line-height: 22px;
 		color: var(--color-dark);
@@ -633,8 +633,8 @@
 	}
 
 	.member-list-col-details {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 15px;
 		line-height: 22px;
 		color: var(--color-dark);
@@ -642,8 +642,8 @@
 	}
 
 	.member-list-col-action {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 15px;
 		line-height: 22px;
 		color: var(--color-dark);
@@ -694,8 +694,8 @@
 	}
 
 	.member-list-nick {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 17px;
 		line-height: 26px;
 		color: var(--color-dark);
@@ -709,8 +709,8 @@
 	}
 
 	.member-detail-item {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 15px;
 		line-height: 22px;
 		color: var(--color-text-light);
@@ -719,7 +719,7 @@
 		gap: 5px;
 
 		strong {
-			font-weight: 500;
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 		}
 
@@ -736,8 +736,8 @@
 	}
 
 	.member-follow-btn {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 15px;
 		line-height: 22px;
 		color: #fff;
@@ -777,8 +777,8 @@
 	}
 
 	.reviews-average-score {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 56px;
 		line-height: 1;
 		color: var(--color-dark);
@@ -796,8 +796,8 @@
 	}
 
 	.reviews-total-count {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-text-light);
@@ -817,8 +817,8 @@
 	}
 
 	.breakdown-label {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-text-light);
@@ -842,8 +842,8 @@
 	}
 
 	.breakdown-count {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-text-light);
@@ -862,8 +862,8 @@
 	}
 
 	.review-form-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 22px;
 		line-height: 32px;
 		color: var(--color-dark);
@@ -877,9 +877,9 @@
 	}
 
 	.review-textarea {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: var(--color-dark);
 		background: #fff;
@@ -900,9 +900,9 @@
 	}
 
 	.post-review-btn {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: #fff;
 		background: var(--color-primary);
@@ -970,17 +970,17 @@
 	}
 
 	.review-author-name {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: var(--color-dark);
 		margin: 0;
 	}
 
 	.review-author-role {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 13px;
 		line-height: 20px;
 		color: var(--color-text-light);
@@ -1005,26 +1005,26 @@
 	}
 
 	.review-item-date {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-text-light);
 	}
 
 	.review-item-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-md);
 		line-height: 27px;
 		color: var(--color-dark);
 		margin: 0;
 	}
 
 	.review-item-text {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-base);
 		line-height: 26px;
 		color: var(--color-text-muted);
 		margin: 0;
@@ -1039,9 +1039,9 @@
 			gap: 8px;
 
 			.MuiPaginationItem-root {
-				font-family: 'Jost', sans-serif;
-				font-weight: 400;
-				font-size: 16px;
+				font-family: var(--font-ui);
+				font-weight: var(--fw-regular);
+				font-size: var(--fs-base);
 				color: var(--color-text-light);
 				border: none;
 				min-width: 32px;

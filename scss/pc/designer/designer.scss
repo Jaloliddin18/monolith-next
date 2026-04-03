@@ -43,18 +43,18 @@
 	}
 
 	.designer-card-name {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 20px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-lg);
 		line-height: 30px;
 		color: var(--color-dark);
 		margin: 0;
 	}
 
 	.designer-card-role {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 		margin: 0;
@@ -75,17 +75,17 @@
 	}
 
 	.stat-value {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-md);
 		line-height: 27px;
 		color: var(--color-dark);
 	}
 
 	.stat-label {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 12px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-xs);
 		line-height: 18px;
 		color: var(--color-text-light);
 	}
@@ -120,9 +120,9 @@
 	}
 
 	.designer-hero-label {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 		letter-spacing: 2px;
@@ -130,18 +130,18 @@
 	}
 
 	.designer-hero-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 48px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-4xl);
 		line-height: normal;
 		color: var(--color-dark);
 		margin: 0;
 	}
 
 	.designer-hero-desc {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-md);
 		line-height: 27px;
 		color: var(--color-text-light);
 		margin: 0;
@@ -175,9 +175,9 @@
 			gap: 8px;
 
 			.MuiPaginationItem-root {
-				font-family: 'Jost', sans-serif;
-				font-weight: 400;
-				font-size: 16px;
+				font-family: var(--font-ui);
+				font-weight: var(--fw-regular);
+				font-size: var(--fs-base);
 				color: var(--color-text-light);
 				border: none;
 				min-width: 32px;
@@ -211,9 +211,9 @@
 	}
 
 	.featured-designers-label {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 		letter-spacing: 2px;
@@ -221,8 +221,8 @@
 	}
 
 	.featured-designers-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 36px;
 		line-height: normal;
 		color: var(--color-dark);
@@ -230,9 +230,9 @@
 	}
 
 	.featured-designers-desc {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-md);
 		line-height: 27px;
 		color: var(--color-text-light);
 		margin: 0;
@@ -291,9 +291,9 @@
 	}
 
 	.featured-card-badge {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 12px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-xs);
 		line-height: 18px;
 		color: #fff;
 		background: var(--color-primary);
@@ -316,8 +316,8 @@
 	}
 
 	.featured-card-name {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
 		font-size: 22px;
 		line-height: 32px;
 		color: var(--color-dark);
@@ -325,16 +325,16 @@
 	}
 
 	.featured-card-role {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 	}
 
 	.featured-card-quote {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 15px;
 		line-height: 24px;
 		color: var(--color-text-light);
@@ -359,17 +359,17 @@
 	}
 
 	.featured-stat-value {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 20px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-lg);
 		line-height: 30px;
 		color: var(--color-dark);
 	}
 
 	.featured-stat-label {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 12px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-xs);
 		line-height: 18px;
 		color: var(--color-text-light);
 	}
@@ -399,9 +399,9 @@
 	}
 
 	.designer-cta-label {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 14px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-sm);
 		line-height: 20px;
 		color: var(--color-primary);
 		letter-spacing: 2px;
@@ -409,18 +409,18 @@
 	}
 
 	.designer-cta-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 40px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-3xl);
 		line-height: normal;
 		color: #fff;
 		margin: 0;
 	}
 
 	.designer-cta-desc {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
+		font-size: var(--fs-md);
 		line-height: 30px;
 		color: var(--color-text-light);
 		margin: 0;
@@ -445,17 +445,17 @@
 	}
 
 	.cta-feature-text {
-		font-family: 'Jost', sans-serif;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-regular);
 		font-size: 15px;
 		line-height: 22px;
 		color: var(--color-text-light);
 	}
 
 	.designer-cta-btn {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 16px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-base);
 		line-height: 24px;
 		color: #fff;
 		background: var(--color-primary);

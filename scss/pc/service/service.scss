@@ -2,7 +2,7 @@
 // SERVICE PAGE
 // ==============================
 .service-page {
-	font-family: 'Jost', sans-serif;
+	font-family: var(--font-ui);
 }
 
 // ==============================
@@ -13,9 +13,9 @@
 	text-align: center;
 
 	.svc-awesome-title {
-		font-family: 'Jost', sans-serif;
-		font-size: 40px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-3xl);
+		font-weight: var(--fw-medium);
 		color: var(--color-dark);
 		margin-bottom: 50px;
 	}
@@ -51,18 +51,18 @@
 		}
 
 		.svc-card-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 20px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-lg);
+			font-weight: var(--fw-medium);
 			line-height: 30px;
 			color: var(--color-dark);
 			margin-bottom: 8px;
 		}
 
 		.svc-card-desc {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-text-light);
 			max-width: 300px;
@@ -76,14 +76,14 @@
 			cursor: pointer;
 
 			span {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-medium);
 				color: var(--color-primary);
 			}
 
 			svg {
-				font-size: 20px;
+				font-size: var(--fs-lg);
 				color: var(--color-primary);
 			}
 		}
@@ -97,9 +97,9 @@
 	padding: 60px 150px;
 
 	.svc-progress-title {
-		font-family: 'Jost', sans-serif;
-		font-size: 40px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-3xl);
+		font-weight: var(--fw-medium);
 		color: var(--color-dark);
 		text-align: center;
 		margin-bottom: 60px;
@@ -143,9 +143,9 @@
 		padding: 10px;
 
 		.progress-step-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 30px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-2xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 			margin-bottom: 24px;
 		}
@@ -158,9 +158,9 @@
 			gap: 24px;
 
 			li {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-regular);
 				line-height: 27px;
 				color: var(--color-text-light);
 				max-width: 461px;
@@ -180,7 +180,7 @@
 	.sale-bg {
 		width: 100%;
 		height: 453px;
-		background: #e4cfcf;
+		background: var(--color-bg-warm);
 	}
 
 	.sale-content-wrap {
@@ -218,9 +218,9 @@
 		}
 
 		.sale-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 40px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-3xl);
+			font-weight: var(--fw-medium);
 			color: var(--color-dark);
 			line-height: 1;
 		}
@@ -241,16 +241,16 @@
 			justify-content: center;
 
 			span {
-				font-family: 'Jost', sans-serif;
+				font-family: var(--font-ui);
 				font-size: 22px;
-				font-weight: 500;
+				font-weight: var(--fw-medium);
 				color: var(--color-dark);
 			}
 		}
 
 		.countdown-colon {
-			font-family: 'Jost', sans-serif;
-			font-size: 14px;
+			font-family: var(--font-ui);
+			font-size: var(--fs-sm);
 			color: #fff;
 		}
 	}
@@ -262,9 +262,9 @@
 		span {
 			width: 60px;
 			text-align: center;
-			font-family: 'Jost', sans-serif;
-			font-size: 12px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-xs);
+			font-weight: var(--fw-regular);
 			color: var(--color-dark);
 		}
 	}
@@ -272,9 +272,9 @@
 	.btn-shop-now {
 		background: var(--color-primary) !important;
 		color: #fff !important;
-		font-family: 'Jost', sans-serif !important;
-		font-size: 18px !important;
-		font-weight: 500 !important;
+		font-family: var(--font-ui) !important;
+		font-size: var(--fs-md) !important;
+		font-weight: var(--fw-medium) !important;
 		padding: 14px 32px !important;
 		border-radius: 0 !important;
 		text-transform: uppercase !important;

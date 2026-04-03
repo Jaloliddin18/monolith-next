@@ -2,9 +2,9 @@
 // SHARED SECTION STYLES
 // ==============================
 .section-title-text {
-  font-family: "Jost", sans-serif;
-  font-size: 40px;
-  font-weight: 500;
+  font-family: var(--font-ui);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-medium);
   color: var(--color-dark);
   line-height: normal;
 }
@@ -18,9 +18,9 @@
   padding: 14px 0;
 
   p {
-    font-family: "Jost", sans-serif;
-    font-size: 18px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-medium);
     color: var(--color-primary);
     line-height: 27px;
   }
@@ -33,9 +33,9 @@
 .btn-shop-now {
   background: var(--color-primary) !important;
   color: #fff !important;
-  font-family: "Jost", sans-serif !important;
-  font-size: 18px !important;
-  font-weight: 500 !important;
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-md) !important;
+  font-weight: var(--fw-medium) !important;
   line-height: 27px !important;
   padding: 14px 32px !important;
   border-radius: 0 !important;
@@ -46,9 +46,9 @@
 .btn-outline-brown {
   border: 1px solid var(--color-primary) !important;
   color: var(--color-primary) !important;
-  font-family: "Jost", sans-serif !important;
-  font-size: 18px !important;
-  font-weight: 500 !important;
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-md) !important;
+  font-weight: var(--fw-medium) !important;
   line-height: 27px !important;
   padding: 14px 32px !important;
   border-radius: 0 !important;
@@ -59,9 +59,9 @@
 .btn-buy-now {
   background: var(--color-primary) !important;
   color: #fff !important;
-  font-family: "Jost", sans-serif !important;
-  font-size: 18px !important;
-  font-weight: 500 !important;
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-md) !important;
+  font-weight: var(--fw-medium) !important;
   padding: 14px 32px !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -82,7 +82,7 @@
     }
 
     .product-title {
-      font-size: 20px !important;
+      font-size: var(--fs-lg) !important;
       line-height: 30px !important;
     }
   }
@@ -106,9 +106,9 @@
       left: 14px;
       padding: 4px 8px;
       border-radius: 4px;
-      font-family: "Jost", sans-serif;
-      font-size: 14px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
       line-height: 20px;
       color: #fff;
       z-index: 2;
@@ -135,9 +135,9 @@
       z-index: 3;
 
       .out-of-stock-text {
-        font-family: "Jost", sans-serif;
-        font-size: 24px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-xl);
+        font-weight: var(--fw-medium);
         color: var(--color-sale);
         text-align: center;
       }
@@ -150,9 +150,9 @@
       width: 100%;
       background: var(--color-primary);
       color: #fff;
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-medium);
       line-height: 27px;
       padding: 14px 32px;
       text-align: center;
@@ -202,27 +202,27 @@
       border-radius: 4px;
 
       .rating-value {
-        font-family: "Jost", sans-serif;
-        font-size: 14px;
-        font-weight: 600;
+        font-family: var(--font-ui);
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-semibold);
         color: var(--color-success);
         line-height: 20px;
       }
     }
 
     .rating-count {
-      font-family: "Jost", sans-serif;
-      font-size: 12px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-regular);
       color: var(--color-text-light);
       line-height: 18px;
     }
   }
 
   .product-title {
-    font-family: "Jost", sans-serif;
-    font-size: 24px;
-    font-weight: 400;
+    font-family: var(--font-ui);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-regular);
     color: var(--color-dark);
     line-height: 36px;
     overflow: hidden;
@@ -232,17 +232,17 @@
 
   .product-price-row {
     .product-price {
-      font-family: "Jost", sans-serif;
-      font-size: 20px;
-      font-weight: 600;
+      font-family: var(--font-ui);
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-semibold);
       color: var(--color-dark);
       line-height: 30px;
     }
 
     .product-price-old {
-      font-family: "Jost", sans-serif;
-      font-size: 14px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-regular);
       color: var(--color-text-light);
       line-height: 20px;
       text-decoration: line-through;
@@ -297,18 +297,18 @@
       width: 558px;
 
       .hero-title {
-        font-family: "Jost", sans-serif;
-        font-size: 40px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-3xl);
+        font-weight: var(--fw-medium);
         line-height: normal;
         color: var(--color-dark);
         width: 506px;
       }
 
       .hero-subtitle {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-regular);
         line-height: 27px;
         color: var(--color-text-muted);
         width: 461px;
@@ -322,9 +322,9 @@
       gap: 24px;
 
       .hero-price {
-        font-family: "Jost", sans-serif;
-        font-size: 30px;
-        font-weight: 600;
+        font-family: var(--font-ui);
+        font-size: var(--fs-2xl);
+        font-weight: var(--fw-semibold);
         color: var(--color-dark);
         line-height: normal;
         white-space: nowrap;
@@ -333,9 +333,9 @@
       .btn-hero-cta {
         background: var(--color-primary) !important;
         color: #fff !important;
-        font-family: "Jost", sans-serif !important;
-        font-size: 18px !important;
-        font-weight: 500 !important;
+        font-family: var(--font-ui) !important;
+        font-size: var(--fs-md) !important;
+        font-weight: var(--fw-medium) !important;
         line-height: 27px !important;
         padding: 14px 32px !important;
         border-radius: 0 !important;
@@ -384,18 +384,18 @@
     }
 
     .intro-title {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: normal;
       width: 538px;
     }
 
     .intro-desc {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       color: var(--color-text-muted);
       line-height: 27px;
       width: 558px;
@@ -411,17 +411,17 @@
       border-bottom: 1px solid var(--color-border);
 
       .stat-label {
-        font-family: "Jost", sans-serif;
-        font-size: 24px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-xl);
+        font-weight: var(--fw-medium);
         color: var(--color-dark);
         line-height: 36px;
       }
 
       .stat-value {
-        font-family: "Jost", sans-serif;
-        font-size: 24px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-xl);
+        font-weight: var(--fw-medium);
         color: var(--color-primary);
         line-height: 36px;
       }
@@ -474,18 +474,18 @@
     }
 
     .service-card-title {
-      font-family: "Jost", sans-serif;
-      font-size: 24px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: 36px;
       white-space: nowrap;
     }
 
     .service-card-desc {
-      font-family: "Jost", sans-serif;
-      font-size: 16px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-base);
+      font-weight: var(--fw-regular);
       color: var(--color-text-muted);
       line-height: 24px;
       white-space: nowrap;
@@ -501,9 +501,9 @@
   gap: 50px;
 
   .awesome-title {
-    font-family: "Jost", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
     color: var(--color-dark);
     line-height: normal;
   }
@@ -548,17 +548,17 @@
     }
 
     .svc-card-title {
-      font-family: "Jost", sans-serif;
-      font-size: 20px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: 30px;
     }
 
     .svc-card-desc {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       color: var(--color-text-light);
       line-height: 27px;
       width: 300px;
@@ -572,9 +572,9 @@
       cursor: pointer;
 
       span {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-medium);
         color: var(--color-primary);
         line-height: 27px;
       }
@@ -600,9 +600,9 @@
     }
 
     .awesome-sale-title {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: normal;
       text-align: center;
@@ -618,27 +618,27 @@
     }
 
     .awesome-sale-subtitle {
-      font-family: "Jost", sans-serif;
-      font-size: 24px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: 36px;
       white-space: nowrap;
     }
 
     .awesome-sale-old {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       color: var(--color-text-light);
       text-decoration: line-through;
       line-height: 27px;
     }
 
     .awesome-sale-price {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-primary);
       line-height: normal;
     }
@@ -646,9 +646,9 @@
     .btn-shop-now {
       background: var(--color-primary) !important;
       color: #fff !important;
-      font-family: "Jost", sans-serif !important;
-      font-size: 18px !important;
-      font-weight: 500 !important;
+      font-family: var(--font-ui) !important;
+      font-size: var(--fs-md) !important;
+      font-weight: var(--fw-medium) !important;
       line-height: 27px !important;
       padding: 14px 32px !important;
       border-radius: 0 !important;
@@ -699,25 +699,25 @@
     }
 
     .newest-card-label {
-      font-family: "Jost", sans-serif;
-      font-size: 16px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-base);
+      font-weight: var(--fw-regular);
       color: var(--color-dark);
       line-height: 24px;
     }
 
     .newest-card-discount {
-      font-family: "Jost", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-base);
+      font-weight: var(--fw-medium);
       color: var(--color-sale);
       line-height: 24px;
     }
 
     .newest-card-title {
-      font-family: "Jost", sans-serif;
-      font-size: 30px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: normal;
       width: 266px;
@@ -765,9 +765,9 @@
     }
 
     .newest-banner-seller {
-      font-family: "Jost", sans-serif;
-      font-size: 16px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-base);
+      font-weight: var(--fw-medium);
       color: var(--color-success);
       line-height: 24px;
     }
@@ -794,9 +794,9 @@
   padding: 60px 150px;
 
   .section-title-text {
-    font-family: "Jost", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
     color: var(--color-dark);
     line-height: normal;
   }
@@ -813,9 +813,9 @@
     width: 1140px;
 
     .section-title-text {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: normal;
     }
@@ -840,9 +840,9 @@
       }
 
       .category-label {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-medium);
         color: var(--color-dark);
         line-height: normal;
         font-style: normal;
@@ -859,9 +859,9 @@
   background: var(--color-bg-warm);
 
   .section-title-text {
-    font-family: "Jost", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
     color: var(--color-dark);
     line-height: normal;
   }
@@ -878,9 +878,9 @@
   }
 
   .sale-banner-title {
-    font-family: "Jost", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
     color: var(--color-dark);
     line-height: normal;
 
@@ -904,9 +904,9 @@
       justify-content: center;
 
       .countdown-value {
-        font-family: "Jost", sans-serif;
-        font-size: 20px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-lg);
+        font-weight: var(--fw-medium);
         color: var(--color-sale);
         line-height: 30px;
         text-align: center;
@@ -914,9 +914,9 @@
     }
 
     .countdown-colon {
-      font-family: "Jost", sans-serif;
-      font-size: 14px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-regular);
       color: var(--color-dark);
       line-height: 20px;
     }
@@ -924,9 +924,9 @@
 
   .countdown-labels {
     .countdown-label {
-      font-family: "Jost", sans-serif;
-      font-size: 12px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-regular);
       color: var(--color-dark);
       text-align: center;
       width: 60px;
@@ -967,35 +967,35 @@
           border-radius: 4px;
 
           .rating-value {
-            font-family: 'Jost', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-semibold);
             color: var(--color-success);
             line-height: 20px;
           }
         }
 
         .rating-count {
-          font-family: 'Jost', sans-serif;
-          font-size: 12px;
-          font-weight: 400;
+          font-family: var(--font-ui);
+          font-size: var(--fs-xs);
+          font-weight: var(--fw-regular);
           color: var(--color-text-light);
           line-height: 18px;
         }
       }
 
       .sale-product-name {
-        font-family: "Jost", sans-serif;
-        font-size: 30px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-2xl);
+        font-weight: var(--fw-medium);
         color: var(--color-dark);
         line-height: normal;
       }
 
       .sale-product-price {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-regular);
         color: var(--color-dark);
         line-height: 27px;
       }
@@ -1032,9 +1032,9 @@
       .btn-view-all-sale {
         background: var(--color-primary) !important;
         color: #fff !important;
-        font-family: "Jost", sans-serif !important;
-        font-size: 18px !important;
-        font-weight: 500 !important;
+        font-family: var(--font-ui) !important;
+        font-size: var(--fs-md) !important;
+        font-weight: var(--fw-medium) !important;
         padding: 14px 32px !important;
         border-radius: 0 !important;
         box-shadow: none !important;
@@ -1051,9 +1051,9 @@
 
   .top-rated-left {
     .section-title-text {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: normal;
     }
@@ -1067,9 +1067,9 @@
   padding: 60px 0;
 
   .section-title-text {
-    font-family: "Jost", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
     color: var(--color-dark);
     line-height: normal;
   }
@@ -1108,18 +1108,18 @@
     z-index: 2;
 
     .popup-name {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       color: var(--color-dark);
       line-height: 27px;
       text-align: center;
     }
 
     .popup-price {
-      font-family: "Jost", sans-serif;
-      font-size: 20px;
-      font-weight: 600;
+      font-family: var(--font-ui);
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-semibold);
       color: var(--color-dark);
       line-height: 30px;
       text-align: center;
@@ -1149,9 +1149,9 @@
     width: 1140px;
 
     .section-title-text {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
       line-height: normal;
     }
@@ -1163,9 +1163,9 @@
     cursor: pointer;
 
     .filter-text {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       color: var(--color-text-light);
       line-height: 27px;
 
@@ -1176,15 +1176,15 @@
   }
 
   .pagination-text {
-    font-family: "Jost", sans-serif;
-    font-size: 18px;
-    font-weight: 400;
+    font-family: var(--font-ui);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-regular);
     line-height: 27px;
   }
 
   .custom-pagination {
     .MuiPaginationItem-root {
-      font-family: "Jost", sans-serif;
+      font-family: var(--font-ui);
       border: none;
 
       &.Mui-selected {
@@ -1204,9 +1204,9 @@
   background: var(--color-bg-warm);
 
   .store-finder-title {
-    font-family: "Jost", sans-serif;
-    font-size: 30px;
-    font-weight: 600;
+    font-family: var(--font-ui);
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-semibold);
     color: var(--color-dark);
     line-height: normal;
   }
@@ -1222,18 +1222,18 @@
       cursor: pointer;
 
       .city-text {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-regular);
         color: var(--color-dark);
         line-height: 27px;
       }
     }
 
     .store-location-placeholder {
-      font-family: "Jost", sans-serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-family: var(--font-ui);
+      font-size: var(--fs-md);
+      font-weight: var(--fw-regular);
       color: var(--color-text-light);
       line-height: 27px;
     }
@@ -1241,9 +1241,9 @@
     .btn-search {
       background: var(--color-primary) !important;
       color: #fff !important;
-      font-family: "Jost", sans-serif !important;
-      font-size: 18px !important;
-      font-weight: 500 !important;
+      font-family: var(--font-ui) !important;
+      font-size: var(--fs-md) !important;
+      font-weight: var(--fw-medium) !important;
       padding: 14px 32px !important;
       border-radius: 0 !important;
       box-shadow: none !important;
@@ -1258,9 +1258,9 @@
   padding: 100px 150px 60px;
 
   .section-title-text {
-    font-family: "Jost", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
     color: var(--color-dark);
     line-height: normal;
   }
@@ -1285,17 +1285,17 @@
       }
 
       .faq-question-text {
-        font-family: "Jost", sans-serif;
-        font-size: 24px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-xl);
+        font-weight: var(--fw-medium);
         color: var(--color-dark);
         line-height: 36px;
       }
 
       .faq-answer {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-regular);
         color: var(--color-text-light);
         line-height: 27px;
         width: 940px;
@@ -1316,9 +1316,9 @@
     margin: 0 auto;
 
     .section-title-text {
-      font-family: "Jost", sans-serif;
-      font-size: 40px;
-      font-weight: 500;
+      font-family: var(--font-ui);
+      font-size: var(--fs-3xl);
+      font-weight: var(--fw-medium);
       color: var(--color-dark);
     }
   }
@@ -1359,9 +1359,9 @@
   padding: 60px 150px;
 
   .section-title-text {
-    font-family: "Jost", sans-serif;
-    font-size: 40px;
-    font-weight: 500;
+    font-family: var(--font-ui);
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-medium);
     color: var(--color-dark);
     line-height: normal;
   }
@@ -1394,25 +1394,25 @@
       flex: 1;
 
       .blog-category {
-        font-family: "Jost", sans-serif;
-        font-size: 16px;
-        font-weight: 500;
+        font-family: var(--font-ui);
+        font-size: var(--fs-base);
+        font-weight: var(--fw-medium);
         color: var(--color-primary);
         line-height: 24px;
       }
 
       .blog-date {
-        font-family: "Jost", sans-serif;
-        font-size: 12px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-xs);
+        font-weight: var(--fw-regular);
         color: var(--color-text-light);
         line-height: 18px;
       }
 
       .blog-title {
-        font-family: "Jost", sans-serif;
-        font-size: 18px;
-        font-weight: 400;
+        font-family: var(--font-ui);
+        font-size: var(--fs-md);
+        font-weight: var(--fw-regular);
         color: var(--color-dark);
         line-height: 27px;
         cursor: pointer;

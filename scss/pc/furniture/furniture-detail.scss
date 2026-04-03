@@ -2,7 +2,7 @@
 // FURNITURE DETAIL PAGE
 // ==============================
 .furniture-detail-page {
-	font-family: 'Jost', sans-serif;
+	font-family: var(--font-ui);
 }
 
 // ==============================
@@ -10,9 +10,9 @@
 // ==============================
 .detail-breadcrumb {
 	padding: 24px 150px;
-	font-family: 'Jost', sans-serif;
-	font-size: 16px;
-	font-weight: 400;
+	font-family: var(--font-ui);
+	font-size: var(--fs-base);
+	font-weight: var(--fw-regular);
 	line-height: 24px;
 
 	a {
@@ -165,34 +165,34 @@
 		padding: 3px 6px;
 
 		span {
-			font-family: 'Jost', sans-serif;
-			font-size: 14px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-sm);
+			font-weight: var(--fw-medium);
 			line-height: 20px;
 			color: #fff;
 		}
 	}
 
 	.review-count {
-		font-family: 'Jost', sans-serif;
-		font-size: 14px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-sm);
+		font-weight: var(--fw-regular);
 		line-height: 20px;
 		color: var(--color-text-light);
 	}
 
 	.detail-title {
-		font-family: 'Jost', sans-serif;
-		font-size: 30px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-2xl);
+		font-weight: var(--fw-medium);
 		color: var(--color-dark);
 		width: 558px;
 	}
 
 	.detail-subtitle {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-regular);
 		line-height: 27px;
 		color: #9c9c9c;
 		width: 558px;
@@ -203,25 +203,25 @@
 	}
 
 	.detail-price {
-		font-family: 'Jost', sans-serif;
-		font-size: 30px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-2xl);
+		font-weight: var(--fw-medium);
 		color: var(--color-dark);
 	}
 
 	.detail-price-old {
-		font-family: 'Jost', sans-serif;
-		font-size: 14px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-sm);
+		font-weight: var(--fw-regular);
 		line-height: 20px;
 		color: var(--color-text-light);
 		text-decoration: line-through;
 	}
 
 	.detail-discount {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-medium);
 		line-height: 27px;
 		color: var(--color-success);
 	}
@@ -232,9 +232,9 @@
 	}
 
 	.countdown-label {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-regular);
 		line-height: 27px;
 		color: var(--color-primary);
 	}
@@ -253,18 +253,18 @@
 		justify-content: center;
 
 		span {
-			font-family: 'Jost', sans-serif;
-			font-size: 20px;
-			font-weight: 600;
+			font-family: var(--font-ui);
+			font-size: var(--fs-lg);
+			font-weight: var(--fw-semibold);
 			line-height: 30px;
 			color: var(--color-primary);
 		}
 	}
 
 	.countdown-colon {
-		font-family: 'Jost', sans-serif;
-		font-size: 14px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-sm);
+		font-weight: var(--fw-regular);
 		color: var(--color-dark);
 	}
 
@@ -272,18 +272,18 @@
 		span {
 			width: 60px;
 			text-align: center;
-			font-family: 'Jost', sans-serif;
-			font-size: 12px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-xs);
+			font-weight: var(--fw-regular);
 			line-height: 18px;
 			color: #4c2d2d;
 		}
 	}
 
 	.detail-label {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-regular);
 		line-height: 27px;
 		color: var(--color-text-light);
 	}
@@ -298,9 +298,9 @@
 		padding: 6px 12px;
 
 		.quantity-value {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 600;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-semibold);
 			line-height: 27px;
 			color: var(--color-dark);
 		}
@@ -320,9 +320,9 @@
 	}
 
 	.stock-label {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-regular);
 		line-height: 27px;
 		color: var(--color-text-light);
 	}
@@ -331,9 +331,9 @@
 	.btn-add-to-cart {
 		background: var(--color-primary) !important;
 		color: #fff !important;
-		font-family: 'Jost', sans-serif !important;
-		font-size: 18px !important;
-		font-weight: 500 !important;
+		font-family: var(--font-ui) !important;
+		font-size: var(--fs-md) !important;
+		font-weight: var(--fw-medium) !important;
 		line-height: 27px !important;
 		padding: 14px 32px !important;
 		border-radius: 0 !important;
@@ -353,9 +353,9 @@
 		}
 
 		.delivery-title {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-medium);
 			line-height: 27px;
 			color: var(--color-dark);
 		}
@@ -369,17 +369,17 @@
 			align-items: center;
 
 			.placeholder {
-				font-family: 'Jost', sans-serif;
-				font-size: 16px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-base);
+				font-weight: var(--fw-regular);
 				line-height: 24px;
 				color: var(--color-text-light);
 			}
 
 			.check-btn {
-				font-family: 'Jost', sans-serif;
-				font-size: 16px;
-				font-weight: 500;
+				font-family: var(--font-ui);
+				font-size: var(--fs-base);
+				font-weight: var(--fw-medium);
 				line-height: 24px;
 				color: var(--color-primary);
 				cursor: pointer;
@@ -392,9 +392,9 @@
 		gap: 14px;
 
 		.trust-text {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-dark);
 		}
@@ -414,9 +414,9 @@
 			gap: 14px;
 
 			li {
-				font-family: 'Jost', sans-serif;
-				font-size: 18px;
-				font-weight: 400;
+				font-family: var(--font-ui);
+				font-size: var(--fs-md);
+				font-weight: var(--fw-regular);
 				line-height: 27px;
 				color: var(--color-dark);
 				max-width: 558px;
@@ -431,9 +431,9 @@
 		gap: 14px;
 
 		.desc-text {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-text-light);
 			max-width: 558px;
@@ -441,9 +441,9 @@
 	}
 
 	.section-heading {
-		font-family: 'Jost', sans-serif;
-		font-size: 24px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-xl);
+		font-weight: var(--fw-regular);
 		line-height: 36px;
 		color: var(--color-dark);
 	}
@@ -458,18 +458,18 @@
 }
 
 .section-title-lg {
-	font-family: 'Jost', sans-serif;
-	font-size: 40px;
-	font-weight: 500;
+	font-family: var(--font-ui);
+	font-size: var(--fs-3xl);
+	font-weight: var(--fw-medium);
 	color: var(--color-dark);
 }
 
 .btn-all-reviews {
 	border-color: var(--color-border) !important;
 	color: #000 !important;
-	font-family: 'Jost', sans-serif !important;
-	font-size: 16px !important;
-	font-weight: 500 !important;
+	font-family: var(--font-ui) !important;
+	font-size: var(--fs-base) !important;
+	font-weight: var(--fw-medium) !important;
 	text-transform: uppercase !important;
 	border-radius: 0 !important;
 	padding: 14px 24px !important;
@@ -505,9 +505,9 @@
 	}
 
 	.review-user-name {
-		font-family: 'Jost', sans-serif;
-		font-size: 24px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-xl);
+		font-weight: var(--fw-regular);
 		line-height: 36px;
 		color: var(--color-dark);
 	}
@@ -518,25 +518,25 @@
 	}
 
 	.review-title {
-		font-family: 'Jost', sans-serif;
-		font-size: 24px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-xl);
+		font-weight: var(--fw-regular);
 		line-height: 36px;
 		color: var(--color-dark);
 	}
 
 	.review-date {
-		font-family: 'Jost', sans-serif;
-		font-size: 14px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-sm);
+		font-weight: var(--fw-regular);
 		line-height: 20px;
 		color: var(--color-text-light);
 	}
 
 	.review-text {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-regular);
 		line-height: 27px;
 		color: var(--color-dark);
 		max-width: 752px;
@@ -569,9 +569,9 @@
 	}
 
 	.review-form-title {
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 40px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-3xl);
 		line-height: normal;
 		color: var(--color-dark);
 		margin: 0;
@@ -596,9 +596,9 @@
 		background: #fff;
 		border: none;
 		outline: none;
-		font-family: 'Jost', sans-serif;
-		font-size: 16px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-base);
+		font-weight: var(--fw-regular);
 		color: var(--color-dark);
 		resize: vertical;
 
@@ -609,9 +609,9 @@
 
 	.post-review-btn {
 		align-self: flex-start;
-		font-family: 'Jost', sans-serif;
-		font-weight: 500;
-		font-size: 18px;
+		font-family: var(--font-ui);
+		font-weight: var(--fw-medium);
+		font-size: var(--fs-md);
 		line-height: 27px;
 		color: var(--color-primary);
 		background: #fff;
@@ -681,24 +681,24 @@
 		padding: 3px 6px;
 
 		span {
-			font-family: 'Jost', sans-serif;
-			font-size: 12px;
-			font-weight: 500;
+			font-family: var(--font-ui);
+			font-size: var(--fs-xs);
+			font-weight: var(--fw-medium);
 			color: #fff;
 		}
 	}
 
 	.rating-count-sm {
-		font-family: 'Jost', sans-serif;
-		font-size: 12px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-xs);
+		font-weight: var(--fw-regular);
 		color: var(--color-text-light);
 	}
 
 	.product-sm-title {
-		font-family: 'Jost', sans-serif;
-		font-size: 20px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-lg);
+		font-weight: var(--fw-medium);
 		line-height: 30px;
 		color: var(--color-dark);
 		overflow: hidden;
@@ -707,17 +707,17 @@
 	}
 
 	.product-sm-price {
-		font-family: 'Jost', sans-serif;
-		font-size: 18px;
-		font-weight: 500;
+		font-family: var(--font-ui);
+		font-size: var(--fs-md);
+		font-weight: var(--fw-medium);
 		line-height: 27px;
 		color: var(--color-dark);
 	}
 
 	.product-sm-old-price {
-		font-family: 'Jost', sans-serif;
-		font-size: 14px;
-		font-weight: 400;
+		font-family: var(--font-ui);
+		font-size: var(--fs-sm);
+		font-weight: var(--fw-regular);
 		line-height: 20px;
 		color: var(--color-text-light);
 		text-decoration: line-through;
@@ -746,17 +746,17 @@
 		}
 
 		.faq-question {
-			font-family: 'Jost', sans-serif;
-			font-size: 24px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-xl);
+			font-weight: var(--fw-regular);
 			line-height: 36px;
 			color: var(--color-dark);
 		}
 
 		.faq-answer {
-			font-family: 'Jost', sans-serif;
-			font-size: 18px;
-			font-weight: 400;
+			font-family: var(--font-ui);
+			font-size: var(--fs-md);
+			font-weight: var(--fw-regular);
 			line-height: 27px;
 			color: var(--color-text-light);
 			max-width: 940px;
