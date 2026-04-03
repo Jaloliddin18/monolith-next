@@ -1,13 +1,16 @@
-import React from 'react';
-import { Stack } from '@mui/material';
-import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+import React, { useEffect } from 'react';
+import type { NextPage } from 'next';
+import withAdminLayout from '../../libs/components/layout/LayoutAdmin';
+import { useRouter } from 'next/router';
 
-const Admin = () => {
-	return (
-		<Stack className="admin-page">
-			<div>Admin Dashboard</div>
-		</Stack>
-	);
+const AdminHome: NextPage = (props: any) => {
+	const router = useRouter();
+
+	/** LIFECYCLES **/
+	useEffect(() => {
+		router.push('/_admin/users');
+	}, []);
+	return <></>;
 };
 
-export default withLayoutBasic(Admin);
+export default withAdminLayout(AdminHome);
