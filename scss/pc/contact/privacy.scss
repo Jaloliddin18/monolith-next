@@ -18,7 +18,7 @@
 				font-family: 'Jost', sans-serif;
 				font-size: 40px;
 				font-weight: 500;
-				color: #000;
+				color: var(--color-dark);
 				line-height: normal;
 			}
 
@@ -27,7 +27,7 @@
 				font-size: 18px;
 				font-weight: 400;
 				line-height: 27px;
-				color: #000;
+				color: var(--color-dark);
 				margin-top: 14px;
 			}
 
@@ -60,7 +60,7 @@
 			.privacy-sidebar {
 				width: 364px;
 				flex-shrink: 0;
-				border-right: 1px solid #e6e6e6;
+				border-right: 1px solid var(--color-border);
 
 				.sidebar-list {
 					display: flex;
@@ -76,16 +76,16 @@
 						font-size: 20px;
 						font-weight: 400;
 						line-height: 30px;
-						color: #000;
+						color: var(--color-dark);
 						cursor: pointer;
 						transition: color 0.2s;
 
 						&:hover {
-							color: #a86464;
+							color: var(--color-primary);
 						}
 
 						&.active {
-							color: #a86464;
+							color: var(--color-primary);
 							font-weight: 500;
 						}
 					}
@@ -104,7 +104,7 @@
 					font-size: 24px;
 					font-weight: 500;
 					line-height: 36px;
-					color: #000;
+					color: var(--color-dark);
 				}
 
 				.detail-paragraph {
@@ -112,7 +112,7 @@
 					font-size: 18px;
 					font-weight: 400;
 					line-height: 27px;
-					color: #999;
+					color: var(--color-text-light);
 					max-width: 744px;
 				}
 
@@ -132,12 +132,12 @@
 						line-height: 27px;
 
 						.bullet-label {
-							color: #000;
+							color: var(--color-dark);
 							font-weight: 400;
 						}
 
 						.bullet-text {
-							color: #999;
+							color: var(--color-text-light);
 						}
 					}
 				}

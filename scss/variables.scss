@@ -1,17 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
+// ==============================
+// TYPOGRAPHY
+// ==============================
 $font-primary: 'Poppins', sans-serif;
 $font-heading: 'Playfair Display', serif;
+$font-ui: 'Jost', sans-serif;
 
-$color-primary: #a0616a;
-$color-dark: #212121;
-$color-text: #333333;
-$color-text-light: #616161;
-$color-bg-light: #faf5f5;
-$color-bg-pink: #fdf0ef;
-$color-border: #e0e0e0;
-$color-white: #ffffff;
-$color-sale: #d32f2f;
+// ==============================
+// COLOR TOKENS — Option A: Warm Charcoal + Terracotta
+// ==============================
 
+// Brand
+$color-primary:       #C46A4A;   // terracotta — buttons, links, accents
+$color-primary-hover: #AA5A3D;   // darker terracotta on hover
+$color-primary-light: #F7F2EE;   // pale terracotta tint
+
+// Text hierarchy
+$color-dark:          #1C1C1C;   // headings, near-black
+$color-text:          #2D2D2D;   // body text
+$color-text-muted:    #787878;   // secondary / muted
+$color-text-light:    #ADADAD;   // placeholders, captions
+
+// Backgrounds
+$color-bg-warm:       #F7F2EE;   // unified warm section background
+$color-bg-light:      #FAFAFA;   // near-white backgrounds
+$color-bg-white:      #FFFFFF;
+
+// Borders
+$color-border:        #E8E0D8;   // warm-toned border
+
+// Status
+$color-success:       #2E7D32;   // ratings, in-stock
+$color-success-bg:    #E8F5E9;   // rating badge background
+$color-sale:          #C0392B;   // sale / discount indicators
+
+// Layout
 $max-width: 1200px;
 $header-height: 152px;
+
+// ==============================
+// CSS CUSTOM PROPERTIES
+// Globally available — no @use needed in page SCSS files
+// ==============================
+:root {
+  --color-primary:       #{$color-primary};
+  --color-primary-hover: #{$color-primary-hover};
+  --color-primary-light: #{$color-primary-light};
+  --color-dark:          #{$color-dark};
+  --color-text:          #{$color-text};
+  --color-text-muted:    #{$color-text-muted};
+  --color-text-light:    #{$color-text-light};
+  --color-bg-warm:       #{$color-bg-warm};
+  --color-bg-light:      #{$color-bg-light};
+  --color-bg-white:      #{$color-bg-white};
+  --color-border:        #{$color-border};
+  --color-success:       #{$color-success};
+  --color-success-bg:    #{$color-success-bg};
+  --color-sale:          #{$color-sale};
+}

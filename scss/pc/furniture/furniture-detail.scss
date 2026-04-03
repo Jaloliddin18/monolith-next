@@ -16,20 +16,20 @@
 	line-height: 24px;
 
 	a {
-		color: #000;
+		color: var(--color-dark);
 		transition: color 0.3s;
 
 		&:hover {
-			color: #a86464;
+			color: var(--color-primary);
 		}
 	}
 
 	span {
-		color: #999;
+		color: var(--color-text-light);
 		margin-left: 8px;
 
 		&.current {
-			color: #000;
+			color: var(--color-dark);
 		}
 	}
 }
@@ -53,7 +53,7 @@
 	.detail-main-image {
 		width: 558px;
 		height: 450px;
-		background: #f9f9f9;
+		background: var(--color-bg-light);
 		overflow: hidden;
 		position: relative;
 
@@ -124,7 +124,7 @@
 		.thumbnail {
 			flex: 1;
 			height: 121px;
-			background: #f9f9f9;
+			background: var(--color-bg-light);
 			overflow: hidden;
 			cursor: pointer;
 
@@ -135,7 +135,7 @@
 			}
 
 			&.active {
-				border: 2px solid #a86464;
+				border: 2px solid var(--color-primary);
 			}
 		}
 	}
@@ -160,7 +160,7 @@
 		display: flex;
 		align-items: center;
 		gap: 4px;
-		background: #379237;
+		background: var(--color-success);
 		border-radius: 4px;
 		padding: 3px 6px;
 
@@ -178,14 +178,14 @@
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;
-		color: #999;
+		color: var(--color-text-light);
 	}
 
 	.detail-title {
 		font-family: 'Jost', sans-serif;
 		font-size: 30px;
 		font-weight: 500;
-		color: #000;
+		color: var(--color-dark);
 		width: 558px;
 	}
 
@@ -206,7 +206,7 @@
 		font-family: 'Jost', sans-serif;
 		font-size: 30px;
 		font-weight: 500;
-		color: #000;
+		color: var(--color-dark);
 	}
 
 	.detail-price-old {
@@ -214,7 +214,7 @@
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;
-		color: #999;
+		color: var(--color-text-light);
 		text-decoration: line-through;
 	}
 
@@ -223,7 +223,7 @@
 		font-size: 18px;
 		font-weight: 500;
 		line-height: 27px;
-		color: #379237;
+		color: var(--color-success);
 	}
 
 	// Countdown
@@ -236,7 +236,7 @@
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 27px;
-		color: #a86464;
+		color: var(--color-primary);
 	}
 
 	.countdown-timer {
@@ -246,7 +246,7 @@
 	.countdown-circle {
 		width: 60px;
 		height: 60px;
-		background: #f6f0f0;
+		background: var(--color-bg-warm);
 		border-radius: 50px;
 		display: flex;
 		align-items: center;
@@ -257,7 +257,7 @@
 			font-size: 20px;
 			font-weight: 600;
 			line-height: 30px;
-			color: #a86464;
+			color: var(--color-primary);
 		}
 	}
 
@@ -265,7 +265,7 @@
 		font-family: 'Jost', sans-serif;
 		font-size: 14px;
 		font-weight: 400;
-		color: #000;
+		color: var(--color-dark);
 	}
 
 	.countdown-labels {
@@ -285,7 +285,7 @@
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 27px;
-		color: #999;
+		color: var(--color-text-light);
 	}
 
 	// Quantity
@@ -294,7 +294,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: 24px;
-		border: 1px solid #e6e6e6;
+		border: 1px solid var(--color-border);
 		padding: 6px 12px;
 
 		.quantity-value {
@@ -302,7 +302,7 @@
 			font-size: 18px;
 			font-weight: 600;
 			line-height: 27px;
-			color: #000;
+			color: var(--color-dark);
 		}
 	}
 
@@ -324,12 +324,12 @@
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 27px;
-		color: #999;
+		color: var(--color-text-light);
 	}
 
 	// Add to cart
 	.btn-add-to-cart {
-		background: #a86464 !important;
+		background: var(--color-primary) !important;
 		color: #fff !important;
 		font-family: 'Jost', sans-serif !important;
 		font-size: 18px !important;
@@ -342,7 +342,7 @@
 		width: 558px;
 
 		&:hover {
-			background: #8f5555 !important;
+			background: var(--color-primary-hover) !important;
 		}
 	}
 
@@ -357,12 +357,12 @@
 			font-size: 18px;
 			font-weight: 500;
 			line-height: 27px;
-			color: #000;
+			color: var(--color-dark);
 		}
 
 		.delivery-input {
 			width: 364px;
-			background: #f9f9f9;
+			background: var(--color-bg-light);
 			padding: 13px 12px;
 			display: flex;
 			justify-content: space-between;
@@ -373,7 +373,7 @@
 				font-size: 16px;
 				font-weight: 400;
 				line-height: 24px;
-				color: #bfbfbf;
+				color: var(--color-text-light);
 			}
 
 			.check-btn {
@@ -381,7 +381,7 @@
 				font-size: 16px;
 				font-weight: 500;
 				line-height: 24px;
-				color: #a86464;
+				color: var(--color-primary);
 				cursor: pointer;
 			}
 		}
@@ -396,13 +396,13 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #000;
+			color: var(--color-dark);
 		}
 	}
 
 	// Offers section
 	.detail-offers {
-		border-top: 1px solid #e6e6e6;
+		border-top: 1px solid var(--color-border);
 		padding: 24px 0;
 		gap: 14px;
 
@@ -418,7 +418,7 @@
 				font-size: 18px;
 				font-weight: 400;
 				line-height: 27px;
-				color: #000;
+				color: var(--color-dark);
 				max-width: 558px;
 			}
 		}
@@ -426,7 +426,7 @@
 
 	// Description section
 	.detail-description {
-		border-top: 1px solid #e6e6e6;
+		border-top: 1px solid var(--color-border);
 		padding: 24px 0;
 		gap: 14px;
 
@@ -435,7 +435,7 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #999;
+			color: var(--color-text-light);
 			max-width: 558px;
 		}
 	}
@@ -445,7 +445,7 @@
 		font-size: 24px;
 		font-weight: 400;
 		line-height: 36px;
-		color: #000;
+		color: var(--color-dark);
 	}
 }
 
@@ -461,11 +461,11 @@
 	font-family: 'Jost', sans-serif;
 	font-size: 40px;
 	font-weight: 500;
-	color: #000;
+	color: var(--color-dark);
 }
 
 .btn-all-reviews {
-	border-color: #e6e6e6 !important;
+	border-color: var(--color-border) !important;
 	color: #000 !important;
 	font-family: 'Jost', sans-serif !important;
 	font-size: 16px !important;
@@ -491,7 +491,7 @@
 		display: flex;
 		gap: 24px;
 		padding: 40px 0;
-		border-bottom: 1px solid #e6e6e6;
+		border-bottom: 1px solid var(--color-border);
 
 		&:first-child {
 			padding-top: 0;
@@ -509,7 +509,7 @@
 		font-size: 24px;
 		font-weight: 400;
 		line-height: 36px;
-		color: #000;
+		color: var(--color-dark);
 	}
 
 	.review-content-col {
@@ -522,7 +522,7 @@
 		font-size: 24px;
 		font-weight: 400;
 		line-height: 36px;
-		color: #000;
+		color: var(--color-dark);
 	}
 
 	.review-date {
@@ -530,7 +530,7 @@
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;
-		color: #999;
+		color: var(--color-text-light);
 	}
 
 	.review-text {
@@ -538,7 +538,7 @@
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 27px;
-		color: #000;
+		color: var(--color-dark);
 		max-width: 752px;
 	}
 
@@ -561,7 +561,7 @@
 
 	// ─── Review Form ───────────────────────
 	.review-form-wrapper {
-		background: #f9f9f9;
+		background: var(--color-bg-light);
 		padding: 50px 97px;
 		display: flex;
 		flex-direction: column;
@@ -573,7 +573,7 @@
 		font-weight: 500;
 		font-size: 40px;
 		line-height: normal;
-		color: #000;
+		color: var(--color-dark);
 		margin: 0;
 	}
 
@@ -599,11 +599,11 @@
 		font-family: 'Jost', sans-serif;
 		font-size: 16px;
 		font-weight: 400;
-		color: #000;
+		color: var(--color-dark);
 		resize: vertical;
 
 		&::placeholder {
-			color: #999;
+			color: var(--color-text-light);
 		}
 	}
 
@@ -613,15 +613,15 @@
 		font-weight: 500;
 		font-size: 18px;
 		line-height: 27px;
-		color: #a86464;
+		color: var(--color-primary);
 		background: #fff;
-		border: 1px solid #a86464;
+		border: 1px solid var(--color-primary);
 		padding: 14px 32px;
 		cursor: pointer;
 		transition: background 0.2s, color 0.2s;
 
 		&:hover {
-			background: #a86464;
+			background: var(--color-primary);
 			color: #fff;
 		}
 	}
@@ -655,7 +655,7 @@
 	.product-card-sm-img {
 		width: 267px;
 		height: 267px;
-		background: #f9f9f9;
+		background: var(--color-bg-light);
 		overflow: hidden;
 		margin-bottom: 24px;
 
@@ -676,7 +676,7 @@
 		display: flex;
 		align-items: center;
 		gap: 2px;
-		background: #379237;
+		background: var(--color-success);
 		border-radius: 4px;
 		padding: 3px 6px;
 
@@ -692,7 +692,7 @@
 		font-family: 'Jost', sans-serif;
 		font-size: 12px;
 		font-weight: 400;
-		color: #999;
+		color: var(--color-text-light);
 	}
 
 	.product-sm-title {
@@ -700,7 +700,7 @@
 		font-size: 20px;
 		font-weight: 500;
 		line-height: 30px;
-		color: #000;
+		color: var(--color-dark);
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -711,7 +711,7 @@
 		font-size: 18px;
 		font-weight: 500;
 		line-height: 27px;
-		color: #000;
+		color: var(--color-dark);
 	}
 
 	.product-sm-old-price {
@@ -719,7 +719,7 @@
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;
-		color: #999;
+		color: var(--color-text-light);
 		text-decoration: line-through;
 	}
 }
@@ -737,7 +737,7 @@
 	}
 
 	.faq-item {
-		border-bottom: 1px solid #e6e6e6;
+		border-bottom: 1px solid var(--color-border);
 		padding: 30px 0;
 		cursor: pointer;
 
@@ -750,7 +750,7 @@
 			font-size: 24px;
 			font-weight: 400;
 			line-height: 36px;
-			color: #000;
+			color: var(--color-dark);
 		}
 
 		.faq-answer {
@@ -758,7 +758,7 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #999;
+			color: var(--color-text-light);
 			max-width: 940px;
 			margin-top: 14px;
 		}

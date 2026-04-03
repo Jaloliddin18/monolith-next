@@ -16,13 +16,13 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #000;
+			color: var(--color-dark);
 			line-height: normal;
 		}
 
 		// Left side - Form
 		.contact-form-section {
-			background: #f9f9f9;
+			background: var(--color-bg-light);
 			padding: 40px;
 			width: 752px;
 			display: flex;
@@ -39,7 +39,7 @@
 					font-size: 18px;
 					font-weight: 400;
 					line-height: 27px;
-					color: #000;
+					color: var(--color-dark);
 				}
 			}
 
@@ -61,12 +61,12 @@
 					font-size: 16px;
 					font-weight: 400;
 					line-height: 24px;
-					color: #000;
+					color: var(--color-dark);
 					background: transparent;
 					resize: none;
 
 					&::placeholder {
-						color: #bfbfbf;
+						color: var(--color-text-light);
 					}
 				}
 
@@ -104,12 +104,12 @@
 					font-size: 14px;
 					font-weight: 400;
 					line-height: 20px;
-					color: #999;
+					color: var(--color-text-light);
 				}
 			}
 
 			.send-btn {
-				background: #a86464;
+				background: var(--color-primary);
 				color: #fff;
 				border: none;
 				padding: 14px 32px;
@@ -122,7 +122,7 @@
 				transition: background 0.3s;
 
 				&:hover {
-					background: #8f5555;
+					background: var(--color-primary-hover);
 				}
 			}
 		}
@@ -151,7 +151,7 @@
 
 					.info-icon {
 						font-size: 40px;
-						color: #0f1928;
+						color: var(--color-dark);
 					}
 
 					.info-title {
@@ -159,7 +159,7 @@
 						font-size: 20px;
 						font-weight: 500;
 						line-height: 30px;
-						color: #0f1928;
+						color: var(--color-dark);
 					}
 				}
 
@@ -174,7 +174,7 @@
 						font-size: 18px;
 						font-weight: 400;
 						line-height: 27px;
-						color: #999;
+						color: var(--color-text-light);
 					}
 				}
 			}
@@ -191,7 +191,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #000;
+			color: var(--color-dark);
 			line-height: normal;
 		}
 
@@ -200,7 +200,7 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #999;
+			color: var(--color-text-light);
 			text-align: center;
 			max-width: 490px;
 		}
@@ -230,7 +230,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #000;
+			color: var(--color-dark);
 			line-height: normal;
 		}
 
@@ -248,7 +248,7 @@
 				height: 364px;
 				overflow: hidden;
 				position: relative;
-				background: #f9f9f9;
+				background: var(--color-bg-light);
 
 				img {
 					width: 100%;
@@ -260,7 +260,7 @@
 					position: absolute;
 					top: 14px;
 					left: 14px;
-					background: #379237;
+					background: var(--color-success);
 					color: #fff;
 					font-family: 'Jost', sans-serif;
 					font-size: 14px;
@@ -282,7 +282,7 @@
 
 					.detail-icon {
 						font-size: 24px;
-						color: #000;
+						color: var(--color-dark);
 					}
 
 					p {
@@ -290,7 +290,7 @@
 						font-size: 18px;
 						font-weight: 400;
 						line-height: 27px;
-						color: #000;
+						color: var(--color-dark);
 					}
 				}
 			}
@@ -325,7 +325,7 @@
 				font-size: 16px;
 				font-weight: 400;
 				line-height: 24px;
-				color: #000;
+				color: var(--color-dark);
 				margin-right: 50px;
 			}
 
@@ -334,7 +334,7 @@
 				font-size: 12px;
 				font-weight: 400;
 				line-height: 18px;
-				color: #a86464;
+				color: var(--color-primary);
 				margin-top: 5px;
 				cursor: pointer;
 			}
@@ -359,10 +359,10 @@
 				align-items: center;
 				justify-content: center;
 				padding: 0;
-				color: #000;
+				color: var(--color-dark);
 
 				&:hover {
-					color: #a86464;
+					color: var(--color-primary);
 				}
 			}
 		}
@@ -378,7 +378,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #000;
+			color: var(--color-dark);
 			line-height: normal;
 		}
 
@@ -386,7 +386,7 @@
 			width: 1140px;
 
 			.faq-item {
-				border-bottom: 1px solid #e6e6e6;
+				border-bottom: 1px solid var(--color-border);
 				padding: 30px 0;
 
 				&:first-child {
@@ -402,12 +402,12 @@
 						font-size: 24px;
 						font-weight: 500;
 						line-height: 36px;
-						color: #000;
+						color: var(--color-dark);
 					}
 
 					.faq-icon {
 						font-size: 32px;
-						color: #000;
+						color: var(--color-dark);
 					}
 				}
 
@@ -416,7 +416,7 @@
 					font-size: 18px;
 					font-weight: 400;
 					line-height: 27px;
-					color: #999;
+					color: var(--color-text-light);
 					max-width: 940px;
 					margin-top: 14px;
 				}
@@ -437,14 +437,14 @@
 				font-family: 'Jost', sans-serif;
 				font-size: 40px;
 				font-weight: 500;
-				color: #000;
+				color: var(--color-dark);
 				line-height: normal;
 			}
 
 			.instagram-handle-btn {
 				background: #fff;
-				border: 1px solid #a86464;
-				color: #a86464;
+				border: 1px solid var(--color-primary);
+				color: var(--color-primary);
 				font-family: 'Jost', sans-serif;
 				font-size: 18px;
 				font-weight: 500;
@@ -454,7 +454,7 @@
 				transition: all 0.3s;
 
 				&:hover {
-					background: #a86464;
+					background: var(--color-primary);
 					color: #fff;
 				}
 			}

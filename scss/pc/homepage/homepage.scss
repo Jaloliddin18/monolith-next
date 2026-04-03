@@ -5,7 +5,7 @@
   font-family: "Jost", sans-serif;
   font-size: 40px;
   font-weight: 500;
-  color: #000;
+  color: var(--color-dark);
   line-height: normal;
 }
 
@@ -21,17 +21,17 @@
     font-family: "Jost", sans-serif;
     font-size: 18px;
     font-weight: 500;
-    color: #a86464;
+    color: var(--color-primary);
     line-height: 27px;
   }
 
   svg {
-    color: #a86464;
+    color: var(--color-primary);
   }
 }
 
 .btn-shop-now {
-  background: #a86464 !important;
+  background: var(--color-primary) !important;
   color: #fff !important;
   font-family: "Jost", sans-serif !important;
   font-size: 18px !important;
@@ -44,8 +44,8 @@
 }
 
 .btn-outline-brown {
-  border: 1px solid #a86464 !important;
-  color: #a86464 !important;
+  border: 1px solid var(--color-primary) !important;
+  color: var(--color-primary) !important;
   font-family: "Jost", sans-serif !important;
   font-size: 18px !important;
   font-weight: 500 !important;
@@ -57,7 +57,7 @@
 }
 
 .btn-buy-now {
-  background: #a86464 !important;
+  background: var(--color-primary) !important;
   color: #fff !important;
   font-family: "Jost", sans-serif !important;
   font-size: 18px !important;
@@ -91,7 +91,7 @@
     position: relative;
     width: 100%;
     height: 364px;
-    background: #f9f9f9;
+    background: var(--color-bg-light);
     overflow: hidden;
 
     img {
@@ -114,11 +114,11 @@
       z-index: 2;
 
       &.bestseller {
-        background: #379237;
+        background: var(--color-success);
       }
 
       &.discount {
-        background: #ff1e1e;
+        background: var(--color-sale);
       }
     }
 
@@ -138,7 +138,7 @@
         font-family: "Jost", sans-serif;
         font-size: 24px;
         font-weight: 500;
-        color: #ff1e1e;
+        color: var(--color-sale);
         text-align: center;
       }
     }
@@ -148,7 +148,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #a86464;
+      background: var(--color-primary);
       color: #fff;
       font-family: "Jost", sans-serif;
       font-size: 18px;
@@ -197,7 +197,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      background: #e1efe1;
+      background: var(--color-success-bg);
       padding: 3px 6px;
       border-radius: 4px;
 
@@ -205,7 +205,7 @@
         font-family: "Jost", sans-serif;
         font-size: 14px;
         font-weight: 600;
-        color: #379237;
+        color: var(--color-success);
         line-height: 20px;
       }
     }
@@ -214,7 +214,7 @@
       font-family: "Jost", sans-serif;
       font-size: 12px;
       font-weight: 400;
-      color: #999;
+      color: var(--color-text-light);
       line-height: 18px;
     }
   }
@@ -223,7 +223,7 @@
     font-family: "Jost", sans-serif;
     font-size: 24px;
     font-weight: 400;
-    color: #000;
+    color: var(--color-dark);
     line-height: 36px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -235,7 +235,7 @@
       font-family: "Jost", sans-serif;
       font-size: 20px;
       font-weight: 600;
-      color: #000;
+      color: var(--color-dark);
       line-height: 30px;
     }
 
@@ -243,7 +243,7 @@
       font-family: "Jost", sans-serif;
       font-size: 14px;
       font-weight: 400;
-      color: #999;
+      color: var(--color-text-light);
       line-height: 20px;
       text-decoration: line-through;
     }
@@ -266,7 +266,7 @@
     left: 0;
     width: 999px;
     height: 600px;
-    background: #fff8f9;
+    background: var(--color-bg-warm);
     z-index: 0;
   }
 
@@ -301,7 +301,7 @@
         font-size: 40px;
         font-weight: 500;
         line-height: normal;
-        color: #000;
+        color: var(--color-dark);
         width: 506px;
       }
 
@@ -310,7 +310,7 @@
         font-size: 18px;
         font-weight: 400;
         line-height: 27px;
-        color: #737373;
+        color: var(--color-text-muted);
         width: 461px;
       }
     }
@@ -325,13 +325,13 @@
         font-family: "Jost", sans-serif;
         font-size: 30px;
         font-weight: 600;
-        color: #000;
+        color: var(--color-dark);
         line-height: normal;
         white-space: nowrap;
       }
 
       .btn-hero-cta {
-        background: #a86464 !important;
+        background: var(--color-primary) !important;
         color: #fff !important;
         font-family: "Jost", sans-serif !important;
         font-size: 18px !important;
@@ -344,7 +344,7 @@
         letter-spacing: 0 !important;
 
         &:hover {
-          background: #8f5555 !important;
+          background: var(--color-primary-hover) !important;
         }
       }
     }
@@ -387,7 +387,7 @@
       font-family: "Jost", sans-serif;
       font-size: 40px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: normal;
       width: 538px;
     }
@@ -396,7 +396,7 @@
       font-family: "Jost", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: #737373;
+      color: var(--color-text-muted);
       line-height: 27px;
       width: 558px;
     }
@@ -408,13 +408,13 @@
 
     .stat-row {
       padding: 24px 0;
-      border-bottom: 1px solid #e6e6e6;
+      border-bottom: 1px solid var(--color-border);
 
       .stat-label {
         font-family: "Jost", sans-serif;
         font-size: 24px;
         font-weight: 500;
-        color: #000;
+        color: var(--color-dark);
         line-height: 36px;
       }
 
@@ -422,7 +422,7 @@
         font-family: "Jost", sans-serif;
         font-size: 24px;
         font-weight: 500;
-        color: #a86464;
+        color: var(--color-primary);
         line-height: 36px;
       }
     }
@@ -477,7 +477,7 @@
       font-family: "Jost", sans-serif;
       font-size: 24px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: 36px;
       white-space: nowrap;
     }
@@ -486,7 +486,7 @@
       font-family: "Jost", sans-serif;
       font-size: 16px;
       font-weight: 400;
-      color: #737373;
+      color: var(--color-text-muted);
       line-height: 24px;
       white-space: nowrap;
     }
@@ -504,7 +504,7 @@
     font-family: "Jost", sans-serif;
     font-size: 40px;
     font-weight: 500;
-    color: #0f1928;
+    color: var(--color-dark);
     line-height: normal;
   }
 
@@ -521,7 +521,7 @@
     width: 364px;
     height: 314px;
     background: #fff;
-    border: 1px solid #f6ece5;
+    border: 1px solid var(--color-bg-warm);
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -551,7 +551,7 @@
       font-family: "Jost", sans-serif;
       font-size: 20px;
       font-weight: 500;
-      color: #0f1928;
+      color: var(--color-dark);
       line-height: 30px;
     }
 
@@ -559,7 +559,7 @@
       font-family: "Jost", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: #999;
+      color: var(--color-text-light);
       line-height: 27px;
       width: 300px;
     }
@@ -575,7 +575,7 @@
         font-family: "Jost", sans-serif;
         font-size: 18px;
         font-weight: 500;
-        color: #a86464;
+        color: var(--color-primary);
         line-height: 27px;
       }
 
@@ -590,7 +590,7 @@
   .awesome-sale-card {
     width: 364px;
     height: 652px;
-    background: #f6f0f0;
+    background: var(--color-bg-warm);
     flex-shrink: 0;
     padding-top: 40px;
     overflow: hidden;
@@ -603,13 +603,13 @@
       font-family: "Jost", sans-serif;
       font-size: 40px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: normal;
       text-align: center;
       white-space: nowrap;
 
       .green {
-        color: #379237;
+        color: var(--color-success);
       }
     }
 
@@ -621,7 +621,7 @@
       font-family: "Jost", sans-serif;
       font-size: 24px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: 36px;
       white-space: nowrap;
     }
@@ -630,7 +630,7 @@
       font-family: "Jost", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: #999;
+      color: var(--color-text-light);
       text-decoration: line-through;
       line-height: 27px;
     }
@@ -639,12 +639,12 @@
       font-family: "Jost", sans-serif;
       font-size: 40px;
       font-weight: 500;
-      color: #a86464;
+      color: var(--color-primary);
       line-height: normal;
     }
 
     .btn-shop-now {
-      background: #a86464 !important;
+      background: var(--color-primary) !important;
       color: #fff !important;
       font-family: "Jost", sans-serif !important;
       font-size: 18px !important;
@@ -684,7 +684,7 @@
     overflow: hidden;
 
     &.newest-card-warm {
-      background: #fff5ee;
+      background: var(--color-bg-warm);
     }
 
     &.newest-card-gray {
@@ -702,7 +702,7 @@
       font-family: "Jost", sans-serif;
       font-size: 16px;
       font-weight: 400;
-      color: #000;
+      color: var(--color-dark);
       line-height: 24px;
     }
 
@@ -710,7 +710,7 @@
       font-family: "Jost", sans-serif;
       font-size: 16px;
       font-weight: 500;
-      color: #e61b1b;
+      color: var(--color-sale);
       line-height: 24px;
     }
 
@@ -718,7 +718,7 @@
       font-family: "Jost", sans-serif;
       font-size: 30px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: normal;
       width: 266px;
     }
@@ -753,7 +753,7 @@
   .newest-banner {
     width: 1140px;
     height: 400px;
-    background: #fffbf1;
+    background: var(--color-bg-warm);
     position: relative;
     overflow: hidden;
 
@@ -768,7 +768,7 @@
       font-family: "Jost", sans-serif;
       font-size: 16px;
       font-weight: 500;
-      color: #379237;
+      color: var(--color-success);
       line-height: 24px;
     }
 
@@ -797,7 +797,7 @@
     font-family: "Jost", sans-serif;
     font-size: 40px;
     font-weight: 500;
-    color: #000;
+    color: var(--color-dark);
     line-height: normal;
   }
 }
@@ -816,7 +816,7 @@
       font-family: "Jost", sans-serif;
       font-size: 40px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: normal;
     }
   }
@@ -843,7 +843,7 @@
         font-family: "Jost", sans-serif;
         font-size: 18px;
         font-weight: 500;
-        color: #000;
+        color: var(--color-dark);
         line-height: normal;
         font-style: normal;
       }
@@ -856,13 +856,13 @@
 // ==============================
 .suggested-section {
   padding: 70px 150px;
-  background: #f6f0f0;
+  background: var(--color-bg-warm);
 
   .section-title-text {
     font-family: "Jost", sans-serif;
     font-size: 40px;
     font-weight: 500;
-    color: #000;
+    color: var(--color-dark);
     line-height: normal;
   }
 }
@@ -881,11 +881,11 @@
     font-family: "Jost", sans-serif;
     font-size: 40px;
     font-weight: 500;
-    color: #000;
+    color: var(--color-dark);
     line-height: normal;
 
     .red {
-      color: #ff1e1e;
+      color: var(--color-sale);
     }
   }
 
@@ -898,7 +898,7 @@
       width: 60px;
       height: 60px;
       border-radius: 50px;
-      background: #f9f9f9;
+      background: var(--color-bg-light);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -907,7 +907,7 @@
         font-family: "Jost", sans-serif;
         font-size: 20px;
         font-weight: 500;
-        color: #ff1e1e;
+        color: var(--color-sale);
         line-height: 30px;
         text-align: center;
       }
@@ -917,7 +917,7 @@
       font-family: "Jost", sans-serif;
       font-size: 14px;
       font-weight: 400;
-      color: #000;
+      color: var(--color-dark);
       line-height: 20px;
     }
   }
@@ -927,7 +927,7 @@
       font-family: "Jost", sans-serif;
       font-size: 12px;
       font-weight: 400;
-      color: #000;
+      color: var(--color-dark);
       text-align: center;
       width: 60px;
       line-height: 18px;
@@ -962,7 +962,7 @@
           display: flex;
           align-items: center;
           gap: 4px;
-          background: #e1efe1;
+          background: var(--color-success-bg);
           padding: 3px 6px;
           border-radius: 4px;
 
@@ -970,7 +970,7 @@
             font-family: 'Jost', sans-serif;
             font-size: 14px;
             font-weight: 600;
-            color: #379237;
+            color: var(--color-success);
             line-height: 20px;
           }
         }
@@ -979,7 +979,7 @@
           font-family: 'Jost', sans-serif;
           font-size: 12px;
           font-weight: 400;
-          color: #999;
+          color: var(--color-text-light);
           line-height: 18px;
         }
       }
@@ -988,7 +988,7 @@
         font-family: "Jost", sans-serif;
         font-size: 30px;
         font-weight: 500;
-        color: #000;
+        color: var(--color-dark);
         line-height: normal;
       }
 
@@ -996,7 +996,7 @@
         font-family: "Jost", sans-serif;
         font-size: 18px;
         font-weight: 400;
-        color: #000;
+        color: var(--color-dark);
         line-height: 27px;
       }
     }
@@ -1030,7 +1030,7 @@
       }
 
       .btn-view-all-sale {
-        background: #a86464 !important;
+        background: var(--color-primary) !important;
         color: #fff !important;
         font-family: "Jost", sans-serif !important;
         font-size: 18px !important;
@@ -1054,7 +1054,7 @@
       font-family: "Jost", sans-serif;
       font-size: 40px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: normal;
     }
   }
@@ -1070,7 +1070,7 @@
     font-family: "Jost", sans-serif;
     font-size: 40px;
     font-weight: 500;
-    color: #000;
+    color: var(--color-dark);
     line-height: normal;
   }
 
@@ -1079,7 +1079,7 @@
     height: 708px;
     position: relative;
     overflow: hidden;
-    background: #f5f5f5;
+    background: var(--color-bg-light);
 
     img {
       width: 100%;
@@ -1111,7 +1111,7 @@
       font-family: "Jost", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: #000;
+      color: var(--color-dark);
       line-height: 27px;
       text-align: center;
     }
@@ -1120,7 +1120,7 @@
       font-family: "Jost", sans-serif;
       font-size: 20px;
       font-weight: 600;
-      color: #000;
+      color: var(--color-dark);
       line-height: 30px;
       text-align: center;
     }
@@ -1152,7 +1152,7 @@
       font-family: "Jost", sans-serif;
       font-size: 40px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
       line-height: normal;
     }
   }
@@ -1166,11 +1166,11 @@
       font-family: "Jost", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: #999;
+      color: var(--color-text-light);
       line-height: 27px;
 
       &.active {
-        color: #000;
+        color: var(--color-dark);
       }
     }
   }
@@ -1201,13 +1201,13 @@
 // ==============================
 .store-finder-section {
   padding: 24px 40px;
-  background: #f6f0f0;
+  background: var(--color-bg-warm);
 
   .store-finder-title {
     font-family: "Jost", sans-serif;
     font-size: 30px;
     font-weight: 600;
-    color: #000;
+    color: var(--color-dark);
     line-height: normal;
   }
 
@@ -1217,7 +1217,7 @@
     padding: 8px;
 
     .store-city-dropdown {
-      border-right: 1px solid #e6e6e6;
+      border-right: 1px solid var(--color-border);
       padding: 12px 20px;
       cursor: pointer;
 
@@ -1225,7 +1225,7 @@
         font-family: "Jost", sans-serif;
         font-size: 18px;
         font-weight: 400;
-        color: #000;
+        color: var(--color-dark);
         line-height: 27px;
       }
     }
@@ -1234,12 +1234,12 @@
       font-family: "Jost", sans-serif;
       font-size: 18px;
       font-weight: 400;
-      color: #ccc;
+      color: var(--color-text-light);
       line-height: 27px;
     }
 
     .btn-search {
-      background: #a86464 !important;
+      background: var(--color-primary) !important;
       color: #fff !important;
       font-family: "Jost", sans-serif !important;
       font-size: 18px !important;
@@ -1261,7 +1261,7 @@
     font-family: "Jost", sans-serif;
     font-size: 40px;
     font-weight: 500;
-    color: #000;
+    color: var(--color-dark);
     line-height: normal;
   }
 
@@ -1269,7 +1269,7 @@
     width: 1140px;
 
     .faq-item {
-      border-bottom: 1px solid #e6e6e6;
+      border-bottom: 1px solid var(--color-border);
       cursor: pointer;
 
       &:first-child {
@@ -1288,7 +1288,7 @@
         font-family: "Jost", sans-serif;
         font-size: 24px;
         font-weight: 500;
-        color: #000;
+        color: var(--color-dark);
         line-height: 36px;
       }
 
@@ -1296,7 +1296,7 @@
         font-family: "Jost", sans-serif;
         font-size: 18px;
         font-weight: 400;
-        color: #999;
+        color: var(--color-text-light);
         line-height: 27px;
         width: 940px;
         margin-top: 14px;
@@ -1319,7 +1319,7 @@
       font-family: "Jost", sans-serif;
       font-size: 40px;
       font-weight: 500;
-      color: #000;
+      color: var(--color-dark);
     }
   }
 
@@ -1329,7 +1329,7 @@
       height: 220px;
       overflow: hidden;
       position: relative;
-      background: #f5f5f5;
+      background: var(--color-bg-light);
 
       img {
         width: 100%;
@@ -1362,13 +1362,13 @@
     font-family: "Jost", sans-serif;
     font-size: 40px;
     font-weight: 500;
-    color: #000;
+    color: var(--color-dark);
     line-height: normal;
   }
 
   .blog-card {
     width: 558px;
-    border: 1px solid #f6ece5;
+    border: 1px solid var(--color-bg-warm);
     padding: 14px;
     display: flex;
     flex-direction: row;
@@ -1381,7 +1381,7 @@
       height: 150px;
       overflow: hidden;
       flex-shrink: 0;
-      background: #f5f5f5;
+      background: var(--color-bg-light);
 
       img {
         width: 100%;
@@ -1397,7 +1397,7 @@
         font-family: "Jost", sans-serif;
         font-size: 16px;
         font-weight: 500;
-        color: #a86464;
+        color: var(--color-primary);
         line-height: 24px;
       }
 
@@ -1405,7 +1405,7 @@
         font-family: "Jost", sans-serif;
         font-size: 12px;
         font-weight: 400;
-        color: #999;
+        color: var(--color-text-light);
         line-height: 18px;
       }
 
@@ -1413,12 +1413,12 @@
         font-family: "Jost", sans-serif;
         font-size: 18px;
         font-weight: 400;
-        color: #000;
+        color: var(--color-dark);
         line-height: 27px;
         cursor: pointer;
 
         &:hover {
-          color: #a86464;
+          color: var(--color-primary);
         }
       }
     }

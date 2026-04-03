@@ -22,7 +22,7 @@
 		font-size: 40px;
 		font-weight: 500;
 		line-height: 1;
-		color: #000;
+		color: var(--color-dark);
 		margin-bottom: 24px;
 	}
 
@@ -31,7 +31,7 @@
 		font-size: 18px;
 		font-weight: 400;
 		line-height: 27px;
-		color: #999;
+		color: var(--color-text-light);
 		max-width: 559px;
 		margin: 0 auto;
 	}
@@ -137,7 +137,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #0f1928;
+			color: var(--color-dark);
 			margin-bottom: 12px;
 		}
 
@@ -146,7 +146,7 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #999;
+			color: var(--color-text-light);
 			max-width: 425px;
 			margin-bottom: 40px;
 		}
@@ -174,7 +174,7 @@
 				font-size: 20px;
 				font-weight: 400;
 				line-height: 30px;
-				color: #0f1928;
+				color: var(--color-dark);
 			}
 		}
 	}
@@ -196,7 +196,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #a86464;
+			color: var(--color-primary);
 			line-height: 1;
 			margin-bottom: 12px;
 		}
@@ -206,7 +206,7 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #000;
+			color: var(--color-dark);
 		}
 	}
 }
@@ -215,7 +215,7 @@
 // AWARDS SECTION
 // ==============================
 .about-awards {
-	background: #f9f9f9;
+	background: var(--color-bg-light);
 	padding: 60px 150px;
 
 	.awards-container {
@@ -243,7 +243,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #000;
+			color: var(--color-dark);
 			margin-bottom: 50px;
 		}
 	}
@@ -267,7 +267,7 @@
 			font-size: 20px;
 			font-weight: 500;
 			line-height: 30px;
-			color: #a86464;
+			color: var(--color-primary);
 			margin-bottom: 12px;
 		}
 
@@ -276,7 +276,7 @@
 			font-size: 20px;
 			font-weight: 500;
 			line-height: 30px;
-			color: #000;
+			color: var(--color-dark);
 		}
 	}
 }
@@ -300,14 +300,14 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #000;
+			color: var(--color-dark);
 		}
 
 		.category-view-all {
 			font-family: 'Jost', sans-serif;
 			font-size: 18px;
 			font-weight: 500;
-			color: #a86464;
+			color: var(--color-primary);
 			text-decoration: none;
 			cursor: pointer;
 			display: flex;
@@ -349,7 +349,7 @@
 				font-size: 18px;
 				font-weight: 500;
 				line-height: 27px;
-				color: #000;
+				color: var(--color-dark);
 				text-align: center;
 			}
 		}
@@ -374,7 +374,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #0f1928;
+			color: var(--color-dark);
 		}
 
 		.services-nav {
@@ -382,7 +382,7 @@
 
 			.nav-arrow {
 				cursor: pointer;
-				color: #000;
+				color: var(--color-dark);
 				font-size: 24px;
 			}
 		}
@@ -395,7 +395,7 @@
 	.service-card-item {
 		width: 364px;
 		height: 314px;
-		border: 1px solid #e6e6e6;
+		border: 1px solid var(--color-border);
 		background: #fff;
 		padding: 24px;
 		display: flex;
@@ -417,7 +417,7 @@
 			font-size: 20px;
 			font-weight: 500;
 			line-height: 30px;
-			color: #0f1928;
+			color: var(--color-dark);
 			margin-bottom: 8px;
 		}
 
@@ -426,7 +426,7 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #999;
+			color: var(--color-text-light);
 			max-width: 300px;
 		}
 
@@ -434,7 +434,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 18px;
 			font-weight: 500;
-			color: #a86464;
+			color: var(--color-primary);
 			cursor: pointer;
 			display: flex;
 			align-items: center;
@@ -467,7 +467,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #000;
+			color: var(--color-dark);
 			margin-bottom: 24px;
 		}
 
@@ -476,7 +476,7 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #999;
+			color: var(--color-text-light);
 			max-width: 529px;
 			margin-bottom: 40px;
 		}
@@ -486,7 +486,7 @@
 		width: 558px;
 
 		.room-item {
-			border-top: 1px solid #e6e6e6;
+			border-top: 1px solid var(--color-border);
 			padding: 24px 40px;
 			cursor: pointer;
 			transition: color 0.3s;
@@ -496,23 +496,23 @@
 				font-size: 24px;
 				font-weight: 500;
 				line-height: 36px;
-				color: #000;
+				color: var(--color-dark);
 			}
 
 			&.active .room-name,
 			&:hover .room-name {
-				color: #a86464;
+				color: var(--color-primary);
 			}
 
 			svg {
 				font-size: 24px;
-				color: #000;
+				color: var(--color-dark);
 			}
 		}
 	}
 
 	.btn-view-collection {
-		background: #a86464 !important;
+		background: var(--color-primary) !important;
 		color: #fff !important;
 		font-family: 'Jost', sans-serif !important;
 		font-size: 18px !important;
@@ -550,7 +550,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 40px;
 			font-weight: 500;
-			color: #0f1928;
+			color: var(--color-dark);
 		}
 
 		.feedback-nav {
@@ -558,7 +558,7 @@
 
 			.nav-arrow {
 				cursor: pointer;
-				color: #000;
+				color: var(--color-dark);
 				font-size: 24px;
 			}
 		}
@@ -578,7 +578,7 @@
 		width: 364px;
 		min-width: 364px;
 		height: 222px;
-		border: 1px solid #e6e6e6;
+		border: 1px solid var(--color-border);
 		background: #fff;
 		padding: 24px;
 		display: flex;
@@ -607,7 +607,7 @@
 				font-size: 18px;
 				font-weight: 400;
 				line-height: 27px;
-				color: #000;
+				color: var(--color-dark);
 			}
 
 			.feedback-user-role {
@@ -615,7 +615,7 @@
 				font-size: 14px;
 				font-weight: 400;
 				line-height: 20px;
-				color: #999;
+				color: var(--color-text-light);
 			}
 		}
 
@@ -634,7 +634,7 @@
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 24px;
-			color: #999;
+			color: var(--color-text-light);
 			max-width: 300px;
 		}
 	}
@@ -676,7 +676,7 @@
 			font-size: 24px;
 			font-weight: 500;
 			line-height: 36px;
-			color: #000;
+			color: var(--color-dark);
 		}
 
 		.feature-box-desc {
@@ -684,7 +684,7 @@
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 24px;
-			color: #737373;
+			color: var(--color-text-muted);
 		}
 	}
 }
@@ -701,11 +701,11 @@
 		font-family: 'Jost', sans-serif;
 		font-size: 30px;
 		font-weight: 500;
-		color: #000;
+		color: var(--color-dark);
 		text-align: center;
 
 		.highlight {
-			color: #ff1e1e;
+			color: var(--color-sale);
 		}
 	}
 
@@ -718,7 +718,7 @@
 	}
 
 	.newsletter-btn {
-		background: #a86464;
+		background: var(--color-primary);
 		padding: 14px 32px;
 		cursor: pointer;
 		display: flex;
@@ -734,7 +734,7 @@
 			font-family: 'Jost', sans-serif;
 			font-size: 18px;
 			font-weight: 500;
-			color: #e1efe1;
+			color: var(--color-success-bg);
 			line-height: 27px;
 			white-space: nowrap;
 		}

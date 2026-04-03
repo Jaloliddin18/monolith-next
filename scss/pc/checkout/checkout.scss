@@ -24,7 +24,7 @@
 			font-size: 30px;
 			font-weight: 500;
 			line-height: normal;
-			color: #000;
+			color: var(--color-dark);
 			margin-bottom: 40px;
 		}
 
@@ -32,7 +32,7 @@
 		.billing-section,
 		.payment-section {
 			padding-bottom: 50px;
-			border-bottom: 1px solid #e6e6e6;
+			border-bottom: 1px solid var(--color-border);
 		}
 
 		.form-fields,
@@ -48,25 +48,25 @@
 			font-size: 18px;
 			font-weight: 400;
 			line-height: 27px;
-			color: #000;
+			color: var(--color-dark);
 			display: block;
 			margin-bottom: 12px;
 		}
 
 		.form-input {
-			background: #f9f9f9;
+			background: var(--color-bg-light);
 			border: none;
 			padding: 12px;
 			font-family: 'Jost', sans-serif;
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 24px;
-			color: #000;
+			color: var(--color-dark);
 			width: 100%;
 			box-sizing: border-box;
 
 			&::placeholder {
-				color: #bfbfbf;
+				color: var(--color-text-light);
 			}
 
 			&.full {
@@ -108,7 +108,7 @@
 				right: 12px;
 				top: 50%;
 				transform: translateY(-50%);
-				color: #bfbfbf;
+				color: var(--color-text-light);
 				pointer-events: none;
 			}
 		}
@@ -123,14 +123,14 @@
 			.checkbox-input {
 				width: 16px;
 				height: 16px;
-				accent-color: #a86464;
+				accent-color: var(--color-primary);
 				cursor: pointer;
 			}
 
 			.checkbox-square {
 				width: 18px;
 				height: 18px;
-				accent-color: #a86464;
+				accent-color: var(--color-primary);
 				cursor: pointer;
 				border: 1px solid #999;
 			}
@@ -140,7 +140,7 @@
 				font-size: 16px;
 				font-weight: 400;
 				line-height: 24px;
-				color: #999;
+				color: var(--color-text-light);
 			}
 		}
 
@@ -152,13 +152,13 @@
 			align-items: center;
 			justify-content: space-between;
 			padding: 24px;
-			border: 1px solid #e6e6e6;
+			border: 1px solid var(--color-border);
 			background: #fff;
 			cursor: pointer;
 			transition: border-color 0.2s;
 
 			&.selected {
-				border-color: #e6e6e6;
+				border-color: var(--color-border);
 			}
 
 			.payment-option-left {
@@ -177,7 +177,7 @@
 				box-sizing: border-box;
 
 				&.radio-selected {
-					border: 5px solid #a86464;
+					border: 5px solid var(--color-primary);
 				}
 			}
 
@@ -186,7 +186,7 @@
 				font-size: 18px;
 				font-weight: 400;
 				line-height: 27px;
-				color: #000;
+				color: var(--color-dark);
 			}
 
 			.payment-logo {
@@ -200,7 +200,7 @@
 		.continue-btn {
 			width: 100%;
 			padding: 14px 32px;
-			background: #a86464;
+			background: var(--color-primary);
 			border: none;
 			font-family: 'Jost', sans-serif;
 			font-size: 18px;
@@ -224,7 +224,7 @@
 	.order-summary {
 		width: 364px;
 		flex-shrink: 0;
-		background: #f9f9f9;
+		background: var(--color-bg-light);
 		padding: 24px;
 		position: sticky;
 		top: 120px;
@@ -235,7 +235,7 @@
 			font-size: 20px;
 			font-weight: 500;
 			line-height: 30px;
-			color: #000;
+			color: var(--color-dark);
 		}
 
 		// Order items
@@ -245,7 +245,7 @@
 				gap: 14px;
 				align-items: center;
 				padding: 24px 0;
-				border-bottom: 1px solid #e6e6e6;
+				border-bottom: 1px solid var(--color-border);
 
 				.order-item-image {
 					width: 100px;
@@ -271,7 +271,7 @@
 						font-size: 14px;
 						font-weight: 400;
 						line-height: 20px;
-						color: #000;
+						color: var(--color-dark);
 						margin: 0;
 					}
 
@@ -280,7 +280,7 @@
 						font-size: 14px;
 						font-weight: 400;
 						line-height: 20px;
-						color: #000;
+						color: var(--color-dark);
 						margin: 0;
 					}
 
@@ -294,7 +294,7 @@
 							font-size: 14px;
 							font-weight: 500;
 							line-height: 20px;
-							color: #000;
+							color: var(--color-dark);
 						}
 
 						.order-item-original {
@@ -302,7 +302,7 @@
 							font-size: 14px;
 							font-weight: 400;
 							line-height: 20px;
-							color: #999;
+							color: var(--color-text-light);
 							text-decoration: line-through;
 						}
 					}
@@ -313,7 +313,7 @@
 		// Countdown timer
 		.order-timer {
 			padding: 24px 0;
-			border-bottom: 1px solid #e6e6e6;
+			border-bottom: 1px solid var(--color-border);
 
 			.timer-header {
 				display: flex;
@@ -326,7 +326,7 @@
 					font-size: 18px;
 					font-weight: 400;
 					line-height: 27px;
-					color: #a86464;
+					color: var(--color-primary);
 				}
 			}
 
@@ -344,7 +344,7 @@
 						width: 60px;
 						height: 60px;
 						border-radius: 50%;
-						background: #f6f0f0;
+						background: var(--color-bg-warm);
 						display: flex;
 						align-items: center;
 						justify-content: center;
@@ -354,7 +354,7 @@
 							font-size: 20px;
 							font-weight: 600;
 							line-height: 30px;
-							color: #a86464;
+							color: var(--color-primary);
 						}
 					}
 
@@ -363,7 +363,7 @@
 						font-size: 14px;
 						font-weight: 400;
 						line-height: 20px;
-						color: #000;
+						color: var(--color-dark);
 					}
 				}
 
@@ -401,11 +401,11 @@
 					font-size: 18px;
 					font-weight: 400;
 					line-height: 27px;
-					color: #000;
+					color: var(--color-dark);
 
 					.pricing-count {
 						font-size: 14px;
-						color: #999;
+						color: var(--color-text-light);
 					}
 				}
 
@@ -414,11 +414,11 @@
 					font-size: 18px;
 					font-weight: 400;
 					line-height: 27px;
-					color: #000;
+					color: var(--color-dark);
 					text-align: right;
 
 					&.green {
-						color: #379237;
+						color: var(--color-success);
 					}
 				}
 			}
@@ -430,14 +430,14 @@
 			align-items: center;
 			justify-content: space-between;
 			padding-top: 24px;
-			border-top: 1px solid #e6e6e6;
+			border-top: 1px solid var(--color-border);
 
 			span {
 				font-family: 'Jost', sans-serif;
 				font-size: 20px;
 				font-weight: 600;
 				line-height: 30px;
-				color: #000;
+				color: var(--color-dark);
 			}
 		}
 	}

@@ -3,15 +3,15 @@ import { typography } from './typography';
 export const light = {
 	palette: {
 		type: 'light',
-		primary: { main: '#a0616a' },
-		secondary: { main: '#212121' },
+		primary: { main: '#C46A4A', light: '#F7F2EE', dark: '#AA5A3D' },
+		secondary: { main: '#1C1C1C' },
 		text: {
-			primary: '#212121',
-			secondary: '#616161',
+			primary: '#2D2D2D',
+			secondary: '#787878',
 		},
 		background: {
-			default: '#ffffff',
-			paper: '#ffffff',
+			default: '#FAFAFA',
+			paper: '#FFFFFF',
 		},
 	},
 	typography,
