@@ -22,7 +22,7 @@ const services = [
   {
     icon: "/icons/cube_icon.svg",
     title: "Personalized Design Assistance",
-    desc: "To assist customers in creating their dream home, StyleCasa provides personalized design assistance.",
+    desc: "To assist customers in creating their dream home, MONOLITH provides personalized design assistance.",
   },
   {
     icon: "/icons/window_icon.svg",
@@ -93,13 +93,13 @@ const reviews = [
   {
     name: "Joan B. Wolfe",
     role: "Manager",
-    text: "I wanted to furnish my new office with stylish and functional furniture, and StyleCasa exceeded my expectations.",
+    text: "I wanted to furnish my new office with stylish and functional furniture, and MONOLITH exceeded my expectations.",
     stars: 4,
   },
   {
     name: "Mira Dias",
     role: "Manager",
-    text: "I am a satisfied customer and will continue to choose StyleCasa for all my furniture needs.",
+    text: "I am a satisfied customer and will continue to choose MONOLITH for all my furniture needs.",
     stars: 4,
   },
   {
@@ -111,7 +111,7 @@ const reviews = [
   {
     name: "Lois K. Chase",
     role: "Manager",
-    text: "I highly recommend StyleCasa for anyone seeking high-quality and long-lasting furniture.",
+    text: "I highly recommend MONOLITH for anyone seeking high-quality and long-lasting furniture.",
     stars: 4,
   },
 ];

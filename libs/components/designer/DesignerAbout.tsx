@@ -11,7 +11,7 @@ const specialties = [
 ];
 
 const achievements = [
-	{ year: '2024', title: 'Designer of the Year — StyleCasa Awards' },
+	{ year: '2024', title: 'Designer of the Year — MONOLITH Awards' },
 	{ year: '2023', title: 'Best Sustainable Collection — Green Furniture Expo' },
 	{ year: '2022', title: 'Featured in Architectural Digest Top 40 Under 40' },
 	{ year: '2020', title: 'Innovation Prize — Milan Furniture Fair' },

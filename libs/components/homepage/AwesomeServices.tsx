@@ -12,7 +12,7 @@ const serviceCards = [
 		icon: '/icons/cube_icon.svg',
 		alt: 'Design Assistance',
 		title: 'Personalized Design Assistance',
-		desc: 'To assist customers in creating their dream home, StyleCasa provides personalized design assistance.',
+		desc: 'To assist customers in creating their dream home, MONOLITH provides personalized design assistance.',
 	},
 ];
 

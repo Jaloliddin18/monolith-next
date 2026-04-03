@@ -11,9 +11,9 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 const faqData = [
   {
-    question: "How can I place an order on StyleCasa?",
+    question: "How can I place an order on MONOLITH?",
     answer:
-      "Placing an order on StyleCasa is easy. Simply browse our website, select the desired products, and add them to your shopping cart. Proceed to the checkout page, provide the necessary information, and complete the payment process. Once your order is confirmed, we will process it and provide you with updates on shipping and delivery.",
+      "Placing an order on MONOLITH is easy. Simply browse our website, select the desired products, and add them to your shopping cart. Proceed to the checkout page, provide the necessary information, and complete the payment process. Once your order is confirmed, we will process it and provide you with updates on shipping and delivery.",
   },
   {
     question: "How long will it take to receive my order?",
@@ -23,7 +23,7 @@ const faqData = [
   {
     question: "What is your return policy?",
     answer:
-      "We offer a 14-day return window for all products purchased on StyleCasa. Items must be returned in their original condition and packaging. Once we receive and inspect the returned item, a refund will be processed to your original payment method within 5-7 business days.",
+      "We offer a 14-day return window for all products purchased on MONOLITH. Items must be returned in their original condition and packaging. Once we receive and inspect the returned item, a refund will be processed to your original payment method within 5-7 business days.",
   },
   {
     question: "How can I contact customer support?",

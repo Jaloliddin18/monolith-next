@@ -5,9 +5,9 @@ import ArrowDownwardIcon from '@mui/icons-material/SouthWest';
 
 const faqs = [
 	{
-		question: 'How can I place an order on StyleCasa?',
+		question: 'How can I place an order on MONOLITH?',
 		answer:
-			'Placing an order on StyleCasa is easy. Simply browse our website, select the desired products, and add them to your shopping cart. Proceed to the checkout page, provide the necessary information, and complete the payment process. Once your order is confirmed, we will process it and provide you with updates on shipping and delivery.',
+			'Placing an order on MONOLITH is easy. Simply browse our website, select the desired products, and add them to your shopping cart. Proceed to the checkout page, provide the necessary information, and complete the payment process. Once your order is confirmed, we will process it and provide you with updates on shipping and delivery.',
 	},
 	{
 		question: 'How long will it take to receive my order?',
@@ -19,7 +19,7 @@ const faqs = [
 		answer: 'We offer a 30-day return policy. Items must be in their original condition and packaging.',
 	},
 	{
-		question: 'How can I place an order on StyleCasa?',
+		question: 'How can I place an order on MONOLITH?',
 		answer: 'You can place orders through our website or contact our customer service team for assistance.',
 	},
 ];

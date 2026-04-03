@@ -9,7 +9,7 @@ const reviewsData = [
 		stars: 5,
 		title: 'Stylish and Comfortable - The Perfect Sofa',
 		date: '5 days ago',
-		text: "I recently purchased the 'LuxeComfort' sofa from StyleCasa, and I couldn't be happier. The sleek design and luxurious upholstery instantly elevate the look of my living room.",
+		text: "I recently purchased the 'LuxeComfort' sofa from MONOLITH, and I couldn't be happier. The sleek design and luxurious upholstery instantly elevate the look of my living room.",
 		hasImages: true,
 	},
 	{
@@ -17,7 +17,7 @@ const reviewsData = [
 		stars: 4,
 		title: "A Relaxing Retreat - The 'DreamScape' Bed",
 		date: '5 days ago',
-		text: "The 'DreamScape' bed from StyleCasa has transformed my bedroom into a peaceful oasis. The contemporary design with its upholstered headboard and sleek frame instantly caught my attention.",
+		text: "The 'DreamScape' bed from MONOLITH has transformed my bedroom into a peaceful oasis. The contemporary design with its upholstered headboard and sleek frame instantly caught my attention.",
 		hasImages: false,
 	},
 	{
@@ -25,7 +25,7 @@ const reviewsData = [
 		stars: 5,
 		title: "Functional and Elegant - The 'Moderno' Dining Table",
 		date: '5 days ago',
-		text: "I was in search of a dining table that could accommodate my large family gatherings and also add a touch of elegance to my dining area. The 'Moderno' dining table from StyleCasa exceeded my expectations.",
+		text: "I was in search of a dining table that could accommodate my large family gatherings and also add a touch of elegance to my dining area. The 'Moderno' dining table from MONOLITH exceeded my expectations.",
 		hasImages: true,
 	},
 ];

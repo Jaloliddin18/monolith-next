@@ -6,9 +6,9 @@ const IntroSection = () => {
 		<Stack className="intro-section" direction="row">
 			<Stack className="intro-content">
 				<Stack className="intro-text">
-					<Typography className="intro-title">Introducing StyleCasa</Typography>
+					<Typography className="intro-title">Introducing MONOLITH</Typography>
 					<Typography className="intro-desc">
-						StyleCasa is a premier destination for individuals seeking a harmonious blend of modern aesthetics
+						MONOLITH is a premier destination for individuals seeking a harmonious blend of modern aesthetics
 						and timeless sophistication in their home.
 					</Typography>
 				</Stack>
@@ -28,7 +28,7 @@ const IntroSection = () => {
 				</Stack>
 			</Stack>
 			<Box className="intro-image">
-				<img src="/img/furniture/luxury_chair.jpg" alt="StyleCasa Furniture" />
+				<img src="/img/furniture/luxury_chair.jpg" alt="MONOLITH Furniture" />
 			</Box>
 		</Stack>
 	);

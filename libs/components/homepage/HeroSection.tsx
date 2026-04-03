@@ -12,7 +12,7 @@ const HeroSection = () => {
 							Explore Our Collection of Chairs and Seating Furniture
 						</Typography>
 						<Typography className="hero-subtitle">
-							Elevate your living environment with StyleCasa&apos;s
+							Elevate your living environment with MONOLITH&apos;s
 							<br />
 							modern furniture collection.
 						</Typography>

@@ -39,10 +39,10 @@ const offers = [
 
 
 const faqItems = [
-	{ question: 'How can I place an order on StyleCasa?', answer: 'Placing an order on StyleCasa is easy. Simply browse our website, select the desired products, and add them to your shopping cart. Proceed to the checkout page, provide the necessary information, and complete the payment process. Once your order is confirmed, we will process it and provide you with updates on shipping and delivery.' },
+	{ question: 'How can I place an order on MONOLITH?', answer: 'Placing an order on MONOLITH is easy. Simply browse our website, select the desired products, and add them to your shopping cart. Proceed to the checkout page, provide the necessary information, and complete the payment process. Once your order is confirmed, we will process it and provide you with updates on shipping and delivery.' },
 	{ question: 'How long will it take to receive my order?', answer: '' },
 	{ question: 'What is your return policy?', answer: '' },
-	{ question: 'How can I place an order on StyleCasa?', answer: '' },
+	{ question: 'How can I place an order on MONOLITH?', answer: '' },
 ];
 
 const FurnitureDetail = () => {
@@ -164,7 +164,7 @@ const FurnitureDetail = () => {
 
 						{/* Subtitle */}
 						<Typography className="detail-subtitle">
-							{furniture?.furnitureDesc ?? 'The Cloud Nine Sectional Sofa from StyleCasa is the epitome of luxury and comfort.'}
+							{furniture?.furnitureDesc ?? 'The Cloud Nine Sectional Sofa from MONOLITH is the epitome of luxury and comfort.'}
 						</Typography>
 
 						{/* Price */}

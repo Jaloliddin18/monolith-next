@@ -20,12 +20,12 @@ const About = () => {
 						With over 15 years of expertise in crafting exquisite wooden furniture
 					</Typography>
 					<Typography className="about-hero-subtitle">
-						At StyleCasa, we take pride in offering a wide range of exquisite wooden furniture that combines
+						At MONOLITH, we take pride in offering a wide range of exquisite wooden furniture that combines
 						elegance, functionality, and durability.
 					</Typography>
 				</Box>
 				<Box className="about-hero-video">
-					<img src="/img/furniture/luxury_chair.jpg" alt="About StyleCasa" />
+					<img src="/img/furniture/luxury_chair.jpg" alt="About MONOLITH" />
 					<Box className="video-overlay">
 						<Box className="play-btn">
 							<PlayArrowIcon />
@@ -62,7 +62,7 @@ const About = () => {
 					<Stack className="why-choose-content">
 						<Typography className="why-choose-title">Why Choose us?</Typography>
 						<Typography className="why-choose-desc">
-							StyleCasa is known for its exceptional craftsmanship and attention to detail. Each piece of
+							MONOLITH is known for its exceptional craftsmanship and attention to detail. Each piece of
 							furniture is meticulously crafted by skilled artisans, ensuring the highest quality and
 							durability.
 						</Typography>
@@ -200,7 +200,7 @@ const About = () => {
 							{
 								icon: '/icons/cube_icon.svg',
 								title: 'Personalized Design Assistance',
-								desc: 'To assist customers in creating their dream home, StyleCasa provides personalized design assistance.',
+								desc: 'To assist customers in creating their dream home, MONOLITH provides personalized design assistance.',
 							},
 						].map((service) => (
 							<Box className="service-card-item" key={service.title}>
@@ -229,7 +229,7 @@ const About = () => {
 					<Stack className="wide-range-left">
 						<Typography className="wide-range-title">Wide Range of Selection</Typography>
 						<Typography className="wide-range-desc">
-							StyleCasa offers a wide range of furniture options to suit various styles and preferences.
+							MONOLITH offers a wide range of furniture options to suit various styles and preferences.
 							From sleek and contemporary designs to timeless classics,
 						</Typography>
 						<Stack className="room-list">
@@ -272,13 +272,13 @@ const About = () => {
 						{
 							name: 'Joan B. Wolfe',
 							role: 'Manager',
-							text: 'I wanted to furnish my new office with stylish and functional furniture, and StyleCasa exceeded my expectations.',
+							text: 'I wanted to furnish my new office with stylish and functional furniture, and MONOLITH exceeded my expectations.',
 							stars: 4,
 						},
 						{
 							name: 'Mira Dias',
 							role: 'Manager',
-							text: 'I am a satisfied customer and will continue to choose StyleCasa for all my furniture needs.',
+							text: 'I am a satisfied customer and will continue to choose MONOLITH for all my furniture needs.',
 							stars: 4,
 						},
 						{
@@ -290,7 +290,7 @@ const About = () => {
 						{
 							name: 'Lois K. Chase',
 							role: 'Manager',
-							text: 'I highly recommend StyleCasa for anyone seeking high-quality and long-lasting furniture.',
+							text: 'I highly recommend MONOLITH for anyone seeking high-quality and long-lasting furniture.',
 							stars: 4,
 						},
 					].map((review, idx) => (
