@@ -72,19 +72,8 @@ const Top = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Stack direction="row" alignItems="center" gap={4}>
-          {/* Logo */}
-          <Link href="/" className="logo">
-            <img
-              src="/icons/Frame.svg"
-              alt="StyleCasa"
-              width={50}
-              height={50}
-            />
-          </Link>
-
-          {/* Navigation Links */}
-          <Stack direction="row" className="nav-links" gap={3}>
+        {/* Navigation Links — left */}
+        <Stack direction="row" className="nav-links" gap={3} sx={{ flex: 1 }}>
             <Link href="/" className={router.pathname === "/" ? "active" : ""}>
               Home
             </Link>
@@ -154,11 +143,17 @@ const Top = () => {
                 </Link>
               </Box>
             </Box>
-          </Stack>
         </Stack>
 
-        {/* Search + Actions */}
-        <Stack direction="row" alignItems="center" gap={2}>
+        {/* Logo — center */}
+        <Link href="/" className="logo" style={{ padding: '0 48px' }}>
+          <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '22px', fontWeight: 300, letterSpacing: '8px', color: '#1C1A17' }}>
+            MONOLITH
+          </span>
+        </Link>
+
+        {/* Search + Actions — right */}
+        <Stack direction="row" alignItems="center" gap={2} sx={{ flex: 1, justifyContent: 'flex-end' }}>
           <Box className="search-box">
             <SearchIcon sx={{ fontSize: 20, color: "#999" }} />
             <input type="text" placeholder="search" />

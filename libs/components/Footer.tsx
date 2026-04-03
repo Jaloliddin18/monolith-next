@@ -10,11 +10,10 @@ const Footer = () => {
 				<Stack className="footer-top-row" direction="row" justifyContent="space-between">
 					{/* Left Column: Logo + Guarantee texts */}
 					<Stack className="footer-brand-col">
-						<Stack className="footer-logo" direction="row" alignItems="center" gap="7px">
-							<img src="/icons/Frame.svg" alt="StyleCasa" width={33} height={60} />
-							<Box>
-								<Typography className="footer-brand-name">StyleCasa</Typography>
-							</Box>
+						<Stack className="footer-logo" direction="row" alignItems="center">
+							<Typography style={{ fontFamily: "'Jost', sans-serif", fontSize: '22px', fontWeight: 300, letterSpacing: '6px', color: '#1C1A17' }}>
+								MONOLITH
+							</Typography>
 						</Stack>
 						<Stack className="footer-guarantee-texts" gap="24px">
 							<Stack direction="row" alignItems="center" gap="24px">
