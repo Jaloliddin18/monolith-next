@@ -11,6 +11,7 @@ import { TabContext } from '@mui/lab';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import TablePagination from '@mui/material/TablePagination';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import SearchIcon from '@mui/icons-material/Search';
 import { InquiryList } from '../../../libs/components/admin/cs/InquiryList';
 
 const InquiryArticles: NextPage = (props: any) => {
@@ -79,7 +80,7 @@ const InquiryArticles: NextPage = (props: any) => {
 										<>
 											{true && <CancelRoundedIcon onClick={() => {}} />}
 											<InputAdornment position="end" onClick={() => {}}>
-												<img src="/img/icons/search_icon.png" alt={'searchIcon'} />
+												<SearchIcon />
 											</InputAdornment>
 										</>
 									}

@@ -12,6 +12,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import TablePagination from '@mui/material/TablePagination';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import SearchIcon from '@mui/icons-material/Search';
 import { NoticeList } from '../../../libs/components/admin/cs/NoticeList';
 
 const AdminNotice: NextPage = (props: any) => {
@@ -90,7 +91,7 @@ const AdminNotice: NextPage = (props: any) => {
 										<>
 											{true && <CancelRoundedIcon onClick={() => {}} />}
 											<InputAdornment position="end" onClick={() => {}}>
-												<img src="/img/icons/search_icon.png" alt={'searchIcon'} />
+												<SearchIcon />
 											</InputAdornment>
 										</>
 									}

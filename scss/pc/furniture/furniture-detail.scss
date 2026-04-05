@@ -3,6 +3,7 @@
 // ==============================
 .furniture-detail-page {
 	font-family: var(--font-ui);
+	align-items: center;
 }
 
 // ==============================
@@ -40,6 +41,7 @@
 .detail-main {
 	padding: 24px 150px;
 	max-width: 1440px;
+	width: 100%;
 	gap: 24px;
 }
 
@@ -481,6 +483,8 @@
 .detail-reviews-section {
 	padding: 60px 150px;
 	gap: 50px;
+	align-items: center;
+	width: 100%;
 
 	.reviews-list {
 		max-width: 1140px;
@@ -566,6 +570,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 50px;
+		width: 100%;
+		max-width: 1140px;
 	}
 
 	.review-form-title {
@@ -641,6 +647,8 @@
 .detail-similar-section {
 	padding: 60px 150px;
 	gap: 50px;
+	align-items: center;
+	width: 100%;
 
 	.products-row {
 		max-width: 1140px;
@@ -730,6 +738,8 @@
 .detail-faq-section {
 	padding: 60px 150px;
 	gap: 50px;
+	align-items: center;
+	width: 100%;
 
 	.faq-list {
 		max-width: 1140px;
