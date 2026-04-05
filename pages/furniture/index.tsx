@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery, useMutation } from '@apollo/client';
-import { useReactiveVar } from '@apollo/client';
+import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
 import { Stack } from '@mui/material';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import FurnitureListPage from '../../libs/components/furniture/FurnitureListPage';
@@ -11,38 +10,60 @@ import { userVar } from '../../apollo/store';
 import { FurnituresInquiry, FIsearch } from '../../libs/types/furniture/furniture.input';
 import { Furniture } from '../../libs/types/furniture/furniture';
 import { Direction } from '../../libs/enums/common.enum';
+import { T } from '../../libs/types/common';
 import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
 
-const FurnitureList = () => {
+const DEFAULT_INQUIRY: FurnituresInquiry = {
+	page: 1,
+	limit: 12,
+	sort: 'createdAt',
+	direction: Direction.DESC,
+	search: {},
+};
+
+const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 
 	const [sortValue, setSortValue] = useState('recommended');
 	const [searchFilter, setSearchFilter] = useState<FIsearch>({});
-	const [inquiry, setInquiry] = useState<FurnituresInquiry>({
-		page: 1,
-		limit: 12,
-		sort: 'createdAt',
-		direction: Direction.DESC,
-		search: {},
-	});
+	const [inquiry, setInquiry] = useState<FurnituresInquiry>(initialInput);
+	const [furnitures, setFurnitures] = useState<Furniture[]>([]);
+	const [total, setTotal] = useState<number>(0);
 
-	const { data, loading, refetch } = useQuery(GET_FURNITURES, {
-		variables: { input: inquiry },
-		fetchPolicy: 'cache-and-network',
-	});
-
+	/** APOLLO REQUESTS **/
 	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
+	const { refetch: getFurnituresRefetch } = useQuery(GET_FURNITURES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: inquiry },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setFurnitures(data?.getFurnitures?.list ?? []);
+			setTotal(data?.getFurnitures?.metaCounter[0]?.total ?? 0);
+		},
+	});
 
-	const furnitures: Furniture[] = data?.getFurnitures?.list || [];
-	const total: number = data?.getFurnitures?.metaCounter?.[0]?.total || 0;
+	/** LIFECYCLES **/
+	useEffect(() => {
+		if (router.isReady && router.query.input) {
+			const inputObj = JSON.parse(router.query.input as string);
+			setInquiry(inputObj);
+		}
+	}, [router.isReady, router.query.input]);
 
+	/** HANDLERS **/
 	const handlePageChange = useCallback(
-		(page: number) => {
-			setInquiry((prev) => ({ ...prev, page }));
+		async (page: number) => {
+			const updated = { ...inquiry, page };
+			setInquiry(updated);
+			await router.push(
+				`/furniture?input=${JSON.stringify(updated)}`,
+				`/furniture?input=${JSON.stringify(updated)}`,
+				{ scroll: false },
+			);
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		},
-		[],
+		[inquiry, router],
 	);
 
 	const handleSortChange = useCallback(
@@ -109,28 +130,31 @@ const FurnitureList = () => {
 					variables: { input: id },
 					fetchPolicy: 'network-only',
 				});
-				await refetch();
+				await getFurnituresRefetch({ input: inquiry });
 			} catch (err: any) {
 				sweetMixinErrorAlert(err.message);
 			}
 		},
-		[user, router, likeTargetFurniture, refetch],
+		[user, router, likeTargetFurniture, getFurnituresRefetch, inquiry],
 	);
 
 	return (
-		<FurnitureListPage
-			furnitures={furnitures}
-			total={total}
-			page={inquiry.page}
-			limit={inquiry.limit}
-			sortValue={sortValue}
-			searchFilter={searchFilter}
-			onPageChange={handlePageChange}
-			onSortChange={handleSortChange}
-			onFilterChange={handleFilterChange}
-			onLike={handleLike}
-		/>
+		<Stack>
+			<FurnitureListPage
+				furnitures={furnitures}
+				total={total}
+				page={inquiry.page}
+				limit={inquiry.limit}
+				sortValue={sortValue}
+				searchFilter={searchFilter}
+				onPageChange={handlePageChange}
+				onSortChange={handleSortChange}
+				onFilterChange={handleFilterChange}
+				onLike={handleLike}
+			/>
+		</Stack>
 	);
 };
+
 
 export default withLayoutBasic(FurnitureList);

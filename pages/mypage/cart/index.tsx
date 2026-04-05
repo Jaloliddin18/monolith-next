@@ -2,7 +2,6 @@ import { Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
 import MyCart from "../../../libs/components/mypage/MyCart";
-import RecentlyViewed from "../../../libs/components/furniture/RecentlyViewed";
 
 const CartPage = () => {
   return (
@@ -19,7 +18,6 @@ const CartPage = () => {
         <Typography className="breadcrumb-current">My Cart</Typography>
       </Stack>
       <MyCart />
-      <RecentlyViewed />
     </Stack>
   );
 };

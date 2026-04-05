@@ -118,15 +118,20 @@ const AdminMenuList = (props: any) => {
   return (
     <>
       <Box className="admin-logo-wrap">
-        <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '18px', fontWeight: 300, letterSpacing: '8px', color: '#1C1A17' }}>
+        <span
+          style={{
+            fontFamily: "'Jost', sans-serif",
+            fontSize: "18px",
+            fontWeight: 300,
+            letterSpacing: "8px",
+            color: "#1C1A17",
+          }}
+        >
           MONOLITH
         </span>
       </Box>
       <Box className="admin-info-card">
-        <Avatar
-          src="/icons/user_profile.png"
-          sx={{ width: 40, height: 40 }}
-        />
+        <Avatar src="/icons/user_profile.png" sx={{ width: 40, height: 40 }} />
         <Box className="admin-info-text">
           <Typography className="brand-name">admin</Typography>
           <Typography className="brand-sub">010998877622</Typography>

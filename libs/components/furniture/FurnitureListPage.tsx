@@ -35,7 +35,7 @@ const sortOptions = [
 
 interface ActiveTag {
 	label: string;
-	type: 'room' | 'material' | 'color' | 'price';
+	type: 'category' | 'room' | 'style' | 'material' | 'color' | 'price';
 	value: string;
 	colorHex?: string;
 }
@@ -71,8 +71,14 @@ const FurnitureListPage = ({
 }: FurnitureListPageProps) => {
 	const getActiveTags = (): ActiveTag[] => {
 		const tags: ActiveTag[] = [];
+		searchFilter.categoryList?.forEach((cat) => {
+			tags.push({ label: cat.replace(/_/g, ' '), type: 'category', value: cat });
+		});
 		searchFilter.roomList?.forEach((room) => {
 			tags.push({ label: room.replace(/_/g, ' '), type: 'room', value: room });
+		});
+		searchFilter.styleList?.forEach((style) => {
+			tags.push({ label: style.replace(/_/g, ' '), type: 'style', value: style });
 		});
 		searchFilter.materialList?.forEach((mat) => {
 			tags.push({ label: mat.replace(/_/g, ' '), type: 'material', value: mat });
@@ -86,9 +92,15 @@ const FurnitureListPage = ({
 
 	const removeTag = (tag: ActiveTag) => {
 		const updated = { ...searchFilter };
-		if (tag.type === 'room') {
+		if (tag.type === 'category') {
+			updated.categoryList = updated.categoryList?.filter((c) => c !== tag.value);
+			if (updated.categoryList?.length === 0) delete updated.categoryList;
+		} else if (tag.type === 'room') {
 			updated.roomList = updated.roomList?.filter((r) => r !== tag.value);
 			if (updated.roomList?.length === 0) delete updated.roomList;
+		} else if (tag.type === 'style') {
+			updated.styleList = updated.styleList?.filter((s) => s !== tag.value);
+			if (updated.styleList?.length === 0) delete updated.styleList;
 		} else if (tag.type === 'material') {
 			updated.materialList = updated.materialList?.filter((m) => m !== tag.value);
 			if (updated.materialList?.length === 0) delete updated.materialList;

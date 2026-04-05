@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Stack, Typography, Slider, InputBase, Radio } from '@mui/material';
-import { FurnitureRoom, FurnitureMaterial, FurnitureColor } from '../../enums/furniture.enum';
+import { Box, Stack, Typography, Slider } from '@mui/material';
+import { FurnitureRoom, FurnitureMaterial, FurnitureColor, FurnitureStyle } from '../../enums/furniture.enum';
 import { FIsearch } from '../../types/furniture/furniture.input';
 
 interface FilterSidebarProps {
@@ -8,34 +8,7 @@ interface FilterSidebarProps {
 	onFilterChange: (search: FIsearch) => void;
 }
 
-const roomLabels: Record<FurnitureRoom, string> = {
-	[FurnitureRoom.LIVING_ROOM]: 'Living Room',
-	[FurnitureRoom.DINING]: 'Dining',
-	[FurnitureRoom.BEDROOM]: 'Bedroom',
-	[FurnitureRoom.HOME_OFFICE]: 'Office',
-	[FurnitureRoom.OUTDOOR]: 'Outdoor',
-	[FurnitureRoom.CHILDRENS_ROOM]: 'Kids',
-	[FurnitureRoom.BATHROOM]: 'Bathroom',
-	[FurnitureRoom.HALLWAY]: 'Entryway',
-	[FurnitureRoom.GARAGE]: 'Garage',
-	[FurnitureRoom.LAUNDRY]: 'Laundry',
-	[FurnitureRoom.KITCHEN]: 'Kitchen',
-	[FurnitureRoom.GAMING_ROOM]: 'Gaming Room',
-};
 
-const materialLabels: Record<FurnitureMaterial, string> = {
-	[FurnitureMaterial.SOLID_WOOD]: 'Mahogany',
-	[FurnitureMaterial.METAL]: 'Metal',
-	[FurnitureMaterial.FABRIC]: 'Fabric',
-	[FurnitureMaterial.LEATHER]: 'Leather',
-	[FurnitureMaterial.PLASTIC]: 'Plastic',
-	[FurnitureMaterial.GLASS]: 'Glass',
-	[FurnitureMaterial.BAMBOO]: 'Bamboo',
-	[FurnitureMaterial.RATTAN]: 'Rattan',
-	[FurnitureMaterial.PARTICLE_BOARD]: 'Maple',
-	[FurnitureMaterial.MDF]: 'Cherry',
-	[FurnitureMaterial.RECYCLED]: 'Recycled',
-};
 
 const colorMap: Record<FurnitureColor, string> = {
 	[FurnitureColor.WHITE]: '#FFFFFF',
@@ -66,7 +39,8 @@ const discountOptions = [
 
 const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => {
 	const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-		categories: true,
+		room: true,
+		style: true,
 		material: true,
 		rating: true,
 		colors: true,
@@ -75,7 +49,6 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 		price: true,
 	});
 	const [showMore, setShowMore] = useState<Record<string, boolean>>({});
-	const [categorySearch, setCategorySearch] = useState('');
 	const [selectedDiscount, setSelectedDiscount] = useState<number>(10);
 
 	const toggle = (s: string) => setExpandedSections((p) => ({ ...p, [s]: !p[s] }));
@@ -95,6 +68,17 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 	const toggleAllRooms = () => {
 		const all = Object.values(FurnitureRoom);
 		onFilterChange({ ...searchFilter, roomList: searchFilter.roomList?.length === all.length ? undefined : all });
+	};
+
+	const toggleStyle = (style: FurnitureStyle) => {
+		const cur = searchFilter.styleList || [];
+		const next = cur.includes(style) ? cur.filter((s) => s !== style) : [...cur, style];
+		onFilterChange({ ...searchFilter, styleList: next.length ? next : undefined });
+	};
+
+	const toggleAllStyles = () => {
+		const all = Object.values(FurnitureStyle);
+		onFilterChange({ ...searchFilter, styleList: searchFilter.styleList?.length === all.length ? undefined : all });
 	};
 
 	const toggleMaterial = (mat: FurnitureMaterial) => {
@@ -121,10 +105,9 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 
 	const price = searchFilter.pricesRange || { start: 25, end: 255 };
 	const allRooms = Object.values(FurnitureRoom);
-	const filtered = categorySearch
-		? allRooms.filter((r) => roomLabels[r].toLowerCase().includes(categorySearch.toLowerCase()))
-		: allRooms;
-	const visibleRooms = showMore.categories ? filtered : filtered.slice(0, VISIBLE_ITEMS);
+	const visibleRooms = showMore.room ? allRooms : allRooms.slice(0, VISIBLE_ITEMS);
+	const allStyles = Object.values(FurnitureStyle);
+	const visibleStyles = showMore.style ? allStyles : allStyles.slice(0, VISIBLE_ITEMS);
 	const allMats = Object.values(FurnitureMaterial);
 	const visibleMats = showMore.material ? allMats : allMats.slice(0, VISIBLE_ITEMS);
 	const allColors = Object.values(FurnitureColor);
@@ -176,42 +159,48 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 				</Stack>
 			</Stack>
 
-			{/* Search */}
-			<Stack className="filter-search">
-				<Stack className="filter-search-input" direction="row" alignItems="center" gap="10px">
-					<Box component="img" src="/icons/MagnifyingGlass.svg" alt="search" width={24} height={24} />
-					<InputBase
-						placeholder="Search for categories"
-						value={categorySearch}
-						onChange={(e) => setCategorySearch(e.target.value)}
-						sx={{ flex: 1, fontFamily: "'Jost', sans-serif", fontSize: '14px', color: '#bfbfbf',
-							'& input::placeholder': { color: '#bfbfbf', opacity: 1 } }}
-					/>
-				</Stack>
-			</Stack>
-
-			{/* Categories */}
+			{/* Room Type */}
 			<Stack className="filter-section">
-				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('categories')}>
-					<Typography className="filter-section-title">Categories</Typography>
-					<Chevron sectionKey="categories" />
+				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('room')}>
+					<Typography className="filter-section-title">Room Type</Typography>
+					<Chevron sectionKey="room" />
 				</Stack>
-				{expandedSections.categories && (
+				{expandedSections.room && (
 					<Stack className="filter-section-body">
 						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={toggleAllRooms} sx={{ cursor: 'pointer' }}>
 							<CustomCheckbox checked={searchFilter.roomList?.length === allRooms.length || false} />
-							<Stack direction="row" alignItems="center" gap="8px">
-								<Typography className="filter-checkbox-label">All</Typography>
-								<Typography className="filter-checkbox-count">(50505)</Typography>
-							</Stack>
+							<Typography className="filter-checkbox-label">All</Typography>
 						</Stack>
 						{visibleRooms.map((room) => (
 							<Stack key={room} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleRoom(room)} sx={{ cursor: 'pointer' }}>
 								<CustomCheckbox checked={searchFilter.roomList?.includes(room) || false} />
-								<Typography className="filter-checkbox-label">{roomLabels[room]}</Typography>
+								<Typography className="filter-checkbox-label">{room.replace(/_/g, ' ')}</Typography>
 							</Stack>
 						))}
-						<ShowMoreLink sectionKey="categories" hasMore={filtered.length > VISIBLE_ITEMS} />
+						<ShowMoreLink sectionKey="room" hasMore={allRooms.length > VISIBLE_ITEMS} />
+					</Stack>
+				)}
+			</Stack>
+
+			{/* Style */}
+			<Stack className="filter-section">
+				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('style')}>
+					<Typography className="filter-section-title">Style</Typography>
+					<Chevron sectionKey="style" />
+				</Stack>
+				{expandedSections.style && (
+					<Stack className="filter-section-body">
+						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={toggleAllStyles} sx={{ cursor: 'pointer' }}>
+							<CustomCheckbox checked={searchFilter.styleList?.length === allStyles.length || false} />
+							<Typography className="filter-checkbox-label">All</Typography>
+						</Stack>
+						{visibleStyles.map((style) => (
+							<Stack key={style} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleStyle(style)} sx={{ cursor: 'pointer' }}>
+								<CustomCheckbox checked={searchFilter.styleList?.includes(style) || false} />
+								<Typography className="filter-checkbox-label">{style.replace(/_/g, ' ')}</Typography>
+							</Stack>
+						))}
+						<ShowMoreLink sectionKey="style" hasMore={allStyles.length > VISIBLE_ITEMS} />
 					</Stack>
 				)}
 			</Stack>
@@ -234,7 +223,7 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 						{visibleMats.map((mat) => (
 							<Stack key={mat} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleMaterial(mat)} sx={{ cursor: 'pointer' }}>
 								<CustomCheckbox checked={searchFilter.materialList?.includes(mat) || false} />
-								<Typography className="filter-checkbox-label">{materialLabels[mat]}</Typography>
+								<Typography className="filter-checkbox-label">{mat.replace(/_/g, ' ')}</Typography>
 							</Stack>
 						))}
 						<ShowMoreLink sectionKey="material" hasMore={allMats.length > VISIBLE_ITEMS} />
@@ -284,7 +273,7 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 										background: colorMap[color],
 										border: searchFilter.colorList?.includes(color)
 											? '2px solid #A86464'
-											: color === '#FFFFFF' ? '1px solid #e6e6e6' : 'none',
+											: color === FurnitureColor.WHITE ? '1px solid #e6e6e6' : 'none',
 									}}
 									onClick={() => toggleColor(color)}
 								/>
