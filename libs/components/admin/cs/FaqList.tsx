@@ -1,6 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import {
 	TableCell,
 	TableHead,
@@ -9,104 +7,72 @@ import {
 	Table,
 	TableContainer,
 	Button,
-	Menu,
-	Fade,
-	MenuItem,
 } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import { Stack } from '@mui/material';
-
-interface Data {
-	category: string;
-	title: string;
-	writer: string;
-	date: string;
-	status: string;
-	id?: string;
-}
-
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
-	if (b[orderBy] < a[orderBy]) {
-		return -1;
-	}
-	if (b[orderBy] > a[orderBy]) {
-		return 1;
-	}
-	return 0;
-}
-
-type Order = 'asc' | 'desc';
+import Avatar from '@mui/material/Avatar';
 
 interface HeadCell {
 	disablePadding: boolean;
-	id: keyof Data;
+	id: string;
 	label: string;
 	numeric: boolean;
 }
 
 const headCells: readonly HeadCell[] = [
-	{
-		id: 'category',
-		numeric: true,
-		disablePadding: false,
-		label: 'CATEGORY',
-	},
-	{
-		id: 'title',
-		numeric: true,
-		disablePadding: false,
-		label: 'TITLE',
-	},
-
-	{
-		id: 'writer',
-		numeric: true,
-		disablePadding: false,
-		label: 'WRITER',
-	},
-	{
-		id: 'date',
-		numeric: true,
-		disablePadding: false,
-		label: 'DATE',
-	},
-	{
-		id: 'status',
-		numeric: false,
-		disablePadding: false,
-		label: 'STATUS',
-	},
+	{ id: 'category', numeric: true, disablePadding: false, label: 'CATEGORY' },
+	{ id: 'title', numeric: true, disablePadding: false, label: 'TITLE' },
+	{ id: 'writer', numeric: true, disablePadding: false, label: 'WRITER' },
+	{ id: 'date', numeric: true, disablePadding: false, label: 'DATE' },
+	{ id: 'status', numeric: false, disablePadding: false, label: 'STATUS' },
 ];
 
-interface EnhancedTableProps {
-	numSelected: number;
-	onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-	onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	order: Order;
-	orderBy: string;
-	rowCount: number;
-}
-
-function EnhancedTableHead(props: EnhancedTableProps) {
-	const { onSelectAllClick } = props;
-
-	return (
-		<TableHead>
-			<TableRow>
-				{headCells.map((headCell) => (
-					<TableCell
-						key={headCell.id}
-						align={headCell.numeric ? 'left' : 'center'}
-						padding={headCell.disablePadding ? 'none' : 'normal'}
-					>
-						{headCell.label}
-					</TableCell>
-				))}
-			</TableRow>
-		</TableHead>
-	);
-}
+const HARDCODED_FAQ = [
+	{
+		id: 'FAQ-001',
+		category: 'Delivery',
+		title: 'How long does standard shipping take?',
+		writer: 'Admin',
+		writerImage: '/img/profile/defaultUser.svg',
+		date: '2025-12-15',
+		status: 'ACTIVE',
+	},
+	{
+		id: 'FAQ-002',
+		category: 'Returns',
+		title: 'What is your return and refund policy?',
+		writer: 'Admin',
+		writerImage: '/img/profile/defaultUser.svg',
+		date: '2025-12-10',
+		status: 'ACTIVE',
+	},
+	{
+		id: 'FAQ-003',
+		category: 'Product',
+		title: 'Are all furniture materials sustainably sourced?',
+		writer: 'Editor',
+		writerImage: '/img/profile/defaultUser.svg',
+		date: '2025-11-22',
+		status: 'ACTIVE',
+	},
+	{
+		id: 'FAQ-004',
+		category: 'Payment',
+		title: 'Which payment methods are accepted?',
+		writer: 'Admin',
+		writerImage: '/img/profile/defaultUser.svg',
+		date: '2025-11-18',
+		status: 'ACTIVE',
+	},
+	{
+		id: 'FAQ-005',
+		category: 'Orders',
+		title: 'Can I modify or cancel my order after placing it?',
+		writer: 'Editor',
+		writerImage: '/img/profile/defaultUser.svg',
+		date: '2025-11-05',
+		status: 'ACTIVE',
+	},
+];
 
 interface FaqArticlesPanelListType {
 	dense?: boolean;
@@ -119,81 +85,59 @@ interface FaqArticlesPanelListType {
 }
 
 export const FaqArticlesPanelList = (props: FaqArticlesPanelListType) => {
-	const {
-		dense,
-		membersData,
-		searchMembers,
-		anchorEl,
-		handleMenuIconClick,
-		handleMenuIconClose,
-		generateMentorTypeHandle,
-	} = props;
-	const router = useRouter();
-
-	/** APOLLO REQUESTS **/
-	/** LIFECYCLES **/
-	/** HANDLERS **/
-
 	return (
 		<Stack>
 			<TableContainer>
-				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={dense ? 'small' : 'medium'}>
-					{/*@ts-ignore*/}
-					<EnhancedTableHead />
+				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={'medium'}>
+					<TableHead>
+						<TableRow>
+							{headCells.map((headCell) => (
+								<TableCell
+									key={headCell.id}
+									align={headCell.numeric ? 'left' : 'center'}
+									padding={headCell.disablePadding ? 'none' : 'normal'}
+								>
+									{headCell.label}
+								</TableCell>
+							))}
+						</TableRow>
+					</TableHead>
 					<TableBody>
-						{[1, 2, 3, 4, 5].map((ele: any, index: number) => {
-							const member_image = '/img/profile/defaultUser.svg';
-
-							let status_class_name = '';
-
-							return (
-								<TableRow hover key={'member._id'} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-									<TableCell align="left">mb id</TableCell>
-									<TableCell align="left">member.mb_full_name</TableCell>
-									<TableCell align="left" className={'name'}>
-										<Stack direction={'row'}>
-											<Link href={`/_admin/users/detail?mb_id=$'{member._id'}`}>
-												<div>
-													<Avatar alt="Remy Sharp" src={member_image} sx={{ ml: '2px', mr: '10px' }} />
-												</div>
-											</Link>
-											<Link href={`/_admin/users/detail?mb_id=${'member._id'}`}>
-												<div>member.mb_nick</div>
-											</Link>
-										</Stack>
-									</TableCell>
-									<TableCell align="left">member.mb_phone</TableCell>
-									<TableCell align="center">
-										<Button onClick={(e: any) => handleMenuIconClick(e, index)} className={'badge success'}>
-											member.mb_type
-										</Button>
-
-										<Menu
-											className={'menu-modal'}
-											MenuListProps={{
-												'aria-labelledby': 'fade-button',
-											}}
-											anchorEl={anchorEl[index]}
-											open={Boolean(anchorEl[index])}
-											onClose={handleMenuIconClose}
-											TransitionComponent={Fade}
-											sx={{ p: 1 }}
-										>
-											<MenuItem onClick={(e) => generateMentorTypeHandle('member._id', 'mentor', 'originate')}>
-												<Typography variant={'subtitle1'} component={'span'}>
-													MENTOR
-												</Typography>
-											</MenuItem>
-											<MenuItem onClick={(e) => generateMentorTypeHandle('member._id', 'user', 'remove')}>
-												<Typography variant={'subtitle1'} component={'span'}>
-													USER
-												</Typography>
-											</MenuItem>
-										</Menu>
-									</TableCell>
-								</TableRow>
-							);
-						})}
+						{HARDCODED_FAQ.map((faq) => (
+							<TableRow hover key={faq.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<TableCell align="left">
+									<span
+										style={{
+											background: '#EDE4D8',
+											color: '#6B4C2A',
+											fontSize: 11,
+											fontWeight: 600,
+											padding: '3px 10px',
+											borderRadius: 20,
+											letterSpacing: 0.4,
+											textTransform: 'uppercase',
+										}}
+									>
+										{faq.category}
+									</span>
+								</TableCell>
+								<TableCell align="left" sx={{ maxWidth: 340, fontWeight: 500 }}>
+									{faq.title}
+								</TableCell>
+								<TableCell align="left">
+									<Stack direction="row" alignItems="center" gap={1}>
+										<Avatar src={faq.writerImage} sx={{ width: 28, height: 28 }} />
+										<span>{faq.writer}</span>
+									</Stack>
+								</TableCell>
+								<TableCell align="left" sx={{ color: 'var(--color-text-muted)', whiteSpace: 'nowrap' }}>
+									{faq.date}
+								</TableCell>
+								<TableCell align="center">
+									<Button className={'badge success'}>{faq.status}</Button>
+								</TableCell>
+							</TableRow>
+						))}
 					</TableBody>
 				</Table>
 			</TableContainer>

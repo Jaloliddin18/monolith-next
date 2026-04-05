@@ -129,6 +129,19 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 	);
 }
 
+const HARDCODED_MEMBERS = [
+	{ _id: '66089ea21669073834636faf', memberNick: 'Oueen', memberFullName: null, memberPhone: '01089321988', memberType: 'USER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '660881a71669073834636f5a', memberNick: 'Oscar', memberFullName: null, memberPhone: '01089321989', memberType: 'DESIGNER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '660006163508d1d2ae04641c', memberNick: 'Justin', memberFullName: null, memberPhone: '01084146861', memberType: 'USER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '65fadcb11dd7fcf6094d4d4f', memberNick: 'bayram', memberFullName: null, memberPhone: '01099886611', memberType: 'USER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '65f9254fed2fbdf69b6bece8', memberNick: 'ShawnAgent', memberFullName: null, memberPhone: '0123458769', memberType: 'DESIGNER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '65f5a45ed8897f8090116a07', memberNick: 'admin', memberFullName: null, memberPhone: '010998877622', memberType: 'ADMIN', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '65f5719cd8897f8090116929', memberNick: 'testxon', memberFullName: null, memberPhone: '01099775522', memberType: 'USER', memberStatus: 'BLOCK', memberWarnings: 1, memberBlocks: 1, memberImage: null },
+	{ _id: '65f55fc83b54eae13ccbe99e', memberNick: 'testjon', memberFullName: null, memberPhone: '01973234123', memberType: 'USER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '65f227283b54eae13ccbdec1', memberNick: 'ShawnUser', memberFullName: null, memberPhone: '294857928375', memberType: 'USER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+	{ _id: '65f21bf03b54eae13ccbdde5', memberNick: 'ShawnU', memberFullName: null, memberPhone: '010123456789', memberType: 'USER', memberStatus: 'ACTIVE', memberWarnings: 0, memberBlocks: 0, memberImage: null },
+];
+
 interface MemberPanelListType {
 	members: Member[];
 	anchorEl: any;
@@ -139,6 +152,7 @@ interface MemberPanelListType {
 
 export const MemberPanelList = (props: MemberPanelListType) => {
 	const { members, anchorEl, menuIconClickHandler, menuIconCloseHandler, updateMemberHandler } = props;
+	const displayMembers = members.length > 0 ? members : HARDCODED_MEMBERS;
 
 	return (
 		<Stack>
@@ -147,7 +161,7 @@ export const MemberPanelList = (props: MemberPanelListType) => {
 					{/*@ts-ignore*/}
 					<EnhancedTableHead />
 					<TableBody>
-						{members.length === 0 && (
+						{false && (
 							<TableRow>
 								<TableCell align="center" colSpan={8}>
 									<span className={'no-data'}>data not found!</span>
@@ -155,8 +169,7 @@ export const MemberPanelList = (props: MemberPanelListType) => {
 							</TableRow>
 						)}
 
-						{members.length !== 0 &&
-							members.map((member: Member, index: number) => {
+						{displayMembers.map((member: any, index: number) => {
 								const member_image = member.memberImage
 									? `${REACT_APP_API_URL}/${member.memberImage}`
 									: '/img/profile/defaultUser.svg';

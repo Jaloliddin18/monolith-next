@@ -21,9 +21,16 @@ import { UPDATE_MEMBER_BY_ADMIN } from '../../../apollo/admin/mutation';
 import { GET_ALL_MEMBERS_BY_ADMIN } from '../../../apollo/admin/query';
 import { T } from '../../../libs/types/common';
 
-const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
+const DEFAULT_MEMBERS_INQUIRY: MembersInquiry = {
+	page: 1,
+	limit: 10,
+	sort: 'createdAt',
+	search: {},
+};
+
+const AdminUsers: NextPage = ({ initialInquiry = DEFAULT_MEMBERS_INQUIRY, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
-	const [membersInquiry, setMembersInquiry] = useState<MembersInquiry>(initialInquiry);
+	const [membersInquiry, setMembersInquiry] = useState<MembersInquiry>(initialInquiry ?? DEFAULT_MEMBERS_INQUIRY);
 	const [members, setMembers] = useState<Member[]>([]);
 	const [membersTotal, setMembersTotal] = useState<number>(0);
 	const [value, setValue] = useState(
@@ -42,16 +49,18 @@ const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
 	} = useQuery(GET_ALL_MEMBERS_BY_ADMIN, {
 		fetchPolicy: 'network-only',
 		variables: { input: membersInquiry },
+		skip: !membersInquiry,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setMembers(data?.getAllMembersByAdmin?.list);
+			setMembers(data?.getAllMembersByAdmin?.list ?? []);
 			setMembersTotal(data?.getAllMembersByAdmin?.metaCounter[0]?.total ?? 0);
 		},
+		onError: () => {},
 	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		getAllMembersByAdminRefetch({ input: membersInquiry }).then();
+		getAllMembersByAdminRefetch({ input: membersInquiry }).then().catch(() => {});
 	}, [membersInquiry]);
 
 	/** HANDLERS **/
@@ -275,13 +284,5 @@ const AdminUsers: NextPage = ({ initialInquiry, ...props }: any) => {
 	);
 };
 
-AdminUsers.defaultProps = {
-	initialInquiry: {
-		page: 1,
-		limit: 10,
-		sort: 'createdAt',
-		search: {},
-	},
-};
 
 export default withAdminLayout(AdminUsers);

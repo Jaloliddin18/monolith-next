@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, List, ListItemButton, ListItemIcon, ListItemText, Divider } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -27,7 +28,7 @@ const AdminMenuList = (props: any) => {
 	useEffect(() => {
 		switch (pathnames[1]) {
 			case 'properties':
-				setClickMenu(['Properties']);
+				setClickMenu(['Furnitures']);
 				break;
 			case 'community':
 				setClickMenu(['Community']);
@@ -54,6 +55,10 @@ const AdminMenuList = (props: any) => {
 				setClickSubMenu('List');
 				break;
 		}
+		// Also auto-open Cs menu when on CS pages
+		if (pathnames[1] === 'cs') {
+			setClickMenu(['Cs']);
+		}
 	}, []);
 
 	/** HANDLERS **/
@@ -72,9 +77,9 @@ const AdminMenuList = (props: any) => {
 			on_click: () => subMenuChangeHandler('Users'),
 		},
 		{
-			title: 'Properties',
+			title: 'Furnitures',
 			icon: <ManageAccountsOutlinedIcon sx={{ fontSize: 20, color: '#bdbdbd' }} />,
-			on_click: () => subMenuChangeHandler('Properties'),
+			on_click: () => subMenuChangeHandler('Furnitures'),
 		},
 		{
 			title: 'Community',
@@ -90,9 +95,10 @@ const AdminMenuList = (props: any) => {
 
 	const sub_menu_set: any = {
 		Users: [{ title: 'List', url: '/_admin/users' }],
-		Properties: [{ title: 'List', url: '/_admin/properties' }],
+		Furnitures: [{ title: 'List', url: '/_admin/properties' }],
 		Community: [{ title: 'List', url: '/_admin/community' }],
 		Cs: [
+			{ title: '1:1 Inquiry', url: '/_admin/cs/inquiry' },
 			{ title: 'FAQ', url: '/_admin/cs/faq' },
 			{ title: 'Notice', url: '/_admin/cs/notice' },
 		],
@@ -100,6 +106,17 @@ const AdminMenuList = (props: any) => {
 
 	return (
 		<>
+			<Box className="admin-logo-wrap">
+				<Box className="admin-logo-circle">M</Box>
+			</Box>
+			<Box className="admin-info-card">
+				<Avatar src="/img/profile/defaultUser.svg" sx={{ width: 40, height: 40 }} />
+				<Box className="admin-info-text">
+					<Typography className="brand-name">admin</Typography>
+					<Typography className="brand-sub">010998877622</Typography>
+				</Box>
+			</Box>
+			<Divider />
 			{menu_set.map((item, index) => (
 				<List className={'menu_wrap'} key={index} disablePadding>
 					<ListItemButton

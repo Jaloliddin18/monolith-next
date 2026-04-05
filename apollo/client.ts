@@ -106,7 +106,7 @@ function createIsomorphicLink() {
           console.log(
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
           );
-          if (!message.includes("input")) sweetErrorAlert(message);
+          if (!message.includes("input") && !message.includes("specific roles") && !message.includes("Allowed only")) sweetErrorAlert(message);
         });
       }
       if (networkError) console.log(`[Network error]: ${networkError}`);

@@ -1,0 +1,517 @@
+// ==============================
+// ADMIN PANEL — Figma-aligned styles
+// Based on nestar design, adapted for Monolith
+// Accent: Terracotta #C46A4A
+// ==============================
+
+// ---- ADMIN ROOT WRAPPER ----
+#admin-wrap {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  width: 100%;
+}
+
+// ---- TOP HEADER BAR ----
+.admin-header {
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+// ---- SIDEBAR LOGO (centered circle) ----
+.admin-logo-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 16px;
+
+  .admin-logo-circle {
+    width: 90px;
+    height: 90px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading) !important;
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    letter-spacing: 0;
+  }
+}
+
+// ---- ADMIN INFO CARD ----
+.admin-info-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin: 0 14px 14px;
+  padding: 12px 16px;
+
+  .admin-info-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+
+    .brand-name {
+      font-family: var(--font-ui) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      color: #212121 !important;
+      line-height: 1.4;
+    }
+
+    .brand-sub {
+      font-family: var(--font-ui) !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      color: #616161 !important;
+      line-height: 1.4;
+    }
+  }
+}
+
+// ---- SIDEBAR MENU ----
+.menu_wrap {
+  padding: 2px 0;
+
+  .menu {
+    padding: 10px 16px !important;
+    color: #212121 !important;
+    transition: all 0.15s ease !important;
+    border-radius: 0 !important;
+
+    &:hover {
+      background: #f5f5f5 !important;
+    }
+
+    &.on {
+      color: #212121 !important;
+      background: transparent !important;
+    }
+
+    .MuiListItemIcon-root {
+      min-width: 0;
+      margin-right: 12px;
+
+      svg {
+        font-size: 20px !important;
+        color: #bdbdbd !important;
+        transition: color 0.15s;
+      }
+    }
+
+    .MuiListItemText-root span,
+    .MuiListItemText-primary {
+      font-family: var(--font-ui) !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+    }
+
+    // expand/collapse chevron
+    svg.MuiSvgIcon-root:last-child {
+      font-size: 20px !important;
+      color: #bdbdbd !important;
+    }
+  }
+
+  .menu-list {
+    padding: 4px 0 8px 0 !important;
+    background: transparent;
+
+    .li {
+      margin: 1px 8px 1px 16px !important;
+      padding: 8px 16px 8px 28px !important;
+      border-radius: 4px !important;
+      color: #757575 !important;
+      font-family: var(--font-ui) !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      cursor: pointer;
+      transition: all 0.15s ease !important;
+
+      span {
+        font-family: var(--font-ui) !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        color: inherit !important;
+      }
+
+      &:hover {
+        background: #f5f5f5 !important;
+        color: #212121 !important;
+      }
+
+      &.on {
+        background: #fdf4f4 !important;
+        color: #212121 !important;
+
+        span {
+          color: #212121 !important;
+          font-weight: 600 !important;
+        }
+      }
+    }
+  }
+}
+
+// ---- MAIN CONTENT WRAPPER ----
+.content {
+  font-family: var(--font-ui);
+
+  .tit {
+    font-family: var(--font-heading) !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #212121 !important;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+
+    h2,
+    .MuiTypography-h2 {
+      font-family: var(--font-heading) !important;
+      font-size: 28px !important;
+      font-weight: 700 !important;
+      color: #212121 !important;
+      letter-spacing: 0;
+    }
+
+    &.flex_space {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .btn_add {
+    background: var(--color-primary) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    font-family: var(--font-ui) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    padding: 8px 20px !important;
+    box-shadow: 0 2px 8px rgba(196, 106, 74, 0.25) !important;
+
+    &:hover {
+      background: var(--color-primary-hover) !important;
+    }
+  }
+}
+
+// ---- TABLE CARD WRAP ----
+.table-wrap {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.2), 0 12px 24px -4px rgba(145, 158, 171, 0.12);
+  overflow: hidden;
+
+  // Tab navigation (matches Figma: underline active tab)
+  .tab-menu {
+    display: flex !important;
+    flex-direction: row !important;
+    padding: 0 8px !important;
+    gap: 0 !important;
+    height: 48px;
+    border-bottom: 1px solid #eeeeee;
+
+    .li {
+      display: flex !important;
+      align-items: center !important;
+      padding: 0 16px !important;
+      font-family: var(--font-ui) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      color: #bdbdbd !important;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+      width: auto !important;
+      height: 100% !important;
+
+      &:hover {
+        color: #212121 !important;
+        background: transparent !important;
+      }
+
+      &.on {
+        color: var(--color-primary) !important;
+        border-bottom-color: var(--color-primary) !important;
+        background: transparent !important;
+        font-weight: 500 !important;
+      }
+    }
+  }
+
+  // Search / filter row (between tabs and table)
+  .search-area {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    border-bottom: 1px solid #eeeeee;
+
+    .MuiSelect-select,
+    .MuiOutlinedInput-input {
+      font-family: var(--font-ui) !important;
+      font-size: 14px !important;
+      padding: 10px 14px !important;
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #eeeeee !important;
+      border-radius: 4px !important;
+    }
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: #bdbdbd !important;
+    }
+  }
+
+  // Table header
+  .MuiTableHead-root {
+    .MuiTableRow-root {
+      background: #fafafa;
+
+      .MuiTableCell-root {
+        font-family: var(--font-ui) !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        color: #374151 !important;
+        letter-spacing: 0.15px;
+        text-transform: none;
+        border-bottom: 1px solid #eeeeee !important;
+        padding: 14px 16px !important;
+        white-space: nowrap;
+        background: #fafafa;
+      }
+    }
+  }
+
+  // Table body
+  .MuiTableBody-root {
+    .MuiTableRow-root {
+      transition: background 0.12s;
+
+      &:hover {
+        background: #fafafa !important;
+      }
+
+      &:last-child .MuiTableCell-root {
+        border-bottom: none !important;
+      }
+
+      .MuiTableCell-root {
+        font-family: var(--font-ui) !important;
+        font-size: 14px !important;
+        color: #616161 !important;
+        border-bottom: 1px solid #eeeeee !important;
+        padding: 12px 16px !important;
+        letter-spacing: 0.15px;
+      }
+    }
+
+    // Name cell (avatar + text link)
+    .name {
+      a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #212121;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 14px;
+        transition: color 0.15s;
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+
+      .MuiStack-root {
+        align-items: center;
+
+        a {
+          display: flex;
+          align-items: center;
+          color: #212121;
+          text-decoration: none;
+
+          &:hover {
+            color: var(--color-primary);
+          }
+        }
+      }
+    }
+  }
+
+  // Empty state
+  .no-data {
+    display: block;
+    text-align: center;
+    padding: 60px 0;
+    font-family: var(--font-ui) !important;
+    font-size: 14px !important;
+    color: #bdbdbd !important;
+  }
+
+  // Pagination
+  .MuiTablePagination-root {
+    border-top: 1px solid #eeeeee;
+
+    .MuiTablePagination-selectLabel,
+    .MuiTablePagination-displayedRows,
+    .MuiTablePagination-select,
+    .MuiTablePagination-input {
+      font-family: var(--font-ui) !important;
+      font-size: 15px !important;
+      color: #212121;
+    }
+
+    .MuiTablePagination-actions button {
+      color: #9e9e9e;
+
+      &:hover {
+        color: var(--color-primary);
+        background: rgba(196, 106, 74, 0.06);
+      }
+    }
+  }
+
+  // Checkbox
+  .MuiCheckbox-root {
+    color: #eeeeee !important;
+
+    &.Mui-checked {
+      color: var(--color-primary) !important;
+    }
+  }
+
+  // Toolbar (bulk actions)
+  .MuiToolbar-root {
+    background: rgba(196, 106, 74, 0.05);
+    border-radius: 8px;
+    margin: 8px 16px;
+    min-height: 48px !important;
+
+    .MuiTypography-h6 {
+      font-family: var(--font-ui) !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      color: var(--color-primary) !important;
+    }
+
+    .MuiButton-text {
+      font-family: var(--font-ui) !important;
+      font-size: 13px !important;
+      color: #d32f2f !important;
+    }
+  }
+}
+
+// ---- STATUS BADGES (Figma: green pill badges) ----
+.badge {
+  font-family: var(--font-ui) !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.34px !important;
+  padding: 3px 10px !important;
+  border-radius: 4px !important;
+  min-width: 0 !important;
+  line-height: 1.5 !important;
+  cursor: pointer;
+  border: none !important;
+
+  &.success {
+    background: rgba(84, 214, 44, 0.16) !important;
+    color: #229a16 !important;
+
+    &:hover {
+      background: rgba(84, 214, 44, 0.25) !important;
+    }
+  }
+
+  &.warning {
+    background: rgba(255, 193, 7, 0.16) !important;
+    color: #b78103 !important;
+
+    &:hover {
+      background: rgba(255, 193, 7, 0.25) !important;
+    }
+  }
+
+  &.error,
+  &.danger {
+    background: rgba(255, 72, 66, 0.16) !important;
+    color: #b72136 !important;
+  }
+}
+
+// ---- STATUS CHANGE DROPDOWN MENU ----
+.menu-modal {
+  .MuiPaper-root {
+    border-radius: 8px !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid #eeeeee;
+    min-width: 140px;
+
+    .MuiMenuItem-root {
+      font-family: var(--font-ui) !important;
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      padding: 10px 20px !important;
+      color: #212121;
+      transition: background 0.15s;
+
+      &:hover {
+        background: #fdf4f4 !important;
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+// ---- SELECT / DROPDOWN ----
+.MuiMenu-root .MuiPaper-root {
+  .MuiMenuItem-root {
+    font-family: var(--font-ui) !important;
+    font-size: 14px !important;
+  }
+}
+
+// ---- ACTION ICON BUTTONS ----
+.MuiIconButton-root {
+  &:hover {
+    color: var(--color-primary);
+    background: rgba(196, 106, 74, 0.06) !important;
+  }
+}
+
+// ---- OPEN IN BROWSER BUTTON ----
+.btn_window {
+  padding: 4px !important;
+  margin-left: 4px;
+  color: #bdbdbd !important;
+
+  &:hover {
+    color: var(--color-primary) !important;
+  }
+
+  svg {
+    font-size: 16px !important;
+  }
+}

@@ -18,10 +18,19 @@ import { useMutation, useQuery } from '@apollo/client';
 import { REMOVE_BOARD_ARTICLE_BY_ADMIN, UPDATE_BOARD_ARTICLE_BY_ADMIN } from '../../../apollo/admin/mutation';
 import { GET_ALL_BOARD_ARTICLES_BY_ADMIN } from '../../../apollo/admin/query';
 import { T } from '../../../libs/types/common';
+import { Direction } from '../../../libs/enums/common.enum';
 
-const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
+const DEFAULT_COMMUNITY_INQUIRY: AllBoardArticlesInquiry = {
+	page: 1,
+	limit: 10,
+	sort: 'createdAt',
+	direction: Direction.DESC,
+	search: {},
+};
+
+const AdminCommunity: NextPage = ({ initialInquiry = DEFAULT_COMMUNITY_INQUIRY, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<any>([]);
-	const [communityInquiry, setCommunityInquiry] = useState<AllBoardArticlesInquiry>(initialInquiry);
+	const [communityInquiry, setCommunityInquiry] = useState<AllBoardArticlesInquiry>(initialInquiry ?? DEFAULT_COMMUNITY_INQUIRY);
 	const [articles, setArticles] = useState<BoardArticle[]>([]);
 	const [articleTotal, setArticleTotal] = useState<number>(0);
 	const [value, setValue] = useState(
@@ -40,16 +49,18 @@ const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
 	} = useQuery(GET_ALL_BOARD_ARTICLES_BY_ADMIN, {
 		fetchPolicy: 'network-only',
 		variables: { input: communityInquiry },
+		skip: !communityInquiry,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setArticles(data?.getAllBoardArticlesByAdmin?.list);
+			setArticles(data?.getAllBoardArticlesByAdmin?.list ?? []);
 			setArticleTotal(data?.getAllBoardArticlesByAdmin?.metaCounter[0]?.total ?? 0);
 		},
+		onError: () => {},
 	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		getAllBoardArticlesByAdminRefetch({ input: communityInquiry }).then();
+		getAllBoardArticlesByAdminRefetch({ input: communityInquiry }).then().catch(() => {});
 	}, [communityInquiry]);
 
 	/** HANDLERS **/
@@ -150,9 +161,6 @@ const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
 		}
 	};
 
-	console.log('+communityInquiry', communityInquiry);
-	console.log('+articles', articles);
-
 	return (
 		<Box component={'div'} className={'content'}>
 			<Typography variant={'h2'} className={'tit'} sx={{ mb: '24px' }}>
@@ -225,14 +233,5 @@ const AdminCommunity: NextPage = ({ initialInquiry, ...props }: any) => {
 	);
 };
 
-AdminCommunity.defaultProps = {
-	initialInquiry: {
-		page: 1,
-		limit: 10,
-		sort: 'createdAt',
-		direction: 'DESC',
-		search: {},
-	},
-};
 
 export default withAdminLayout(AdminCommunity);

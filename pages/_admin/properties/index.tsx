@@ -18,10 +18,19 @@ import { useMutation, useQuery } from '@apollo/client';
 import { REMOVE_FURNITURE_BY_ADMIN, UPDATE_FURNITURE_BY_ADMIN } from '../../../apollo/admin/mutation';
 import { GET_ALL_FURNITURES_BY_ADMIN } from '../../../apollo/admin/query';
 import { T } from '../../../libs/types/common';
+import { Direction } from '../../../libs/enums/common.enum';
 
-const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
+const DEFAULT_FURNITURES_INQUIRY: AllFurnituresInquiry = {
+	page: 1,
+	limit: 10,
+	sort: 'createdAt',
+	direction: Direction.DESC,
+	search: {},
+};
+
+const AdminProperties: NextPage = ({ initialInquiry = DEFAULT_FURNITURES_INQUIRY, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
-	const [furnituresInquiry, setFurnituresInquiry] = useState<AllFurnituresInquiry>(initialInquiry);
+	const [furnituresInquiry, setFurnituresInquiry] = useState<AllFurnituresInquiry>(initialInquiry ?? DEFAULT_FURNITURES_INQUIRY);
 	const [furnitures, setFurnitures] = useState<Furniture[]>([]);
 	const [furnituresTotal, setFurnituresTotal] = useState<number>(0);
 	const [value, setValue] = useState(
@@ -40,16 +49,18 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 	} = useQuery(GET_ALL_FURNITURES_BY_ADMIN, {
 		fetchPolicy: 'network-only',
 		variables: { input: furnituresInquiry },
+		skip: !furnituresInquiry,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setFurnitures(data?.getAllFurnituresByAdmin?.list);
+			setFurnitures(data?.getAllFurnituresByAdmin?.list ?? []);
 			setFurnituresTotal(data?.getAllFurnituresByAdmin?.metaCounter[0]?.total ?? 0);
 		},
+		onError: () => {},
 	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		getAllFurnituresByAdminRefetch({ input: furnituresInquiry }).then();
+		getAllFurnituresByAdminRefetch({ input: furnituresInquiry }).then().catch(() => {});
 	}, [furnituresInquiry]);
 
 	/** HANDLERS **/
@@ -84,8 +95,8 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 			case 'ACTIVE':
 				setFurnituresInquiry({ ...furnituresInquiry, search: { furnitureStatus: FurnitureStatus.ACTIVE } });
 				break;
-			case 'SOLD':
-				setFurnituresInquiry({ ...furnituresInquiry, search: { furnitureStatus: FurnitureStatus.SOLD } });
+			case 'DISCONTINUED':
+				setFurnituresInquiry({ ...furnituresInquiry, search: { furnitureStatus: FurnitureStatus.DISCONTINUED } });
 				break;
 			case 'DELETE':
 				setFurnituresInquiry({ ...furnituresInquiry, search: { furnitureStatus: FurnitureStatus.DELETE } });
@@ -119,11 +130,11 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 					sort: 'createdAt',
 					search: {
 						...furnituresInquiry.search,
-						furnitureRoomList: [newValue as FurnitureRoom],
+						roomList: [newValue as FurnitureRoom],
 					},
 				});
 			} else {
-				delete (furnituresInquiry?.search as any)?.furnitureRoomList;
+				delete (furnituresInquiry?.search as any)?.roomList;
 				setFurnituresInquiry({ ...furnituresInquiry });
 			}
 		} catch (err: any) {
@@ -167,11 +178,11 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 									Active
 								</ListItem>
 								<ListItem
-									onClick={(e: any) => tabChangeHandler(e, 'SOLD')}
-									value="SOLD"
-									className={value === 'SOLD' ? 'li on' : 'li'}
+									onClick={(e: any) => tabChangeHandler(e, 'DISCONTINUED')}
+									value="DISCONTINUED"
+									className={value === 'DISCONTINUED' ? 'li on' : 'li'}
 								>
-									Sold
+									Discontinued
 								</ListItem>
 								<ListItem
 									onClick={(e: any) => tabChangeHandler(e, 'DELETE')}
@@ -221,14 +232,5 @@ const AdminProperties: NextPage = ({ initialInquiry, ...props }: any) => {
 	);
 };
 
-AdminProperties.defaultProps = {
-	initialInquiry: {
-		page: 1,
-		limit: 10,
-		sort: 'createdAt',
-		direction: 'DESC',
-		search: {},
-	},
-};
 
 export default withAdminLayout(AdminProperties);

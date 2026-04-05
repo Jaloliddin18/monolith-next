@@ -263,7 +263,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%) translateY(1.5px);
-    left: 0;
+    left: calc(50% - 720px);
     width: 999px;
     height: 600px;
     background: var(--color-bg-warm);
@@ -274,8 +274,13 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%) translateY(1.56px);
-    left: 150px;
+    left: 0;
     right: 0;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 150px;
+    box-sizing: border-box;
     z-index: 1;
     display: flex;
     flex-direction: row;
@@ -373,6 +378,9 @@
   padding: 24px 150px 60px;
   gap: 50px;
   align-items: center;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .intro-content {
     width: 558px;
@@ -449,6 +457,9 @@
 .services-section {
   padding: 50px 150px;
   gap: 24px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .service-card {
     width: 267px;
@@ -499,6 +510,9 @@
 .awesome-section {
   padding: 60px 150px;
   gap: 50px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .awesome-title {
     font-family: var(--font-ui);
@@ -676,6 +690,9 @@
 // ==============================
 .newest-section {
   padding: 60px 150px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .newest-card {
     width: 558px;
@@ -792,6 +809,9 @@
 // ==============================
 .trending-section {
   padding: 60px 150px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .section-title-text {
     font-family: var(--font-ui);
@@ -808,6 +828,9 @@
 .category-section {
   padding: 60px 150px 100px;
   background: #fff;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .category-header {
     width: 1140px;
@@ -857,6 +880,9 @@
 .suggested-section {
   padding: 70px 150px;
   background: var(--color-bg-warm);
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .section-title-text {
     font-family: var(--font-ui);
@@ -872,6 +898,9 @@
 // ==============================
 .sale-banner-section {
   padding: 100px 150px 60px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .sale-banner-header {
     width: 1140px;
@@ -1048,6 +1077,9 @@
 // ==============================
 .top-rated-section {
   padding: 60px 150px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .top-rated-left {
     .section-title-text {
@@ -1144,6 +1176,9 @@
 // ==============================
 .top-selection-section {
   padding: 60px 150px 100px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .top-selection-header {
     width: 1140px;
@@ -1256,6 +1291,9 @@
 // ==============================
 .faq-section {
   padding: 100px 150px 60px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .section-title-text {
     font-family: var(--font-ui);
@@ -1357,6 +1395,9 @@
 // ==============================
 .blog-section {
   padding: 60px 150px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 
   .section-title-text {
     font-family: var(--font-ui);
