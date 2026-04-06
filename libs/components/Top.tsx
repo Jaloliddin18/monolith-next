@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useReactiveVar } from "@apollo/client";
+import { useReactiveVar, useQuery } from "@apollo/client";
 import { userVar } from "../../apollo/store";
 import { getJwtToken, updateUserInfo, logOut } from "../auth";
 import {
@@ -21,6 +21,9 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
 import MiniCart from "./cart/MiniCart";
 import MiniWishlist from "./cart/MiniWishlist";
+import { getCartCount } from "../utils/cartStorage";
+import { GET_FAVORITES } from "../../apollo/user/query";
+import { T } from "../types/common";
 
 const Top = () => {
   const router = useRouter();
@@ -28,6 +31,37 @@ const Top = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const [wishlistCount, setWishlistCount] = useState(0);
+
+  useEffect(() => {
+    const update = () => setCartCount(getCartCount());
+    update();
+    window.addEventListener('cartUpdated', update);
+    window.addEventListener('storage', update);
+    return () => {
+      window.removeEventListener('cartUpdated', update);
+      window.removeEventListener('storage', update);
+    };
+  }, []);
+
+  const { data: favoritesData, refetch: refetchWishlistCount } = useQuery(GET_FAVORITES, {
+    skip: !user?._id,
+    variables: { input: { page: 1, limit: 1 } },
+    fetchPolicy: 'network-only',
+  });
+
+  useEffect(() => {
+    if (!user?._id) { setWishlistCount(0); return; }
+    setWishlistCount((favoritesData as T)?.getFavorites?.metaCounter?.[0]?.total ?? 0);
+  }, [favoritesData, user?._id]);
+
+  useEffect(() => {
+    if (!user?._id) return;
+    const update = () => refetchWishlistCount();
+    window.addEventListener('wishlistUpdated', update);
+    return () => window.removeEventListener('wishlistUpdated', update);
+  }, [user?._id, refetchWishlistCount]);
 
   useEffect(() => {
     const token = getJwtToken();
@@ -200,12 +234,14 @@ const Top = () => {
 
           {user?._id && (
             <IconButton onClick={() => setOpenWishlist(true)}>
-              <FavoriteBorderIcon />
+              <Badge badgeContent={wishlistCount} color="primary">
+                <FavoriteBorderIcon />
+              </Badge>
             </IconButton>
           )}
 
           <IconButton onClick={() => setOpenCart(true)}>
-            <Badge badgeContent={3} color="primary">
+            <Badge badgeContent={cartCount} color="primary">
               <ShoppingCartOutlinedIcon />
             </Badge>
           </IconButton>

@@ -1,43 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { CircularProgress } from '@mui/material';
+import { GET_FAVORITES } from '../../../apollo/user/query';
+import { LIKE_TARGET_FURNITURE } from '../../../apollo/user/mutation';
+import { userVar } from '../../../apollo/store';
+import { Furniture } from '../../types/furniture/furniture';
+import { REACT_APP_API_URL } from '../../config';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
+import { T } from '../../types/common';
 
-interface WishlistItem {
-	id: string;
-	title: string;
-	price: number;
-	originalPrice: number;
-	discountPercent: number;
-	image: string;
-}
-
-const wishlistItems: WishlistItem[] = [
-	{
-		id: '1',
-		title: 'Elegant Comfort Chair',
-		price: 179.99,
-		originalPrice: 224.99,
-		discountPercent: 20,
-		image: '/img/furniture/luxury_chair.jpg',
-	},
-	{
-		id: '2',
-		title: 'Modern Floating Bed',
-		price: 764.25,
-		originalPrice: 899.00,
-		discountPercent: 15,
-		image: '/img/furniture/luxury_chair.jpg',
-	},
-	{
-		id: '3',
-		title: 'Velvet Accent Chair',
-		price: 129.99,
-		originalPrice: 144.43,
-		discountPercent: 10,
-		image: '/img/furniture/luxury_chair.jpg',
-	},
-];
+const PLACEHOLDER_IMG = '/img/furniture/luxury_chair.jpg';
 
 interface MiniWishlistProps {
 	open: boolean;
@@ -45,6 +20,42 @@ interface MiniWishlistProps {
 }
 
 const MiniWishlist = ({ open, onClose }: MiniWishlistProps) => {
+	const user = useReactiveVar(userVar);
+	const [wishlistItems, setWishlistItems] = useState<Furniture[]>([]);
+	const [total, setTotal] = useState(0);
+
+	const { loading, refetch } = useQuery(GET_FAVORITES, {
+		fetchPolicy: 'network-only',
+		skip: !open || !user?._id,
+		variables: { input: { page: 1, limit: 10 } },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setWishlistItems(data?.getFavorites?.list ?? []);
+			setTotal(data?.getFavorites?.metaCounter[0]?.total ?? 0);
+		},
+	});
+
+	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
+
+	const handleRemove = async (id: string) => {
+		try {
+			await likeTargetFurniture({ variables: { input: id } });
+			await refetch({ input: { page: 1, limit: 10 } });
+			window.dispatchEvent(new Event('wishlistUpdated'));
+			await sweetTopSmallSuccessAlert('Removed from wishlist', 800);
+		} catch (err: any) {
+			sweetMixinErrorAlert(err.message);
+		}
+	};
+
+	const getImage = (f: Furniture) =>
+		f.furnitureImages?.[0] ? `${REACT_APP_API_URL}/${f.furnitureImages[0]}` : PLACEHOLDER_IMG;
+
+	const getDisplayPrice = (f: Furniture) =>
+		f.furnitureLastChancePrice && f.furnitureLastChancePrice < f.furniturePrice
+			? f.furnitureLastChancePrice
+			: f.furniturePrice;
+
 	if (!open) return null;
 
 	return (
@@ -55,37 +66,53 @@ const MiniWishlist = ({ open, onClose }: MiniWishlistProps) => {
 				<div className="mini-wishlist-header">
 					<div className="header-title">
 						<h3>My Wishlist</h3>
-						<span className="item-count">({wishlistItems.length} Items)</span>
+						<span className="item-count">({total} Items)</span>
 					</div>
 					<button className="close-btn" onClick={onClose}>
 						<CloseIcon />
 					</button>
 				</div>
 
-				{wishlistItems.length > 0 ? (
+				{loading ? (
+					<div style={{ display: 'flex', justifyContent: 'center', padding: '40px 0' }}>
+						<CircularProgress />
+					</div>
+				) : wishlistItems.length > 0 ? (
 					<>
 						{/* Items */}
 						<div className="mini-wishlist-items">
-							{wishlistItems.map((item) => (
-								<div className="wishlist-item" key={item.id}>
-									<div className="wishlist-item-image">
-										<img src={item.image} alt={item.title} />
-									</div>
-									<div className="wishlist-item-details">
-										<div className="wishlist-item-content">
-											<p className="item-title">{item.title}</p>
-											<div className="item-price-row">
-												<span className="current-price">${item.price.toFixed(2)}</span>
-												<span className="original-price">${item.originalPrice.toFixed(2)}</span>
-												<span className="discount">({item.discountPercent}% off)</span>
-											</div>
+							{wishlistItems.map((item) => {
+								const displayPrice = getDisplayPrice(item);
+								const hasDiscount = item.furnitureLastChancePrice && item.furnitureLastChancePrice < item.furniturePrice;
+								const discountPercent = hasDiscount
+									? Math.round(((item.furniturePrice - item.furnitureLastChancePrice!) / item.furniturePrice) * 100)
+									: 0;
+
+								return (
+									<div className="wishlist-item" key={item._id}>
+										<div className="wishlist-item-image">
+											<img src={getImage(item)} alt={item.furnitureTitle} />
 										</div>
-										<button className="delete-btn">
-											<DeleteOutlineIcon sx={{ fontSize: 22 }} />
-										</button>
+										<div className="wishlist-item-details">
+											<div className="wishlist-item-content">
+												<p className="item-title">{item.furnitureTitle}</p>
+												<div className="item-price-row">
+													<span className="current-price">${displayPrice.toFixed(2)}</span>
+													{hasDiscount && (
+														<>
+															<span className="original-price">${item.furniturePrice.toFixed(2)}</span>
+															<span className="discount">({discountPercent}% off)</span>
+														</>
+													)}
+												</div>
+											</div>
+											<button className="delete-btn" onClick={() => handleRemove(item._id)}>
+												<DeleteOutlineIcon sx={{ fontSize: 22 }} />
+											</button>
+										</div>
 									</div>
-								</div>
-							))}
+								);
+							})}
 						</div>
 
 						{/* Actions */}

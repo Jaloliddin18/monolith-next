@@ -131,6 +131,7 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 					fetchPolicy: 'network-only',
 				});
 				await getFurnituresRefetch({ input: inquiry });
+				window.dispatchEvent(new Event('wishlistUpdated'));
 			} catch (err: any) {
 				sweetMixinErrorAlert(err.message);
 			}

@@ -1,287 +1,85 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Stack, Box, Typography, IconButton, Button } from '@mui/material';
+import { Stack, Box, Typography, IconButton, Button, Pagination, CircularProgress } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Link from 'next/link';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_FAVORITES, GET_VISITED } from '../../../apollo/user/query';
+import { LIKE_TARGET_FURNITURE } from '../../../apollo/user/mutation';
 import { Furniture } from '../../types/furniture/furniture';
-import { FurnitureStatus, FurnitureCategory, FurnitureRoom, FurnitureStyle, FurnitureMaterial, FurnitureColor, AssemblyType, AssemblyDifficulty, DeliveryMethod, SustainabilityLabel } from '../../enums/furniture.enum';
+import { OrdinaryInquiry } from '../../types/furniture/furniture.input';
+import { FurnitureStatus } from '../../enums/furniture.enum';
+import { REACT_APP_API_URL } from '../../config';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
+import { Messages } from '../../config';
+import { T } from '../../types/common';
+import { useReactiveVar } from '@apollo/client';
+import { userVar } from '../../../apollo/store';
 
 const PLACEHOLDER_IMG = '/img/furniture/luxury_chair.jpg';
 
-const hardcodedWishlist: Furniture[] = [
-	{
-		_id: 'wish-1',
-		furnitureTitle: 'Elegant Comfort Chair',
-		furniturePrice: 224.99,
-		furnitureLastChancePrice: 179.99,
-		furnitureImages: [],
-		furnitureRank: 44,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 30,
-		furnitureComments: 5,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.MODERN,
-		furnitureMaterial: FurnitureMaterial.SOLID_WOOD,
-		furnitureColor: FurnitureColor.BLACK,
-		furnitureWeight: 15,
-		furnitureRent: false,
-		furnitureDiscount: 20,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-	{
-		_id: 'wish-2',
-		furnitureTitle: 'Elegant Comfort Chair',
-		furniturePrice: 142.84,
-		furnitureLastChancePrice: 99.99,
-		furnitureImages: [],
-		furnitureRank: 46,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.DISCONTINUED,
-		furnitureLikes: 22,
-		furnitureComments: 3,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.MODERN,
-		furnitureMaterial: FurnitureMaterial.FABRIC,
-		furnitureColor: FurnitureColor.BROWN,
-		furnitureWeight: 12,
-		furnitureRent: false,
-		furnitureDiscount: 30,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-	{
-		_id: 'wish-3',
-		furnitureTitle: 'Modern Floating Bed',
-		furniturePrice: 899,
-		furnitureLastChancePrice: 764.25,
-		furnitureImages: [],
-		furnitureRank: 45,
-		furnitureViews: 5560,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 45,
-		furnitureComments: 8,
-		furnitureRoom: FurnitureRoom.BEDROOM,
-		furnitureCategory: FurnitureCategory.BEDS_MATTRESSES,
-		furnitureStyle: FurnitureStyle.MODERN,
-		furnitureMaterial: FurnitureMaterial.SOLID_WOOD,
-		furnitureColor: FurnitureColor.BLACK,
-		furnitureWeight: 50,
-		furnitureRent: false,
-		furnitureDiscount: 30,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.SELF_ASSEMBLY,
-		assemblyDifficulty: AssemblyDifficulty.MEDIUM,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-	{
-		_id: 'wish-4',
-		furnitureTitle: 'Elegant Comfort Chair',
-		furniturePrice: 144.43,
-		furnitureLastChancePrice: 129.99,
-		furnitureImages: [],
-		furnitureRank: 34,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 18,
-		furnitureComments: 2,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.TRADITIONAL,
-		furnitureMaterial: FurnitureMaterial.LEATHER,
-		furnitureColor: FurnitureColor.BLACK,
-		furnitureWeight: 14,
-		furnitureRent: false,
-		furnitureDiscount: 10,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-	{
-		_id: 'wish-5',
-		furnitureTitle: 'Elegant Comfort Chair',
-		furniturePrice: 144.43,
-		furnitureLastChancePrice: 129.99,
-		furnitureImages: [],
-		furnitureRank: 34,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 10,
-		furnitureComments: 1,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.TRADITIONAL,
-		furnitureMaterial: FurnitureMaterial.LEATHER,
-		furnitureColor: FurnitureColor.BLACK,
-		furnitureWeight: 14,
-		furnitureRent: false,
-		furnitureDiscount: 10,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-];
-
-export const hardcodedRecentlyViewed: Furniture[] = [
-	{
-		_id: 'rv-1',
-		furnitureTitle: 'Elegant Crystal Chandelie',
-		furniturePrice: 199,
-		furnitureLastChancePrice: 159.20,
-		furnitureImages: [],
-		furnitureRank: 47,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 55,
-		furnitureComments: 12,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.MODERN,
-		furnitureMaterial: FurnitureMaterial.METAL,
-		furnitureColor: FurnitureColor.NATURAL_WOOD,
-		furnitureWeight: 8,
-		furnitureRent: false,
-		furnitureDiscount: 20,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-	{
-		_id: 'rv-2',
-		furnitureTitle: 'Velvet Swivel Chair',
-		furniturePrice: 349,
-		furnitureLastChancePrice: 279.20,
-		furnitureImages: [],
-		furnitureRank: 47,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 40,
-		furnitureComments: 6,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.MODERN,
-		furnitureMaterial: FurnitureMaterial.FABRIC,
-		furnitureColor: FurnitureColor.GREEN,
-		furnitureWeight: 18,
-		furnitureRent: false,
-		furnitureDiscount: 20,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-	{
-		_id: 'rv-3',
-		furnitureTitle: 'Contemporary Accent Chair',
-		furniturePrice: 349,
-		furnitureLastChancePrice: 279.20,
-		furnitureImages: [],
-		furnitureRank: 47,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 35,
-		furnitureComments: 4,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.SCANDINAVIAN,
-		furnitureMaterial: FurnitureMaterial.FABRIC,
-		furnitureColor: FurnitureColor.BLUE,
-		furnitureWeight: 16,
-		furnitureRent: false,
-		furnitureDiscount: 20,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-	{
-		_id: 'rv-4',
-		furnitureTitle: 'Mid-Century Armchair',
-		furniturePrice: 399,
-		furnitureLastChancePrice: 319.20,
-		furnitureImages: [],
-		furnitureRank: 47,
-		furnitureViews: 12125,
-		furnitureStatus: FurnitureStatus.ACTIVE,
-		furnitureLikes: 28,
-		furnitureComments: 3,
-		furnitureRoom: FurnitureRoom.LIVING_ROOM,
-		furnitureCategory: FurnitureCategory.CHAIRS,
-		furnitureStyle: FurnitureStyle.INDUSTRIAL,
-		furnitureMaterial: FurnitureMaterial.SOLID_WOOD,
-		furnitureColor: FurnitureColor.BROWN,
-		furnitureWeight: 20,
-		furnitureRent: false,
-		furnitureDiscount: 20,
-		furnitureOnSale: true,
-		furnitureBestseller: false,
-		assemblyType: AssemblyType.PRE_ASSEMBLED,
-		assemblyDifficulty: AssemblyDifficulty.EASY,
-		deliveryMethod: DeliveryMethod.HOME_DELIVERY,
-		sustainabilityLabel: SustainabilityLabel.NONE,
-		memberId: 'member-1',
-		createdAt: new Date(),
-		updatedAt: new Date(),
-	},
-];
-
 const MyWishlist = () => {
 	const router = useRouter();
+	const user = useReactiveVar(userVar);
 	const [hoveredId, setHoveredId] = useState<string | null>(null);
-	const [wishlistItems, setWishlistItems] = useState(hardcodedWishlist);
 
-	const handleRemoveFromWishlist = (furnitureId: string) => {
-		setWishlistItems((prev) => prev.filter((item) => item._id !== furnitureId));
+	const [wishlistItems, setWishlistItems] = useState<Furniture[]>([]);
+	const [wishlistTotal, setWishlistTotal] = useState(0);
+	const [searchWishlist, setSearchWishlist] = useState<OrdinaryInquiry>({ page: 1, limit: 9 });
+
+	const [visitedItems, setVisitedItems] = useState<Furniture[]>([]);
+	const [visitedTotal, setVisitedTotal] = useState(0);
+	const [searchVisited, setSearchVisited] = useState<OrdinaryInquiry>({ page: 1, limit: 4 });
+
+	/** APOLLO REQUESTS **/
+
+	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
+
+	const { loading: favoritesLoading, refetch: refetchFavorites } = useQuery(GET_FAVORITES, {
+		fetchPolicy: 'network-only',
+		variables: { input: searchWishlist },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setWishlistItems(data?.getFavorites?.list ?? []);
+			setWishlistTotal(data?.getFavorites?.metaCounter[0]?.total ?? 0);
+		},
+	});
+
+	const { loading: visitedLoading } = useQuery(GET_VISITED, {
+		fetchPolicy: 'network-only',
+		variables: { input: searchVisited },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setVisitedItems(data?.getVisited?.list ?? []);
+			setVisitedTotal(data?.getVisited?.metaCounter[0]?.total ?? 0);
+		},
+	});
+
+	/** HANDLERS **/
+
+	const handleRemoveFromWishlist = async (furnitureId: string) => {
+		try {
+			if (!user._id) throw new Error(Messages.NOT_AUTHENTICATED);
+			await likeTargetFurniture({ variables: { input: furnitureId } });
+			await refetchFavorites({ input: searchWishlist });
+			await sweetTopSmallSuccessAlert('Removed from wishlist', 800);
+		} catch (err: any) {
+			sweetMixinErrorAlert(err.message);
+		}
+	};
+
+	const wishlistPaginationHandler = (_: T, value: number) => {
+		setSearchWishlist((prev) => ({ ...prev, page: value }));
+	};
+
+	const visitedPaginationHandler = (_: T, value: number) => {
+		setSearchVisited((prev) => ({ ...prev, page: value }));
+	};
+
+	const getItemImage = (furniture: Furniture) => {
+		return furniture.furnitureImages?.[0]
+			? `${REACT_APP_API_URL}/${furniture.furnitureImages[0]}`
+			: PLACEHOLDER_IMG;
 	};
 
 	const getDiscount = (furniture: Furniture) => {
@@ -299,9 +97,13 @@ const MyWishlist = () => {
 
 	return (
 		<Stack className="wishlist-content">
-			<Typography className="content-title">My Wishlist({wishlistItems.length})</Typography>
+			<Typography className="content-title">My Wishlist({wishlistTotal})</Typography>
 
-			{wishlistItems.length === 0 ? (
+			{favoritesLoading ? (
+				<Stack alignItems="center" py="40px">
+					<CircularProgress />
+				</Stack>
+			) : wishlistItems.length === 0 ? (
 				<Box className="placeholder-content">Your wishlist is empty</Box>
 			) : (
 				<Stack className="wishlist-items">
@@ -319,7 +121,7 @@ const MyWishlist = () => {
 							>
 								<Box className="wishlist-item-image">
 									<Link href={`/furniture/detail?id=${furniture._id}`}>
-										<img src={PLACEHOLDER_IMG} alt={furniture.furnitureTitle} />
+										<img src={getItemImage(furniture)} alt={furniture.furnitureTitle} />
 									</Link>
 									{isOutOfStock && (
 										<Box className="out-of-stock-badge">
@@ -372,12 +174,95 @@ const MyWishlist = () => {
 				</Stack>
 			)}
 
+			{wishlistTotal > searchWishlist.limit && (
+				<Stack alignItems="center" mt="24px">
+					<Pagination
+						count={Math.ceil(wishlistTotal / searchWishlist.limit)}
+						page={searchWishlist.page}
+						shape="circular"
+						color="primary"
+						onChange={wishlistPaginationHandler}
+					/>
+				</Stack>
+			)}
+
 			{wishlistItems.length > 0 && (
 				<Button className="continues-shopping-btn" onClick={() => router.push('/furniture')}>
 					CONTINUES SHOPPING
 				</Button>
 			)}
 
+			{/* Recently Viewed */}
+			{visitedItems.length > 0 && (
+				<Stack className="recently-viewed-section" mt="40px">
+					<Typography className="content-title">Recently Viewed({visitedTotal})</Typography>
+					{visitedLoading ? (
+						<Stack alignItems="center" py="24px">
+							<CircularProgress />
+						</Stack>
+					) : (
+						<Stack className="wishlist-items">
+							{visitedItems.map((furniture) => {
+								const { hasDiscount, discountPrice, percent } = getDiscount(furniture);
+								const isOutOfStock = furniture.furnitureStatus === FurnitureStatus.DISCONTINUED;
+
+								return (
+									<Box key={furniture._id} className="wishlist-item">
+										<Box className="wishlist-item-image">
+											<Link href={`/furniture/detail?id=${furniture._id}`}>
+												<img src={getItemImage(furniture)} alt={furniture.furnitureTitle} />
+											</Link>
+											{isOutOfStock && (
+												<Box className="out-of-stock-badge">
+													<Typography>Out of stock</Typography>
+												</Box>
+											)}
+										</Box>
+
+										<Stack className="wishlist-item-details">
+											<Stack gap="8px">
+												<Stack direction="row" alignItems="center" gap="8px">
+													<Box className="rating-badge">
+														<Typography className="rating-value">{getRating(furniture)}</Typography>
+														<img src="/icons/star_icon.svg" alt="star" width={12} height={12} />
+													</Box>
+													<Typography className="review-count">({furniture.furnitureViews?.toLocaleString() || 0})</Typography>
+												</Stack>
+												<Link href={`/furniture/detail?id=${furniture._id}`}>
+													<Typography className="item-title">{furniture.furnitureTitle}</Typography>
+												</Link>
+												<Stack direction="row" alignItems="center" gap="8px">
+													<Typography className="item-price">
+														${hasDiscount ? discountPrice.toFixed(2) : furniture.furniturePrice.toFixed(2)}
+													</Typography>
+													{hasDiscount && (
+														<>
+															<Typography className="item-price-old">${furniture.furniturePrice.toFixed(2)}</Typography>
+															<Typography className="item-discount">({percent}% off)</Typography>
+														</>
+													)}
+												</Stack>
+											</Stack>
+										</Stack>
+									</Box>
+								);
+							})}
+						</Stack>
+					)}
+
+					{visitedTotal > searchVisited.limit && (
+						<Stack alignItems="center" mt="24px">
+							<Pagination
+								count={Math.ceil(visitedTotal / searchVisited.limit)}
+								page={searchVisited.page}
+								shape="circular"
+								color="primary"
+								onChange={visitedPaginationHandler}
+							/>
+						</Stack>
+					)}
+				</Stack>
+			)}
 		</Stack>
 	);
 };

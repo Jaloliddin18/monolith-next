@@ -21,6 +21,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import StarIcon from '@mui/icons-material/Star';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import InstagramSection from '../../libs/components/common/InstagramSection';
+import { addToCart } from '../../libs/utils/cartStorage';
 import ProductReviews from '../../libs/components/furniture/ProductReviews';
 import { GET_FURNITURE, GET_FURNITURES } from '../../apollo/user/query';
 import { LIKE_TARGET_FURNITURE } from '../../apollo/user/mutation';
@@ -60,7 +61,7 @@ const FurnitureDetail = () => {
 	const [countdown, setCountdown] = useState({ days: 10, hours: 18, mins: 23, secs: 0 });
 	const [similarFurnitures, setSimilarFurnitures] = useState<Furniture[]>([]);
 
-	const { data: furnitureData } = useQuery(GET_FURNITURE, {
+	const { data: furnitureData, refetch: refetchFurniture } = useQuery(GET_FURNITURE, {
 		variables: { input: id as string },
 		skip: !id,
 		fetchPolicy: 'cache-and-network',
@@ -122,10 +123,18 @@ const FurnitureDetail = () => {
 		if (!user?._id) return router.push('/account/join');
 		try {
 			await likeTargetFurniture({ variables: { input: furniture?._id }, fetchPolicy: 'network-only' });
+			await refetchFurniture();
+			window.dispatchEvent(new Event('wishlistUpdated'));
 			sweetTopSmallSuccessAlert('success', 800);
 		} catch (err: any) {
 			sweetMixinErrorAlert(err.message);
 		}
+	};
+
+	const handleAddToCart = () => {
+		if (!furniture) return;
+		addToCart(furniture, quantity);
+		sweetTopSmallSuccessAlert('Added to cart', 800);
 	};
 
 	return (
@@ -273,7 +282,7 @@ const FurnitureDetail = () => {
 						</Stack>
 
 						{/* Add to Cart */}
-						<Button className="btn-add-to-cart" variant="contained" fullWidth>
+						<Button className="btn-add-to-cart" variant="contained" fullWidth onClick={handleAddToCart}>
 							ADD TO CART
 						</Button>
 

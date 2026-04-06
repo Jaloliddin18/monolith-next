@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Stack, Typography } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Furniture } from '../../types/furniture/furniture';
 import { REACT_APP_API_URL } from '../../config';
+import { addToCart } from '../../utils/cartStorage';
+import { sweetTopSmallSuccessAlert } from '../../sweetAlert';
 
 interface ProductCardProps {
 	furniture: Furniture;
@@ -16,6 +20,13 @@ interface ProductCardProps {
 
 const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, reviewCount: reviewCountProp, originalPrice, size = 'default' }: ProductCardProps) => {
 	const router = useRouter();
+	const [liked, setLiked] = useState(furniture?.likedByMe?.[0]?.myFavorite ?? false);
+
+	const handleAddToCart = (e: React.MouseEvent) => {
+		e.stopPropagation();
+		addToCart(furniture);
+		sweetTopSmallSuccessAlert('Added to cart', 800);
+	};
 	if (!furniture) return null;
 	const { _id, furnitureTitle, furniturePrice, furnitureImages, furnitureBestseller, furnitureDiscount } = furniture;
 
@@ -43,7 +54,7 @@ const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, revi
 					</Box>
 				)}
 
-				<Box className="add-to-cart-bar" onClick={(e) => e.stopPropagation()}>
+				<Box className="add-to-cart-bar" onClick={handleAddToCart}>
 					ADD TO CART
 				</Box>
 
@@ -52,10 +63,16 @@ const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, revi
 						className="action-btn"
 						onClick={(e) => {
 							e.stopPropagation();
+							const next = !liked;
+							setLiked(next);
 							onLike?.(_id);
+							sweetTopSmallSuccessAlert(next ? 'Added to wishlist' : 'Removed from wishlist', 800);
 						}}
 					>
-						<img src="/icons/Heart.svg" alt="Wishlist" width={24} height={24} />
+						{liked
+							? <FavoriteIcon sx={{ fontSize: 22, color: '#a86464' }} />
+							: <FavoriteBorderIcon sx={{ fontSize: 22, color: '#333' }} />
+						}
 					</Box>
 					<Box className="action-btn" onClick={(e) => e.stopPropagation()}>
 						<img src="/icons/Eye.svg" alt="View" width={24} height={24} />

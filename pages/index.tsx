@@ -1,5 +1,15 @@
+import { useCallback, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Stack } from '@mui/material';
+import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
 import withLayoutHome from '../libs/components/layout/LayoutHome';
+import { GET_FURNITURES } from '../apollo/user/query';
+import { LIKE_TARGET_FURNITURE } from '../apollo/user/mutation';
+import { userVar } from '../apollo/store';
+import { Furniture } from '../libs/types/furniture/furniture';
+import { Direction } from '../libs/enums/common.enum';
+import { T } from '../libs/types/common';
+import { sweetMixinErrorAlert } from '../libs/sweetAlert';
 
 import HeroSection from '../libs/components/homepage/HeroSection';
 import IntroSection from '../libs/components/homepage/IntroSection';
@@ -19,6 +29,56 @@ import BlogSection from '../libs/components/homepage/BlogSection';
 import StoreFinder from '../libs/components/homepage/StoreFinder';
 
 const Home = () => {
+	const router = useRouter();
+	const user = useReactiveVar(userVar);
+
+	const [trendingFurnitures, setTrendingFurnitures] = useState<Furniture[]>([]);
+	const [topRatedFurnitures, setTopRatedFurnitures] = useState<Furniture[]>([]);
+	const [topSelectionFurnitures, setTopSelectionFurnitures] = useState<Furniture[]>([]);
+	const [suggestedFurnitures, setSuggestedFurnitures] = useState<Furniture[]>([]);
+
+	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
+
+	useQuery(GET_FURNITURES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: { page: 1, limit: 6, sort: 'furnitureViews', direction: Direction.DESC, search: {} } },
+		onCompleted: (data: T) => setTrendingFurnitures(data?.getFurnitures?.list ?? []),
+	});
+
+	useQuery(GET_FURNITURES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: { page: 1, limit: 3, sort: 'furnitureRank', direction: Direction.DESC, search: {} } },
+		onCompleted: (data: T) => setTopRatedFurnitures(data?.getFurnitures?.list ?? []),
+	});
+
+	useQuery(GET_FURNITURES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: { page: 1, limit: 6, sort: 'createdAt', direction: Direction.DESC, search: {} } },
+		onCompleted: (data: T) => setTopSelectionFurnitures(data?.getFurnitures?.list ?? []),
+	});
+
+	useQuery(GET_FURNITURES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: { page: 1, limit: 3, sort: 'furnitureLikes', direction: Direction.DESC, search: {} } },
+		onCompleted: (data: T) => setSuggestedFurnitures(data?.getFurnitures?.list ?? []),
+	});
+
+	const handleLike = useCallback(
+		async (id: string) => {
+			try {
+				if (!user?._id) {
+					router.push('/account/join');
+					return;
+				}
+				await likeTargetFurniture({ variables: { input: id }, fetchPolicy: 'network-only' });
+				window.dispatchEvent(new Event('wishlistUpdated'));
+			} catch (err: any) {
+				sweetMixinErrorAlert(err.message);
+			}
+		},
+		[user, router, likeTargetFurniture],
+	);
+
 	return (
 		<Stack id="home-page">
 			<HeroSection />
@@ -26,13 +86,13 @@ const Home = () => {
 			<ServicesSection />
 			<AwesomeServices />
 			<NewestChair />
-			<TrendingNow trendFurnitures={[]} onLike={() => {}} />
+			<TrendingNow trendFurnitures={trendingFurnitures} onLike={handleLike} />
 			<ShopByCategory />
-			<SuggestedSection furnitures={[]} onLike={() => {}} />
+			<SuggestedSection furnitures={suggestedFurnitures} onLike={handleLike} />
 			<SaleBanner />
-			<TopRated furnitures={[]} onLike={() => {}} />
+			<TopRated furnitures={topRatedFurnitures} onLike={handleLike} />
 			<LivingRoom />
-			<TopSelection furnitures={[]} onLike={() => {}} />
+			<TopSelection furnitures={topSelectionFurnitures} onLike={handleLike} />
 			<StoreFinder />
 			<FaqSection />
 			<InstagramSection />
