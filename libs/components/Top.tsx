@@ -31,7 +31,9 @@ const Top = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartCount, setCartCount] = useState(() =>
+    typeof window !== "undefined" ? getCartCount() : 0
+  );
   const [wishlistCount, setWishlistCount] = useState(0);
 
   useEffect(() => {

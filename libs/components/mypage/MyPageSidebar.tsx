@@ -4,18 +4,12 @@ import { useReactiveVar } from "@apollo/client";
 import { Stack, Box, Typography } from "@mui/material";
 import Link from "next/link";
 import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
-import FavoriteBorderOutlined from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
-import Inventory2Outlined from "@mui/icons-material/Inventory2Outlined";
-import LocalOfferOutlined from "@mui/icons-material/LocalOfferOutlined";
 import PowerSettingsNewOutlined from "@mui/icons-material/PowerSettingsNewOutlined";
 import ExpandMoreOutlined from "@mui/icons-material/ExpandMoreOutlined";
 import ExpandLessOutlined from "@mui/icons-material/ExpandLessOutlined";
 import ManageSearchOutlined from "@mui/icons-material/ManageSearchOutlined";
-import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
-import PersonAddAlt1Outlined from "@mui/icons-material/PersonAddAlt1Outlined";
 import ArticleOutlined from "@mui/icons-material/ArticleOutlined";
-import EditNoteOutlined from "@mui/icons-material/EditNoteOutlined";
 import { userVar } from "../../../apollo/store";
 import { REACT_APP_API_URL } from "../../config";
 import { logOut } from "../../auth";
@@ -24,6 +18,7 @@ const MyPageSidebar = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
   const [accountExpanded, setAccountExpanded] = useState(true);
+  const [shoppingExpanded, setShoppingExpanded] = useState(true);
   const [activityExpanded, setActivityExpanded] = useState(true);
   const [communityExpanded, setCommunityExpanded] = useState(true);
 
@@ -97,56 +92,48 @@ const MyPageSidebar = () => {
           )}
         </Box>
 
-        {/* Wishlist */}
+        {/* Shopping */}
         <Box className="nav-section">
-          <Link
-            href="/mypage/wishlist"
-            className={`nav-item ${currentPath === "/mypage/wishlist" ? "active" : ""}`}
-          >
-            <span className="nav-icon">
-              <FavoriteBorderOutlined />
-            </span>
-            My Wishlist
-          </Link>
-        </Box>
-
-        {/* Cart */}
-        <Box className="nav-section">
-          <Link
-            href="/mypage/cart"
-            className={`nav-item ${currentPath === "/mypage/cart" ? "active" : ""}`}
+          <Box
+            className={`nav-item ${["/mypage/wishlist", "/mypage/cart", "/mypage/orders", "/mypage/coupons"].includes(currentPath) ? "active" : ""}`}
+            onClick={() => setShoppingExpanded(!shoppingExpanded)}
           >
             <span className="nav-icon">
               <ShoppingCartOutlined />
             </span>
-            My Cart
-          </Link>
-        </Box>
-
-        {/* Orders */}
-        <Box className="nav-section">
-          <Link
-            href="/mypage/orders"
-            className={`nav-item ${currentPath === "/mypage/orders" ? "active" : ""}`}
-          >
-            <span className="nav-icon">
-              <Inventory2Outlined />
+            Shopping
+            <span className="nav-icon" style={{ marginLeft: "auto" }}>
+              {shoppingExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
             </span>
-            My Orders
-          </Link>
-        </Box>
-
-        {/* Coupons */}
-        <Box className="nav-section">
-          <Link
-            href="/mypage/coupons"
-            className={`nav-item ${currentPath === "/mypage/coupons" ? "active" : ""}`}
-          >
-            <span className="nav-icon">
-              <LocalOfferOutlined />
-            </span>
-            My Coupons
-          </Link>
+          </Box>
+          {shoppingExpanded && (
+            <Box className="nav-sub-items">
+              <Link
+                href="/mypage/wishlist"
+                className={`sub-item ${currentPath === "/mypage/wishlist" ? "active" : ""}`}
+              >
+                My Wishlist
+              </Link>
+              <Link
+                href="/mypage/cart"
+                className={`sub-item ${currentPath === "/mypage/cart" ? "active" : ""}`}
+              >
+                My Cart
+              </Link>
+              <Link
+                href="/mypage/orders"
+                className={`sub-item ${currentPath === "/mypage/orders" ? "active" : ""}`}
+              >
+                My Orders
+              </Link>
+              <Link
+                href="/mypage/coupons"
+                className={`sub-item ${currentPath === "/mypage/coupons" ? "active" : ""}`}
+              >
+                My Coupons
+              </Link>
+            </Box>
+          )}
         </Box>
 
         {/* Activity */}
@@ -169,21 +156,18 @@ const MyPageSidebar = () => {
                 href="/mypage/visited"
                 className={`sub-item ${currentPath === "/mypage/visited" ? "active" : ""}`}
               >
-                <ManageSearchOutlined fontSize="small" />
                 Recently Visited
               </Link>
               <Link
                 href="/mypage/followers"
                 className={`sub-item ${currentPath === "/mypage/followers" ? "active" : ""}`}
               >
-                <PeopleOutlined fontSize="small" />
                 Followers
               </Link>
               <Link
                 href="/mypage/followings"
                 className={`sub-item ${currentPath === "/mypage/followings" ? "active" : ""}`}
               >
-                <PersonAddAlt1Outlined fontSize="small" />
                 Followings
               </Link>
             </Box>
@@ -210,14 +194,12 @@ const MyPageSidebar = () => {
                 href="/mypage/articles"
                 className={`sub-item ${currentPath === "/mypage/articles" ? "active" : ""}`}
               >
-                <ArticleOutlined fontSize="small" />
                 My Articles
               </Link>
               <Link
                 href="/mypage/write-article"
                 className={`sub-item ${currentPath === "/mypage/write-article" ? "active" : ""}`}
               >
-                <EditNoteOutlined fontSize="small" />
                 Write Article
               </Link>
             </Box>
