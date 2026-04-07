@@ -11,6 +11,11 @@ import LocalOfferOutlined from "@mui/icons-material/LocalOfferOutlined";
 import PowerSettingsNewOutlined from "@mui/icons-material/PowerSettingsNewOutlined";
 import ExpandMoreOutlined from "@mui/icons-material/ExpandMoreOutlined";
 import ExpandLessOutlined from "@mui/icons-material/ExpandLessOutlined";
+import ManageSearchOutlined from "@mui/icons-material/ManageSearchOutlined";
+import PeopleOutlined from "@mui/icons-material/PeopleOutlined";
+import PersonAddAlt1Outlined from "@mui/icons-material/PersonAddAlt1Outlined";
+import ArticleOutlined from "@mui/icons-material/ArticleOutlined";
+import EditNoteOutlined from "@mui/icons-material/EditNoteOutlined";
 import { userVar } from "../../../apollo/store";
 import { REACT_APP_API_URL } from "../../config";
 import { logOut } from "../../auth";
@@ -19,6 +24,8 @@ const MyPageSidebar = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
   const [accountExpanded, setAccountExpanded] = useState(true);
+  const [activityExpanded, setActivityExpanded] = useState(true);
+  const [communityExpanded, setCommunityExpanded] = useState(true);
 
   const currentPath = router.asPath;
 
@@ -140,6 +147,81 @@ const MyPageSidebar = () => {
             </span>
             My Coupons
           </Link>
+        </Box>
+
+        {/* Activity */}
+        <Box className="nav-section">
+          <Box
+            className={`nav-item ${["/mypage/visited", "/mypage/followers", "/mypage/followings"].includes(currentPath) ? "active" : ""}`}
+            onClick={() => setActivityExpanded(!activityExpanded)}
+          >
+            <span className="nav-icon">
+              <ManageSearchOutlined />
+            </span>
+            Activity
+            <span className="nav-icon" style={{ marginLeft: "auto" }}>
+              {activityExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
+            </span>
+          </Box>
+          {activityExpanded && (
+            <Box className="nav-sub-items">
+              <Link
+                href="/mypage/visited"
+                className={`sub-item ${currentPath === "/mypage/visited" ? "active" : ""}`}
+              >
+                <ManageSearchOutlined fontSize="small" />
+                Recently Visited
+              </Link>
+              <Link
+                href="/mypage/followers"
+                className={`sub-item ${currentPath === "/mypage/followers" ? "active" : ""}`}
+              >
+                <PeopleOutlined fontSize="small" />
+                Followers
+              </Link>
+              <Link
+                href="/mypage/followings"
+                className={`sub-item ${currentPath === "/mypage/followings" ? "active" : ""}`}
+              >
+                <PersonAddAlt1Outlined fontSize="small" />
+                Followings
+              </Link>
+            </Box>
+          )}
+        </Box>
+
+        {/* Community */}
+        <Box className="nav-section">
+          <Box
+            className={`nav-item ${["/mypage/articles", "/mypage/write-article"].includes(currentPath) ? "active" : ""}`}
+            onClick={() => setCommunityExpanded(!communityExpanded)}
+          >
+            <span className="nav-icon">
+              <ArticleOutlined />
+            </span>
+            Community
+            <span className="nav-icon" style={{ marginLeft: "auto" }}>
+              {communityExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
+            </span>
+          </Box>
+          {communityExpanded && (
+            <Box className="nav-sub-items">
+              <Link
+                href="/mypage/articles"
+                className={`sub-item ${currentPath === "/mypage/articles" ? "active" : ""}`}
+              >
+                <ArticleOutlined fontSize="small" />
+                My Articles
+              </Link>
+              <Link
+                href="/mypage/write-article"
+                className={`sub-item ${currentPath === "/mypage/write-article" ? "active" : ""}`}
+              >
+                <EditNoteOutlined fontSize="small" />
+                Write Article
+              </Link>
+            </Box>
+          )}
         </Box>
 
         {/* Logout */}
