@@ -1535,4 +1535,261 @@
       }
     }
   }
+
+  // ==============================
+  // MY ARTICLES
+  // ==============================
+  .articles-content {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .articles-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+
+    .articles-title {
+      font-family: var(--font-ui);
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-medium);
+      color: var(--color-dark);
+      margin: 0 0 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .articles-subtitle {
+      font-family: var(--font-ui);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-regular);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .articles-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 8px;
+
+    .MuiPagination-ul {
+      gap: 2px;
+
+      .MuiPaginationItem-root {
+        font-family: var(--font-ui);
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-regular);
+        color: var(--color-text-muted);
+        border: 1px solid transparent;
+        min-width: 34px;
+        height: 34px;
+        border-radius: 2px;
+        transition: border-color 0.2s, color 0.2s;
+
+        &:hover {
+          border-color: var(--color-border);
+          background: transparent;
+        }
+
+        &.Mui-selected {
+          background: var(--color-primary);
+          color: #fff;
+          border-color: var(--color-primary);
+          border-radius: 2px;
+        }
+      }
+    }
+
+    .articles-total {
+      font-family: var(--font-ui);
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-regular);
+      color: var(--color-text-light);
+      letter-spacing: 0.3px;
+      margin: 0;
+    }
+  }
+
+  .articles-empty {
+    font-family: var(--font-ui);
+    font-size: var(--fs-base);
+    color: var(--color-text-muted);
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  // ==============================
+  // WRITE ARTICLE
+  // ==============================
+  .write-article-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .write-article-header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+
+    .write-article-title {
+      font-family: var(--font-ui);
+      font-size: var(--fs-2xl);
+      font-weight: var(--fw-medium);
+      color: var(--color-dark);
+      margin: 0 0 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .write-article-subtitle {
+      font-family: var(--font-ui);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-regular);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+  }
+
+  .write-article-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .write-article-fields {
+    display: flex;
+    gap: 20px;
+  }
+
+  .write-article-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+
+    .write-article-label {
+      font-family: var(--font-ui);
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-medium);
+      color: var(--color-text);
+      letter-spacing: 0.1px;
+    }
+
+    // Override MUI Select
+    .write-article-select {
+      border-radius: 2px;
+      font-family: var(--font-ui);
+      font-size: var(--fs-base);
+      color: var(--color-text);
+      background: #fff;
+
+      .MuiSelect-select {
+        padding: 11px 14px;
+        font-family: var(--font-ui);
+      }
+
+      .MuiOutlinedInput-notchedOutline {
+        border-color: var(--color-border);
+        border-radius: 2px;
+      }
+
+      &:hover .MuiOutlinedInput-notchedOutline {
+        border-color: var(--color-primary);
+      }
+
+      &.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: var(--color-primary);
+        border-width: 1px;
+      }
+
+      .MuiSvgIcon-root {
+        color: var(--color-text-muted);
+      }
+    }
+
+    // Override MUI TextField
+    .write-article-input {
+      .MuiInputBase-root {
+        border-radius: 2px;
+        font-family: var(--font-ui);
+        font-size: var(--fs-base);
+        color: var(--color-text);
+        background: #fff;
+
+        input {
+          padding: 11px 14px;
+          font-family: var(--font-ui);
+
+          &::placeholder {
+            color: var(--color-text-light);
+            opacity: 1;
+          }
+        }
+      }
+
+      .MuiOutlinedInput-notchedOutline {
+        border-color: var(--color-border);
+        border-radius: 2px;
+      }
+
+      .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline {
+        border-color: var(--color-primary);
+      }
+
+      .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: var(--color-primary);
+        border-width: 1px;
+      }
+
+      // Remove MUI label
+      .MuiInputLabel-root {
+        display: none;
+      }
+
+      fieldset legend {
+        display: none;
+      }
+    }
+  }
+
+  // TuiEditor wrapper overrides
+  .write-article-form {
+    .toastui-editor-defaultUI {
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      font-family: var(--font-ui);
+
+      .toastui-editor-toolbar {
+        background: var(--color-bg-light);
+        border-bottom: 1px solid var(--color-border);
+      }
+    }
+  }
+
+  .write-article-register-btn {
+    align-self: center;
+    width: 260px;
+    height: 48px;
+    background: var(--color-primary) !important;
+    color: #fff !important;
+    font-family: var(--font-ui);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.5px;
+    text-transform: none;
+    border-radius: 2px;
+    margin-top: 8px;
+    transition: background 0.2s !important;
+
+    &:hover {
+      background: var(--color-primary-hover) !important;
+    }
+  }
 }

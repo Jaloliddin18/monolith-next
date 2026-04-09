@@ -1,9 +1,18 @@
-import { Stack, Typography } from "@mui/material";
+import React from "react";
+import { Stack } from "@mui/material";
+import dynamic from "next/dynamic";
+
+const TuiEditor = dynamic(() => import("../community/TuiEditor"), {
+  ssr: false,
+});
 
 const WriteArticle = () => {
   return (
     <Stack className="write-article-content">
-      <Typography className="content-title">Write Article</Typography>
+      <div className="write-article-header">
+        <h2 className="write-article-title">Write An Article</h2>
+      </div>
+      <TuiEditor />
     </Stack>
   );
 };

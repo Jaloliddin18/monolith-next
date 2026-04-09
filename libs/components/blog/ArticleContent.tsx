@@ -49,7 +49,21 @@ const ArticleContent = ({ articleId }: ArticleContentProps) => {
 		}
 	};
 
-	if (!article) return null;
+	if (!article)
+		return (
+			<Stack className="article-content-section">
+				<div className="article-skeleton">
+					<div className="article-skeleton-badge" />
+					<div className="article-skeleton-title" />
+					<div className="article-skeleton-title short" />
+					<div className="article-skeleton-author" />
+					<div className="article-skeleton-image" />
+					<div className="article-skeleton-line" />
+					<div className="article-skeleton-line" />
+					<div className="article-skeleton-line short" />
+				</div>
+			</Stack>
+		);
 
 	const isLiked = article.likedByMe?.[0]?.myFavorite ?? false;
 	const author = article.memberData;
@@ -99,17 +113,7 @@ const ArticleContent = ({ articleId }: ArticleContentProps) => {
 			</div>
 
 			{/* Article Content */}
-			<div className="article-block">
-				{article.articleContent.split('\n').map((line, i) =>
-					line.trim() ? (
-						<p key={i} className="article-text">
-							{line}
-						</p>
-					) : (
-						<br key={i} />
-					),
-				)}
-			</div>
+			<div className="article-block" dangerouslySetInnerHTML={{ __html: article.articleContent }} />
 
 			{/* Stats + Like */}
 			<div className="article-stats-row">
