@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Box, Button, Pagination, Stack, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -19,6 +20,7 @@ interface MyFollowingsProps {
 }
 
 const MyFollowings = ({ subscribeHandler, unsubscribeHandler, likeMemberHandler }: MyFollowingsProps) => {
+	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const [followInquiry, setFollowInquiry] = useState<FollowInquiry>(DEFAULT_INPUT);
 	const [memberFollowings, setMemberFollowings] = useState<Following[]>([]);
@@ -77,7 +79,14 @@ const MyFollowings = ({ subscribeHandler, unsubscribeHandler, likeMemberHandler 
 
 					return (
 						<Stack className="follows-card" key={following._id} direction="row" alignItems="center">
-							<Stack className="follows-card-name" direction="row" alignItems="center" gap="12px">
+							<Stack
+								className="follows-card-name"
+								direction="row"
+								alignItems="center"
+								gap="12px"
+								onClick={() => router.push(`/member/detail?memberId=${member?._id}`)}
+								sx={{ cursor: 'pointer' }}
+							>
 								<Box
 									component="img"
 									src={imagePath}

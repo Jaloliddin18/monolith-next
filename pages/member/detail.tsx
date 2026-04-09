@@ -10,14 +10,17 @@ import DesignerReviewsPanel from '../../libs/components/designer/DesignerReviews
 import { useQuery } from '@apollo/client';
 import { GET_MEMBER } from '../../apollo/user/query';
 import { Member } from '../../libs/types/member/member';
+import { MemberType } from '../../libs/enums/member.enum';
 import { T } from '../../libs/types/common';
 import { useRouter } from 'next/router';
 
 const DesignerDetail = () => {
 	const router = useRouter();
 	const memberId = router.query?.memberId as string;
-	const [activeTab, setActiveTab] = useState('designs');
 	const [member, setMember] = useState<Member | null>(null);
+
+	const isDesigner = member?.memberType === MemberType.DESIGNER;
+	const [activeTab, setActiveTab] = useState('blog');
 
 	useQuery(GET_MEMBER, {
 		fetchPolicy: 'cache-and-network',
@@ -25,7 +28,11 @@ const DesignerDetail = () => {
 		skip: !memberId,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setMember(data?.getMember ?? null);
+			const fetched: Member = data?.getMember ?? null;
+			setMember(fetched);
+			if (fetched?.memberType === MemberType.DESIGNER) {
+				setActiveTab('designs');
+			}
 		},
 	});
 
@@ -33,7 +40,7 @@ const DesignerDetail = () => {
 		if (!memberId) return null;
 		switch (activeTab) {
 			case 'designs':
-				return <DesignerDesignsPanel memberId={memberId} member={member} />;
+				return isDesigner ? <DesignerDesignsPanel memberId={memberId} member={member} /> : null;
 			case 'blog':
 				return <DesignerBlogPanel memberId={memberId} />;
 			case 'followers':
@@ -49,7 +56,12 @@ const DesignerDetail = () => {
 
 	return (
 		<Stack className="designer-detail-page">
-			<DesignerProfileHero member={member} activeTab={activeTab} onTabChange={setActiveTab} />
+			<DesignerProfileHero
+				member={member}
+				activeTab={activeTab}
+				onTabChange={setActiveTab}
+				onMemberUpdate={setMember}
+			/>
 			<div className="designer-panel-content">{renderPanel()}</div>
 		</Stack>
 	);

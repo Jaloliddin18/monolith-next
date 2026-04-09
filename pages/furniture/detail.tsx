@@ -5,6 +5,7 @@ import { useReactiveVar } from '@apollo/client';
 import { Box, Stack, Typography, Button, IconButton } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import ShareIcon from '@mui/icons-material/Share';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
@@ -191,6 +192,10 @@ const FurnitureDetail = () => {
 									<StarIcon sx={{ fontSize: 16, color: '#fff' }} />
 								</Box>
 								<Typography className="review-count">({furniture?.furnitureComments ?? 20} review)</Typography>
+								<Stack direction="row" alignItems="center" gap="4px">
+									<VisibilityIcon sx={{ fontSize: 16, color: '#888' }} />
+									<Typography className="review-count">{furniture?.furnitureViews ?? 0}</Typography>
+								</Stack>
 							</Stack>
 							<Stack direction="row" gap="14px" alignItems="center">
 								<IconButton onClick={handleLike} sx={{ p: 0 }}>

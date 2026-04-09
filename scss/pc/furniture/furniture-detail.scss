@@ -11,6 +11,9 @@
 // ==============================
 .detail-breadcrumb {
 	padding: 24px 150px;
+	max-width: 1440px;
+	margin: 0 auto;
+	width: 100%;
 	font-family: var(--font-ui);
 	font-size: var(--fs-base);
 	font-weight: var(--fw-regular);
@@ -41,6 +44,7 @@
 .detail-main {
 	padding: 24px 150px;
 	max-width: 1440px;
+	margin: 0 auto;
 	width: 100%;
 	gap: 24px;
 }

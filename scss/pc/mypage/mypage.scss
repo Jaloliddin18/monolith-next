@@ -1,5 +1,5 @@
 #mypage-page {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   width: 100%;
   padding: 60px 150px;
@@ -615,6 +615,28 @@
     }
 
     // ==============================
+    // RECENTLY VISITED
+    // ==============================
+    .visited-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .no-data-text {
+        text-align: center;
+        color: var(--color-text-light);
+        font-size: var(--fs-base);
+        padding: 48px 0;
+      }
+
+      .visited-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+
+    // ==============================
     // FOLLOWERS / FOLLOWINGS
     // ==============================
     .follows-content {
@@ -954,7 +976,7 @@
 // CART PAGE (standalone, no sidebar)
 // ==============================
 #cart-page {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   width: 100%;
   padding: 24px 150px 60px;
@@ -1262,7 +1284,7 @@
 // RECENTLY VIEWED (mypage context)
 // ==============================
 .recently-viewed-section {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   width: 100%;
   padding: 60px 150px;
