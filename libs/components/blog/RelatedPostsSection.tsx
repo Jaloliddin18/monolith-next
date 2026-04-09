@@ -1,34 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Stack } from '@mui/material';
 import BlogArticleCard from '../common/BlogArticleCard';
+import { useQuery } from '@apollo/client';
+import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
+import { BoardArticle } from '../../types/board-article/board-article';
+import { BoardArticlesInquiry } from '../../types/board-article/board-article.input';
+import { Direction } from '../../enums/common.enum';
+import { REACT_APP_API_URL } from '../../config';
+import { T } from '../../types/common';
 
 const DEFAULT_IMAGE = '/img/furniture/luxury_chair.jpg';
 
-const relatedPosts = [
-	{
-		id: '201',
-		image: DEFAULT_IMAGE,
-		category: 'Space Planning',
-		date: 'July 25, 2023',
-		title: 'Rustic Retreats: Embracing the Charm of Wooden Furniture',
-	},
-	{
-		id: '202',
-		image: DEFAULT_IMAGE,
-		category: 'Buying Guides',
-		date: 'July 25, 2023',
-		title: 'Wooden Furniture Makeover: Transforming Old Pieces with Style',
-	},
-	{
-		id: '203',
-		image: DEFAULT_IMAGE,
-		category: 'Furniture Trends',
-		date: 'July 25, 2023',
-		title: 'Elevate Your Space: Styling Tips with Wooden Furniture',
-	},
-];
+interface RelatedPostsSectionProps {
+	articleId?: string;
+}
 
-const RelatedPostsSection = () => {
+const RelatedPostsSection = ({ articleId }: RelatedPostsSectionProps) => {
+	const [articles, setArticles] = useState<BoardArticle[]>([]);
+
+	const inquiry: BoardArticlesInquiry = {
+		page: 1,
+		limit: 4,
+		sort: 'createdAt',
+		direction: Direction.DESC,
+		search: {},
+	};
+
+	useQuery(GET_BOARD_ARTICLES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: inquiry },
+		onCompleted: (data: T) => {
+			const list: BoardArticle[] = data?.getBoardArticles?.list ?? [];
+			// exclude the currently viewed article
+			setArticles(list.filter((a) => a._id !== articleId).slice(0, 3));
+		},
+	});
+
 	return (
 		<Stack className="related-posts-section">
 			<div className="related-posts-header">
@@ -43,14 +50,18 @@ const RelatedPostsSection = () => {
 				</div>
 			</div>
 			<div className="related-posts-grid">
-				{relatedPosts.map((post) => (
+				{articles.map((article) => (
 					<BlogArticleCard
-						key={post.id}
-						id={post.id}
-						image={post.image}
-						category={post.category}
-						date={post.date}
-						title={post.title}
+						key={article._id}
+						id={article._id}
+						image={article.articleImage ? `${REACT_APP_API_URL}/${article.articleImage}` : DEFAULT_IMAGE}
+						category={article.articleCategory}
+						date={new Date(article.createdAt).toLocaleDateString('en-US', {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+						})}
+						title={article.articleTitle}
 					/>
 				))}
 			</div>

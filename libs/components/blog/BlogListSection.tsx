@@ -1,101 +1,134 @@
 import React, { useState } from 'react';
 import { Stack, Pagination } from '@mui/material';
 import BlogCard from '../common/BlogCard';
+import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
+import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
+import { LIKE_TARGET_BOARD_ARTICLE } from '../../../apollo/user/mutation';
+import { BoardArticle } from '../../types/board-article/board-article';
+import { BoardArticlesInquiry } from '../../types/board-article/board-article.input';
+import { BoardArticleCategory } from '../../enums/board-article.enum';
+import { Direction } from '../../enums/common.enum';
+import { REACT_APP_API_URL } from '../../config';
+import { T } from '../../types/common';
+import { userVar } from '../../../apollo/store';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
 
 const DEFAULT_IMAGE = '/img/furniture/luxury_chair.jpg';
+const LIMIT = 6;
 
-const blogData = [
-	{
-		id: '1',
-		image: DEFAULT_IMAGE,
-		category: 'Style Guides',
-		date: 'January 5, 2023',
-		title: 'Exploring different furniture styles and their characteristics.',
-	},
-	{
-		id: '2',
-		image: DEFAULT_IMAGE,
-		category: 'Furniture Trends',
-		date: 'July 9, 2023',
-		title: 'Showcasing the latest trends in furniture design and decor.',
-	},
-	{
-		id: '3',
-		image: DEFAULT_IMAGE,
-		category: 'Furniture Care',
-		date: 'February 14, 2023',
-		title: 'Tips and advice on how to care for and maintain different types of furniture.',
-	},
-	{
-		id: '4',
-		image: DEFAULT_IMAGE,
-		category: 'Upcycling',
-		date: 'July 19, 2023',
-		title: 'Techniques and inspiration for restoring and upcycling old furniture pieces.',
-	},
-	{
-		id: '5',
-		image: DEFAULT_IMAGE,
-		category: 'Buying Guides',
-		date: 'March 21, 2023',
-		title: 'Helping readers make informed decisions when purchasing furniture.',
-	},
-	{
-		id: '6',
-		image: DEFAULT_IMAGE,
-		category: 'Space Planning',
-		date: 'August 28, 2023',
-		title: 'Tips for optimizing furniture placement and arrangement in different living spaces.',
-	},
-	{
-		id: '7',
-		image: DEFAULT_IMAGE,
-		category: 'Furniture DIY Projects',
-		date: 'April 8, 2023',
-		title: 'Step-by-step guides and ideas for DIY furniture projects.',
-	},
-	{
-		id: '8',
-		image: DEFAULT_IMAGE,
-		category: 'Materials and Finishes',
-		date: 'September 12, 2023',
-		title: 'Exploring the various materials and finishes used in furniture construction.',
-	},
+const CATEGORIES: { value: BoardArticleCategory; label: string }[] = [
+	{ value: BoardArticleCategory.FREE, label: 'Free' },
+	{ value: BoardArticleCategory.RECOMMEND, label: 'Recommend' },
+	{ value: BoardArticleCategory.NEWS, label: 'News' },
+	{ value: BoardArticleCategory.HUMOR, label: 'Humor' },
 ];
 
 const BlogListSection = () => {
+	const user = useReactiveVar(userVar);
+	const [articles, setArticles] = useState<BoardArticle[]>([]);
+	const [total, setTotal] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
-	const totalPages = 10;
+	const [activeCategory, setActiveCategory] = useState<BoardArticleCategory>(BoardArticleCategory.FREE);
 
-	const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
+	const inquiry: BoardArticlesInquiry = {
+		page: currentPage,
+		limit: LIMIT,
+		sort: 'createdAt',
+		direction: Direction.DESC,
+		search: { articleCategory: activeCategory },
+	};
+
+	const { refetch } = useQuery(GET_BOARD_ARTICLES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: inquiry },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setArticles(data?.getBoardArticles?.list ?? []);
+			setTotal(data?.getBoardArticles?.metaCounter?.[0]?.total ?? 0);
+		},
+	});
+
+	const [likeTargetBoardArticle] = useMutation(LIKE_TARGET_BOARD_ARTICLE);
+
+	const handleCategoryChange = (category: BoardArticleCategory) => {
+		setActiveCategory(category);
+		setCurrentPage(1);
+	};
+
+	const handlePageChange = (_e: React.ChangeEvent<unknown>, page: number) => {
 		setCurrentPage(page);
+	};
+
+	const handleLike = async (e: React.MouseEvent, id: string) => {
+		e.stopPropagation();
+		if (!user?._id) {
+			sweetMixinErrorAlert('Please login first!');
+			return;
+		}
+		try {
+			await likeTargetBoardArticle({ variables: { input: id } });
+			await refetch({ input: inquiry });
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			sweetMixinErrorAlert(err?.message ?? 'Something went wrong');
+		}
 	};
 
 	return (
 		<Stack className="blog-list-section">
 			<h2 className="section-title">Styling Tips with Wooden Furniture</h2>
-			<div className="blog-grid">
-				{blogData.map((blog) => (
-					<BlogCard
-						key={blog.id}
-						id={blog.id}
-						image={blog.image}
-						category={blog.category}
-						date={blog.date}
-						title={blog.title}
-					/>
+
+			<div className="blog-category-tabs">
+				{CATEGORIES.map((cat) => (
+					<button
+						key={cat.value}
+						type="button"
+						className={`blog-category-tab ${activeCategory === cat.value ? 'active' : ''}`}
+						onClick={() => handleCategoryChange(cat.value)}
+					>
+						{cat.label}
+					</button>
 				))}
 			</div>
-			<div className="blog-pagination">
-				<Pagination
-					count={totalPages}
-					page={currentPage}
-					onChange={handlePageChange}
-					shape="rounded"
-					siblingCount={1}
-					boundaryCount={1}
-				/>
+
+			<div className="blog-grid">
+				{articles.length > 0 ? (
+					articles.map((article) => (
+						<BlogCard
+							key={article._id}
+							id={article._id}
+							image={article.articleImage ? `${REACT_APP_API_URL}/${article.articleImage}` : DEFAULT_IMAGE}
+							category={article.articleCategory}
+							date={new Date(article.createdAt).toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric',
+							})}
+							title={article.articleTitle}
+							likes={article.articleLikes}
+							views={article.articleViews}
+							comments={article.articleComments}
+							likedByMe={article.likedByMe?.[0]?.myFavorite ?? false}
+							onLike={(e) => handleLike(e, article._id)}
+						/>
+					))
+				) : (
+					<p style={{ padding: '24px', color: 'var(--color-text-muted)' }}>No articles found.</p>
+				)}
 			</div>
+
+			{total > LIMIT && (
+				<div className="blog-pagination">
+					<Pagination
+						count={Math.ceil(total / LIMIT)}
+						page={currentPage}
+						onChange={handlePageChange}
+						shape="rounded"
+						siblingCount={1}
+						boundaryCount={1}
+					/>
+				</div>
+			)}
 		</Stack>
 	);
 };

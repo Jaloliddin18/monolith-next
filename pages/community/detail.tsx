@@ -12,9 +12,9 @@ const CommunityDetail = () => {
 
 	return (
 		<Stack className="blog-detail-page">
-			<ArticleContent />
+			<ArticleContent articleId={articleId} />
 			<ArticleComments articleId={articleId} />
-			<RelatedPostsSection />
+			<RelatedPostsSection articleId={articleId} />
 		</Stack>
 	);
 };
