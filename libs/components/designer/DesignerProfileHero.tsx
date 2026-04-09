@@ -7,7 +7,7 @@ import { MemberType } from '../../enums/member.enum';
 import { REACT_APP_API_URL } from '../../config';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
-import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
+import { sweetMixinErrorAlert } from '../../sweetAlert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -19,11 +19,12 @@ interface DesignerProfileHeroProps {
 	activeTab: string;
 	onTabChange: (tab: string) => void;
 	onMemberUpdate?: (updated: Member) => void;
+	onFollowToggle?: (follower: Member, added: boolean) => void;
 }
 
-const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate }: DesignerProfileHeroProps) => {
+const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate, onFollowToggle }: DesignerProfileHeroProps) => {
 	const user = useReactiveVar(userVar);
-	const isMyProfile = user?._id === member?._id;
+	const isMyProfile = !!user?._id && user._id === member?._id;
 
 	const isFollowing = member?.followedByMe?.some((f) => f.myFollowing) ?? false;
 	const isLiked = member?.likedByMe?.[0]?.myFavorite ?? false;
@@ -43,7 +44,6 @@ const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate }:
 				await unsubscribe({ variables: { input: member._id } });
 			} else {
 				await subscribe({ variables: { input: member._id } });
-				await sweetTopSmallSuccessAlert('Followed!', 800);
 			}
 			// Optimistic update: toggle follow state + update count
 			const delta = isFollowing ? -1 : 1;
@@ -52,6 +52,7 @@ const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate }:
 				memberFollowers: (member.memberFollowers ?? 0) + delta,
 				followedByMe: [{ followingId: member._id, followerId: user._id, myFollowing: !isFollowing }],
 			});
+			onFollowToggle?.(user as Member, !isFollowing);
 		} catch (err: any) {
 			sweetMixinErrorAlert(err?.message ?? 'Something went wrong');
 		}
@@ -79,6 +80,7 @@ const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate }:
 	};
 
 	const isDesigner = member?.memberType === MemberType.DESIGNER;
+	const roleLabel = member?.memberType === MemberType.DESIGNER ? 'Designer' : member?.memberType === MemberType.USER ? 'User' : '';
 
 	const statTabs: { key: string; value: number; label: string }[] = [
 		...(isDesigner ? [{ key: 'designs', value: member?.memberDesigns ?? 0, label: 'Designs' }] : []),
@@ -100,7 +102,7 @@ const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate }:
 					<img src={image} alt={member?.memberNick ?? 'Designer'} />
 				</div>
 				<div className="designer-profile-info">
-					<span className="designer-profile-badge">{member?.memberAddress ?? 'Designer'}</span>
+					<span className="designer-profile-badge">{roleLabel}</span>
 					<h1 className="designer-profile-name">
 						{member?.memberFullName ?? member?.memberNick ?? '—'}
 					</h1>

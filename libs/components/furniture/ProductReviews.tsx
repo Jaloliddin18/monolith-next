@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Box, Typography, Pagination } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useRouter } from 'next/router';
 import { useQuery, useMutation } from '@apollo/client';
 import { useReactiveVar } from '@apollo/client';
 import { GET_COMMENTS } from '../../../apollo/user/query';
@@ -21,6 +22,7 @@ interface ProductReviewsProps {
 }
 
 const ProductReviews = ({ furnitureId }: ProductReviewsProps) => {
+	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [reviewText, setReviewText] = useState('');
@@ -111,7 +113,7 @@ const ProductReviews = ({ furnitureId }: ProductReviewsProps) => {
 							const memberImage = member?.memberImage
 								? `${REACT_APP_API_URL}/${member.memberImage}`
 								: '/icons/user_profile.png';
-							const name = member?.memberFullName ?? member?.memberNick ?? 'Anonymous';
+							const name = member?.memberFullName || member?.memberNick || 'Anonymous';
 							const date = new Date(comment.createdAt).toLocaleDateString('en-GB', {
 								day: '2-digit',
 								month: 'short',
@@ -120,7 +122,15 @@ const ProductReviews = ({ furnitureId }: ProductReviewsProps) => {
 
 							return (
 								<Box className="review-item" key={comment._id}>
-									<Stack className="review-user-col">
+									<Stack
+										className="review-user-col"
+										sx={{ cursor: member?._id ? 'pointer' : 'default' }}
+										onClick={() => {
+								if (!member?._id) return;
+								if (!!user?._id && user._id === member._id) router.push('/mypage');
+								else router.push(`/member/detail?memberId=${member._id}`);
+							}}
+									>
 										<Box
 											component="img"
 											src={memberImage}

@@ -84,7 +84,11 @@ const MyFollowings = ({ subscribeHandler, unsubscribeHandler, likeMemberHandler 
 								direction="row"
 								alignItems="center"
 								gap="12px"
-								onClick={() => router.push(`/member/detail?memberId=${member?._id}`)}
+								onClick={() =>
+									!!user?._id && user._id === member?._id
+										? router.push('/mypage')
+										: router.push(`/member/detail?memberId=${member?._id}`)
+								}
 								sx={{ cursor: 'pointer' }}
 							>
 								<Box

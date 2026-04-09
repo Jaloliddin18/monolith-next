@@ -64,3 +64,9 @@ export const updateCartQuantity = (id: string, quantity: number): CartItem[] => 
 export const getCartCount = (): number => {
 	return getCartItems().reduce((sum, i) => sum + i.quantity, 0);
 };
+
+export const clearCart = (): void => {
+	if (typeof window === 'undefined') return;
+	localStorage.removeItem(CART_KEY);
+	window.dispatchEvent(new Event('cartUpdated'));
+};

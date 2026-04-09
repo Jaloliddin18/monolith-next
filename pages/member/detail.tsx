@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { Stack } from '@mui/material';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import DesignerProfileHero from '../../libs/components/designer/DesignerProfileHero';
@@ -18,9 +18,21 @@ const DesignerDetail = () => {
 	const router = useRouter();
 	const memberId = router.query?.memberId as string;
 	const [member, setMember] = useState<Member | null>(null);
+	const optimisticRef = useRef(false);
 
 	const isDesigner = member?.memberType === MemberType.DESIGNER;
 	const [activeTab, setActiveTab] = useState('blog');
+
+	const [followerEvent, setFollowerEvent] = useState<{ follower: Member; added: boolean } | null>(null);
+
+	const handleMemberUpdate = useCallback((updated: Member) => {
+		optimisticRef.current = true;
+		setMember(updated);
+	}, []);
+
+	const handleFollowToggle = useCallback((follower: Member, added: boolean) => {
+		setFollowerEvent({ follower, added });
+	}, []);
 
 	useQuery(GET_MEMBER, {
 		fetchPolicy: 'cache-and-network',
@@ -29,6 +41,8 @@ const DesignerDetail = () => {
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			const fetched: Member = data?.getMember ?? null;
+			// Don't overwrite optimistic updates from user interactions
+			if (optimisticRef.current) return;
 			setMember(fetched);
 			if (fetched?.memberType === MemberType.DESIGNER) {
 				setActiveTab('designs');
@@ -36,33 +50,38 @@ const DesignerDetail = () => {
 		},
 	});
 
-	const renderPanel = () => {
-		if (!memberId) return null;
-		switch (activeTab) {
-			case 'designs':
-				return isDesigner ? <DesignerDesignsPanel memberId={memberId} member={member} /> : null;
-			case 'blog':
-				return <DesignerBlogPanel memberId={memberId} />;
-			case 'followers':
-				return <DesignerFollowersPanel memberId={memberId} />;
-			case 'followings':
-				return <DesignerFollowingsPanel memberId={memberId} />;
-			case 'reviews':
-				return <DesignerReviewsPanel />;
-			default:
-				return null;
-		}
-	};
-
 	return (
 		<Stack className="designer-detail-page">
 			<DesignerProfileHero
 				member={member}
 				activeTab={activeTab}
 				onTabChange={setActiveTab}
-				onMemberUpdate={setMember}
+				onMemberUpdate={handleMemberUpdate}
+				onFollowToggle={handleFollowToggle}
 			/>
-			<div className="designer-panel-content">{renderPanel()}</div>
+			<div className="designer-panel-content">
+				{memberId && (
+					<>
+						{isDesigner && (
+							<div style={{ display: activeTab === 'designs' ? undefined : 'none' }}>
+								<DesignerDesignsPanel memberId={memberId} member={member} />
+							</div>
+						)}
+						<div style={{ display: activeTab === 'blog' ? undefined : 'none' }}>
+							<DesignerBlogPanel memberId={memberId} />
+						</div>
+						<div style={{ display: activeTab === 'followers' ? undefined : 'none' }}>
+							<DesignerFollowersPanel memberId={memberId} followerEvent={followerEvent} />
+						</div>
+						<div style={{ display: activeTab === 'followings' ? undefined : 'none' }}>
+							<DesignerFollowingsPanel memberId={memberId} />
+						</div>
+						<div style={{ display: activeTab === 'reviews' ? undefined : 'none' }}>
+							<DesignerReviewsPanel memberId={memberId} />
+						</div>
+					</>
+				)}
+			</div>
 		</Stack>
 	);
 };
