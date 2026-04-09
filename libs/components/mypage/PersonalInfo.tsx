@@ -78,14 +78,13 @@ const PersonalInfo = () => {
 
   const handleSave = async () => {
     try {
-      const input: any = {
-        _id: user._id,
-        memberNick: formData.memberNick,
-        memberFullName: formData.memberFullName,
-        memberPhone: formData.memberPhone,
-        memberAddress: formData.memberAddress,
-        memberDesc: formData.memberDesc,
-      };
+      const input: any = { _id: user._id };
+
+      if (formData.memberNick) input.memberNick = formData.memberNick;
+      if (formData.memberFullName) input.memberFullName = formData.memberFullName;
+      if (formData.memberPhone) input.memberPhone = formData.memberPhone;
+      if (formData.memberAddress) input.memberAddress = formData.memberAddress;
+      if (formData.memberDesc) input.memberDesc = formData.memberDesc;
 
       if (imageFile) {
         input.memberImage = imageFile;

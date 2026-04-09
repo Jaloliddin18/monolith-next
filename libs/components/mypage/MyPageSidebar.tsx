@@ -10,9 +10,12 @@ import ExpandMoreOutlined from "@mui/icons-material/ExpandMoreOutlined";
 import ExpandLessOutlined from "@mui/icons-material/ExpandLessOutlined";
 import ManageSearchOutlined from "@mui/icons-material/ManageSearchOutlined";
 import ArticleOutlined from "@mui/icons-material/ArticleOutlined";
+import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 import { userVar } from "../../../apollo/store";
 import { REACT_APP_API_URL } from "../../config";
 import { logOut } from "../../auth";
+import { MemberType } from "../../enums/member.enum";
+import ChairOutlined from "@mui/icons-material/ChairOutlined";
 
 const MyPageSidebar = () => {
   const router = useRouter();
@@ -36,15 +39,21 @@ const MyPageSidebar = () => {
       <Box className="sidebar-profile">
         <img
           className="profile-avatar"
-          src={"/icons/user_profile.png"}
+          src={avatarSrc}
           alt="Profile"
         />
         <Box className="profile-info">
           <Typography className="profile-name">
-            {user.memberNick || "User"}
+            {user.memberFullName || user.memberNick || "User"}
           </Typography>
-          <Typography className="profile-location">
-            {user.memberAddress || "No address"}
+          <Box className="profile-phone-row">
+            <LocalPhoneOutlined sx={{ fontSize: 16 }} />
+            <Typography className="profile-phone">
+              {user.memberPhone || "—"}
+            </Typography>
+          </Box>
+          <Typography className="profile-member-type">
+            {user.memberType || "USER"}
           </Typography>
         </Box>
       </Box>
@@ -82,59 +91,97 @@ const MyPageSidebar = () => {
               >
                 Manage Address
               </Link>
-              <Link
-                href="/mypage/payment-details"
-                className={`sub-item ${currentPath === "/mypage/payment-details" ? "active" : ""}`}
-              >
-                Payment Details
-              </Link>
+              {user.memberType !== MemberType.DESIGNER && (
+                <Link
+                  href="/mypage/payment-details"
+                  className={`sub-item ${currentPath === "/mypage/payment-details" ? "active" : ""}`}
+                >
+                  Payment Details
+                </Link>
+              )}
             </Box>
           )}
         </Box>
 
-        {/* Shopping */}
-        <Box className="nav-section">
-          <Box
-            className={`nav-item ${["/mypage/wishlist", "/mypage/cart", "/mypage/orders", "/mypage/coupons"].includes(currentPath) ? "active" : ""}`}
-            onClick={() => setShoppingExpanded(!shoppingExpanded)}
-          >
-            <span className="nav-icon">
-              <ShoppingCartOutlined />
-            </span>
-            Shopping
-            <span className="nav-icon" style={{ marginLeft: "auto" }}>
-              {shoppingExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
-            </span>
-          </Box>
-          {shoppingExpanded && (
-            <Box className="nav-sub-items">
-              <Link
-                href="/mypage/wishlist"
-                className={`sub-item ${currentPath === "/mypage/wishlist" ? "active" : ""}`}
-              >
-                My Wishlist
-              </Link>
-              <Link
-                href="/mypage/cart"
-                className={`sub-item ${currentPath === "/mypage/cart" ? "active" : ""}`}
-              >
-                My Cart
-              </Link>
-              <Link
-                href="/mypage/orders"
-                className={`sub-item ${currentPath === "/mypage/orders" ? "active" : ""}`}
-              >
-                My Orders
-              </Link>
-              <Link
-                href="/mypage/coupons"
-                className={`sub-item ${currentPath === "/mypage/coupons" ? "active" : ""}`}
-              >
-                My Coupons
-              </Link>
+        {/* Shopping — USER only */}
+        {user.memberType !== MemberType.DESIGNER && (
+          <Box className="nav-section">
+            <Box
+              className={`nav-item ${["/mypage/wishlist", "/mypage/cart", "/mypage/orders", "/mypage/coupons"].includes(currentPath) ? "active" : ""}`}
+              onClick={() => setShoppingExpanded(!shoppingExpanded)}
+            >
+              <span className="nav-icon">
+                <ShoppingCartOutlined />
+              </span>
+              Shopping
+              <span className="nav-icon" style={{ marginLeft: "auto" }}>
+                {shoppingExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
+              </span>
             </Box>
-          )}
-        </Box>
+            {shoppingExpanded && (
+              <Box className="nav-sub-items">
+                <Link
+                  href="/mypage/wishlist"
+                  className={`sub-item ${currentPath === "/mypage/wishlist" ? "active" : ""}`}
+                >
+                  My Wishlist
+                </Link>
+                <Link
+                  href="/mypage/cart"
+                  className={`sub-item ${currentPath === "/mypage/cart" ? "active" : ""}`}
+                >
+                  My Cart
+                </Link>
+                <Link
+                  href="/mypage/orders"
+                  className={`sub-item ${currentPath === "/mypage/orders" ? "active" : ""}`}
+                >
+                  My Orders
+                </Link>
+                <Link
+                  href="/mypage/coupons"
+                  className={`sub-item ${currentPath === "/mypage/coupons" ? "active" : ""}`}
+                >
+                  My Coupons
+                </Link>
+              </Box>
+            )}
+          </Box>
+        )}
+
+        {/* My Furnitures — DESIGNER only */}
+        {user.memberType === MemberType.DESIGNER && (
+          <Box className="nav-section">
+            <Box
+              className={`nav-item ${["/mypage/my-furnitures", "/mypage/add-furniture"].includes(currentPath) ? "active" : ""}`}
+              onClick={() => setShoppingExpanded(!shoppingExpanded)}
+            >
+              <span className="nav-icon">
+                <ChairOutlined />
+              </span>
+              My Furnitures
+              <span className="nav-icon" style={{ marginLeft: "auto" }}>
+                {shoppingExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
+              </span>
+            </Box>
+            {shoppingExpanded && (
+              <Box className="nav-sub-items">
+                <Link
+                  href="/mypage/my-furnitures"
+                  className={`sub-item ${currentPath === "/mypage/my-furnitures" ? "active" : ""}`}
+                >
+                  My Furnitures
+                </Link>
+                <Link
+                  href="/mypage/add-furniture"
+                  className={`sub-item ${currentPath === "/mypage/add-furniture" ? "active" : ""}`}
+                >
+                  Add Furniture
+                </Link>
+              </Box>
+            )}
+          </Box>
+        )}
 
         {/* Activity */}
         <Box className="nav-section">

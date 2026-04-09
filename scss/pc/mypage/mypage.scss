@@ -34,7 +34,7 @@
       .profile-info {
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px;
 
         .profile-name {
           font-family: "Syne", sans-serif;
@@ -43,11 +43,25 @@
           color: var(--color-dark);
         }
 
-        .profile-location {
+        .profile-phone-row {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: var(--color-text-muted);
+        }
+
+        .profile-phone {
           font-family: "Syne", sans-serif;
           font-size: var(--fs-sm);
           font-weight: var(--fw-regular);
-          color: #848484;
+          color: var(--color-dark);
+        }
+
+        .profile-member-type {
+          font-family: "Syne", sans-serif;
+          font-size: var(--fs-sm);
+          font-weight: var(--fw-semibold);
+          color: var(--color-primary);
         }
       }
     }
@@ -1791,5 +1805,426 @@
     &:hover {
       background: var(--color-primary-hover) !important;
     }
+  }
+
+  // ─── My Furnitures ──────────────────────
+  .my-furnitures-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .my-furnitures-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .my-furnitures-tab {
+    font-family: var(--font-ui) !important;
+    font-size: var(--fs-sm) !important;
+    font-weight: var(--fw-regular) !important;
+    color: var(--color-text-muted) !important;
+    background: none !important;
+    border: 1px solid var(--color-border) !important;
+    padding: 6px 16px !important;
+    border-radius: 3px !important;
+    cursor: pointer;
+    line-height: 1.5 !important;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+
+    &:hover {
+      border-color: var(--color-primary) !important;
+      color: var(--color-primary) !important;
+    }
+
+    &.active {
+      background: var(--color-primary) !important;
+      border-color: var(--color-primary) !important;
+      color: #fff !important;
+    }
+  }
+
+  .my-furnitures-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+}
+
+// ═══════════════════════════════════════════
+// Add Furniture — Standalone Page (no sidebar)
+// ═══════════════════════════════════════════
+
+.add-furniture-page {
+  max-width: 900px;
+  margin: 48px auto 80px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.add-furniture-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.18s;
+  align-self: flex-start;
+
+  &:hover {
+    color: var(--color-dark);
+  }
+}
+
+.add-furniture-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-furniture-page-title {
+  font-family: var(--font-ui) !important;
+  font-size: 28px !important;
+  font-weight: var(--fw-bold) !important;
+  color: var(--color-dark) !important;
+  line-height: 1.2 !important;
+}
+
+.add-furniture-page-subtitle {
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-sm) !important;
+  color: var(--color-text-muted) !important;
+}
+
+// ─── Step indicator ──────────────────────────
+.add-furniture-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.af-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+
+  .af-step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-bg-light);
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--color-text-muted);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .af-step-label {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  &.active {
+    .af-step-num {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+    .af-step-label {
+      color: var(--color-primary);
+      font-weight: var(--fw-medium);
+    }
+  }
+
+  &.done {
+    .af-step-num {
+      background: var(--color-dark);
+      border-color: var(--color-dark);
+      color: #fff;
+    }
+    .af-step-label {
+      color: var(--color-dark);
+    }
+  }
+}
+
+.af-step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--color-border);
+  margin-bottom: 22px;
+  transition: background 0.2s;
+
+  &.done {
+    background: var(--color-dark);
+  }
+}
+
+// ─── Form card ───────────────────────────────
+.add-furniture-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 36px 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+// ─── Reusable field styles ────────────────────
+.add-furniture-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.add-furniture-section-title {
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-lg) !important;
+  font-weight: var(--fw-medium) !important;
+  color: var(--color-dark) !important;
+}
+
+.add-furniture-optional {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-muted);
+  margin-left: 6px;
+}
+
+.af-required-mark {
+  color: #c0392b;
+  margin-left: 2px;
+}
+
+.add-furniture-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  &.three-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.add-furniture-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-furniture-label {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-dark);
+}
+
+.add-furniture-input {
+  .MuiOutlinedInput-root {
+    border-radius: 3px;
+    font-family: var(--font-ui);
+    font-size: var(--fs-base);
+
+    fieldset {
+      border-color: var(--color-border);
+    }
+
+    &:hover fieldset {
+      border-color: var(--color-text-muted);
+    }
+
+    &.Mui-focused fieldset {
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+.add-furniture-select {
+  border-radius: 3px !important;
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-base) !important;
+
+  fieldset {
+    border-color: var(--color-border) !important;
+  }
+}
+
+.add-furniture-checkboxes {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+
+  .MuiFormControlLabel-label {
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    color: var(--color-text-muted);
+  }
+}
+
+// ─── Drag & drop upload zone ─────────────────
+.add-furniture-dropzone {
+  border: 2px dashed #e0b0a0;
+  border-radius: 6px;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  background: #fffaf9;
+  transition: border-color 0.2s, background 0.2s;
+
+  &:hover,
+  &.drag-over {
+    border-color: var(--color-primary);
+    background: #fff5f3;
+  }
+
+  .af-dropzone-icon {
+    font-size: 52px !important;
+    color: #ccc;
+  }
+
+  .af-dropzone-text {
+    font-family: var(--font-ui) !important;
+    font-size: var(--fs-base) !important;
+    font-weight: var(--fw-medium) !important;
+    color: var(--color-dark) !important;
+  }
+
+  .af-dropzone-hint {
+    font-family: var(--font-ui) !important;
+    font-size: var(--fs-sm) !important;
+    color: var(--color-text-muted) !important;
+  }
+
+  .af-browse-btn {
+    margin-top: 4px;
+    padding: 8px 24px;
+    background: none;
+    border: 1.5px solid var(--color-dark);
+    border-radius: 3px;
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: var(--color-dark);
+      color: #fff;
+    }
+  }
+}
+
+// ─── Image previews ───────────────────────────
+.af-preview-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.af-preview-item {
+  position: relative;
+  width: 120px;
+  height: 90px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .af-preview-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 26px;
+    height: 26px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.18s;
+
+    &:hover {
+      background: var(--color-primary);
+    }
+  }
+}
+
+// ─── Step navigation bar ─────────────────────
+.add-furniture-step-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.af-nav-prev-btn {
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: 10px 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: border-color 0.18s, color 0.18s;
+
+  &:hover {
+    border-color: var(--color-text-muted);
+    color: var(--color-dark);
+  }
+}
+
+.af-nav-next-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-medium);
+  color: #fff;
+  background: var(--color-dark);
+  border: none;
+  padding: 12px 32px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.18s;
+
+  &:hover {
+    background: #111;
   }
 }
