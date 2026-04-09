@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Stack, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -21,6 +21,10 @@ interface ProductCardProps {
 const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, reviewCount: reviewCountProp, originalPrice, size = 'default' }: ProductCardProps) => {
 	const router = useRouter();
 	const [liked, setLiked] = useState(furniture?.likedByMe?.[0]?.myFavorite ?? false);
+
+	useEffect(() => {
+		setLiked(furniture?.likedByMe?.[0]?.myFavorite ?? false);
+	}, [furniture?.likedByMe]);
 
 	const handleAddToCart = (e: React.MouseEvent) => {
 		e.stopPropagation();

@@ -51,6 +51,12 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 		}
 	}, [router.isReady, router.query.input]);
 
+	useEffect(() => {
+		const handler = () => getFurnituresRefetch();
+		window.addEventListener('wishlistUpdated', handler);
+		return () => window.removeEventListener('wishlistUpdated', handler);
+	}, [getFurnituresRefetch]);
+
 	/** HANDLERS **/
 	const handlePageChange = useCallback(
 		async (page: number) => {

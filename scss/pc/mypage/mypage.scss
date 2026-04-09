@@ -614,6 +614,168 @@
       }
     }
 
+    // ==============================
+    // FOLLOWERS / FOLLOWINGS
+    // ==============================
+    .follows-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .follows-list-box {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #d9c5c5;
+      border-radius: 4px;
+      overflow: hidden;
+
+      .follows-listing-header {
+        display: flex;
+        flex-direction: row;
+        padding: 14px 24px;
+        background: #fafafa;
+        border-bottom: 1px solid #d9c5c5;
+
+        .header-text {
+          font-family: var(--font-ui);
+          font-size: var(--fs-sm);
+          font-weight: var(--fw-medium);
+          color: var(--color-text-light);
+          flex: 1;
+
+          &:first-child { flex: 1.5; }
+          &:last-child { text-align: right; }
+        }
+      }
+
+      .no-follows-text {
+        padding: 40px 24px;
+        font-family: var(--font-ui);
+        font-size: var(--fs-base);
+        color: var(--color-text-light);
+        text-align: center;
+      }
+
+      .follows-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--color-border);
+        gap: 24px;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .follows-card-name {
+          flex: 1.5;
+
+          .follows-member-nick {
+            font-family: var(--font-ui);
+            font-size: var(--fs-base);
+            font-weight: var(--fw-medium);
+            color: var(--color-dark);
+          }
+        }
+
+        .follows-card-details {
+          flex: 1;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 20px;
+
+          .follows-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
+            color: var(--color-dark);
+
+            span {
+              &:first-child {
+                color: var(--color-text);
+              }
+              &:last-child {
+                color: var(--color-text-light);
+              }
+            }
+
+            &.follows-like {
+              align-items: center;
+              gap: 4px;
+            }
+          }
+        }
+
+        .follows-card-action {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+          min-width: 160px;
+          justify-content: flex-end;
+
+          .following-label {
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-style: italic;
+            color: var(--color-primary);
+          }
+
+          .follow-btn {
+            background: #4caf50;
+            color: #fff;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-transform: none;
+            border: none;
+
+            &:hover {
+              background: #43a047;
+            }
+          }
+
+          .unfollow-btn {
+            background: #e57373;
+            color: #fff;
+            font-family: var(--font-ui);
+            font-size: var(--fs-sm);
+            font-weight: var(--fw-medium);
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-transform: none;
+            border: none;
+
+            &:hover {
+              background: #ef5350;
+            }
+          }
+        }
+      }
+    }
+
+    .follows-pagination {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding-top: 8px;
+
+      .follows-total {
+        font-family: var(--font-ui);
+        font-size: var(--fs-sm);
+        color: var(--color-text-light);
+      }
+    }
+
     .wishlist-content {
       display: flex;
       flex-direction: column;

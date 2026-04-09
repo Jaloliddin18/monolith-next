@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Stack } from '@mui/material';
 import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
@@ -39,29 +39,40 @@ const Home = () => {
 
 	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 
-	useQuery(GET_FURNITURES, {
+	const { refetch: refetchTrending } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 6, sort: 'furnitureViews', direction: Direction.DESC, search: {} } },
 		onCompleted: (data: T) => setTrendingFurnitures(data?.getFurnitures?.list ?? []),
 	});
 
-	useQuery(GET_FURNITURES, {
+	const { refetch: refetchTopRated } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 3, sort: 'furnitureRank', direction: Direction.DESC, search: {} } },
 		onCompleted: (data: T) => setTopRatedFurnitures(data?.getFurnitures?.list ?? []),
 	});
 
-	useQuery(GET_FURNITURES, {
+	const { refetch: refetchTopSelection } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 6, sort: 'createdAt', direction: Direction.DESC, search: {} } },
 		onCompleted: (data: T) => setTopSelectionFurnitures(data?.getFurnitures?.list ?? []),
 	});
 
-	useQuery(GET_FURNITURES, {
+	const { refetch: refetchSuggested } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 3, sort: 'furnitureLikes', direction: Direction.DESC, search: {} } },
 		onCompleted: (data: T) => setSuggestedFurnitures(data?.getFurnitures?.list ?? []),
 	});
+
+	useEffect(() => {
+		const handler = () => {
+			refetchTrending();
+			refetchTopRated();
+			refetchTopSelection();
+			refetchSuggested();
+		};
+		window.addEventListener('wishlistUpdated', handler);
+		return () => window.removeEventListener('wishlistUpdated', handler);
+	}, [refetchTrending, refetchTopRated, refetchTopSelection, refetchSuggested]);
 
 	const handleLike = useCallback(
 		async (id: string) => {

@@ -106,6 +106,12 @@ const FurnitureDetail = () => {
 	);
 
 	useEffect(() => {
+		const handler = () => refetchFurniture();
+		window.addEventListener('wishlistUpdated', handler);
+		return () => window.removeEventListener('wishlistUpdated', handler);
+	}, [refetchFurniture]);
+
+	useEffect(() => {
 		const timer = setInterval(() => {
 			setCountdown((prev) => {
 				let { days, hours, mins, secs } = prev;

@@ -140,7 +140,6 @@ const ProductReviews = ({ furnitureId }: ProductReviewsProps) => {
 									</Stack>
 									<Stack className="review-content-col">
 										<Stack direction="row" justifyContent="space-between" alignItems="center">
-											<Typography className="review-title">{comment.commentContent.slice(0, 60)}</Typography>
 											<Typography className="review-date">{date}</Typography>
 										</Stack>
 										<Typography className="review-text">{comment.commentContent}</Typography>
