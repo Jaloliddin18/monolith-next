@@ -62,7 +62,7 @@ const MyPageSidebar = () => {
         {/* Account Setting */}
         <Box className="nav-section">
           <Box
-            className={`nav-item ${currentPath === "/mypage" || currentPath === "/mypage/manage-address" || currentPath === "/mypage/payment-details" ? "active" : ""}`}
+            className={`nav-item ${currentPath === "/mypage" || currentPath === "/mypage/payment-details" ? "active" : ""}`}
             onClick={() => setAccountExpanded(!accountExpanded)}
           >
             <span className="nav-icon">
@@ -84,12 +84,6 @@ const MyPageSidebar = () => {
                 className={`sub-item ${currentPath === "/mypage" ? "active" : ""}`}
               >
                 Personal Info
-              </Link>
-              <Link
-                href="/mypage/manage-address"
-                className={`sub-item ${currentPath === "/mypage/manage-address" ? "active" : ""}`}
-              >
-                Manage Address
               </Link>
               {user.memberType !== MemberType.DESIGNER && (
                 <Link

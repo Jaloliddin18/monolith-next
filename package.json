@@ -17,6 +17,7 @@
     "@toast-ui/react-editor": "^3.1.7",
     "apollo-link-token-refresh": "0.4.0",
     "apollo-upload-client": "17.0.0",
+    "axios": "^1.15.0",
     "browser-image-compression": "^2.0.2",
     "graphql": "^16.13.1",
     "jwt-decode": "^4.0.0",

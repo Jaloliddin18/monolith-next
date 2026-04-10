@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Stack } from '@mui/material';
 import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
 import { GET_FURNITURES } from '../../../apollo/user/query';
 import { Furniture } from '../../types/furniture/furniture';
 import { FurnituresInquiry } from '../../types/furniture/furniture.input';
@@ -17,6 +18,7 @@ interface DesignerDesignsPanelProps {
 }
 
 const DesignerDesignsPanel = ({ memberId, member }: DesignerDesignsPanelProps) => {
+	const router = useRouter();
 	const [furnitures, setFurnitures] = useState<Furniture[]>([]);
 
 	const inquiry: FurnituresInquiry = {
@@ -54,7 +56,12 @@ const DesignerDesignsPanel = ({ memberId, member }: DesignerDesignsPanelProps) =
 						? new Date(item.createdAt).getFullYear().toString()
 						: '';
 					return (
-						<div key={item._id} className="design-item-card">
+						<div
+						key={item._id}
+						className="design-item-card"
+						style={{ cursor: 'pointer' }}
+						onClick={() => router.push(`/furniture/detail?id=${item._id}`)}
+					>
 							<div className="design-item-image">
 								<img src={image} alt={item.furnitureTitle} />
 								<div className="design-item-overlay">

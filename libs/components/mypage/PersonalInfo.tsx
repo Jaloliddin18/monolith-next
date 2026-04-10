@@ -1,40 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useReactiveVar } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/client";
-import {
-  Stack,
-  Box,
-  Typography,
-  Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-} from "@mui/material";
+import { Stack, Box, Typography, Button } from "@mui/material";
+import axios from "axios";
 import { userVar } from "../../../apollo/store";
 import { GET_MEMBER } from "../../../apollo/user/query";
 import { UPDATE_MEMBER } from "../../../apollo/user/mutation";
-import { REACT_APP_API_URL } from "../../config";
+import { REACT_APP_API_URL, REACT_APP_API_GRAPHQL_URL } from "../../config";
 import {
   sweetTopSmallSuccessAlert,
   sweetMixinErrorAlert,
 } from "../../sweetAlert";
-import { updateUserInfo } from "../../auth";
+import { getJwtToken, updateStorage, updateUserInfo } from "../../auth";
 
 const PersonalInfo = () => {
   const user = useReactiveVar(userVar);
+  const token = getJwtToken();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
-    memberNick: "",
-    memberFullName: "",
-    memberPhone: "",
-    memberAddress: "",
-    memberDesc: "",
-    memberImage: "",
-    gender: "male",
+    memberNick: user.memberNick || "",
+    memberFullName: user.memberFullName || "",
+    memberPhone: user.memberPhone || "",
+    memberAddress: user.memberAddress || "",
+    memberDesc: user.memberDesc || "",
+    memberImage: user.memberImage || "",
   });
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState("");
+  const [imagePreview, setImagePreview] = useState(
+    user.memberImage
+      ? user.memberImage.startsWith("/img") || user.memberImage.startsWith("/icons")
+        ? user.memberImage
+        : `${REACT_APP_API_URL}/${user.memberImage}`
+      : ""
+  );
 
   const { data: memberData } = useQuery(GET_MEMBER, {
     variables: { input: user._id },
@@ -54,13 +52,16 @@ const PersonalInfo = () => {
         memberAddress: member.memberAddress || "",
         memberDesc: member.memberDesc || "",
         memberImage: member.memberImage || "",
-        gender: "male",
       });
 
-      const imgSrc = member.memberImage?.startsWith("/img")
-        ? member.memberImage
-        : `${REACT_APP_API_URL}/${member.memberImage}`;
-      setImagePreview(imgSrc);
+      if (member.memberImage) {
+        const imgSrc =
+          member.memberImage.startsWith("/img") ||
+          member.memberImage.startsWith("/icons")
+            ? member.memberImage
+            : `${REACT_APP_API_URL}/${member.memberImage}`;
+        setImagePreview(imgSrc);
+      }
     }
   }, [memberData]);
 
@@ -68,11 +69,41 @@ const PersonalInfo = () => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImageFile(file);
-      setImagePreview(URL.createObjectURL(file));
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const image = e.target.files?.[0];
+      if (!image) return;
+
+      const form = new FormData();
+      form.append(
+        "operations",
+        JSON.stringify({
+          query: `mutation ImageUploader($file: Upload!, $target: String!) {
+            imageUploader(file: $file, target: $target)
+          }`,
+          variables: { file: null, target: "member" },
+        })
+      );
+      form.append("map", JSON.stringify({ "0": ["variables.file"] }));
+      form.append("0", image);
+
+      const response = await axios.post(
+        `${REACT_APP_API_GRAPHQL_URL}`,
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "apollo-require-preflight": true,
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const uploadedImage = response.data.data.imageUploader;
+      setFormData((prev) => ({ ...prev, memberImage: uploadedImage }));
+      setImagePreview(`${REACT_APP_API_URL}/${uploadedImage}`);
+    } catch (err) {
+      console.log("Error, uploadImage:", err);
     }
   };
 
@@ -85,17 +116,14 @@ const PersonalInfo = () => {
       if (formData.memberPhone) input.memberPhone = formData.memberPhone;
       if (formData.memberAddress) input.memberAddress = formData.memberAddress;
       if (formData.memberDesc) input.memberDesc = formData.memberDesc;
+      if (formData.memberImage) input.memberImage = formData.memberImage;
 
-      if (imageFile) {
-        input.memberImage = imageFile;
-      }
+      const result = await updateMember({ variables: { input } });
 
-      const result = await updateMember({
-        variables: { input },
-      });
-
-      if (result?.data?.updateMember?.accessToken) {
-        updateUserInfo(result.data.updateMember.accessToken);
+      const jwtToken = result?.data?.updateMember?.accessToken;
+      if (jwtToken) {
+        await updateStorage({ jwtToken });
+        updateUserInfo(jwtToken);
       }
 
       await sweetTopSmallSuccessAlert("Profile updated successfully", 800);
@@ -114,18 +142,25 @@ const PersonalInfo = () => {
         memberAddress: member.memberAddress || "",
         memberDesc: member.memberDesc || "",
         memberImage: member.memberImage || "",
-        gender: "male",
       });
-      setImageFile(null);
-      const imgSrc = member.memberImage?.startsWith("/img")
-        ? member.memberImage
-        : `${REACT_APP_API_URL}/${member.memberImage}`;
-      setImagePreview(imgSrc);
+      if (member.memberImage) {
+        const imgSrc =
+          member.memberImage.startsWith("/img") ||
+          member.memberImage.startsWith("/icons")
+            ? member.memberImage
+            : `${REACT_APP_API_URL}/${member.memberImage}`;
+        setImagePreview(imgSrc);
+      }
     }
   };
 
   const avatarSrc =
-    imagePreview || user.memberImage || "/icons/user_profile.png";
+    imagePreview ||
+    (user.memberImage
+      ? user.memberImage.startsWith("/img") || user.memberImage.startsWith("/icons")
+        ? user.memberImage
+        : `${REACT_APP_API_URL}/${user.memberImage}`
+      : "/icons/user_profile.png");
 
   return (
     <>
@@ -134,15 +169,11 @@ const PersonalInfo = () => {
       <Stack className="personal-info-form">
         <Typography className="form-section-title">Upload Profile</Typography>
         <Box className="upload-profile">
-          <img
-            className="upload-avatar"
-            src={"/icons/user_profile.png"}
-            alt="Profile"
-          />
+          <img className="upload-avatar" src={avatarSrc} alt="Profile" />
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/*"
+            accept="image/jpg, image/jpeg, image/png"
             hidden
             onChange={handleImageUpload}
           />
@@ -184,7 +215,9 @@ const PersonalInfo = () => {
               className="field-input"
               placeholder="Enter mobile number"
               value={formData.memberPhone}
-              onChange={(e) => handleInputChange("memberPhone", e.target.value)}
+              onChange={(e) =>
+                handleInputChange("memberPhone", e.target.value)
+              }
             />
           </Box>
           <Box className="form-field">
@@ -198,23 +231,6 @@ const PersonalInfo = () => {
               }
             />
           </Box>
-        </Box>
-
-        <Box className="gender-section">
-          <Typography className="field-label">Gender</Typography>
-          <RadioGroup
-            row
-            value={formData.gender}
-            onChange={(e) => handleInputChange("gender", e.target.value)}
-          >
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-          </RadioGroup>
         </Box>
       </Stack>
 
