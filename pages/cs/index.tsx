@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import NewsletterBanner from "../../libs/components/furniture/NewsletterBanner";
 import InstagramSection from "../../libs/components/common/InstagramSection";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -364,5 +365,11 @@ const Service = () => {
     </Stack>
   );
 };
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(Service);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
 import MyPageLayout from "../../../libs/components/mypage/MyPageLayout";
 
@@ -11,5 +12,11 @@ const OrdersPage = () => {
     </MyPageLayout>
   );
 };
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});
 
 export default withLayoutBasic(OrdersPage);

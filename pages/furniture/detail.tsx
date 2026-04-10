@@ -107,6 +107,10 @@ const FurnitureDetail = () => {
 	);
 
 	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+	}, []);
+
+	useEffect(() => {
 		const handler = () => refetchFurniture();
 		window.addEventListener('wishlistUpdated', handler);
 		return () => window.removeEventListener('wishlistUpdated', handler);

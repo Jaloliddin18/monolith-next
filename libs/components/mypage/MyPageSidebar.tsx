@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useReactiveVar } from "@apollo/client";
+import { useTranslation } from "next-i18next";
 import { Stack, Box, Typography } from "@mui/material";
 import Link from "next/link";
 import SettingsOutlined from "@mui/icons-material/SettingsOutlined";
@@ -20,6 +21,7 @@ import ChairOutlined from "@mui/icons-material/ChairOutlined";
 const MyPageSidebar = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
+  const { t } = useTranslation('common');
   const [accountExpanded, setAccountExpanded] = useState(true);
   const [shoppingExpanded, setShoppingExpanded] = useState(true);
   const [activityExpanded, setActivityExpanded] = useState(true);
@@ -68,7 +70,7 @@ const MyPageSidebar = () => {
             <span className="nav-icon">
               <SettingsOutlined />
             </span>
-            Account Setting
+            {t('Account Setting')}
             <span className="nav-icon" style={{ marginLeft: "auto" }}>
               {accountExpanded ? (
                 <ExpandLessOutlined />
@@ -83,14 +85,14 @@ const MyPageSidebar = () => {
                 href="/mypage"
                 className={`sub-item ${currentPath === "/mypage" ? "active" : ""}`}
               >
-                Personal Info
+                {t('Personal Info')}
               </Link>
               {user.memberType !== MemberType.DESIGNER && (
                 <Link
                   href="/mypage/payment-details"
                   className={`sub-item ${currentPath === "/mypage/payment-details" ? "active" : ""}`}
                 >
-                  Payment Details
+                  {t('Payment Details')}
                 </Link>
               )}
             </Box>
@@ -107,7 +109,7 @@ const MyPageSidebar = () => {
               <span className="nav-icon">
                 <ShoppingCartOutlined />
               </span>
-              Shopping
+              {t('Shopping')}
               <span className="nav-icon" style={{ marginLeft: "auto" }}>
                 {shoppingExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
               </span>
@@ -118,25 +120,25 @@ const MyPageSidebar = () => {
                   href="/mypage/wishlist"
                   className={`sub-item ${currentPath === "/mypage/wishlist" ? "active" : ""}`}
                 >
-                  My Wishlist
+                  {t('My Wishlist')}
                 </Link>
                 <Link
                   href="/mypage/cart"
                   className={`sub-item ${currentPath === "/mypage/cart" ? "active" : ""}`}
                 >
-                  My Cart
+                  {t('My Cart')}
                 </Link>
                 <Link
                   href="/mypage/orders"
                   className={`sub-item ${currentPath === "/mypage/orders" ? "active" : ""}`}
                 >
-                  My Orders
+                  {t('My Orders')}
                 </Link>
                 <Link
                   href="/mypage/coupons"
                   className={`sub-item ${currentPath === "/mypage/coupons" ? "active" : ""}`}
                 >
-                  My Coupons
+                  {t('My Coupons')}
                 </Link>
               </Box>
             )}
@@ -153,7 +155,7 @@ const MyPageSidebar = () => {
               <span className="nav-icon">
                 <ChairOutlined />
               </span>
-              My Furnitures
+              {t('My Furnitures')}
               <span className="nav-icon" style={{ marginLeft: "auto" }}>
                 {shoppingExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
               </span>
@@ -164,13 +166,13 @@ const MyPageSidebar = () => {
                   href="/mypage/my-furnitures"
                   className={`sub-item ${currentPath === "/mypage/my-furnitures" ? "active" : ""}`}
                 >
-                  My Furnitures
+                  {t('My Furnitures')}
                 </Link>
                 <Link
                   href="/mypage/add-furniture"
                   className={`sub-item ${currentPath === "/mypage/add-furniture" ? "active" : ""}`}
                 >
-                  Add Furniture
+                  {t('Add Furniture')}
                 </Link>
               </Box>
             )}
@@ -186,7 +188,7 @@ const MyPageSidebar = () => {
             <span className="nav-icon">
               <ManageSearchOutlined />
             </span>
-            Activity
+            {t('Activity')}
             <span className="nav-icon" style={{ marginLeft: "auto" }}>
               {activityExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
             </span>
@@ -197,19 +199,19 @@ const MyPageSidebar = () => {
                 href="/mypage/visited"
                 className={`sub-item ${currentPath === "/mypage/visited" ? "active" : ""}`}
               >
-                Recently Visited
+                {t('Recently Visited')}
               </Link>
               <Link
                 href="/mypage/followers"
                 className={`sub-item ${currentPath === "/mypage/followers" ? "active" : ""}`}
               >
-                Followers
+                {t('Followers')}
               </Link>
               <Link
                 href="/mypage/followings"
                 className={`sub-item ${currentPath === "/mypage/followings" ? "active" : ""}`}
               >
-                Followings
+                {t('Followings')}
               </Link>
             </Box>
           )}
@@ -224,7 +226,7 @@ const MyPageSidebar = () => {
             <span className="nav-icon">
               <ArticleOutlined />
             </span>
-            Community
+            {t('Community')}
             <span className="nav-icon" style={{ marginLeft: "auto" }}>
               {communityExpanded ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
             </span>
@@ -235,13 +237,13 @@ const MyPageSidebar = () => {
                 href="/mypage/articles"
                 className={`sub-item ${currentPath === "/mypage/articles" ? "active" : ""}`}
               >
-                My Articles
+                {t('My Articles')}
               </Link>
               <Link
                 href="/mypage/write-article"
                 className={`sub-item ${currentPath === "/mypage/write-article" ? "active" : ""}`}
               >
-                Write Article
+                {t('Write Article')}
               </Link>
             </Box>
           )}
@@ -253,7 +255,7 @@ const MyPageSidebar = () => {
             <span className="nav-icon">
               <PowerSettingsNewOutlined />
             </span>
-            Log out
+            {t('Log out')}
           </button>
         </Box>
       </Stack>

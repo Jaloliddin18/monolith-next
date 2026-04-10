@@ -172,7 +172,7 @@ export const GET_FURNITURES = gql`
         furnitureStyle
         furnitureStatus
         furnitureMaterial
-        sustainabilityLabel
+  
         assemblyType
         assemblyDifficulty
         deliveryMethod
@@ -253,7 +253,7 @@ export const GET_DESIGNER_FURNITURES = gql`
         furnitureStyle
         furnitureStatus
         furnitureMaterial
-        sustainabilityLabel
+  
         assemblyType
         assemblyDifficulty
         deliveryMethod
@@ -302,7 +302,7 @@ export const GET_FAVORITES = gql`
         furnitureStyle
         furnitureStatus
         furnitureMaterial
-        sustainabilityLabel
+  
         assemblyType
         assemblyDifficulty
         deliveryMethod
@@ -378,7 +378,7 @@ export const GET_VISITED = gql`
         furnitureStyle
         furnitureStatus
         furnitureMaterial
-        sustainabilityLabel
+  
         assemblyType
         assemblyDifficulty
         deliveryMethod

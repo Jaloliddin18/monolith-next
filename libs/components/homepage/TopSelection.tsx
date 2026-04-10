@@ -122,7 +122,7 @@ const TopSelection = ({ furnitures, onLike }: TopSelectionProps) => {
 				</Stack>
 			</Stack>
 
-			<Stack direction="row" flexWrap="wrap" gap="50px 24px" sx={{ width: 1140 }}>
+			<Stack direction="row" flexWrap="wrap" gap="40px 28px" sx={{ width: 1200 }}>
 				{products
 					? products.slice(0, 6).map((furniture) => (
 							<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />

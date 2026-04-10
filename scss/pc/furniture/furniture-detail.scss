@@ -128,11 +128,13 @@
 		}
 
 		.thumbnail {
-			flex: 1;
+			flex: 0 0 121px;
+			width: 121px;
 			height: 121px;
 			background: var(--color-bg-light);
 			overflow: hidden;
 			cursor: pointer;
+			border-radius: 4px;
 
 			img {
 				width: 100%;

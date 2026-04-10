@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "next-i18next";
 import { useReactiveVar } from "@apollo/client";
 import { useMutation, useQuery } from "@apollo/client";
 import { Stack, Box, Typography, Button } from "@mui/material";
@@ -14,6 +15,7 @@ import {
 import { getJwtToken, updateStorage, updateUserInfo } from "../../auth";
 
 const PersonalInfo = () => {
+  const { t } = useTranslation('common');
   const user = useReactiveVar(userVar);
   const token = getJwtToken();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -164,10 +166,10 @@ const PersonalInfo = () => {
 
   return (
     <>
-      <Typography className="content-title">Personal Information</Typography>
+      <Typography className="content-title">{t('Personal Information')}</Typography>
 
       <Stack className="personal-info-form">
-        <Typography className="form-section-title">Upload Profile</Typography>
+        <Typography className="form-section-title">{t('Upload Profile')}</Typography>
         <Box className="upload-profile">
           <img className="upload-avatar" src={avatarSrc} alt="Profile" />
           <input
@@ -181,16 +183,16 @@ const PersonalInfo = () => {
             className="upload-btn"
             onClick={() => fileInputRef.current?.click()}
           >
-            Upload Image
+            {t('Upload Image')}
           </Button>
         </Box>
 
         <Box className="form-row">
           <Box className="form-field">
-            <Typography className="field-label">Full Name</Typography>
+            <Typography className="field-label">{t('Full Name')}</Typography>
             <input
               className="field-input"
-              placeholder="Enter full name"
+              placeholder={t('Enter full name')}
               value={formData.memberFullName}
               onChange={(e) =>
                 handleInputChange("memberFullName", e.target.value)
@@ -198,10 +200,10 @@ const PersonalInfo = () => {
             />
           </Box>
           <Box className="form-field">
-            <Typography className="field-label">Nickname</Typography>
+            <Typography className="field-label">{t('Nickname')}</Typography>
             <input
               className="field-input"
-              placeholder="Enter nickname"
+              placeholder={t('Enter nickname')}
               value={formData.memberNick}
               onChange={(e) => handleInputChange("memberNick", e.target.value)}
             />
@@ -210,10 +212,10 @@ const PersonalInfo = () => {
 
         <Box className="form-row">
           <Box className="form-field">
-            <Typography className="field-label">Mobile Number</Typography>
+            <Typography className="field-label">{t('Mobile Number')}</Typography>
             <input
               className="field-input"
-              placeholder="Enter mobile number"
+              placeholder={t('Enter mobile number')}
               value={formData.memberPhone}
               onChange={(e) =>
                 handleInputChange("memberPhone", e.target.value)
@@ -221,10 +223,10 @@ const PersonalInfo = () => {
             />
           </Box>
           <Box className="form-field">
-            <Typography className="field-label">Address</Typography>
+            <Typography className="field-label">{t('Address')}</Typography>
             <input
               className="field-input"
-              placeholder="Enter address"
+              placeholder={t('Enter address')}
               value={formData.memberAddress}
               onChange={(e) =>
                 handleInputChange("memberAddress", e.target.value)
@@ -236,10 +238,10 @@ const PersonalInfo = () => {
 
       <Stack className="form-actions" direction="row">
         <Button className="save-btn" onClick={handleSave}>
-          SAVE
+          {t('SAVE')}
         </Button>
         <Button className="cancel-btn" onClick={handleCancel}>
-          CANCEL
+          {t('CANCEL')}
         </Button>
       </Stack>
     </>

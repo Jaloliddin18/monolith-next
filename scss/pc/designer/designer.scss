@@ -247,6 +247,13 @@
 		gap: 24px;
 	}
 
+	.featured-designer-skeleton {
+		background: rgba(0, 0, 0, 0.08);
+		border-radius: 4px;
+		height: 380px;
+		animation: skeleton-pulse 1.4s ease-in-out infinite;
+	}
+
 	.featured-designer-card {
 		background: #fff;
 		cursor: pointer;

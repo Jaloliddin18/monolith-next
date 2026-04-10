@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box, Stack, Typography, Select, MenuItem, SelectChangeEvent } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import { Furniture } from '../../types/furniture/furniture';
 import { FIsearch } from '../../types/furniture/furniture.input';
 import FilterSidebar from './FilterSidebar';
@@ -69,6 +70,8 @@ const FurnitureListPage = ({
 	onFilterChange,
 	onLike,
 }: FurnitureListPageProps) => {
+	const { t } = useTranslation('common');
+
 	const getActiveTags = (): ActiveTag[] => {
 		const tags: ActiveTag[] = [];
 		searchFilter.categoryList?.forEach((cat) => {
@@ -125,17 +128,17 @@ const FurnitureListPage = ({
 					<Stack gap="24px">
 						<Stack gap="12px">
 							<Typography className="hero-discount-label">
-								Up to <span className="highlight">30% Off</span>
+								{t('shopHeroDiscount')}
 							</Typography>
 							<Typography className="hero-heading">
-								Enhance Your Kitchen with Our Furniture Options
+								{t('shopHeroHeading')}
 							</Typography>
 						</Stack>
 						<Typography className="hero-price">$ 1249.10</Typography>
 					</Stack>
 					<Link href="/furniture">
 						<Box className="hero-shop-btn">
-							<Typography className="hero-shop-btn-text">SHOP NOW</Typography>
+							<Typography className="hero-shop-btn-text">{t('SHOP NOW')}</Typography>
 						</Box>
 					</Link>
 				</Stack>

@@ -466,6 +466,14 @@
 			max-width: 1140px;
 			width: 100%;
 		}
+
+		.blog-article-skeleton {
+			flex: 1;
+			height: 320px;
+			background: rgba(0, 0, 0, 0.08);
+			border-radius: 4px;
+			animation: skeleton-pulse 1.4s ease-in-out infinite;
+		}
 	}
 
 	// ─── Instagram Section ─────────────────

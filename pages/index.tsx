@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Stack } from '@mui/material';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
 import withLayoutHome from '../libs/components/layout/LayoutHome';
 import { GET_FURNITURES } from '../apollo/user/query';
@@ -8,7 +9,6 @@ import { LIKE_TARGET_FURNITURE } from '../apollo/user/mutation';
 import { userVar } from '../apollo/store';
 import { Furniture } from '../libs/types/furniture/furniture';
 import { Direction } from '../libs/enums/common.enum';
-import { T } from '../libs/types/common';
 import { sweetMixinErrorAlert } from '../libs/sweetAlert';
 
 import HeroSection from '../libs/components/homepage/HeroSection';
@@ -32,36 +32,36 @@ const Home = () => {
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 
-	const [trendingFurnitures, setTrendingFurnitures] = useState<Furniture[]>([]);
-	const [topRatedFurnitures, setTopRatedFurnitures] = useState<Furniture[]>([]);
-	const [topSelectionFurnitures, setTopSelectionFurnitures] = useState<Furniture[]>([]);
-	const [suggestedFurnitures, setSuggestedFurnitures] = useState<Furniture[]>([]);
-
 	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 
-	const { refetch: refetchTrending } = useQuery(GET_FURNITURES, {
+	const { data: trendingData, refetch: refetchTrending } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 6, sort: 'furnitureViews', direction: Direction.DESC, search: {} } },
-		onCompleted: (data: T) => setTrendingFurnitures(data?.getFurnitures?.list ?? []),
+		notifyOnNetworkStatusChange: false,
 	});
 
-	const { refetch: refetchTopRated } = useQuery(GET_FURNITURES, {
+	const { data: topRatedData, refetch: refetchTopRated } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 3, sort: 'furnitureRank', direction: Direction.DESC, search: {} } },
-		onCompleted: (data: T) => setTopRatedFurnitures(data?.getFurnitures?.list ?? []),
+		notifyOnNetworkStatusChange: false,
 	});
 
-	const { refetch: refetchTopSelection } = useQuery(GET_FURNITURES, {
+	const { data: topSelectionData, refetch: refetchTopSelection } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 6, sort: 'createdAt', direction: Direction.DESC, search: {} } },
-		onCompleted: (data: T) => setTopSelectionFurnitures(data?.getFurnitures?.list ?? []),
+		notifyOnNetworkStatusChange: false,
 	});
 
-	const { refetch: refetchSuggested } = useQuery(GET_FURNITURES, {
+	const { data: suggestedData, refetch: refetchSuggested } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: { page: 1, limit: 3, sort: 'furnitureLikes', direction: Direction.DESC, search: {} } },
-		onCompleted: (data: T) => setSuggestedFurnitures(data?.getFurnitures?.list ?? []),
+		notifyOnNetworkStatusChange: false,
 	});
+
+	const trendingFurnitures: Furniture[] = trendingData?.getFurnitures?.list ?? [];
+	const topRatedFurnitures: Furniture[] = topRatedData?.getFurnitures?.list ?? [];
+	const topSelectionFurnitures: Furniture[] = topSelectionData?.getFurnitures?.list ?? [];
+	const suggestedFurnitures: Furniture[] = suggestedData?.getFurnitures?.list ?? [];
 
 	useEffect(() => {
 		const handler = () => {
@@ -111,5 +111,11 @@ const Home = () => {
 		</Stack>
 	);
 };
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutHome(Home);

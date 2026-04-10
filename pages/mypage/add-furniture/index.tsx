@@ -1,4 +1,5 @@
 import { Stack } from "@mui/material";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
 import AddFurniture from "../../../libs/components/mypage/AddFurniture";
 
@@ -9,5 +10,11 @@ const AddFurniturePage = () => {
     </Stack>
   );
 };
+
+export const getStaticProps = async ({ locale }: any) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});
 
 export default withLayoutBasic(AddFurniturePage);

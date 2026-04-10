@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import NewsletterBanner from '../../libs/components/furniture/NewsletterBanner';
 import InstagramSection from '../../libs/components/common/InstagramSection';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -11,17 +13,18 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 
 const About = () => {
+	const { t } = useTranslation('common');
+
 	return (
 		<Stack className="about-page">
 			{/* ===== HERO SECTION ===== */}
 			<Stack className="about-hero">
 				<Box className="about-hero-content">
 					<Typography className="about-hero-title" variant="h1">
-						With over 15 years of expertise in crafting exquisite wooden furniture
+						{t('aboutHeroTitle')}
 					</Typography>
 					<Typography className="about-hero-subtitle">
-						At MONOLITH, we take pride in offering a wide range of exquisite wooden furniture that combines
-						elegance, functionality, and durability.
+						{t('aboutHeroSubtitle')}
 					</Typography>
 				</Box>
 				<Box className="about-hero-video">
@@ -365,5 +368,11 @@ const About = () => {
 		</Stack>
 	);
 };
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(About);

@@ -27,7 +27,7 @@ export interface Furniture {
 	furnitureStyle: FurnitureStyle;
 	furnitureStatus: FurnitureStatus;
 	furnitureMaterial: FurnitureMaterial;
-	sustainabilityLabel: SustainabilityLabel;
+	sustainabilityLabel?: SustainabilityLabel;
 	assemblyType: AssemblyType;
 	assemblyDifficulty: AssemblyDifficulty;
 	deliveryMethod: DeliveryMethod;

@@ -1,5 +1,6 @@
 import { Stack } from '@mui/material';
 import { useMutation, useReactiveVar } from '@apollo/client';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import withLayoutBasic from '../../../libs/components/layout/LayoutBasic';
 import MyPageLayout from '../../../libs/components/mypage/MyPageLayout';
 import MyFollowings from '../../../libs/components/mypage/MyFollowings';
@@ -57,5 +58,11 @@ const FollowingsPage = () => {
 		</Stack>
 	);
 };
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(FollowingsPage);

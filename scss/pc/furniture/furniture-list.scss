@@ -8,15 +8,41 @@
 	// HERO BANNER
 	// ==============================
 	.furniture-hero-banner {
-		padding: 60px 150px;
-		background: #fffaf3;
+		position: relative;
+		width: 100%;
 		max-width: 1440px;
 		margin-left: auto;
 		margin-right: auto;
+		height: 400px;
+		overflow: hidden;
+		display: flex !important;
+		flex-direction: row;
+		align-items: center;
 
+		// warm bg block on the left (mirrors homepage .hero-bg)
+		&::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			left: calc(50% - 720px);
+			width: 900px;
+			height: 100%;
+			background: var(--color-bg-warm);
+			z-index: 0;
+		}
+
+		// inner layout container
 		.hero-text-side {
-			max-width: 487px;
+			position: relative;
+			z-index: 1;
+			width: 558px;
 			flex-shrink: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 28px;
+			padding-left: 150px;
 
 			.hero-discount-label {
 				font-family: var(--font-ui);
@@ -34,15 +60,16 @@
 				font-size: var(--fs-3xl);
 				font-weight: var(--fw-medium);
 				color: var(--color-dark);
-				line-height: 1;
+				line-height: normal;
 			}
 
 			.hero-price {
 				font-family: var(--font-ui);
 				font-size: var(--fs-2xl);
 				font-weight: var(--fw-semibold);
-				color: var(--color-primary);
-				line-height: 1;
+				color: var(--color-dark);
+				line-height: normal;
+				white-space: nowrap;
 			}
 
 			.hero-shop-btn {
@@ -70,12 +97,17 @@
 		}
 
 		.hero-image-side {
-			flex-shrink: 0;
+			position: relative;
+			z-index: 1;
+			flex: 1;
+			height: 100%;
+			overflow: hidden;
 
 			img {
-				width: 558px;
-				height: 558px;
+				width: 100%;
+				height: 100%;
 				object-fit: cover;
+				display: block;
 			}
 		}
 	}
@@ -172,7 +204,7 @@
 	// FILTER SIDEBAR
 	// ==============================
 	.filter-sidebar {
-		width: 364px;
+		width: 240px;
 		flex-shrink: 0;
 		gap: 0;
 		position: sticky;
@@ -389,17 +421,17 @@
 		}
 
 		.grid-cards {
-			gap: 23px;
+			gap: 28px;
 			row-gap: 50px;
 
 			.grid-card-wrapper {
-				width: calc((100% - 46px) / 3);
+				width: calc((100% - 56px) / 3);
 
 				.product-card {
 					width: 100%;
 
 					.product-card-img {
-						height: 300px;
+						height: 360px;
 					}
 
 					.product-title {
@@ -417,7 +449,7 @@
 						width: 100%;
 
 						.product-card-img {
-							height: 300px;
+							height: 360px;
 						}
 
 						.product-title {

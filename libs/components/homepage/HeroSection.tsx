@@ -1,7 +1,10 @@
 import React from 'react';
 import { Box, Stack, Typography, Button } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 
 const HeroSection = () => {
+	const { t } = useTranslation('common');
+
 	return (
 		<Box className="hero-section">
 			<Box className="hero-bg" />
@@ -9,18 +12,16 @@ const HeroSection = () => {
 				<Stack className="hero-left">
 					<Stack className="hero-text-block">
 						<Typography className="hero-title">
-							Explore Our Collection of Chairs and Seating Furniture
+							{t('heroTitle')}
 						</Typography>
 						<Typography className="hero-subtitle">
-							Elevate your living environment with MONOLITH&apos;s
-							<br />
-							modern furniture collection.
+							{t('heroSubtitle')}
 						</Typography>
 					</Stack>
 					<Stack className="hero-cta" direction="row" alignItems="center">
 						<Typography className="hero-price">$139.99</Typography>
 						<Button className="btn-hero-cta" disableElevation>
-							ADD TO CART
+							{t('ADD TO CART')}
 						</Button>
 					</Stack>
 				</Stack>

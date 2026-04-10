@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Stack, Pagination } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import BlogCard from '../common/BlogCard';
 import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
 import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
@@ -16,14 +17,15 @@ import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAler
 const DEFAULT_IMAGE = '/img/furniture/luxury_chair.jpg';
 const LIMIT = 6;
 
-const CATEGORIES: { value: BoardArticleCategory; label: string }[] = [
-	{ value: BoardArticleCategory.FREE, label: 'Free' },
-	{ value: BoardArticleCategory.RECOMMEND, label: 'Recommend' },
-	{ value: BoardArticleCategory.NEWS, label: 'News' },
-	{ value: BoardArticleCategory.HUMOR, label: 'Humor' },
+const CATEGORY_VALUES = [
+	{ value: BoardArticleCategory.FREE, key: 'Free' },
+	{ value: BoardArticleCategory.RECOMMEND, key: 'Recommend' },
+	{ value: BoardArticleCategory.NEWS, key: 'News' },
+	{ value: BoardArticleCategory.HUMOR, key: 'Humor' },
 ];
 
 const BlogListSection = () => {
+	const { t } = useTranslation('common');
 	const user = useReactiveVar(userVar);
 	const [articles, setArticles] = useState<BoardArticle[]>([]);
 	const [total, setTotal] = useState(0);
@@ -76,17 +78,17 @@ const BlogListSection = () => {
 
 	return (
 		<Stack className="blog-list-section">
-			<h2 className="section-title">Styling Tips with Wooden Furniture</h2>
+			<h2 className="section-title">{t('blogSectionTitle')}</h2>
 
 			<div className="blog-category-tabs">
-				{CATEGORIES.map((cat) => (
+				{CATEGORY_VALUES.map((cat) => (
 					<button
 						key={cat.value}
 						type="button"
 						className={`blog-category-tab ${activeCategory === cat.value ? 'active' : ''}`}
 						onClick={() => handleCategoryChange(cat.value)}
 					>
-						{cat.label}
+						{t(cat.key)}
 					</button>
 				))}
 			</div>

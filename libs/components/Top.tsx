@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useReactiveVar, useQuery } from "@apollo/client";
+import { useTranslation } from "next-i18next";
 import { userVar } from "../../apollo/store";
 import { getJwtToken, updateUserInfo, logOut } from "../auth";
 import {
@@ -19,6 +20,7 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MiniCart from "./cart/MiniCart";
 import MiniWishlist from "./cart/MiniWishlist";
 import { getCartCount } from "../utils/cartStorage";
@@ -28,27 +30,35 @@ import { T } from "../types/common";
 const Top = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
+  const { t, i18n } = useTranslation("common");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [langAnchorEl, setLangAnchorEl] = useState<null | HTMLElement>(null);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
+  const [lang, setLang] = useState<string>("en");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("locale") ?? "en";
+    setLang(saved);
+  }, [router]);
 
   useEffect(() => {
     const update = () => setCartCount(getCartCount());
     update();
-    window.addEventListener('cartUpdated', update);
-    window.addEventListener('storage', update);
+    window.addEventListener("cartUpdated", update);
+    window.addEventListener("storage", update);
     return () => {
-      window.removeEventListener('cartUpdated', update);
-      window.removeEventListener('storage', update);
+      window.removeEventListener("cartUpdated", update);
+      window.removeEventListener("storage", update);
     };
   }, []);
 
   const { data: favoritesData, refetch: refetchWishlistCount } = useQuery(GET_FAVORITES, {
     skip: !user?._id,
     variables: { input: { page: 1, limit: 1 } },
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
   });
 
   useEffect(() => {
@@ -59,8 +69,8 @@ const Top = () => {
   useEffect(() => {
     if (!user?._id) return;
     const update = () => refetchWishlistCount();
-    window.addEventListener('wishlistUpdated', update);
-    return () => window.removeEventListener('wishlistUpdated', update);
+    window.addEventListener("wishlistUpdated", update);
+    return () => window.removeEventListener("wishlistUpdated", update);
   }, [user?._id, refetchWishlistCount]);
 
   useEffect(() => {
@@ -81,20 +91,32 @@ const Top = () => {
     handleMenuClose();
   }, []);
 
+  const handleLangOpen = (e: React.MouseEvent<HTMLElement>) => {
+    setLangAnchorEl(e.currentTarget);
+  };
+
+  const handleLangClose = () => {
+    setLangAnchorEl(null);
+  };
+
+  const handleLangChoice = useCallback(
+    async (locale: string) => {
+      setLang(locale);
+      localStorage.setItem("locale", locale);
+      setLangAnchorEl(null);
+      await router.push(router.asPath, router.asPath, { locale });
+    },
+    [router],
+  );
+
   return (
     <Stack id="top">
       {/* Top Banner */}
       <Box className="top-banner">
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          gap={1}
-        >
+        <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
           <CardGiftcardOutlinedIcon sx={{ fontSize: 18 }} />
           <Typography variant="body2">
-            Enjoy <span className="highlight">30% Off</span> Everything - Shop
-            Now and Save Big!
+            {t("topBanner")}
           </Typography>
         </Stack>
       </Box>
@@ -108,89 +130,62 @@ const Top = () => {
       >
         {/* Navigation Links — left */}
         <Stack direction="row" className="nav-links" gap={3} sx={{ flex: 1 }}>
-            <Link href="/" className={router.pathname === "/" ? "active" : ""}>
-              Home
-            </Link>
+          <Link href="/" className={router.pathname === "/" ? "active" : ""}>
+            {t("Home")}
+          </Link>
+          <Link href="/furniture" className={router.pathname.includes("/furniture") ? "active" : ""}>
+            {t("Shop")}
+          </Link>
+          <Link href="/designers" className={router.pathname.includes("/designers") ? "active" : ""}>
+            {t("Designers")}
+          </Link>
+          <Link href="/community" className={router.pathname.includes("/community") ? "active" : ""}>
+            {t("Blog")}
+          </Link>
+          <Box
+            className={`nav-dropdown ${router.pathname.includes("/about") || router.pathname === "/cs/contact" ? "active" : ""}`}
+          >
             <Link
-              href="/furniture"
-              className={router.pathname.includes("/furniture") ? "active" : ""}
+              href="/about"
+              className={`nav-dropdown-trigger ${router.pathname.includes("/about") || router.pathname === "/cs/contact" ? "active" : ""}`}
             >
-              Shop
+              {t("About")}
             </Link>
-            <Link
-              href="/designers"
-              className={router.pathname.includes("/designers") ? "active" : ""}
-            >
-              Designers
-            </Link>
-            <Link
-              href="/community"
-              className={router.pathname.includes("/community") ? "active" : ""}
-            >
-              Blog
-            </Link>
-            <Box
-              className={`nav-dropdown ${router.pathname.includes("/about") || router.pathname.includes("/service") || router.pathname === "/cs/contact" ? "active" : ""}`}
-            >
-              <Link
-                href="/about"
-                className={`nav-dropdown-trigger ${router.pathname.includes("/about") || router.pathname.includes("/service") || router.pathname === "/cs/contact" ? "active" : ""}`}
-              >
-                About
-              </Link>
-              <Box className="nav-dropdown-menu">
-                <Link href="/about" className="dropdown-item">
-                  About
-                </Link>
-                <Link href="/cs/contact" className="dropdown-item">
-                  Contact Us
-                </Link>
-              </Box>
+            <Box className="nav-dropdown-menu">
+              <Link href="/about" className="dropdown-item">{t("About")}</Link>
+              <Link href="/cs/contact" className="dropdown-item">{t("Contact Us")}</Link>
             </Box>
-            {/* <Link
-              href="/mypage"
-              className={router.pathname.includes("/mypage") ? "active" : ""}
+          </Box>
+          <Box
+            className={`nav-dropdown ${router.pathname.startsWith("/cs") && router.pathname !== "/cs/contact" ? "active" : ""}`}
+          >
+            <Link
+              href="/cs"
+              className={`nav-dropdown-trigger ${router.pathname.startsWith("/cs") && router.pathname !== "/cs/contact" ? "active" : ""}`}
             >
-              My Page
-            </Link> */}
-            <Box
-              className={`nav-dropdown ${router.pathname.startsWith("/cs") && router.pathname !== "/cs/contact" ? "active" : ""}`}
-            >
-              <Link
-                href="/cs"
-                className={`nav-dropdown-trigger ${router.pathname.startsWith("/cs") && router.pathname !== "/cs/contact" ? "active" : ""}`}
-              >
-                CS
-              </Link>
-              <Box className="nav-dropdown-menu">
-                <Link href="/cs" className="dropdown-item">
-                  Customer Service
-                </Link>
-                <Link href="/cs/faq" className="dropdown-item">
-                  FAQ
-                </Link>
-                <Link href="/cs/terms" className="dropdown-item">
-                  Terms & Conditions
-                </Link>
-                <Link href="/cs/privacy" className="dropdown-item">
-                  Privacy Policy
-                </Link>
-              </Box>
+              {t("CS")}
+            </Link>
+            <Box className="nav-dropdown-menu">
+              <Link href="/cs" className="dropdown-item">{t("Customer Service")}</Link>
+              <Link href="/cs/faq" className="dropdown-item">{t("FAQ")}</Link>
+              <Link href="/cs/terms" className="dropdown-item">{t("Terms & Conditions")}</Link>
+              <Link href="/cs/privacy" className="dropdown-item">{t("Privacy Policy")}</Link>
             </Box>
+          </Box>
         </Stack>
 
         {/* Logo — center */}
-        <Link href="/" className="logo" style={{ padding: '0 48px' }}>
-          <span style={{ fontFamily: "'Jost', sans-serif", fontSize: '22px', fontWeight: 300, letterSpacing: '8px', color: '#1C1A17' }}>
+        <Link href="/" className="logo" style={{ padding: "0 48px" }}>
+          <span style={{ fontFamily: "'Jost', sans-serif", fontSize: "22px", fontWeight: 300, letterSpacing: "8px", color: "#1C1A17" }}>
             MONOLITH
           </span>
         </Link>
 
         {/* Search + Actions — right */}
-        <Stack direction="row" alignItems="center" gap={2} sx={{ flex: 1, justifyContent: 'flex-end' }}>
+        <Stack direction="row" alignItems="center" gap={2} sx={{ flex: 1, justifyContent: "flex-end" }}>
           <Box className="search-box">
             <SearchIcon sx={{ fontSize: 20, color: "#999" }} />
-            <input type="text" placeholder="search" />
+            <input type="text" placeholder={t("search")} />
           </Box>
 
           {user?._id ? (
@@ -206,29 +201,17 @@ const Top = () => {
                   sx={{ width: 36, height: 36 }}
                 />
               </IconButton>
-              <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMenuClose}
-              >
-                <MenuItem
-                  onClick={() => {
-                    router.push("/mypage");
-                    handleMenuClose();
-                  }}
-                >
-                  My Page
+              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+                <MenuItem onClick={() => { router.push("/mypage"); handleMenuClose(); }}>
+                  {t("My Page")}
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>{t("Logout")}</MenuItem>
               </Menu>
             </>
           ) : (
-            <Box
-              className="login-register-btn"
-              onClick={() => router.push("/account/join")}
-            >
+            <Box className="login-register-btn" onClick={() => router.push("/account/join")}>
               <PersonOutlineIcon sx={{ fontSize: 20 }} />
-              <span>Login / Register</span>
+              <span>{t("Login / Register")}</span>
             </Box>
           )}
 
@@ -245,6 +228,39 @@ const Top = () => {
               <ShoppingCartOutlinedIcon />
             </Badge>
           </IconButton>
+
+          {/* Language Switcher */}
+          <Box
+            className="lang-switcher"
+            onClick={handleLangOpen}
+            sx={{ display: "flex", alignItems: "center", gap: "4px", cursor: "pointer", ml: 0.5 }}
+          >
+            <img
+              src={`/img/flag/lang${lang}.png`}
+              alt={lang}
+              style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }}
+            />
+            <KeyboardArrowDownIcon sx={{ fontSize: 16, color: "#616161" }} />
+          </Box>
+          <Menu
+            anchorEl={langAnchorEl}
+            open={Boolean(langAnchorEl)}
+            onClose={handleLangClose}
+            sx={{ mt: "4px" }}
+          >
+            <MenuItem onClick={() => handleLangChoice("en")} sx={{ gap: "10px" }}>
+              <img src="/img/flag/langen.png" alt="English" style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }} />
+              {t("English")}
+            </MenuItem>
+            <MenuItem onClick={() => handleLangChoice("kr")} sx={{ gap: "10px" }}>
+              <img src="/img/flag/langkr.png" alt="Korean" style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }} />
+              {t("Korean")}
+            </MenuItem>
+            <MenuItem onClick={() => handleLangChoice("ru")} sx={{ gap: "10px" }}>
+              <img src="/img/flag/langru.png" alt="Russian" style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }} />
+              {t("Russian")}
+            </MenuItem>
+          </Menu>
         </Stack>
       </Stack>
 
@@ -252,10 +268,7 @@ const Top = () => {
       <MiniCart open={openCart} onClose={() => setOpenCart(false)} />
 
       {/* Mini Wishlist Sidebar */}
-      <MiniWishlist
-        open={openWishlist}
-        onClose={() => setOpenWishlist(false)}
-      />
+      <MiniWishlist open={openWishlist} onClose={() => setOpenWishlist(false)} />
     </Stack>
   );
 };

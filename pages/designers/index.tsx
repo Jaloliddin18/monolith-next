@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Stack } from '@mui/material';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import DesignerHero from '../../libs/components/designer/DesignerHero';
 import FeaturedDesigners from '../../libs/components/designer/FeaturedDesigners';
@@ -26,6 +27,7 @@ const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 	const [designers, setDesigners] = useState<Member[]>([]);
 	const [total, setTotal] = useState<number>(0);
 	const [featured, setFeatured] = useState<Member[]>([]);
+	const [featuredLoading, setFeaturedLoading] = useState<boolean>(true);
 
 	/** APOLLO REQUESTS **/
 	useQuery(GET_DESIGNERS, {
@@ -51,6 +53,7 @@ const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 		},
 		onCompleted: (data: T) => {
 			setFeatured(data?.getDesigners?.list ?? []);
+			setFeaturedLoading(false);
 		},
 	});
 
@@ -76,7 +79,7 @@ const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 	return (
 		<Stack className="designers-page">
 			<DesignerHero />
-			<FeaturedDesigners designers={featured} />
+			<FeaturedDesigners designers={featured} loading={featuredLoading} />
 			<DesignerListSection
 				designers={designers}
 				total={total}
@@ -89,5 +92,11 @@ const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 	);
 };
 
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(Designers);

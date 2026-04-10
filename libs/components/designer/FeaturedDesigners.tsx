@@ -8,14 +8,31 @@ const DEFAULT_IMAGE = '/img/furniture/luxury_chair.jpg';
 
 interface FeaturedDesignersProps {
 	designers: Member[];
+	loading?: boolean;
 }
 
-const FeaturedDesigners = ({ designers }: FeaturedDesignersProps) => {
+const FeaturedDesigners = ({ designers, loading }: FeaturedDesignersProps) => {
 	const router = useRouter();
 
 	const handleClick = (id: string) => {
 		router.push(`/member/detail?memberId=${id}`);
 	};
+
+	if (loading) {
+		return (
+			<Stack className="featured-designers-section">
+				<div className="featured-designers-header">
+					<span className="featured-designers-label">Spotlight</span>
+					<h2 className="featured-designers-title">Featured Designers</h2>
+				</div>
+				<div className="featured-designers-grid">
+					{[1, 2, 3].map((i) => (
+						<div key={i} className="featured-designer-card featured-designer-skeleton" />
+					))}
+				</div>
+			</Stack>
+		);
+	}
 
 	if (!designers.length) return null;
 

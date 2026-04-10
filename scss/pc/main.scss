@@ -18,6 +18,15 @@
 @use "./contact/privacy";
 
 // ==============================
+// SKELETON ANIMATION
+// ==============================
+@keyframes skeleton-pulse {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+// ==============================
 // GLOBAL LAYOUT
 // ==============================
 #pc-wrap {
@@ -89,6 +98,7 @@
 
     .nav-links {
       align-items: center;
+      flex-wrap: nowrap;
 
       a {
         font-size: var(--fs-base);
@@ -97,6 +107,7 @@
         position: relative;
         padding-bottom: 4px;
         transition: color 0.3s;
+        white-space: nowrap;
 
         &:hover,
         &.active {
@@ -129,6 +140,7 @@
           transition: color 0.3s;
           cursor: pointer;
           text-decoration: none;
+          white-space: nowrap;
 
           &:hover,
           &.active {

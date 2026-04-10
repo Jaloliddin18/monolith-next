@@ -672,6 +672,7 @@ const AddFurniture = () => {
 								</FormControl>
 							</Box>
 						</Box>
+
 					</>
 				)}
 

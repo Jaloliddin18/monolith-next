@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useQuery, useMutation, useReactiveVar } from '@apollo/client';
 import { Stack } from '@mui/material';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import FurnitureListPage from '../../libs/components/furniture/FurnitureListPage';
 import { GET_FURNITURES } from '../../apollo/user/query';
@@ -163,5 +164,11 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 	);
 };
 
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(FurnitureList);
