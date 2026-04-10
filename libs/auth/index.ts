@@ -178,6 +178,7 @@ const deleteStorage = () => {
   localStorage.removeItem("accessToken");
   window.localStorage.setItem("logout", Date.now().toString());
   clearCart();
+  document.cookie = "NEXT_LOCALE=en; path=/; max-age=31536000";
 };
 
 const deleteUserInfo = () => {

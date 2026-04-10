@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Stack } from '@mui/material';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import DesignerProfileHero from '../../libs/components/designer/DesignerProfileHero';
@@ -85,5 +86,11 @@ const DesignerDetail = () => {
 		</Stack>
 	);
 };
+
+export const getServerSideProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(DesignerDetail);

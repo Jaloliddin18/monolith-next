@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { Stack } from '@mui/material';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -66,5 +67,11 @@ const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 		</Stack>
 	);
 };
+
+export const getServerSideProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(Designers);

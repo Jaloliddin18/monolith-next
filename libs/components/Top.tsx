@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useReactiveVar, useQuery } from "@apollo/client";
+import { useReactiveVar, useQuery, useLazyQuery } from "@apollo/client";
 import { useTranslation } from "next-i18next";
 import { userVar } from "../../apollo/store";
 import { getJwtToken, updateUserInfo, logOut } from "../auth";
@@ -24,8 +24,10 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MiniCart from "./cart/MiniCart";
 import MiniWishlist from "./cart/MiniWishlist";
 import { getCartCount } from "../utils/cartStorage";
-import { GET_FAVORITES } from "../../apollo/user/query";
+import { GET_FAVORITES, GET_FURNITURES } from "../../apollo/user/query";
 import { T } from "../types/common";
+import { Furniture } from "../types/furniture/furniture";
+import { REACT_APP_API_URL } from "../config";
 
 const Top = () => {
   const router = useRouter();
@@ -38,10 +40,76 @@ const Top = () => {
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
   const [lang, setLang] = useState<string>("en");
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [searchFurnitures, { data: furnitureData, loading: isSearching }] = useLazyQuery(GET_FURNITURES, {
+    fetchPolicy: "network-only",
+  });
+
+  const furnitures: Furniture[] = (furnitureData as T)?.getFurnitures?.list ?? [];
+  const hasResults = furnitures.length > 0;
 
   useEffect(() => {
     const saved = localStorage.getItem("locale") ?? "en";
     setLang(saved);
+  }, [router]);
+
+  useEffect(() => {
+    if (searchOpen) {
+      searchInputRef.current?.focus();
+    } else {
+      setSearchText("");
+      setShowDropdown(false);
+    }
+  }, [searchOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSearchInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setSearchText(val);
+
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    if (val.trim().length < 2) {
+      setShowDropdown(false);
+      return;
+    }
+
+    debounceRef.current = setTimeout(() => {
+      const text = val.trim();
+      setShowDropdown(true);
+      searchFurnitures({ variables: { input: { page: 1, limit: 5, search: { text } } } });
+    }, 300);
+  }, [searchFurnitures]);
+
+  const handleSearchKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Escape") {
+      setSearchOpen(false);
+    }
+    if (e.key === "Enter" && searchText.trim()) {
+      const input = JSON.stringify({ page: 1, limit: 12, search: { text: searchText.trim() } });
+      router.push(`/furniture?input=${input}`);
+      setSearchOpen(false);
+    }
+  }, [searchText, router]);
+
+  const handleResultClick = useCallback((href: string) => {
+    router.push(href);
+    setSearchOpen(false);
   }, [router]);
 
   useEffect(() => {
@@ -183,9 +251,72 @@ const Top = () => {
 
         {/* Search + Actions — right */}
         <Stack direction="row" alignItems="center" gap={2} sx={{ flex: 1, justifyContent: "flex-end" }}>
-          <Box className="search-box">
-            <SearchIcon sx={{ fontSize: 20, color: "#999" }} />
-            <input type="text" placeholder={t("search")} />
+          <Box
+            ref={searchRef}
+            className={`search-box${searchOpen ? " open" : ""}`}
+            onClick={() => !searchOpen && setSearchOpen(true)}
+          >
+            <SearchIcon className="search-icon" sx={{ fontSize: 20 }} />
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder={t("search")}
+              value={searchText}
+              onChange={handleSearchInput}
+              onKeyDown={handleSearchKeyDown}
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            {/* Search Results Dropdown */}
+            {searchOpen && showDropdown && (
+              <Box className="search-dropdown">
+                {isSearching && !hasResults && (
+                  <Box className="search-dropdown-loading">
+                    <Typography className="search-loading-text">Searching...</Typography>
+                  </Box>
+                )}
+
+                {!isSearching && !hasResults && (
+                  <Box className="search-dropdown-empty">
+                    <Typography className="search-empty-text">No results for "{searchText}"</Typography>
+                  </Box>
+                )}
+
+                {furnitures.map((item) => (
+                  <Box
+                    key={item._id}
+                    className="search-result-item"
+                    onClick={() => handleResultClick(`/furniture/${item._id}`)}
+                  >
+                    <Box
+                      className="search-result-thumb"
+                      sx={{
+                        backgroundImage: item.furnitureImages?.[0]
+                          ? `url(${REACT_APP_API_URL}/${item.furnitureImages[0]})`
+                          : "url(/img/furniture/luxury_chair.jpg)",
+                      }}
+                    />
+                    <Box className="search-result-info">
+                      <Typography className="search-result-title">{item.furnitureTitle}</Typography>
+                      <Typography className="search-result-sub">
+                        ${item.furniturePrice?.toLocaleString()}
+                      </Typography>
+                    </Box>
+                  </Box>
+                ))}
+
+                {hasResults && (
+                  <Box
+                    className="search-see-all"
+                    onClick={() => handleResultClick(`/furniture?input=${JSON.stringify({ page: 1, limit: 12, search: { text: searchText.trim() } })}`)}
+                  >
+                    <Typography className="search-see-all-text">
+                      See all results for "{searchText}"
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+            )}
           </Box>
 
           {user?._id ? (

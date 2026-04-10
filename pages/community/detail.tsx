@@ -1,4 +1,5 @@
 import React from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Stack } from '@mui/material';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import ArticleContent from '../../libs/components/blog/ArticleContent';
@@ -18,5 +19,11 @@ const CommunityDetail = () => {
 		</Stack>
 	);
 };
+
+export const getServerSideProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(CommunityDetail);

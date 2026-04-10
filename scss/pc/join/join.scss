@@ -13,11 +13,12 @@
 
 	// ─── Left Panel (Form) ─────────────────
 	.login-form-panel {
-		flex: 1;
+		flex: 0 0 50%;
+		width: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 100px 40px;
+		padding: 60px 48px;
 	}
 
 	.login-form-content {
@@ -26,14 +27,14 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		max-width: 500px;
+		max-width: 420px;
 	}
 
 	.login-form-wrapper {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 40px;
+		gap: 28px;
 		width: 100%;
 	}
 
@@ -49,7 +50,7 @@
 	.login-title {
 		font-family: var(--font-ui);
 		font-weight: var(--fw-medium);
-		font-size: var(--fs-4xl);
+		font-size: var(--fs-2xl);
 		line-height: normal;
 		color: var(--color-dark);
 		margin: 0;
@@ -58,8 +59,8 @@
 	.login-subtitle {
 		font-family: var(--font-ui);
 		font-weight: var(--fw-regular);
-		font-size: var(--fs-base);
-		line-height: 24px;
+		font-size: var(--fs-sm);
+		line-height: 22px;
 		color: var(--color-text-light);
 		margin: 0;
 	}
@@ -78,8 +79,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 24px;
-		padding: 12px 14px;
+		gap: 12px;
+		padding: 9px 12px;
 		border: 1px solid var(--color-border);
 		background: transparent;
 		cursor: pointer;
@@ -88,8 +89,8 @@
 		span {
 			font-family: var(--font-ui);
 			font-weight: var(--fw-regular);
-			font-size: var(--fs-base);
-			line-height: 24px;
+			font-size: var(--fs-sm);
+			line-height: 22px;
 			color: var(--color-dark);
 			white-space: nowrap;
 		}
@@ -117,8 +118,8 @@
 	.divider-text {
 		font-family: var(--font-ui);
 		font-weight: var(--fw-regular);
-		font-size: var(--fs-base);
-		line-height: 24px;
+		font-size: var(--fs-sm);
+		line-height: 22px;
 		color: var(--color-dark);
 		text-align: center;
 	}
@@ -128,40 +129,40 @@
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		gap: 40px;
+		gap: 28px;
 	}
 
 	.form-fields {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
+		gap: 16px;
 		width: 100%;
 	}
 
 	.form-group {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 6px;
 	}
 
 	.form-label {
 		font-family: var(--font-ui);
 		font-weight: var(--fw-regular);
-		font-size: var(--fs-md);
-		line-height: 27px;
+		font-size: var(--fs-sm);
+		line-height: 22px;
 		color: var(--color-dark);
 	}
 
 	.form-input {
 		width: 100%;
-		padding: 12px;
+		padding: 9px 12px;
 		background: var(--color-bg-light);
 		border: none;
 		outline: none;
 		font-family: var(--font-ui);
 		font-weight: var(--fw-regular);
-		font-size: var(--fs-base);
-		line-height: 24px;
+		font-size: var(--fs-sm);
+		line-height: 22px;
 		color: var(--color-dark);
 		box-sizing: border-box;
 
@@ -261,8 +262,8 @@
 		.remember-text {
 			font-family: var(--font-ui);
 			font-weight: var(--fw-regular);
-			font-size: var(--fs-base);
-			line-height: 24px;
+			font-size: var(--fs-sm);
+			line-height: 22px;
 			color: var(--color-text-light);
 		}
 	}
@@ -273,8 +274,8 @@
 		cursor: pointer;
 		font-family: var(--font-ui);
 		font-weight: var(--fw-regular);
-		font-size: var(--fs-base);
-		line-height: 24px;
+		font-size: var(--fs-sm);
+		line-height: 22px;
 		color: var(--color-sale);
 		text-align: right;
 		padding: 0;
@@ -296,14 +297,14 @@
 
 	.login-btn {
 		width: 100%;
-		padding: 14px 32px;
+		padding: 10px 28px;
 		background: var(--color-primary);
 		border: none;
 		cursor: pointer;
 		font-family: var(--font-ui);
 		font-weight: var(--fw-medium);
-		font-size: var(--fs-md);
-		line-height: 27px;
+		font-size: var(--fs-sm);
+		line-height: 22px;
 		color: #fff;
 		text-align: center;
 		transition: background 0.2s;
@@ -318,8 +319,8 @@
 	}
 
 	.signup-link {
-		font-size: var(--fs-base);
-		line-height: 24px;
+		font-size: var(--fs-sm);
+		line-height: 22px;
 		text-align: center;
 		margin: 0;
 	}
@@ -344,10 +345,10 @@
 
 	// ─── Right Panel (Image) ───────────────
 	.login-image-panel {
-		width: 500px;
+		flex: 0 0 50%;
+		width: 50%;
 		min-height: calc(100vh - 152px);
 		background: #e3e9df;
-		flex-shrink: 0;
 		overflow: hidden;
 		display: flex;
 		align-items: center;

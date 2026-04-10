@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { logIn, signUp } from '../../libs/auth';
@@ -66,5 +67,11 @@ const Join: NextPage = () => {
 		/>
 	);
 };
+
+export const getServerSideProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 export default withLayoutBasic(Join);
