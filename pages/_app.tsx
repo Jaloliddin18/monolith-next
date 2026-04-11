@@ -36,9 +36,12 @@ function App({ Component, pageProps }: AppProps) {
 
     ws.onclose = () => {
       console.log('WebSocket disconnected');
+      socketVar(null);
     };
 
     return () => {
+      ws.onopen = null;
+      ws.onmessage = null;
       ws.close();
     };
   }, []);

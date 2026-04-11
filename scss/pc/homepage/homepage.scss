@@ -103,7 +103,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease;
+      transition:
+        transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.6s ease;
       z-index: 1;
     }
 
@@ -222,7 +224,10 @@
       gap: 8px;
       opacity: 0;
       transform: translateY(12px);
-      transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        background 0.2s ease;
       z-index: 3;
       cursor: pointer;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -414,15 +419,11 @@
 
   .hero-right {
     width: 655px;
-    height: 474px;
     flex-shrink: 0;
-    background: #000;
-    overflow: hidden;
 
     img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
   }
@@ -495,14 +496,11 @@
 
   .intro-image {
     width: 532px;
-    height: 550px;
     flex-shrink: 0;
-    overflow: hidden;
 
     img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
   }
@@ -735,7 +733,7 @@
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         display: block;
       }
     }
@@ -853,7 +851,7 @@
       transform: translateY(-50%);
 
       img {
-        width: 300px;
+        width: 520px;
         height: auto;
         object-fit: contain;
       }
@@ -965,7 +963,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 
     .left {
       display: flex;
@@ -1009,7 +1007,9 @@
           cursor: pointer;
           color: var(--color-dark);
           transition: color 0.2s;
-          &:hover { color: var(--color-primary); }
+          &:hover {
+            color: var(--color-primary);
+          }
         }
 
         .swiper-sale-next {
@@ -1017,19 +1017,23 @@
           cursor: pointer;
           color: var(--color-dark);
           transition: color 0.2s;
-          &:hover { color: var(--color-primary); }
+          &:hover {
+            color: var(--color-primary);
+          }
         }
 
         .swiper-sale-pagination {
-          display: flex;
-          gap: 6px;
+          position: static;
           .swiper-pagination-bullet {
             width: 8px;
             height: 8px;
             background: #ccc;
             border-radius: 50%;
             opacity: 1;
-            &.swiper-pagination-bullet-active { background: var(--color-dark); }
+            margin: 0 3px;
+            &.swiper-pagination-bullet-active {
+              background: var(--color-dark);
+            }
           }
         }
       }
@@ -1037,7 +1041,8 @@
   }
 
   .countdown-wrapper {
-    align-items: flex-start;
+    width: 100%;
+    align-items: center;
   }
 
   .countdown-row {
@@ -1132,7 +1137,7 @@
           font-family: var(--font-ui);
           font-size: var(--fs-sm);
           font-weight: var(--fw-regular);
-          color: #FF1E1E;
+          color: #ff1e1e;
           line-height: 18px;
         }
       }
@@ -1188,7 +1193,7 @@
       }
 
       .btn-view-all-sale {
-        background: #A86464 !important;
+        background: #a86464 !important;
         color: #fff !important;
         font-family: var(--font-ui) !important;
         font-size: var(--fs-md) !important;
@@ -1253,7 +1258,9 @@
           cursor: pointer;
           color: var(--color-dark);
           transition: color 0.2s;
-          &:hover { color: var(--color-primary); }
+          &:hover {
+            color: var(--color-primary);
+          }
         }
 
         .swiper-top-rated-next {
@@ -1261,19 +1268,23 @@
           cursor: pointer;
           color: var(--color-dark);
           transition: color 0.2s;
-          &:hover { color: var(--color-primary); }
+          &:hover {
+            color: var(--color-primary);
+          }
         }
 
         .swiper-top-rated-pagination {
-          display: flex;
-          gap: 6px;
+          position: static;
           .swiper-pagination-bullet {
             width: 8px;
             height: 8px;
             background: #ccc;
             border-radius: 50%;
             opacity: 1;
-            &.swiper-pagination-bullet-active { background: var(--color-dark); }
+            margin: 0 3px;
+            &.swiper-pagination-bullet-active {
+              background: var(--color-dark);
+            }
           }
         }
       }

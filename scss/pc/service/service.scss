@@ -186,7 +186,8 @@
 	.sale-content-wrap {
 		position: absolute;
 		top: 50px;
-		left: 150px;
+		left: 50%;
+		transform: translateX(-50%);
 		display: flex;
 		gap: 50px;
 		align-items: flex-start;

@@ -101,7 +101,7 @@ const Home = () => {
 	return (
 		<Stack id="home-page">
 			<HeroSection />
-			<IntroSection />
+			<TopRated furnitures={topRatedFurnitures} onLike={handleLike} />
 			<ServicesSection />
 			<AwesomeServices />
 			<NewestChair />
@@ -109,7 +109,7 @@ const Home = () => {
 			<ShopByCategory />
 			<SuggestedSection furnitures={suggestedFurnitures} onLike={handleLike} />
 			<SaleBanner furnitures={saleFurnitures} onLike={handleLike} />
-			<TopRated furnitures={topRatedFurnitures} onLike={handleLike} />
+			<IntroSection />
 			<LivingRoom />
 			<TopSelection furnitures={topSelectionFurnitures} onLike={handleLike} />
 			<StoreFinder />

@@ -1,37 +1,59 @@
-import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import React from "react";
+import { Box, Stack, Typography } from "@mui/material";
 
 const categories = [
-	{ icon: '/icons/bed.svg', label: 'Lemp' },
-	{ icon: '/icons/Desk.svg', label: 'Desks' },
-	{ icon: '/icons/chair.svg', label: 'Chair' },
-	{ icon: '/icons/Sofa.svg', label: 'Sofas' },
-	{ icon: '/icons/bed.svg', label: 'Bed' },
-	{ icon: '/icons/Table.svg', label: 'Table' },
+  { icon: "/icons/bed.svg", label: "Lamp" },
+  { icon: "/icons/Desk.svg", label: "Desk" },
+  { icon: "/icons/chair.svg", label: "Chair" },
+  { icon: "/icons/Sofa.svg", label: "Sofas" },
+  { icon: "/icons/bed.svg", label: "Bed" },
+  { icon: "/icons/Table.svg", label: "Table" },
 ];
 
 const ShopByCategory = () => {
-	return (
-		<Stack className="category-section" alignItems="center" gap="50px">
-			<Stack className="category-header" direction="row" justifyContent="space-between" alignItems="center">
-				<Typography className="section-title-text">Shop by Category</Typography>
-				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
-					<Typography>View All </Typography>
-					<Box component="img" src="/icons/ArrowUpRight.svg" alt="→" width={20} height={20} />
-				</Stack>
-			</Stack>
-			<Stack className="category-grid" direction="row" gap="24px">
-				{categories.map((cat) => (
-					<Stack key={cat.label} className="category-item" alignItems="center" justifyContent="flex-end" gap="10px">
-						<Box className="category-icon">
-							<img src={cat.icon} alt={cat.label} width={100} height={100} />
-						</Box>
-						<Typography className="category-label">{cat.label}</Typography>
-					</Stack>
-				))}
-			</Stack>
-		</Stack>
-	);
+  return (
+    <Stack className="category-section" alignItems="center" gap="50px">
+      <Stack
+        className="category-header"
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Typography className="section-title-text">Shop by Category</Typography>
+        <Stack
+          className="view-all-link"
+          direction="row"
+          alignItems="center"
+          gap="10px"
+        >
+          <Typography>View All </Typography>
+          <Box
+            component="img"
+            src="/icons/ArrowUpRight.svg"
+            alt="→"
+            width={20}
+            height={20}
+          />
+        </Stack>
+      </Stack>
+      <Stack className="category-grid" direction="row" gap="24px">
+        {categories.map((cat) => (
+          <Stack
+            key={cat.label}
+            className="category-item"
+            alignItems="center"
+            justifyContent="flex-end"
+            gap="10px"
+          >
+            <Box className="category-icon">
+              <img src={cat.icon} alt={cat.label} width={100} height={100} />
+            </Box>
+            <Typography className="category-label">{cat.label}</Typography>
+          </Stack>
+        ))}
+      </Stack>
+    </Stack>
+  );
 };
 
 export default ShopByCategory;

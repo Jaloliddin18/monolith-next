@@ -57,7 +57,10 @@ const Chat = () => {
           break;
       }
     };
-  }, [socket, messagesList]);
+    return () => {
+      socket.onmessage = null;
+    };
+  }, [socket]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {

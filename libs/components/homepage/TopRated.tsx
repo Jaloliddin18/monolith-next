@@ -36,11 +36,12 @@ const TopRated = ({ furnitures = [], onLike }: TopRatedProps) => {
 					modules={[Navigation, Pagination]}
 					slidesPerView={'auto'}
 					spaceBetween={24}
+					watchOverflow={false}
 					navigation={{
 						nextEl: '.swiper-top-rated-next',
 						prevEl: '.swiper-top-rated-prev',
 					}}
-					pagination={{ el: '.swiper-top-rated-pagination', clickable: true }}
+					pagination={{ el: '.swiper-top-rated-pagination', clickable: true, type: 'bullets' }}
 				>
 					{furnitures.map((furniture) => (
 						<SwiperSlide key={furniture._id} style={{ width: 'auto' }}>

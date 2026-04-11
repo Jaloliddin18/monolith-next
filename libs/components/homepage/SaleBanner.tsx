@@ -45,16 +45,25 @@ const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
 
 	return (
 		<Stack className="sale-banner-section" gap="40px">
-			<Box className="sale-info-box">
-				{/* Left: title + subtitle */}
-				<Box className="left">
-					<span>
-						<em>Sale</em> Opportunity — Don&apos;t Miss Out!
-					</span>
-					<p>Limited time deals on premium furniture</p>
+			<Stack className="sale-header" gap="16px">
+				{/* Row 1: title + subtitle left | arrows + dots right */}
+				<Box className="sale-info-box">
+					<Box className="left">
+						<span>
+							<em>Sale</em> Opportunity — Don&apos;t Miss Out!
+						</span>
+						<p>Limited time deals on premium furniture</p>
+					</Box>
+					<Box className="right">
+						<Box className="pagination-box">
+							<WestIcon className="swiper-sale-prev" />
+							<div className="swiper-sale-pagination" />
+							<EastIcon className="swiper-sale-next" />
+						</Box>
+					</Box>
 				</Box>
 
-				{/* Center: countdown */}
+				{/* Row 2: countdown centered */}
 				<Stack className="countdown-wrapper" gap="4px" alignItems="center">
 					<Stack className="countdown-row" direction="row" alignItems="center" gap="14px">
 						{[
@@ -79,27 +88,19 @@ const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
 						))}
 					</Stack>
 				</Stack>
-
-				{/* Right: navigation arrows */}
-				<Box className="right">
-					<Box className="pagination-box">
-						<WestIcon className="swiper-sale-prev" />
-						<div className="swiper-sale-pagination" />
-						<EastIcon className="swiper-sale-next" />
-					</Box>
-				</Box>
-			</Box>
+			</Stack>
 
 			<Swiper
 				modules={[Navigation, Pagination]}
 				slidesPerView={'auto'}
 				slidesPerGroup={4}
 				spaceBetween={24}
+				watchOverflow={false}
 				navigation={{
 					nextEl: '.swiper-sale-next',
 					prevEl: '.swiper-sale-prev',
 				}}
-				pagination={{ el: '.swiper-sale-pagination', clickable: true }}
+				pagination={{ el: '.swiper-sale-pagination', clickable: true, type: 'bullets' }}
 			>
 				{furnitures.map((furniture) => (
 					<SwiperSlide key={furniture._id} style={{ width: 'auto' }}>
