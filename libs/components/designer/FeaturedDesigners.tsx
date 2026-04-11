@@ -23,7 +23,7 @@ const FeaturedDesigners = ({ designers, loading }: FeaturedDesignersProps) => {
 			<Stack className="featured-designers-section">
 				<div className="featured-designers-header">
 					<span className="featured-designers-label">Spotlight</span>
-					<h2 className="featured-designers-title">Featured Designers</h2>
+					<h2 className="featured-designers-title">Top Designers</h2>
 				</div>
 				<div className="featured-designers-grid">
 					{[1, 2, 3].map((i) => (
@@ -40,7 +40,7 @@ const FeaturedDesigners = ({ designers, loading }: FeaturedDesignersProps) => {
 		<Stack className="featured-designers-section">
 			<div className="featured-designers-header">
 				<span className="featured-designers-label">Spotlight</span>
-				<h2 className="featured-designers-title">Featured Designers</h2>
+				<h2 className="featured-designers-title">Top Designers</h2>
 				<p className="featured-designers-desc">
 					Exceptional talent handpicked for their innovation, craftsmanship, and design philosophy
 				</p>
@@ -60,7 +60,7 @@ const FeaturedDesigners = ({ designers, loading }: FeaturedDesignersProps) => {
 							<div className="featured-card-image">
 								<img src={image} alt={designer.memberNick} />
 								<div className="featured-card-overlay">
-									<span className="featured-card-badge">Featured</span>
+									<span className="featured-card-badge">Top</span>
 								</div>
 							</div>
 							<div className="featured-card-content">

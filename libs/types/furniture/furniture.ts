@@ -46,6 +46,8 @@ export interface Furniture {
 	furnitureLikes: number;
 	furnitureComments: number;
 	furnitureRank: number;
+	furnitureTrending?: number;
+	furnitureEngagement?: number;
 	furnitureRent: boolean;
 	furnitureDiscount: number;
 	discountStart?: Date;

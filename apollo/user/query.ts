@@ -190,6 +190,8 @@ export const GET_FURNITURES = gql`
         furnitureLikes
         furnitureComments
         furnitureRank
+        furnitureTrending
+        furnitureEngagement
         furnitureRent
         furnitureDiscount
         discountStart

@@ -7,6 +7,9 @@ import { useApollo } from '../apollo/client';
 import { light } from '../scss/MaterialTheme';
 import '../scss/app.scss';
 import '../scss/pc/main.scss';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 function App({ Component, pageProps }: AppProps) {
 	const apolloClient = useApollo(pageProps.initialApolloState);

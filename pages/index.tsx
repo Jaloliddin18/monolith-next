@@ -36,25 +36,31 @@ const Home = () => {
 
 	const { data: trendingData, refetch: refetchTrending } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
-		variables: { input: { page: 1, limit: 6, sort: 'furnitureViews', direction: Direction.DESC, search: {} } },
+		variables: { input: { page: 1, limit: 6, sort: 'furnitureTrending', direction: Direction.DESC, search: {} } },
 		notifyOnNetworkStatusChange: false,
 	});
 
 	const { data: topRatedData, refetch: refetchTopRated } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
-		variables: { input: { page: 1, limit: 3, sort: 'furnitureRank', direction: Direction.DESC, search: {} } },
+		variables: { input: { page: 1, limit: 10, sort: 'furnitureRank', direction: Direction.DESC, search: {} } },
 		notifyOnNetworkStatusChange: false,
 	});
 
 	const { data: topSelectionData, refetch: refetchTopSelection } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
-		variables: { input: { page: 1, limit: 6, sort: 'createdAt', direction: Direction.DESC, search: {} } },
+		variables: { input: { page: 1, limit: 6, sort: 'furnitureRank', direction: Direction.DESC, search: {} } },
 		notifyOnNetworkStatusChange: false,
 	});
 
 	const { data: suggestedData, refetch: refetchSuggested } = useQuery(GET_FURNITURES, {
 		fetchPolicy: 'cache-and-network',
-		variables: { input: { page: 1, limit: 3, sort: 'furnitureLikes', direction: Direction.DESC, search: {} } },
+		variables: { input: { page: 1, limit: 3, sort: 'furnitureEngagement', direction: Direction.DESC, search: {} } },
+		notifyOnNetworkStatusChange: false,
+	});
+
+	const { data: saleData, refetch: refetchSale } = useQuery(GET_FURNITURES, {
+		fetchPolicy: 'cache-and-network',
+		variables: { input: { page: 1, limit: 10, sort: 'createdAt', direction: Direction.DESC, search: { options: ['furnitureOnSale'] } } },
 		notifyOnNetworkStatusChange: false,
 	});
 
@@ -62,6 +68,7 @@ const Home = () => {
 	const topRatedFurnitures: Furniture[] = topRatedData?.getFurnitures?.list ?? [];
 	const topSelectionFurnitures: Furniture[] = topSelectionData?.getFurnitures?.list ?? [];
 	const suggestedFurnitures: Furniture[] = suggestedData?.getFurnitures?.list ?? [];
+	const saleFurnitures: Furniture[] = saleData?.getFurnitures?.list ?? [];
 
 	useEffect(() => {
 		const handler = () => {
@@ -69,10 +76,11 @@ const Home = () => {
 			refetchTopRated();
 			refetchTopSelection();
 			refetchSuggested();
+			refetchSale();
 		};
 		window.addEventListener('wishlistUpdated', handler);
 		return () => window.removeEventListener('wishlistUpdated', handler);
-	}, [refetchTrending, refetchTopRated, refetchTopSelection, refetchSuggested]);
+	}, [refetchTrending, refetchTopRated, refetchTopSelection, refetchSuggested, refetchSale]);
 
 	const handleLike = useCallback(
 		async (id: string) => {
@@ -100,7 +108,7 @@ const Home = () => {
 			<TrendingNow trendFurnitures={trendingFurnitures} onLike={handleLike} />
 			<ShopByCategory />
 			<SuggestedSection furnitures={suggestedFurnitures} onLike={handleLike} />
-			<SaleBanner />
+			<SaleBanner furnitures={saleFurnitures} onLike={handleLike} />
 			<TopRated furnitures={topRatedFurnitures} onLike={handleLike} />
 			<LivingRoom />
 			<TopSelection furnitures={topSelectionFurnitures} onLike={handleLike} />
