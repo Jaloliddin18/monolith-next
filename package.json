@@ -28,6 +28,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-i18next": "11",
+    "react-scrollable-feed": "^2.0.4",
     "sass": "^1.98.0",
     "subscriptions-transport-ws": "0.9.19",
     "sweetalert2": "^11.26.22",
