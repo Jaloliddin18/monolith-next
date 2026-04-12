@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from '../common/ProductCard';
 
@@ -102,13 +103,14 @@ interface TrendingNowProps {
 }
 
 const TrendingNow = ({ trendFurnitures, onLike }: TrendingNowProps) => {
+	const router = useRouter();
 	const products = trendFurnitures && trendFurnitures.length > 0 ? trendFurnitures : null;
 
 	return (
 		<Stack className="trending-section" gap="50px">
 			<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
 				<Typography className="section-title-text">Trending Now</Typography>
-				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
+				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px" onClick={() => router.push('/furniture')} sx={{ cursor: 'pointer' }}>
 					<Typography>View All product</Typography>
 					<Box component="img" src="/icons/ArrowUpRight.svg" alt="→" width={20} height={20} />
 				</Stack>

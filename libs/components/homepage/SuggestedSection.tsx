@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from '../common/ProductCard';
 
@@ -65,13 +66,14 @@ interface SuggestedSectionProps {
 }
 
 const SuggestedSection = ({ furnitures, onLike }: SuggestedSectionProps) => {
+	const router = useRouter();
 	const products = furnitures && furnitures.length > 0 ? furnitures : null;
 
 	return (
 		<Stack className="suggested-section" gap="50px">
 			<Stack className="section-header-row" direction="row" justifyContent="space-between" alignItems="center">
 				<Typography className="section-title-text">Suggested for you</Typography>
-				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px">
+				<Stack className="view-all-link" direction="row" alignItems="center" gap="10px" onClick={() => router.push('/furniture')} sx={{ cursor: 'pointer' }}>
 					<Typography>View All product</Typography>
 					<Box component="img" src="/icons/ArrowUpRight.svg" alt="→" width={20} height={20} />
 				</Stack>

@@ -1,7 +1,9 @@
 import React from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
+import { useRouter } from "next/router";
 
 const NewestChair = () => {
+  const router = useRouter();
   return (
     <Stack className="newest-section" gap="24px">
       <Stack direction="row" gap="24px">
@@ -51,7 +53,7 @@ const NewestChair = () => {
               Upgrade Your Seating Game
             </Typography>
           </Stack>
-          <Button className="btn-shop-now" disableElevation>
+          <Button className="btn-shop-now" disableElevation onClick={() => router.push('/furniture')}>
             SHOP NOW
           </Button>
         </Stack>

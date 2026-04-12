@@ -1,9 +1,11 @@
 import React from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 const HeroSection = () => {
   const { t } = useTranslation("common");
+  const router = useRouter();
 
   return (
     <Box className="hero-section">
@@ -18,7 +20,7 @@ const HeroSection = () => {
           </Stack>
           <Stack className="hero-cta" direction="row" alignItems="center">
             <Typography className="hero-price">$139.99</Typography>
-            <Button className="btn-hero-cta" disableElevation>
+            <Button className="btn-hero-cta" disableElevation onClick={() => router.push('/furniture')}>
               {t("ADD TO CART")}
             </Button>
           </Stack>

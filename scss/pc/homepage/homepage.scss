@@ -1331,17 +1331,34 @@
       border: 7px solid rgba(255, 255, 255, 0.4);
       border-radius: 50px;
       cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    &:hover .living-dot {
+      opacity: 1;
     }
   }
 
   .living-product-popup {
     position: absolute;
-    top: 137px;
-    left: 50%;
-    transform: translateX(217px);
     background: #fff;
     padding: 24px;
-    z-index: 2;
+    z-index: 3;
+    width: 160px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+
+    &.popup-visible {
+      opacity: 1;
+      pointer-events: all;
+      transition: opacity 0.3s ease-in;
+    }
+
+    &.popup-fading {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.8s ease-out;
+    }
 
     .popup-name {
       font-family: var(--font-ui);
@@ -1363,14 +1380,22 @@
 
     .popup-arrow {
       position: absolute;
-      bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
       height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-top: 10px solid #fff;
+
+      &.popup-arrow-down {
+        bottom: -10px;
+        border-top: 10px solid #fff;
+      }
+
+      &.popup-arrow-up {
+        top: -10px;
+        border-bottom: 10px solid #fff;
+      }
     }
   }
 }

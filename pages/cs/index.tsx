@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useRouter } from "next/router";
 import NewsletterBanner from "../../libs/components/furniture/NewsletterBanner";
 import InstagramSection from "../../libs/components/common/InstagramSection";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -168,6 +169,7 @@ const reviews = [
 ];
 
 const Service = () => {
+  const router = useRouter();
   const [countdown, setCountdown] = useState({
     days: 10,
     hours: 18,
@@ -366,7 +368,7 @@ const Service = () => {
                   <span>Secs</span>
                 </Stack>
               </Box>
-              <Button variant="contained" className="btn-shop-now">
+              <Button variant="contained" className="btn-shop-now" onClick={() => router.push('/furniture')}>
                 SHOP NOW
               </Button>
             </Stack>

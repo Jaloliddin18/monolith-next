@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Stack, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 
 const categories = [
-  { icon: "/icons/bed.svg", label: "Lamp" },
-  { icon: "/icons/Desk.svg", label: "Desk" },
+  { icon: "/icons/bed.svg", label: "Desk" },
+  { icon: "/icons/Desk.svg", label: "Lamp" },
   { icon: "/icons/chair.svg", label: "Chair" },
   { icon: "/icons/Sofa.svg", label: "Sofas" },
   { icon: "/icons/bed.svg", label: "Bed" },
@@ -11,6 +12,8 @@ const categories = [
 ];
 
 const ShopByCategory = () => {
+  const router = useRouter();
+
   return (
     <Stack className="category-section" alignItems="center" gap="50px">
       <Stack
@@ -25,6 +28,8 @@ const ShopByCategory = () => {
           direction="row"
           alignItems="center"
           gap="10px"
+          onClick={() => router.push("/furniture")}
+          sx={{ cursor: "pointer" }}
         >
           <Typography>View All </Typography>
           <Box

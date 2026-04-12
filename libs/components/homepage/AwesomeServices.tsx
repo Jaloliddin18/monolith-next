@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
+import { useRouter } from "next/router";
 
 const serviceCards = [
   {
@@ -36,11 +37,13 @@ const ServiceCard = ({
   alt,
   title,
   desc,
+  onLearnMore,
 }: {
   icon: string;
   alt: string;
   title: string;
   desc: string;
+  onLearnMore: () => void;
 }) => (
   <Box className="svc-card">
     <Box className="svc-card-icon">
@@ -49,7 +52,7 @@ const ServiceCard = ({
     <Box className="svc-card-body">
       <Typography className="svc-card-title">{title}</Typography>
       <Typography className="svc-card-desc">{desc}</Typography>
-      <Box className="svc-card-link">
+      <Box className="svc-card-link" onClick={onLearnMore} sx={{ cursor: 'pointer' }}>
         <span>Learn more</span>
         <img src="/icons/ArrowRight.svg" alt="→" width={20} height={20} />
       </Box>
@@ -58,6 +61,8 @@ const ServiceCard = ({
 );
 
 const AwesomeServices = () => {
+  const router = useRouter();
+
   return (
     <Stack className="awesome-section" alignItems="center">
       <Typography className="awesome-title">Our Awesome Services</Typography>
@@ -65,7 +70,7 @@ const AwesomeServices = () => {
         {/* Left Column */}
         <Stack className="awesome-col" gap="24px">
           {serviceCards.map((card) => (
-            <ServiceCard key={card.title} {...card} />
+            <ServiceCard key={card.title} {...card} onLearnMore={() => router.push('/cs')} />
           ))}
         </Stack>
 
@@ -88,7 +93,7 @@ const AwesomeServices = () => {
                 <Typography className="awesome-sale-price">$21.99</Typography>
               </Stack>
             </Stack>
-            <Button className="btn-shop-now" disableElevation>
+            <Button className="btn-shop-now" disableElevation onClick={() => router.push('/furniture')}>
               SHOP NOW
             </Button>
           </Stack>
@@ -100,7 +105,7 @@ const AwesomeServices = () => {
         {/* Right Column */}
         <Stack className="awesome-col" gap="24px">
           {serviceCardsRight.map((card) => (
-            <ServiceCard key={card.title} {...card} />
+            <ServiceCard key={card.title} {...card} onLearnMore={() => router.push('/cs')} />
           ))}
         </Stack>
       </Stack>
