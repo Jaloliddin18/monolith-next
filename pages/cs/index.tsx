@@ -368,16 +368,20 @@ const Service = () => {
                   <span>Secs</span>
                 </Stack>
               </Box>
-              <Button variant="contained" className="btn-shop-now" onClick={() => router.push('/furniture')}>
+              <Button
+                variant="contained"
+                className="btn-shop-now"
+                onClick={() => router.push("/furniture")}
+              >
                 SHOP NOW
               </Button>
             </Stack>
             <Stack className="sale-thumbnails" direction="row">
               <Box className="sale-thumb">
-                <img src="/img/furniture/luxury_chair.jpg" alt="Product 1" />
+                <img src="/img/cs/cs6.webp" alt="Product 1" />
               </Box>
               <Box className="sale-thumb">
-                <img src="/img/furniture/luxury_chair.jpg" alt="Product 2" />
+                <img src="/img/cs/cs8.webp" alt="Product 2" />
               </Box>
             </Stack>
           </Stack>

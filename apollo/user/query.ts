@@ -715,3 +715,22 @@ export const GET_MEMBER_FOLLOWINGS = gql`
     }
   }
 `;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+export const GET_SUBSCRIBERS = gql`
+  query GetAllSubscribersByAdmin($input: GetSubscribersInquiry!) {
+    getAllSubscribersByAdmin(input: $input) {
+      list {
+        _id
+        subscriberEmail
+        isActive
+        createdAt
+      }
+      metaCounter {
+        total
+      }
+    }
+  }
+`;

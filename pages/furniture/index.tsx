@@ -13,6 +13,7 @@ import { Furniture } from '../../libs/types/furniture/furniture';
 import { Direction } from '../../libs/enums/common.enum';
 import { T } from '../../libs/types/common';
 import { sweetMixinErrorAlert } from '../../libs/sweetAlert';
+import NewsletterBanner from '../../libs/components/furniture/NewsletterBanner';
 
 const DEFAULT_INQUIRY: FurnituresInquiry = {
 	page: 1,
@@ -160,6 +161,8 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 				onFilterChange={handleFilterChange}
 				onLike={handleLike}
 			/>
+			{/* ===== NEWSLETTER BANNER ===== */}
+			<NewsletterBanner />
 		</Stack>
 	);
 };

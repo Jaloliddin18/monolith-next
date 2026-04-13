@@ -390,3 +390,26 @@ export const UNSUBSCRIBE = gql`
     }
   }
 `;
+
+/**************************
+ *      NOTIFICATION      *
+ *************************/
+export const SUBSCRIBE_NEWSLETTER = gql`
+  mutation Subscribe($input: SubscribeInput!) {
+    subscribe(input: $input) {
+      _id
+      subscriberEmail
+      isActive
+    }
+  }
+`;
+
+export const UNSUBSCRIBE_NEWSLETTER = gql`
+  mutation Unsubscribe($input: UnsubscribeInput!) {
+    unsubscribe(input: $input) {
+      _id
+      subscriberEmail
+      isActive
+    }
+  }
+`;

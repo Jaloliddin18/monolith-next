@@ -201,7 +201,11 @@ const About = () => {
             alignItems="center"
           >
             <Typography className="category-title">Shop by Category</Typography>
-            <Box className="category-view-all" onClick={() => router.push('/furniture')} sx={{ cursor: 'pointer' }}>
+            <Box
+              className="category-view-all"
+              onClick={() => router.push("/furniture")}
+              sx={{ cursor: "pointer" }}
+            >
               <Typography
                 sx={{
                   fontFamily: "'Jost', sans-serif",
@@ -327,15 +331,19 @@ const About = () => {
                   justifyContent="space-between"
                   alignItems="center"
                   key={room}
-                  onClick={() => router.push('/furniture')}
-                  sx={{ cursor: 'pointer' }}
+                  onClick={() => router.push("/furniture")}
+                  sx={{ cursor: "pointer" }}
                 >
                   <Typography className="room-name">{room}</Typography>
                   <ArrowUpwardIcon />
                 </Stack>
               ))}
             </Stack>
-            <Button variant="contained" className="btn-view-collection" onClick={() => router.push('/furniture')}>
+            <Button
+              variant="contained"
+              className="btn-view-collection"
+              onClick={() => router.push("/furniture")}
+            >
               VIEW ALL COLLECTION
             </Button>
           </Stack>

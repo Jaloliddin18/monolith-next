@@ -5,6 +5,7 @@ import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import BlogListSection from '../../libs/components/blog/BlogListSection';
 import TrendingArticlesSection from '../../libs/components/blog/TrendingArticlesSection';
 import InstagramSection from '../../libs/components/common/InstagramSection';
+import NewsletterBanner from '../../libs/components/furniture/NewsletterBanner';
 
 const Community = () => {
 	return (
@@ -12,6 +13,8 @@ const Community = () => {
 			<BlogListSection />
 			<TrendingArticlesSection />
 			<InstagramSection />
+			{/* ===== NEWSLETTER BANNER ===== */}
+			<NewsletterBanner />
 		</Stack>
 	);
 };
