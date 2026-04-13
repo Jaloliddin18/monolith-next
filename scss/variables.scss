@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Jost:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
 
 // ==============================
 // TYPOGRAPHY
@@ -66,6 +66,7 @@ $header-height: 152px;
   --font-primary: #{$font-primary};
   --font-heading: #{$font-heading};
   --font-ui:      #{$font-ui};
+  --font-dm-sans: 'DM Sans', sans-serif;
 
   // Font size scale
   --fs-xs:   12px;
