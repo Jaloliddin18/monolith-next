@@ -19,6 +19,7 @@
     "apollo-upload-client": "17.0.0",
     "axios": "^1.15.0",
     "browser-image-compression": "^2.0.2",
+    "framer-motion": "^12.38.0",
     "graphql": "^16.13.1",
     "i18next": "21",
     "jwt-decode": "^4.0.0",
