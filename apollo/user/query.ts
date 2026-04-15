@@ -107,6 +107,11 @@ export const GET_FURNITURE = gql`
       furniturePrice
       furnitureLastChancePrice
       furnitureWeight
+      furnitureDimensions {
+        width
+        height
+        depth
+      }
       furnitureColor
       assemblyTime
       furnitureImages

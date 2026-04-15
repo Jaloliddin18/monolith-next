@@ -261,6 +261,12 @@ export const LIKE_TARGET_FURNITURE = gql`
   }
 `;
 
+export const VIDEO_UPLOADER = gql`
+  mutation VideoUploader($file: Upload!, $target: String!) {
+    videoUploader(file: $file, target: $target)
+  }
+`;
+
 /**************************
  *      BOARD-ARTICLE     *
  *************************/

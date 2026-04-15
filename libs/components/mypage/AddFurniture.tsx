@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_FURNITURE } from "../../../apollo/user/mutation";
+import { CREATE_FURNITURE, VIDEO_UPLOADER } from "../../../apollo/user/mutation";
 import {
   FurnitureRoom,
   FurnitureCategory,
@@ -43,6 +43,7 @@ const AddFurniture = () => {
   const router = useRouter();
   const token = getJwtToken();
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
 
   const [step, setStep] = useState(1);
   const [dragOver, setDragOver] = useState(false);
@@ -78,7 +79,12 @@ const AddFurniture = () => {
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 
+  const [videoPath, setVideoPath] = useState<string>('');
+  const [videoPreview, setVideoPreview] = useState<string>('');
+  const [videoUploading, setVideoUploading] = useState(false);
+
   const [createFurniture] = useMutation(CREATE_FURNITURE);
+  const [_videoUploaderMutation] = useMutation(VIDEO_UPLOADER);
 
   const set = (field: string, value: any) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -105,6 +111,46 @@ const AddFurniture = () => {
     });
     const json = await response.json();
     return json.data.imageUploader as string;
+  };
+
+  const uploadVideo = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append(
+      "operations",
+      JSON.stringify({
+        query: `mutation VideoUploader($file: Upload!, $target: String!) { videoUploader(file: $file, target: $target) }`,
+        variables: { file: null, target: "furniture" },
+      }),
+    );
+    formData.append("map", JSON.stringify({ "0": ["variables.file"] }));
+    formData.append("0", file);
+
+    const response = await fetch(`${process.env.REACT_APP_API_GRAPHQL_URL}`, {
+      method: "POST",
+      headers: {
+        "apollo-require-preflight": "true",
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+    const json = await response.json();
+    return json.data.videoUploader as string;
+  };
+
+  const handleVideoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setVideoUploading(true);
+    try {
+      const path = await uploadVideo(file);
+      setVideoPath(path);
+      setVideoPreview(`${REACT_APP_API_URL}/${path}`);
+      sweetTopSmallSuccessAlert("Video uploaded!", 800);
+    } catch (err: any) {
+      sweetMixinErrorAlert(err?.message ?? "Video upload failed");
+    } finally {
+      setVideoUploading(false);
+    }
   };
 
   const processFiles = async (files: File[]) => {
@@ -186,6 +232,7 @@ const AddFurniture = () => {
         furnitureImages: images,
       };
 
+      if (videoPath) input.furnitureVideo = videoPath;
       if (form.furnitureDesc) input.furnitureDesc = form.furnitureDesc;
       if (form.assemblyDifficulty)
         input.assemblyDifficulty = form.assemblyDifficulty;
@@ -635,6 +682,64 @@ const AddFurniture = () => {
                       </button>
                     </Box>
                   ))}
+                </Box>
+              )}
+            </Box>
+
+            {/* Video upload */}
+            <Box className="add-furniture-section">
+              <Typography className="add-furniture-section-title">
+                Upload Video{" "}
+                <span className="add-furniture-optional">(optional)</span>
+              </Typography>
+              <Box
+                className="add-furniture-dropzone"
+                onClick={() => videoInputRef.current?.click()}
+              >
+                <CloudUploadOutlinedIcon className="af-dropzone-icon" />
+                <Typography className="af-dropzone-text">
+                  {videoUploading
+                    ? "Uploading..."
+                    : "Click to upload a product video"}
+                </Typography>
+                <Typography className="af-dropzone-hint">
+                  Accepted formats: MP4, WebM, MOV (max ~5 sec)
+                </Typography>
+                <button
+                  className="af-browse-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    videoInputRef.current?.click();
+                  }}
+                >
+                  Browse Files ↗
+                </button>
+              </Box>
+              <input
+                ref={videoInputRef}
+                type="file"
+                accept="video/mp4,video/webm,video/quicktime"
+                hidden
+                onChange={handleVideoChange}
+              />
+              {videoPreview && (
+                <Box className="af-preview-row">
+                  <Box className="af-preview-item">
+                    <video
+                      src={videoPreview}
+                      controls
+                      style={{ width: "100%", maxWidth: 320, borderRadius: 8 }}
+                    />
+                    <button
+                      className="af-preview-remove"
+                      onClick={() => {
+                        setVideoPath("");
+                        setVideoPreview("");
+                      }}
+                    >
+                      <DeleteOutlineIcon sx={{ fontSize: 16 }} />
+                    </button>
+                  </Box>
                 </Box>
               )}
             </Box>

@@ -40,11 +40,14 @@ const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, revi
 	if (!furniture) return null;
 	const { _id, furnitureTitle, furniturePrice, furnitureImages, furnitureBestseller, furnitureDiscount, furnitureLikes, furnitureViews, furnitureComments } = furniture;
 
-	const primaryImage = furnitureImages?.[0]
-		? `${REACT_APP_API_URL}/${furnitureImages[0]}`
-		: '/img/furniture/luxury_chair.jpg';
-	const secondaryImage = furnitureImages?.[1]
+	// [1] = white-bg product shot (default thumbnail), [0] = hero lifestyle (hover)
+	const cardImage = furnitureImages?.[1]
 		? `${REACT_APP_API_URL}/${furnitureImages[1]}`
+		: furnitureImages?.[0]
+			? `${REACT_APP_API_URL}/${furnitureImages[0]}`
+			: '/img/furniture/luxury_chair.jpg';
+	const heroImage = furnitureImages?.[0]
+		? `${REACT_APP_API_URL}/${furnitureImages[0]}`
 		: null;
 
 	const reviewCount = reviewCountProp ?? furnitureComments ?? 0;
@@ -62,18 +65,18 @@ const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, revi
 			onMouseLeave={() => setIsHovered(false)}
 		>
 			<Box className="product-card-img" onClick={handleClick}>
-				{/* Primary image */}
+				{/* Default thumbnail: furnitureImages[1] (white bg), fallback to [0] */}
 				<img
 					className="img-primary"
-					src={primaryImage}
+					src={cardImage}
 					alt={furnitureTitle}
 				/>
-				{/* Secondary image (shown on hover if exists) */}
-				{secondaryImage && (
+				{/* Hero image overlay: furnitureImages[0], fades in on hover */}
+				{heroImage && (
 					<img
 						className={`img-secondary${isHovered ? ' visible' : ''}`}
-						src={secondaryImage}
-						alt={`${furnitureTitle} alternate`}
+						src={heroImage}
+						alt={`${furnitureTitle} hero`}
 					/>
 				)}
 

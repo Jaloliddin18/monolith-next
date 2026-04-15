@@ -152,6 +152,13 @@ const FurnitureDetail = () => {
   });
 
   // ─── Derived values ─────────────────────────────────────────
+  // Image slot map (raw paths from furnitureImages array)
+  const mainImage = furniture?.furnitureImages?.[0] ?? "";
+  const galleryImages = furniture?.furnitureImages?.slice(1, 6) ?? [];
+  const zoomedImage = furniture?.furnitureImages?.[6] ?? "";
+  const dimensionImages = furniture?.furnitureImages?.slice(7, 9) ?? [];
+  // videoUrl = furniture?.furnitureVideo (defined below with full URL prefix)
+
   const currentPrice =
     furniture?.furnitureLastChancePrice &&
     furniture.furnitureLastChancePrice < furniture.furniturePrice
@@ -169,12 +176,30 @@ const FurnitureDetail = () => {
     [furniture],
   );
 
-  const allImages = furniture?.furnitureImages?.length
-    ? furniture.furnitureImages.map((_, i) => imagePath(i))
-    : ["/img/furniture/luxury_chair.jpg"];
+  const heroImage = mainImage
+    ? `${REACT_APP_API_URL}/${mainImage}`
+    : "/img/furniture/luxury_chair.jpg";
 
-  const heroImage = allImages[0];
-  const closeupImage = allImages[allImages.length - 1];
+  const galleryImageUrls = galleryImages.map(
+    (img) => `${REACT_APP_API_URL}/${img}`,
+  );
+
+  const zoomedImageUrl = zoomedImage
+    ? `${REACT_APP_API_URL}/${zoomedImage}`
+    : "/img/furniture/luxury_chair.jpg";
+
+  const dimensionImageUrls = dimensionImages.map(
+    (img) => `${REACT_APP_API_URL}/${img}`,
+  );
+
+  // Flat ordered list used only by the lightbox
+  const allImages = [
+    heroImage,
+    ...galleryImageUrls,
+    zoomedImageUrl,
+    ...dimensionImageUrls,
+  ];
+
   const videoUrl = furniture?.furnitureVideo
     ? `${REACT_APP_API_URL}/${furniture.furnitureVideo}`
     : null;
@@ -316,9 +341,12 @@ const FurnitureDetail = () => {
               spaceBetween={1}
               className="nvg-swiper"
             >
-              {allImages.map((img, idx) => (
+              {galleryImageUrls.map((img, idx) => (
                 <SwiperSlide key={idx}>
-                  <div className="nvg-slide" onClick={() => openLightbox(idx)}>
+                  <div
+                    className="nvg-slide"
+                    onClick={() => openLightbox(idx + 1)}
+                  >
                     <img src={img} alt={`View ${idx + 1}`} />
                   </div>
                 </SwiperSlide>
@@ -337,7 +365,7 @@ const FurnitureDetail = () => {
               <ArrowForwardIcon />
             </button>
             <div className="nvg-slide-counter">
-              {carouselIndex + 1} / {allImages.length}
+              {carouselIndex + 1} / {galleryImageUrls.length}
             </div>
           </div>
 
@@ -345,9 +373,9 @@ const FurnitureDetail = () => {
           <div className="nvg-media-row">
             <div
               className="nvg-media-item"
-              onClick={() => openLightbox(allImages.length - 1)}
+              onClick={() => openLightbox(1 + galleryImageUrls.length)}
             >
-              <img src={closeupImage} alt="Close-up" />
+              <img src={zoomedImageUrl} alt="Close-up" />
             </div>
             <div className="nvg-media-item nvg-media-item--video">
               {videoUrl ? (
@@ -370,11 +398,9 @@ const FurnitureDetail = () => {
                 </>
               ) : (
                 <img
-                  src={allImages[Math.min(1, allImages.length - 1)]}
+                  src={galleryImageUrls[0] ?? heroImage}
                   alt="Detail view"
-                  onClick={() =>
-                    openLightbox(Math.min(1, allImages.length - 1))
-                  }
+                  onClick={() => openLightbox(1)}
                 />
               )}
             </div>
@@ -460,7 +486,7 @@ const FurnitureDetail = () => {
                 </p>
                 <p className="nvg-variant-mat">{matLabel}</p>
               </div>
-              <span className="nvg-variant-opts">2 options ›</span>
+              <span className="nvg-variant-opts">1 option ›</span>
             </div>
 
             {/* Quantity + CTA + Heart */}
@@ -533,7 +559,6 @@ const FurnitureDetail = () => {
 
       {/* ─── Accordion sections — 2-column ─── */}
       <div className="nvg-accordions">
-
         {/* Left: accordion list */}
         <div className="nvg-acc-list">
           {accordionSections.map(({ id, label, Icon }) => (
@@ -565,96 +590,86 @@ const FurnitureDetail = () => {
                   <div className="nvg-dim-body">
                     <table className="nvg-dim-table">
                       <tbody>
-                        <tr>
-                          <td>Depth</td>
-                          <td>{dims?.depth != null ? `${dims.depth} cm` : "—"}</td>
-                        </tr>
-                        <tr>
-                          <td>Height</td>
-                          <td>{dims?.height != null ? `${dims.height} cm` : "—"}</td>
-                        </tr>
-                        <tr>
-                          <td>Width</td>
-                          <td>{dims?.width != null ? `${dims.width} cm` : "—"}</td>
-                        </tr>
-                        <tr>
-                          <td>Seat height</td>
-                          <td>—</td>
-                        </tr>
-                        <tr>
-                          <td>Seat depth</td>
-                          <td>—</td>
-                        </tr>
-                        <tr>
-                          <td>Weight</td>
-                          <td>
-                            {furniture?.furnitureWeight != null
-                              ? `${furniture.furnitureWeight} kg`
-                              : "—"}
-                          </td>
-                        </tr>
+                        {furniture?.furnitureDimensions?.width != null && (
+                          <tr>
+                            <td>Width</td>
+                            <td>{furniture.furnitureDimensions.width} cm</td>
+                          </tr>
+                        )}
+                        {furniture?.furnitureDimensions?.height != null && (
+                          <tr>
+                            <td>Height</td>
+                            <td>{furniture.furnitureDimensions.height} cm</td>
+                          </tr>
+                        )}
+                        {furniture?.furnitureDimensions?.depth != null && (
+                          <tr>
+                            <td>Depth</td>
+                            <td>{furniture.furnitureDimensions.depth} cm</td>
+                          </tr>
+                        )}
+                        {furniture?.furnitureWeight != null && (
+                          <tr>
+                            <td>Weight</td>
+                            <td>{furniture.furnitureWeight} kg</td>
+                          </tr>
+                        )}
                       </tbody>
                     </table>
                   </div>
                 )}
-              {id === "details" && (
-                <div className="nvg-acc-content">
-                  <p>Material: {matLabel || "—"}</p>
-                  <p>
-                    Assembly:{" "}
-                    {furniture?.assemblyType
-                      ?.replace(/_/g, " ")
-                      .toLowerCase() ?? "—"}
-                  </p>
-                  <p>
-                    Style:{" "}
-                    {furniture?.furnitureStyle
-                      ?.replace(/_/g, " ")
-                      .toLowerCase() ?? "—"}
-                  </p>
-                </div>
-              )}
-              {id === "description" && (
-                <div className="nvg-acc-content">
-                  <p>
-                    {furniture?.furnitureDesc ?? "No description available."}
-                  </p>
-                </div>
-              )}
-              {id === "packages" && (
-                <div className="nvg-acc-content">
-                  <p>
-                    1 package — Assembly:{" "}
-                    {furniture?.assemblyDifficulty
-                      ?.replace(/_/g, " ")
-                      .toLowerCase() ?? "—"}
-                  </p>
-                </div>
-              )}
+                {id === "details" && (
+                  <div className="nvg-acc-content">
+                    <p>Material: {matLabel || "—"}</p>
+                    <p>
+                      Assembly:{" "}
+                      {furniture?.assemblyType
+                        ?.replace(/_/g, " ")
+                        .toLowerCase() ?? "—"}
+                    </p>
+                    <p>
+                      Style:{" "}
+                      {furniture?.furnitureStyle
+                        ?.replace(/_/g, " ")
+                        .toLowerCase() ?? "—"}
+                    </p>
+                  </div>
+                )}
+                {id === "description" && (
+                  <div className="nvg-acc-content">
+                    <p>
+                      {furniture?.furnitureDesc ?? "No description available."}
+                    </p>
+                  </div>
+                )}
+                {id === "packages" && (
+                  <div className="nvg-acc-content">
+                    <p>
+                      1 package — Assembly:{" "}
+                      {furniture?.assemblyDifficulty
+                        ?.replace(/_/g, " ")
+                        .toLowerCase() ?? "—"}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-        </div>{/* end nvg-acc-list */}
+          ))}
+        </div>
+        {/* end nvg-acc-list */}
 
         {/* Right: sticky image panel */}
         <div className="nvg-dim-panel">
           <div className="nvg-dim-panel-frame">
-            {dims?.width && (
-              <div className="nvg-dim-annotation">
-                <span className="nvg-dim-ann-line" />
-                <span className="nvg-dim-ann-val">{dims.width}cm</span>
-                <span className="nvg-dim-ann-line" />
-              </div>
-            )}
             <img
-              src={allImages[dimImageIdx]}
-              alt={`View ${dimImageIdx + 1}`}
+              src={dimensionImageUrls[dimImageIdx] ?? heroImage}
+              alt={`Dimension view ${dimImageIdx + 1}`}
               className="nvg-dim-panel-img"
             />
           </div>
           <div className="nvg-dim-panel-footer">
             <span className="nvg-dim-panel-counter">
-              View {dimImageIdx + 1}/{allImages.length} : Visit
+              View {dimImageIdx + 1}/{dimensionImageUrls.length} : Visit
             </span>
             <div className="nvg-dim-panel-nav">
               <button
@@ -664,16 +679,20 @@ const FurnitureDetail = () => {
                 <ArrowBackIcon sx={{ fontSize: 14 }} />
               </button>
               <button
-                onClick={() => setDimImageIdx((i) => Math.min(allImages.length - 1, i + 1))}
-                disabled={dimImageIdx === allImages.length - 1}
+                onClick={() =>
+                  setDimImageIdx((i) =>
+                    Math.min(dimensionImageUrls.length - 1, i + 1),
+                  )
+                }
+                disabled={dimImageIdx === dimensionImageUrls.length - 1}
               >
                 <ArrowForwardIcon sx={{ fontSize: 14 }} />
               </button>
             </div>
           </div>
         </div>
-
-      </div>{/* end nvg-accordions */}
+      </div>
+      {/* end nvg-accordions */}
 
       {/* ─── You'll Also Like (full-width) ─── */}
       {similarFurnitures.length > 0 && (
