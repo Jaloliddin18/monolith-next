@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Box, Stack, Typography } from '@mui/material';
 import { useQuery } from '@apollo/client';
 import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
@@ -8,6 +8,7 @@ import { BoardArticlesInquiry } from '../../types/board-article/board-article.in
 import { Direction } from '../../enums/common.enum';
 
 const BlogSection = () => {
+	const router = useRouter();
 	const [searchFilter] = useState<BoardArticlesInquiry>({
 		page: 1,
 		limit: 4,
@@ -40,7 +41,12 @@ const BlogSection = () => {
 			<Typography className="section-title-text">Our Latest Blog</Typography>
 			<Stack direction="row" flexWrap="wrap" gap="24px" sx={{ width: 1140 }}>
 				{latestBlogs.map((article) => (
-					<Box key={article._id} className="blog-card">
+					<Box
+						key={article._id}
+						className="blog-card"
+						onClick={() => router.push(`/community/detail?articleId=${article._id}`)}
+						style={{ cursor: 'pointer' }}
+					>
 						<Box className="blog-card-img">
 							<img src={getImage(article)} alt={article.articleTitle} />
 						</Box>
@@ -49,9 +55,7 @@ const BlogSection = () => {
 								<Typography className="blog-category">{article.articleCategory}</Typography>
 								<Typography className="blog-date">{formatDate(article.createdAt)}</Typography>
 							</Stack>
-							<Link href={`/community/detail?id=${article._id}&articleCategory=${article.articleCategory}`}>
-								<Typography className="blog-title">{article.articleTitle}</Typography>
-							</Link>
+							<Typography className="blog-title">{article.articleTitle}</Typography>
 						</Stack>
 					</Box>
 				))}

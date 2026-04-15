@@ -300,3 +300,12 @@
 		}
 	}
 }
+
+// ==============================
+// FEEDBACK TRACK SPEED OVERRIDE
+// CS page has 24 cards (12×2), About has 8 (4×2).
+// Scale duration proportionally so perceived speed matches.
+// ==============================
+.service-page .feedback-track {
+	animation-duration: 75s;
+}

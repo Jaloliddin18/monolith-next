@@ -5,12 +5,9 @@ import { useRouter } from "next/router";
 import NewsletterBanner from "../../libs/components/furniture/NewsletterBanner";
 import InstagramSection from "../../libs/components/common/InstagramSection";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 
 const services = [
   {
@@ -259,32 +256,13 @@ const Service = () => {
 
       {/* ===== FEEDBACK FROM CUSTOMER ===== */}
       <Stack className="about-feedback">
-        <Stack
-          className="feedback-header"
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography className="feedback-title">
-            Feedback from Customer
-          </Typography>
-          <Stack className="feedback-nav" direction="row">
-            <ArrowBackIcon className="nav-arrow feedback-prev" />
-            <ArrowForwardIcon className="nav-arrow feedback-next" />
-          </Stack>
-        </Stack>
-        <Swiper
-          modules={[Navigation]}
-          slidesPerView={4}
-          spaceBetween={20}
-          navigation={{
-            nextEl: ".feedback-next",
-            prevEl: ".feedback-prev",
-          }}
-        >
-          {reviews.map((review, idx) => (
-            <SwiperSlide key={idx}>
-              <Box className="feedback-card">
+        <Typography className="feedback-title">
+          Feedback from Customer
+        </Typography>
+        <Box className="feedback-wrapper">
+          <Box className="feedback-track">
+            {[...reviews, ...reviews].map((review, idx) => (
+              <Box key={idx} className="feedback-card">
                 <Stack
                   className="feedback-user"
                   direction="row"
@@ -320,9 +298,9 @@ const Service = () => {
                   </Typography>
                 </Stack>
               </Box>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            ))}
+          </Box>
+        </Box>
       </Stack>
 
       {/* ===== SALE BANNER WITH COUNTDOWN ===== */}

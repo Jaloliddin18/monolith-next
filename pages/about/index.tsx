@@ -12,8 +12,32 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+const aboutReviews = [
+  {
+    name: "Joan B. Wolfe",
+    role: "Manager",
+    text: "I wanted to furnish my new office with stylish and functional furniture, and MONOLITH exceeded my expectations.",
+    stars: 4,
+  },
+  {
+    name: "Mira Dias",
+    role: "Manager",
+    text: "I am a satisfied customer and will continue to choose MONOLITH for all my furniture needs.",
+    stars: 4,
+  },
+  {
+    name: "Lois K. Chase",
+    role: "Manager",
+    text: "Style casa furniture never fails to impress me. The durability and longevity of their products are unmatched.",
+    stars: 4,
+  },
+  {
+    name: "Lois K. Chase",
+    role: "Manager",
+    text: "I highly recommend MONOLITH for anyone seeking high-quality and long-lasting furniture.",
+    stars: 4,
+  },
+];
 
 const About = () => {
   const { t } = useTranslation("common");
@@ -369,101 +393,50 @@ const About = () => {
 
       {/* ===== FEEDBACK FROM CUSTOMER ===== */}
       <Stack className="about-feedback">
-        <Stack
-          className="feedback-header"
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography className="feedback-title">
-            Feedback from Customer
-          </Typography>
-          <Stack className="feedback-nav" direction="row">
-            <ArrowBackIcon className="swiper-feedback-prev nav-arrow" />
-            <ArrowForwardIcon className="swiper-feedback-next nav-arrow" />
-          </Stack>
-        </Stack>
-        <Box className="feedback-swiper-wrapper">
-          <Swiper
-            modules={[Navigation]}
-            slidesPerView={3}
-            spaceBetween={24}
-            navigation={{
-              nextEl: ".swiper-feedback-next",
-              prevEl: ".swiper-feedback-prev",
-            }}
-            breakpoints={{
-              0: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-          >
-            {[
-              {
-                name: "Joan B. Wolfe",
-                role: "Manager",
-                text: "I wanted to furnish my new office with stylish and functional furniture, and MONOLITH exceeded my expectations.",
-                stars: 4,
-              },
-              {
-                name: "Mira Dias",
-                role: "Manager",
-                text: "I am a satisfied customer and will continue to choose MONOLITH for all my furniture needs.",
-                stars: 4,
-              },
-              {
-                name: "Lois K. Chase",
-                role: "Manager",
-                text: "Style casa furniture never fails to impress me. The durability and longevity of their products are unmatched.",
-                stars: 4,
-              },
-              {
-                name: "Lois K. Chase",
-                role: "Manager",
-                text: "I highly recommend MONOLITH for anyone seeking high-quality and long-lasting furniture.",
-                stars: 4,
-              },
-            ].map((review, idx) => (
-              <SwiperSlide key={idx}>
-                <Box className="feedback-card">
-                  <Stack
-                    className="feedback-user"
-                    direction="row"
-                    alignItems="center"
-                  >
-                    <Box className="feedback-avatar">
-                      <img
-                        src="/img/furniture/brown_chair.png"
-                        alt={review.name}
-                      />
-                    </Box>
-                    <Stack>
-                      <Typography className="feedback-user-name">
-                        {review.name}
-                      </Typography>
-                      <Typography className="feedback-user-role">
-                        {review.role}
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                  <Stack gap="8px">
-                    <Stack className="feedback-stars" direction="row">
-                      {[...Array(5)].map((_, i) =>
-                        i < review.stars ? (
-                          <StarIcon key={i} />
-                        ) : (
-                          <StarBorderIcon key={i} />
-                        ),
-                      )}
-                    </Stack>
-                    <Typography className="feedback-text">
-                      {review.text}
+        <Typography className="feedback-title">
+          Feedback from Customer
+        </Typography>
+        <Box className="feedback-wrapper">
+          <Box className="feedback-track">
+            {[...aboutReviews, ...aboutReviews].map((review, idx) => (
+              <Box key={idx} className="feedback-card">
+                <Stack
+                  className="feedback-user"
+                  direction="row"
+                  alignItems="center"
+                >
+                  <Box className="feedback-avatar">
+                    <img
+                      src="/img/furniture/brown_chair.png"
+                      alt={review.name}
+                    />
+                  </Box>
+                  <Stack>
+                    <Typography className="feedback-user-name">
+                      {review.name}
+                    </Typography>
+                    <Typography className="feedback-user-role">
+                      {review.role}
                     </Typography>
                   </Stack>
-                </Box>
-              </SwiperSlide>
+                </Stack>
+                <Stack gap="8px">
+                  <Stack className="feedback-stars" direction="row">
+                    {[...Array(5)].map((_, i) =>
+                      i < review.stars ? (
+                        <StarIcon key={i} />
+                      ) : (
+                        <StarBorderIcon key={i} />
+                      ),
+                    )}
+                  </Stack>
+                  <Typography className="feedback-text">
+                    {review.text}
+                  </Typography>
+                </Stack>
+              </Box>
             ))}
-          </Swiper>
+          </Box>
         </Box>
       </Stack>
 

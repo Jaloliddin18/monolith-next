@@ -574,38 +574,42 @@
 // ==============================
 // FEEDBACK / TESTIMONIALS
 // ==============================
+@keyframes scrollLeft {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(-50%); }
+}
+
 .about-feedback {
-	padding: 60px 0 60px 150px;
+	padding: 60px 0;
 
-	.feedback-header {
-		max-width: 1140px;
+	.feedback-title {
+		font-family: var(--font-ui);
+		font-size: var(--fs-3xl);
+		font-weight: var(--fw-medium);
+		color: var(--color-dark);
+		padding: 0 150px;
 		margin-bottom: 50px;
-
-		.feedback-title {
-			font-family: var(--font-ui);
-			font-size: var(--fs-3xl);
-			font-weight: var(--fw-medium);
-			color: var(--color-dark);
-		}
-
-		.feedback-nav {
-			gap: 24px;
-
-			.nav-arrow {
-				cursor: pointer;
-				color: var(--color-dark);
-				font-size: var(--fs-xl);
-			}
-		}
 	}
 
-	.swiper {
+	.feedback-wrapper {
+		overflow: hidden;
 		width: 100%;
-		overflow: visible;
+	}
+
+	.feedback-track {
+		display: flex;
+		gap: 24px;
+		width: max-content;
+		animation: scrollLeft 25s linear infinite;
+
+		&:hover {
+			animation-play-state: paused;
+		}
 	}
 
 	.feedback-card {
-		width: 100%;
+		width: 360px;
+		flex-shrink: 0;
 		height: 222px;
 		border: 1px solid var(--color-border);
 		background: #fff;
