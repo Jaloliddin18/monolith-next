@@ -14,7 +14,7 @@ const Community = () => {
 			<TrendingArticlesSection />
 			<InstagramSection />
 			{/* ===== NEWSLETTER BANNER ===== */}
-			<NewsletterBanner />
+			<NewsletterBanner variant="community" />
 		</Stack>
 	);
 };

@@ -45,20 +45,34 @@ const About = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Box className="partner-logo">
+        <Box className="partner-logo partner-logo--inline">
           <img src="/icons/about_logo1.svg" alt="Partner 1" />
+          <img
+            src="/icons/csIcon1.png"
+            alt="partner 1"
+            style={{ height: "40px", width: "auto" }}
+          />
         </Box>
         <Box className="partner-logo">
-          <img src="/icons/about_logo2.svg" alt="Partner 2" />
+          <img src="/icons/about_logo2.svg" alt="Rustic Roots" />
         </Box>
         <Box className="partner-logo">
-          <img src="/icons/about_logo3.svg" alt="Partner 3" />
+          <img src="/icons/about_logo3.svg" alt="WoodCraft Furnishings" />
         </Box>
-        <Box className="partner-logo">
+        <Box className="partner-logo partner-logo--labeled">
           <img src="/icons/about_logo4.svg" alt="Partner 4" />
+          <img
+            src="/icons/csIcon4.svg"
+            alt="partner 4"
+            style={{ height: "40px", width: "auto" }}
+          />
         </Box>
         <Box className="partner-logo">
-          <img src="/icons/about_logo5.svg" alt="Partner 5" />
+          <img
+            src="/icons/csIcon5.svg"
+            alt="partner 5"
+            style={{ height: "100px", width: "auto" }}
+          />
         </Box>
       </Stack>
 
@@ -151,7 +165,7 @@ const About = () => {
       <Stack className="about-awards">
         <Stack className="awards-container" direction="row" alignItems="center">
           <Box className="awards-image">
-            <img src="/img/about/about2.webp" alt="Awards" />
+            <img src="/img/about/awards.webp" alt="Awards" />
           </Box>
           <Stack className="awards-content">
             <Typography className="awards-title">
@@ -498,7 +512,7 @@ const About = () => {
       </Stack>
 
       {/* ===== NEWSLETTER BANNER ===== */}
-      <NewsletterBanner />
+      <NewsletterBanner variant="about" />
 
       {/* ===== INSTAGRAM SECTION ===== */}
       <InstagramSection />

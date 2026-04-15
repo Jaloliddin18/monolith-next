@@ -15,7 +15,6 @@ import FilterSidebar from "./FilterSidebar";
 import ProductGrid from "./ProductGrid";
 import PopularProducts from "./PopularProducts";
 import ReviewSection from "./ReviewSection";
-import NewsletterBanner from "./NewsletterBanner";
 import InstagramSection from "../common/InstagramSection";
 
 interface FurnitureListPageProps {
@@ -321,9 +320,6 @@ const FurnitureListPage = ({
 
       {/* Reviews */}
       <ReviewSection />
-
-      {/* Newsletter Banner */}
-      <NewsletterBanner />
 
       {/* Instagram */}
       <InstagramSection />

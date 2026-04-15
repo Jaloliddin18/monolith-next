@@ -30,16 +30,14 @@ const InstagramSection = () => {
         {instagramImages.map((img, i) => (
           <Box key={i} className="instagram-item">
             <img src={img} alt={`Instagram ${i + 1}`} />
-            {i === 2 && (
-              <Box className="instagram-overlay">
-                <img
-                  src="/icons/InstagramLogo.svg"
-                  alt="Instagram"
-                  width={40}
-                  height={40}
-                />
-              </Box>
-            )}
+            <Box className="instagram-overlay">
+              <img
+                src="/icons/InstagramLogo.svg"
+                alt="Instagram"
+                width={32}
+                height={32}
+              />
+            </Box>
           </Box>
         ))}
       </Stack>

@@ -162,7 +162,7 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 				onLike={handleLike}
 			/>
 			{/* ===== NEWSLETTER BANNER ===== */}
-			<NewsletterBanner />
+			<NewsletterBanner variant="furniture" />
 		</Stack>
 	);
 };

@@ -29,17 +29,17 @@ const services = [
     desc: "To assist customers in creating their dream home, MONOLITH provides personalized design assistance.",
   },
   {
-    icon: "/icons/window_icon.svg",
+    icon: "/icons/interior-design1.svg",
     title: "Interior Design Consultation",
     desc: "The design experts offer professional advice on furniture styles, color schemes, and layout options",
   },
   {
-    icon: "/icons/c_icon.svg",
+    icon: "/icons/assembly1.svg",
     title: "Delivery and Assembly",
     desc: "Offers white glove delivery service, ensuring that furniture is carefully delivered to the customer's doorstep",
   },
   {
-    icon: "/icons/oval_icon.svg",
+    icon: "/icons/service1.svg",
     title: "Guidance and Support",
     desc: "Expert guidance and support throughout the furniture selection and purchasing process.",
   },
@@ -433,7 +433,7 @@ const Service = () => {
       </Stack>
 
       {/* ===== NEWSLETTER BANNER ===== */}
-      <NewsletterBanner />
+      <NewsletterBanner variant="cs" />
 
       {/* ===== INSTAGRAM SECTION ===== */}
       <InstagramSection />

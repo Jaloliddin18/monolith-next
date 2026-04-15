@@ -15,7 +15,7 @@ const NewestChair = () => {
             </Typography>
           </Stack>
           <Box className="newest-card-image">
-            <img src="/img/homepage/home5.webp" alt="Newest Chair" />
+            <img src="/img/homepage/home2.webp" alt="Newest Chair" />
           </Box>
         </Box>
         <Box className="newest-card newest-card-gray">
@@ -53,7 +53,11 @@ const NewestChair = () => {
               Upgrade Your Seating Game
             </Typography>
           </Stack>
-          <Button className="btn-shop-now" disableElevation onClick={() => router.push('/furniture')}>
+          <Button
+            className="btn-shop-now"
+            disableElevation
+            onClick={() => router.push("/furniture")}
+          >
             SHOP NOW
           </Button>
         </Stack>
