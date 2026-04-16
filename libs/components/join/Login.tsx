@@ -65,6 +65,8 @@ const Login = ({ input, handleInput, doLogin, setLoginView }: LoginProps) => {
                   <div className="form-group">
                     <label className="form-label">Username</label>
                     <input
+                      id="login-nick"
+                      name="nick"
                       className="form-input"
                       type="text"
                       placeholder="Enter your username"
@@ -77,6 +79,8 @@ const Login = ({ input, handleInput, doLogin, setLoginView }: LoginProps) => {
                     <label className="form-label">Password</label>
                     <div className="password-input-wrapper">
                       <input
+                        id="login-password"
+                        name="password"
                         className="form-input"
                         type={showPassword ? "text" : "password"}
                         placeholder="********"
@@ -104,6 +108,8 @@ const Login = ({ input, handleInput, doLogin, setLoginView }: LoginProps) => {
                   <div className="form-options">
                     <label className="remember-me">
                       <input
+                        id="login-remember-me"
+                        name="rememberMe"
                         type="checkbox"
                         checked={rememberMe}
                         onChange={(e) => setRememberMe(e.target.checked)}

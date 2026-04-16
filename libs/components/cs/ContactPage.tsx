@@ -86,10 +86,10 @@ const ContactPage = () => {
             <Typography className="form-label">Full Name</Typography>
             <Stack className="form-row" direction="row">
               <Box className="form-input">
-                <input type="text" placeholder="First name" />
+                <input id="contact-first-name" name="firstName" type="text" placeholder="First name" />
               </Box>
               <Box className="form-input">
-                <input type="text" placeholder="Last name" />
+                <input id="contact-last-name" name="lastName" type="text" placeholder="Last name" />
               </Box>
             </Stack>
           </Box>
@@ -115,7 +115,7 @@ const ContactPage = () => {
             <Box className="form-group">
               <Typography className="form-label">Email Address</Typography>
               <Box className="form-input">
-                <input type="email" placeholder="example@gmail.com" />
+                <input id="contact-email" name="email" type="email" placeholder="example@gmail.com" />
               </Box>
             </Box>
           </Stack>
@@ -123,7 +123,7 @@ const ContactPage = () => {
           <Box className="form-group">
             <Typography className="form-label">Your Message</Typography>
             <Box className="form-input message-input">
-              <textarea placeholder="Type here..." rows={4} />
+              <textarea id="contact-message" name="message" placeholder="Type here..." rows={4} />
             </Box>
           </Box>
 

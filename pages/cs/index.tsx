@@ -90,6 +90,21 @@ const progressSteps = [
   },
 ];
 
+const customerProfileImages = [
+  "albert.jpg",
+  "charles.jpg",
+  "christian.jpg",
+  "christina.jpg",
+  "christina_won.jpg",
+  "diego.jpg",
+  "ian.jpg",
+  "jordi.jpg",
+  "joseph.jpg",
+  "kirill.jpg",
+  "nicolas.jpg",
+  "toa.jpg",
+];
+
 const reviews = [
   {
     name: "Joan B. Wolfe",
@@ -270,7 +285,7 @@ const Service = () => {
                 >
                   <Box className="feedback-avatar">
                     <img
-                      src="/img/furniture/brown_chair.png"
+                      src={`/img/customer_profile/${customerProfileImages[idx % customerProfileImages.length]}`}
                       alt={review.name}
                     />
                   </Box>

@@ -45,6 +45,8 @@ const CheckoutForm = () => {
             <label className="form-label">Full Name</label>
             <div className="form-row">
               <input
+                id="billing-first-name"
+                name="firstName"
                 className="form-input"
                 type="text"
                 placeholder="First Name"
@@ -54,6 +56,8 @@ const CheckoutForm = () => {
                 }
               />
               <input
+                id="billing-last-name"
+                name="lastName"
                 className="form-input"
                 type="text"
                 placeholder="Last name"
@@ -69,6 +73,8 @@ const CheckoutForm = () => {
           <div className="form-group">
             <label className="form-label">Email Address</label>
             <input
+              id="billing-email"
+              name="email"
               className="form-input full"
               type="email"
               placeholder="example@gmail.com"
@@ -81,6 +87,8 @@ const CheckoutForm = () => {
           <div className="form-group">
             <label className="form-label">Address</label>
             <textarea
+              id="billing-address"
+              name="address"
               className="form-input form-textarea"
               placeholder="Shipping address"
               value={billingData.address}
@@ -93,6 +101,8 @@ const CheckoutForm = () => {
             <div className="form-group">
               <label className="form-label">City</label>
               <input
+                id="billing-city"
+                name="city"
                 className="form-input"
                 type="text"
                 placeholder="Add city"
@@ -103,6 +113,8 @@ const CheckoutForm = () => {
             <div className="form-group">
               <label className="form-label">State</label>
               <input
+                id="billing-state"
+                name="state"
                 className="form-input"
                 type="text"
                 placeholder="Sate/Province"
@@ -117,6 +129,8 @@ const CheckoutForm = () => {
             <div className="form-group">
               <label className="form-label">Pincode</label>
               <input
+                id="billing-pincode"
+                name="pincode"
                 className="form-input"
                 type="text"
                 placeholder="0 0 0 0 0 0"
@@ -128,6 +142,8 @@ const CheckoutForm = () => {
               <label className="form-label">Country</label>
               <div className="select-wrapper">
                 <select
+                  id="billing-country"
+                  name="country"
                   className="form-input form-select"
                   value={billingData.country}
                   onChange={(e) =>
@@ -150,6 +166,8 @@ const CheckoutForm = () => {
           {/* Same address checkbox */}
           <label className="checkbox-row">
             <input
+              id="billing-same-address"
+              name="sameAddress"
               type="checkbox"
               checked={sameAddress}
               onChange={(e) => setSameAddress(e.target.checked)}
@@ -220,6 +238,8 @@ const CheckoutForm = () => {
           <div className="form-group">
             <label className="form-label">Email Address</label>
             <input
+              id="payment-email"
+              name="paymentEmail"
               className="form-input full"
               type="email"
               placeholder="example@gmail.com"
@@ -231,6 +251,8 @@ const CheckoutForm = () => {
           <div className="form-group">
             <label className="form-label">Card Number</label>
             <input
+              id="payment-card-number"
+              name="cardNumber"
               className="form-input full"
               type="text"
               placeholder="0 0 0 0   0 0 0 0   0 0 0 0   0 0 0 0"
@@ -243,6 +265,8 @@ const CheckoutForm = () => {
             <div className="form-group">
               <label className="form-label">Expire Date</label>
               <input
+                id="payment-expire-date"
+                name="expireDate"
                 className="form-input"
                 type="text"
                 placeholder="DD - YYYY"
@@ -253,6 +277,8 @@ const CheckoutForm = () => {
             <div className="form-group">
               <label className="form-label">CVV</label>
               <input
+                id="payment-cvv"
+                name="cvv"
                 className="form-input"
                 type="text"
                 placeholder="0000"
@@ -265,6 +291,8 @@ const CheckoutForm = () => {
           {/* Save card checkboxes */}
           <label className="checkbox-row">
             <input
+              id="payment-save-card"
+              name="saveCard"
               type="checkbox"
               checked={saveCard}
               onChange={(e) => setSaveCard(e.target.checked)}
@@ -277,6 +305,8 @@ const CheckoutForm = () => {
 
           <label className="checkbox-row">
             <input
+              id="payment-save-card-2"
+              name="saveCard2"
               type="checkbox"
               checked={saveCard2}
               onChange={(e) => setSaveCard2(e.target.checked)}

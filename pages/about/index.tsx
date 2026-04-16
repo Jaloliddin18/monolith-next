@@ -12,6 +12,21 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
+const customerProfileImages = [
+  "albert.jpg",
+  "charles.jpg",
+  "christian.jpg",
+  "christina.jpg",
+  "christina_won.jpg",
+  "diego.jpg",
+  "ian.jpg",
+  "jordi.jpg",
+  "joseph.jpg",
+  "kirill.jpg",
+  "nicolas.jpg",
+  "toa.jpg",
+];
+
 const aboutReviews = [
   {
     name: "Joan B. Wolfe",
@@ -407,7 +422,7 @@ const About = () => {
                 >
                   <Box className="feedback-avatar">
                     <img
-                      src="/img/furniture/brown_chair.png"
+                      src={`/img/customer_profile/${customerProfileImages[idx % customerProfileImages.length]}`}
                       alt={review.name}
                     />
                   </Box>

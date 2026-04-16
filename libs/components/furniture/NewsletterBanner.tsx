@@ -104,6 +104,8 @@ const NewsletterBanner = ({ variant = 'furniture' }: NewsletterBannerProps) => {
 				<Stack direction="row" alignItems="center" gap="12px">
 					<Box className="newsletter-input-wrap">
 						<input
+							id="newsletter-email"
+							name="email"
 							type="email"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}

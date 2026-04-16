@@ -317,6 +317,8 @@ const AddFurniture = () => {
                   Title {REQUIRED_MARK}
                 </label>
                 <TextField
+                  id="furniture-title"
+                  name="furnitureTitle"
                   fullWidth
                   placeholder="e.g. Minimalist Oak Sofa"
                   value={form.furnitureTitle}
@@ -330,6 +332,8 @@ const AddFurniture = () => {
                   Price ($) {REQUIRED_MARK}
                 </label>
                 <TextField
+                  id="furniture-price"
+                  name="furniturePrice"
                   fullWidth
                   type="number"
                   placeholder="0.00"
@@ -349,6 +353,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("furnitureRoom", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-room", name: "furnitureRoom" }}
                   >
                     <MenuItem value="" disabled>
                       Select room
@@ -372,6 +377,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("furnitureCategory", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-category", name: "furnitureCategory" }}
                   >
                     <MenuItem value="" disabled>
                       Select category
@@ -395,6 +401,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("furnitureStyle", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-style", name: "furnitureStyle" }}
                   >
                     <MenuItem value="" disabled>
                       Select style
@@ -413,6 +420,8 @@ const AddFurniture = () => {
                   Weight (kg) {REQUIRED_MARK}
                 </label>
                 <TextField
+                  id="furniture-weight"
+                  name="furnitureWeight"
                   fullWidth
                   type="number"
                   placeholder="0.0"
@@ -432,6 +441,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("furnitureMaterial", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-material", name: "furnitureMaterial" }}
                   >
                     <MenuItem value="" disabled>
                       Select material
@@ -455,6 +465,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("furnitureColor", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-color", name: "furnitureColor" }}
                   >
                     <MenuItem value="" disabled>
                       Select color
@@ -478,6 +489,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("assemblyType", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-assembly-type", name: "assemblyType" }}
                   >
                     <MenuItem value="" disabled>
                       Select assembly type
@@ -501,6 +513,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("deliveryMethod", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-delivery-method", name: "deliveryMethod" }}
                   >
                     <MenuItem value="" disabled>
                       Select delivery method
@@ -526,6 +539,8 @@ const AddFurniture = () => {
                 <span className="add-furniture-optional">(optional)</span>
               </Typography>
               <TextField
+                id="furniture-desc"
+                name="furnitureDesc"
                 fullWidth
                 multiline
                 rows={5}
@@ -554,6 +569,7 @@ const AddFurniture = () => {
                       }
                       className="add-furniture-select"
                       displayEmpty
+                      inputProps={{ id: "furniture-assembly-difficulty", name: "assemblyDifficulty" }}
                     >
                       <MenuItem value="">None</MenuItem>
                       {Object.values(AssemblyDifficulty).map((v) => (
@@ -569,6 +585,8 @@ const AddFurniture = () => {
                     Assembly Time (min)
                   </label>
                   <TextField
+                    id="furniture-assembly-time"
+                    name="assemblyTime"
                     fullWidth
                     type="number"
                     placeholder="e.g. 30"
@@ -589,6 +607,8 @@ const AddFurniture = () => {
                 <Box className="add-furniture-field">
                   <label className="add-furniture-label">Width</label>
                   <TextField
+                    id="furniture-width"
+                    name="width"
                     fullWidth
                     type="number"
                     placeholder="cm"
@@ -600,6 +620,8 @@ const AddFurniture = () => {
                 <Box className="add-furniture-field">
                   <label className="add-furniture-label">Height</label>
                   <TextField
+                    id="furniture-height"
+                    name="height"
                     fullWidth
                     type="number"
                     placeholder="cm"
@@ -611,6 +633,8 @@ const AddFurniture = () => {
                 <Box className="add-furniture-field">
                   <label className="add-furniture-label">Depth</label>
                   <TextField
+                    id="furniture-depth"
+                    name="depth"
                     fullWidth
                     type="number"
                     placeholder="cm"
@@ -754,6 +778,8 @@ const AddFurniture = () => {
                 <Box className="add-furniture-field">
                   <label className="add-furniture-label">Discount (%)</label>
                   <TextField
+                    id="furniture-discount"
+                    name="furnitureDiscount"
                     fullWidth
                     type="number"
                     placeholder="e.g. 10"
@@ -765,6 +791,8 @@ const AddFurniture = () => {
                 <Box className="add-furniture-field">
                   <label className="add-furniture-label">Discount Start</label>
                   <TextField
+                    id="furniture-discount-start"
+                    name="discountStart"
                     fullWidth
                     type="date"
                     value={form.discountStart}
@@ -776,6 +804,8 @@ const AddFurniture = () => {
                 <Box className="add-furniture-field">
                   <label className="add-furniture-label">Discount End</label>
                   <TextField
+                    id="furniture-discount-end"
+                    name="discountEnd"
                     fullWidth
                     type="date"
                     value={form.discountEnd}
@@ -787,6 +817,8 @@ const AddFurniture = () => {
                 <Box className="add-furniture-field">
                   <label className="add-furniture-label">Launch Date</label>
                   <TextField
+                    id="furniture-launched-at"
+                    name="launchedAt"
                     fullWidth
                     type="date"
                     value={form.launchedAt}
@@ -845,6 +877,7 @@ const AddFurniture = () => {
                     onChange={(e) => set("sustainabilityLabel", e.target.value)}
                     className="add-furniture-select"
                     displayEmpty
+                    inputProps={{ id: "furniture-sustainability-label", name: "sustainabilityLabel" }}
                   >
                     <MenuItem value="">None</MenuItem>
                     {Object.values(SustainabilityLabel).map((v) => (

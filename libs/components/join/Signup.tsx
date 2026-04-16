@@ -76,6 +76,8 @@ const Signup = ({
                   <div className="form-group">
                     <label className="form-label">Username</label>
                     <input
+                      id="signup-nick"
+                      name="nick"
                       className="form-input"
                       type="text"
                       placeholder="Enter your username"
@@ -88,6 +90,8 @@ const Signup = ({
                   <div className="form-group">
                     <label className="form-label">Phone Number</label>
                     <input
+                      id="signup-phone"
+                      name="phone"
                       className="form-input"
                       type="tel"
                       placeholder="01012345678"
@@ -101,6 +105,8 @@ const Signup = ({
                     <label className="form-label">Password</label>
                     <div className="password-input-wrapper">
                       <input
+                        id="signup-password"
+                        name="password"
                         className="form-input"
                         type={showPassword ? "text" : "password"}
                         placeholder="********"
@@ -129,6 +135,7 @@ const Signup = ({
                     <label className="form-label">Account Type</label>
                     <label className="remember-me">
                       <input
+                        id="signup-account-type-designer"
                         type="checkbox"
                         name="DESIGNER"
                         checked={input.type === "DESIGNER"}
@@ -145,6 +152,8 @@ const Signup = ({
                   <div className="terms-check">
                     <label className="remember-me">
                       <input
+                        id="signup-agree-terms"
+                        name="agreeTerms"
                         type="checkbox"
                         checked={agreeTerms}
                         onChange={(e) => setAgreeTerms(e.target.checked)}
