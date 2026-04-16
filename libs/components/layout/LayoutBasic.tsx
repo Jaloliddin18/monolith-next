@@ -3,6 +3,7 @@ import { Stack } from '@mui/material';
 import Top from '../Top';
 import Footer from '../Footer';
 import Chat from '../Chat';
+import AiChatBubble from '../common/AiChatBubble';
 import { getJwtToken, updateUserInfo } from '../../auth';
 
 const withLayoutBasic = (Component: any) => {
@@ -19,6 +20,7 @@ const withLayoutBasic = (Component: any) => {
 					<Component {...props} />
 				</Stack>
 				<Chat />
+				<AiChatBubble />
 				<Footer />
 			</Stack>
 		);
