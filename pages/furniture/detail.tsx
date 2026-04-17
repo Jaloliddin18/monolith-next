@@ -353,33 +353,25 @@ const FurnitureDetail = () => {
             >
               <img src={zoomedImageUrl} alt="Close-up" />
             </div>
-            <div className="nvg-media-item nvg-media-item--video">
-              {videoUrl ? (
-                <>
-                  <video
-                    ref={videoRef}
-                    src={videoUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                  <button className="nvg-video-btn" onClick={toggleVideo}>
-                    {videoPlaying ? (
-                      <PauseIcon sx={{ fontSize: 18 }} />
-                    ) : (
-                      <PlayArrowIcon sx={{ fontSize: 18 }} />
-                    )}
-                  </button>
-                </>
-              ) : (
-                <img
-                  src={galleryImageUrls[0] ?? heroImage}
-                  alt="Detail view"
-                  onClick={() => openLightbox(1)}
+            {videoUrl && (
+              <div className="nvg-media-item nvg-media-item--video">
+                <video
+                  ref={videoRef}
+                  src={videoUrl}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
                 />
-              )}
-            </div>
+                <button className="nvg-video-btn" onClick={toggleVideo}>
+                  {videoPlaying ? (
+                    <PauseIcon sx={{ fontSize: 18 }} />
+                  ) : (
+                    <PlayArrowIcon sx={{ fontSize: 18 }} />
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

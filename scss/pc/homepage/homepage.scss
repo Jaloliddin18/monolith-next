@@ -418,7 +418,7 @@
   }
 
   .hero-right {
-    width: 655px;
+    width: 800px;
     flex-shrink: 0;
 
     img {
@@ -1189,6 +1189,13 @@
       text-align: center;
       width: 60px;
       line-height: 18px;
+    }
+  }
+
+  .section-swiper-wrap {
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: none;
     }
   }
 

@@ -19,14 +19,18 @@ const HeroSection = () => {
             </Typography>
           </Stack>
           <Stack className="hero-cta" direction="row" alignItems="center">
-            <Typography className="hero-price">$139.99</Typography>
-            <Button className="btn-hero-cta" disableElevation onClick={() => router.push('/furniture')}>
+            <Typography className="hero-price">$1399.10</Typography>
+            <Button
+              className="btn-hero-cta"
+              disableElevation
+              onClick={() => router.push("/furniture")}
+            >
               {t("ADD TO CART")}
             </Button>
           </Stack>
         </Stack>
         <Box className="hero-right">
-          <img src="/img/homepage/home12.webp" alt="Featured Chair" />
+          <img src="/img/homepage/home_hero.webp" alt="Featured Chair" />
         </Box>
       </Stack>
     </Box>

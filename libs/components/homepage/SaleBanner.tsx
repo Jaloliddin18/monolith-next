@@ -116,30 +116,32 @@ const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
         </Stack>
       </Stack>
 
-      <Swiper
-        modules={[Navigation, Pagination]}
-        slidesPerView={"auto"}
-        slidesPerGroup={4}
-        spaceBetween={24}
-        watchOverflow={false}
-        navigation={{
-          nextEl: nextRef.current,
-          prevEl: prevRef.current,
-        }}
-        onBeforeInit={(swiper) => {
-          if (typeof swiper.params.navigation !== "boolean") {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-          }
-        }}
-        pagination={{ clickable: true, type: "bullets" }}
-      >
-        {furnitures.map((furniture) => (
-          <SwiperSlide key={furniture._id} style={{ width: "auto" }}>
-            <ProductCard furniture={furniture} onLike={onLike} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <Box className="section-swiper-wrap">
+        <Swiper
+          modules={[Navigation, Pagination]}
+          slidesPerView={4}
+          spaceBetween={24}
+          loop={true}
+          navigation={{
+            nextEl: nextRef.current,
+            prevEl: prevRef.current,
+          }}
+          onBeforeInit={(swiper) => {
+            if (typeof swiper.params.navigation !== "boolean") {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }
+          }}
+          pagination={{ clickable: true }}
+          style={{ width: "100%", paddingBottom: "48px" }}
+        >
+          {furnitures.map((furniture) => (
+            <SwiperSlide key={furniture._id}>
+              <ProductCard furniture={furniture} onLike={onLike} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Box>
     </Stack>
   );
 };

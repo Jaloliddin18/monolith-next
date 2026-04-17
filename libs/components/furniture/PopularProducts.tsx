@@ -53,7 +53,7 @@ const PopularProducts = () => {
         className="popular-products-header"
       >
         <Typography className="popular-products-title">
-          Popular product
+          Popular products
         </Typography>
         <Link href="/furniture" style={{ textDecoration: "none" }}>
           <Stack
