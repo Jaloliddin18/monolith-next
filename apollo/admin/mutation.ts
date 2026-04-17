@@ -171,6 +171,40 @@ export const REMOVE_BOARD_ARTICLE_BY_ADMIN = gql`
 `;
 
 /**************************
+ *         NOTICE         *
+ *************************/
+
+export const UPDATE_NOTICE_BY_ADMIN = gql`
+  mutation UpdateNoticeByAdmin($input: NoticeUpdate!) {
+    updateNoticeByAdmin(input: $input) {
+      _id
+      noticeCategory
+      noticeStatus
+      noticeTitle
+      noticeContent
+      memberId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const REMOVE_NOTICE_BY_ADMIN = gql`
+  mutation RemoveNoticeByAdmin($input: String!) {
+    removeNoticeByAdmin(noticeId: $input) {
+      _id
+      noticeCategory
+      noticeStatus
+      noticeTitle
+      noticeContent
+      memberId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+/**************************
  *         COMMENT        *
  *************************/
 

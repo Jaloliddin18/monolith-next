@@ -209,6 +209,7 @@ const AdminProperties: NextPage = ({ initialInquiry = DEFAULT_FURNITURES_INQUIRY
 						</Box>
 						<FurniturePanelList
 							furnitures={furnitures}
+							loading={getAllFurnituresByAdminLoading}
 							anchorEl={anchorEl}
 							menuIconClickHandler={menuIconClickHandler}
 							menuIconCloseHandler={menuIconCloseHandler}

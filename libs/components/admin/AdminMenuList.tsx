@@ -12,7 +12,6 @@ import {
 import Collapse from "@mui/material/Collapse";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
-import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
@@ -160,18 +159,20 @@ const AdminMenuList = (props: any) => {
               {item.icon}
             </ListItemIcon>
             <ListItemText>{item.title}</ListItemText>
-            {clickMenu.find((menu: string) => item.title === menu) ? (
-              <ExpandLess />
-            ) : (
-              <ExpandMore />
-            )}
+            <ExpandMore
+              sx={{
+                transition: 'transform 0.25s ease',
+                transform: clickMenu.find((menu: string) => item.title === menu)
+                  ? 'rotate(180deg)'
+                  : 'rotate(0deg)',
+              }}
+            />
           </ListItemButton>
           <Collapse
             in={!!clickMenu.find((menu: string) => menu === item.title)}
             className="menu"
-            timeout="auto"
+            timeout={250}
             component="li"
-            unmountOnExit
           >
             <List className="menu-list" disablePadding>
               {sub_menu_set[item.title] &&

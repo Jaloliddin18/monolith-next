@@ -11,30 +11,19 @@ import {
 	Menu,
 	Fade,
 	MenuItem,
+	CircularProgress,
+	Avatar,
+	Stack,
+	Typography,
 } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import { Stack } from '@mui/material';
 import { Furniture } from '../../../types/furniture/furniture';
 import { REACT_APP_API_URL } from '../../../config';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Typography from '@mui/material/Typography';
 import { FurnitureStatus } from '../../../enums/furniture.enum';
-
-interface Data {
-	id: string;
-	title: string;
-	price: string;
-	designer: string;
-	room: string;
-	category: string;
-	status: string;
-}
-
-type Order = 'asc' | 'desc';
 
 interface HeadCell {
 	disablePadding: boolean;
-	id: keyof Data;
+	id: string;
 	label: string;
 	numeric: boolean;
 }
@@ -49,16 +38,7 @@ const headCells: readonly HeadCell[] = [
 	{ id: 'status', numeric: false, disablePadding: false, label: 'STATUS' },
 ];
 
-interface EnhancedTableProps {
-	numSelected: number;
-	onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-	onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	order: Order;
-	orderBy: string;
-	rowCount: number;
-}
-
-function EnhancedTableHead(props: EnhancedTableProps) {
+function EnhancedTableHead() {
 	return (
 		<TableHead>
 			<TableRow>
@@ -76,17 +56,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 	);
 }
 
-const HARDCODED_FURNITURES = [
-	{ _id: '66089ea21669073834636aa1', furnitureTitle: 'Oslo Sofa', furniturePrice: 1290, furnitureRoom: 'LIVING_ROOM', furnitureCategory: 'SOFA', furnitureStatus: 'ACTIVE', furnitureImages: ['img/furniture/luxury_chair.jpg'], memberData: { memberNick: 'Oueen' } },
-	{ _id: '660881a71669073834636bb2', furnitureTitle: 'Bergen Dining Table', furniturePrice: 870, furnitureRoom: 'DINING_ROOM', furnitureCategory: 'TABLE', furnitureStatus: 'ACTIVE', furnitureImages: ['img/furniture/luxury_chair.jpg'], memberData: { memberNick: 'Oscar' } },
-	{ _id: '660006163508d1d2ae04cc3', furnitureTitle: 'Fjord Bookshelf', furniturePrice: 430, furnitureRoom: 'STUDY', furnitureCategory: 'STORAGE', furnitureStatus: 'DISCONTINUED', furnitureImages: ['img/furniture/luxury_chair.jpg'], memberData: { memberNick: 'Justin' } },
-	{ _id: '65fadcb11dd7fcf6094ddd4', furnitureTitle: 'Lund Lounge Chair', furniturePrice: 650, furnitureRoom: 'LIVING_ROOM', furnitureCategory: 'CHAIR', furnitureStatus: 'ACTIVE', furnitureImages: ['img/furniture/luxury_chair.jpg'], memberData: { memberNick: 'bayram' } },
-	{ _id: '65f9254fed2fbdf69b6bee5', furnitureTitle: 'Trondheim Bed Frame', furniturePrice: 1150, furnitureRoom: 'BEDROOM', furnitureCategory: 'BED', furnitureStatus: 'ACTIVE', furnitureImages: ['img/furniture/luxury_chair.jpg'], memberData: { memberNick: 'ShawnAgent' } },
-	{ _id: '65f5a45ed8897f8090116f6', furnitureTitle: 'Stavanger Coffee Table', furniturePrice: 320, furnitureRoom: 'LIVING_ROOM', furnitureCategory: 'TABLE', furnitureStatus: 'DELETE', furnitureImages: ['img/furniture/luxury_chair.jpg'], memberData: { memberNick: 'admin' } },
-];
-
 interface FurniturePanelListType {
 	furnitures: Furniture[];
+	loading: boolean;
 	anchorEl: any;
 	menuIconClickHandler: any;
 	menuIconCloseHandler: any;
@@ -97,22 +69,33 @@ interface FurniturePanelListType {
 export const FurniturePanelList = (props: FurniturePanelListType) => {
 	const {
 		furnitures,
+		loading,
 		anchorEl,
 		menuIconClickHandler,
 		menuIconCloseHandler,
 		updateFurnitureHandler,
 		removeFurnitureHandler,
 	} = props;
-	const displayFurnitures = furnitures.length > 0 ? furnitures : HARDCODED_FURNITURES;
 
 	return (
 		<Stack>
 			<TableContainer>
 				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={'medium'}>
-					{/*@ts-ignore*/}
 					<EnhancedTableHead />
 					<TableBody>
-						{displayFurnitures.map((furniture: any, index: number) => {
+						{loading ? (
+							<TableRow>
+								<TableCell align="center" colSpan={7}>
+									<CircularProgress size={24} />
+								</TableCell>
+							</TableRow>
+						) : furnitures.length === 0 ? (
+							<TableRow>
+								<TableCell align="center" colSpan={7}>
+									<span className={'no-data'}>No furniture found</span>
+								</TableCell>
+							</TableRow>
+						) : furnitures.map((furniture, index) => {
 								const furnitureImage = `${REACT_APP_API_URL}/${furniture?.furnitureImages[0]}`;
 
 								return (

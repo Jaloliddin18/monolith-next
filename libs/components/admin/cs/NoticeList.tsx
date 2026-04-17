@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	TableCell,
 	TableHead,
@@ -7,16 +7,17 @@ import {
 	Table,
 	TableContainer,
 	Button,
-	Box,
-	Checkbox,
-	Toolbar,
-	IconButton,
-	Tooltip,
+	CircularProgress,
+	Menu,
+	Fade,
+	MenuItem,
+	Avatar,
+	Stack,
+	Typography,
 } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import { Stack } from '@mui/material';
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { Notice } from '../../../types/notice/notice';
+import { NoticeStatus } from '../../../enums/notice.enum';
+import { REACT_APP_API_URL } from '../../../config';
 
 interface HeadCell {
 	disablePadding: boolean;
@@ -31,186 +32,133 @@ const headCells: readonly HeadCell[] = [
 	{ id: 'id', numeric: true, disablePadding: false, label: 'NOTICE ID' },
 	{ id: 'writer', numeric: true, disablePadding: false, label: 'WRITER' },
 	{ id: 'date', numeric: true, disablePadding: false, label: 'DATE' },
-	{ id: 'view', numeric: true, disablePadding: false, label: 'VIEWS' },
-	{ id: 'action', numeric: false, disablePadding: false, label: 'ACTION' },
+	{ id: 'action', numeric: false, disablePadding: false, label: 'STATUS' },
 ];
 
-const HARDCODED_NOTICES = [
-	{
-		id: 'NTC-001',
-		category: 'General',
-		title: 'Scheduled site maintenance — Jan 20, 02:00–04:00 AM',
-		writer: 'Admin',
-		date: '2026-01-15',
-		views: 342,
-	},
-	{
-		id: 'NTC-002',
-		category: 'Delivery',
-		title: 'Holiday shipping delays — orders may take 3–5 extra days',
-		writer: 'Admin',
-		date: '2025-12-20',
-		views: 1204,
-	},
-	{
-		id: 'NTC-003',
-		category: 'Promotion',
-		title: 'New Year Sale: up to 40% off selected furniture',
-		writer: 'Editor',
-		date: '2025-12-30',
-		views: 2871,
-	},
-	{
-		id: 'NTC-004',
-		category: 'Policy',
-		title: 'Updated privacy policy effective February 1, 2026',
-		writer: 'Admin',
-		date: '2026-01-08',
-		views: 519,
-	},
-	{
-		id: 'NTC-005',
-		category: 'General',
-		title: 'New product categories added: Home Office & Outdoor',
-		writer: 'Editor',
-		date: '2026-01-03',
-		views: 746,
-	},
-];
-
-interface NoticeListType {
-	dense?: boolean;
-	membersData?: any;
-	searchMembers?: any;
-	anchorEl?: any;
-	handleMenuIconClick?: any;
-	handleMenuIconClose?: any;
-	generateMentorTypeHandle?: any;
+interface NoticeListProps {
+	notices: Notice[];
+	loading: boolean;
+	anchorEl: any;
+	menuIconClickHandler: (e: any, index: number) => void;
+	menuIconCloseHandler: () => void;
+	updateNoticeHandler: (updateData: any) => void;
+	removeNoticeHandler: (id: string) => void;
 }
 
-export const NoticeList = (props: NoticeListType) => {
-	const [selected, setSelected] = useState<string[]>([]);
-
-	const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-		if (event.target.checked) {
-			setSelected(HARDCODED_NOTICES.map((n) => n.id));
-		} else {
-			setSelected([]);
-		}
-	};
-
-	const handleSelect = (id: string) => {
-		setSelected((prev) => (prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]));
-	};
+export const NoticeList = (props: NoticeListProps) => {
+	const { notices, loading, anchorEl, menuIconClickHandler, menuIconCloseHandler, updateNoticeHandler, removeNoticeHandler } = props;
 
 	return (
 		<Stack>
 			<TableContainer>
 				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={'medium'}>
-					{selected.length > 0 ? (
-						<TableHead>
-							<TableRow>
-								<TableCell padding="checkbox" colSpan={8}>
-									<Toolbar sx={{ minHeight: '48px !important', pl: 1 }}>
-										<Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }}>
-											<Checkbox
-												color="primary"
-												indeterminate={selected.length > 0 && selected.length < HARDCODED_NOTICES.length}
-												checked={selected.length === HARDCODED_NOTICES.length}
-												onChange={handleSelectAll}
-											/>
-											<Typography sx={{ flex: '1 1 100%', fontSize: 14, fontWeight: 600 }} color="inherit" component="div">
-												{selected.length} selected
-											</Typography>
-										</Box>
-										<Button variant={'text'} size={'small'} sx={{ color: 'var(--color-sale)', fontFamily: 'var(--font-ui)', fontWeight: 600 }}>
-											Delete
-										</Button>
-									</Toolbar>
+					<TableHead>
+						<TableRow>
+							{headCells.map((headCell) => (
+								<TableCell
+									key={headCell.id}
+									align={headCell.numeric ? 'left' : 'center'}
+									padding={headCell.disablePadding ? 'none' : 'normal'}
+								>
+									{headCell.label}
 								</TableCell>
-							</TableRow>
-						</TableHead>
-					) : (
-						<TableHead>
-							<TableRow>
-								<TableCell padding="checkbox">
-									<Checkbox
-										color="primary"
-										indeterminate={selected.length > 0 && selected.length < HARDCODED_NOTICES.length}
-										checked={HARDCODED_NOTICES.length > 0 && selected.length === HARDCODED_NOTICES.length}
-										onChange={handleSelectAll}
-									/>
-								</TableCell>
-								{headCells.map((headCell) => (
-									<TableCell
-										key={headCell.id}
-										align={headCell.numeric ? 'left' : 'center'}
-										padding={headCell.disablePadding ? 'none' : 'normal'}
-									>
-										{headCell.label}
-									</TableCell>
-								))}
-							</TableRow>
-						</TableHead>
-					)}
+							))}
+						</TableRow>
+					</TableHead>
 					<TableBody>
-						{HARDCODED_NOTICES.map((notice) => (
-							<TableRow
-								hover
-								key={notice.id}
-								selected={selected.includes(notice.id)}
-								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-							>
-								<TableCell padding="checkbox">
-									<Checkbox
-										color="primary"
-										checked={selected.includes(notice.id)}
-										onChange={() => handleSelect(notice.id)}
-									/>
-								</TableCell>
-								<TableCell align="left">
-									<span
-										style={{
-											background: '#EDE4D8',
-											color: '#6B4C2A',
-											fontSize: 11,
-											fontWeight: 600,
-											padding: '3px 10px',
-											borderRadius: 20,
-											letterSpacing: 0.4,
-											textTransform: 'uppercase',
-										}}
-									>
-										{notice.category}
-									</span>
-								</TableCell>
-								<TableCell align="left" sx={{ fontWeight: 500, maxWidth: 300 }}>
-									{notice.title}
-								</TableCell>
-								<TableCell align="left" sx={{ color: 'var(--color-text-muted)', fontSize: 12 }}>
-									{notice.id}
-								</TableCell>
-								<TableCell align="left">{notice.writer}</TableCell>
-								<TableCell align="left" sx={{ color: 'var(--color-text-muted)', whiteSpace: 'nowrap' }}>
-									{notice.date}
-								</TableCell>
-								<TableCell align="left" sx={{ color: 'var(--color-text-muted)' }}>
-									{notice.views.toLocaleString()}
-								</TableCell>
-								<TableCell align="center">
-									<Tooltip title="Delete">
-										<IconButton size="small">
-											<DeleteRoundedIcon fontSize="small" />
-										</IconButton>
-									</Tooltip>
-									<Tooltip title="Edit">
-										<IconButton size="small">
-											<EditOutlinedIcon fontSize="small" />
-										</IconButton>
-									</Tooltip>
+						{loading ? (
+							<TableRow>
+								<TableCell align="center" colSpan={6}>
+									<CircularProgress size={24} />
 								</TableCell>
 							</TableRow>
-						))}
+						) : notices.length === 0 ? (
+							<TableRow>
+								<TableCell align="center" colSpan={6}>
+									<span className={'no-data'}>No notices found</span>
+								</TableCell>
+							</TableRow>
+						) : (
+							notices.map((notice, index) => {
+								const writerImage = notice.memberData?.memberImage
+									? `${REACT_APP_API_URL}/${notice.memberData.memberImage}`
+									: '/icons/user_profile.png';
+								return (
+									<TableRow hover key={notice._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+										<TableCell align="left">
+											<span
+												style={{
+													background: '#EDE4D8',
+													color: '#6B4C2A',
+													fontSize: 11,
+													fontWeight: 600,
+													padding: '3px 10px',
+													borderRadius: 20,
+													letterSpacing: 0.4,
+													textTransform: 'uppercase',
+												}}
+											>
+												{notice.noticeCategory}
+											</span>
+										</TableCell>
+										<TableCell align="left" sx={{ fontWeight: 500, maxWidth: 300 }}>
+											{notice.noticeTitle}
+										</TableCell>
+										<TableCell align="left" sx={{ color: 'var(--color-text-muted)', fontSize: 12 }}>
+											{notice._id}
+										</TableCell>
+										<TableCell align="left">
+											<Stack direction="row" alignItems="center" gap={1}>
+												<Avatar src={writerImage} alt={notice.memberData?.memberNick} sx={{ width: 28, height: 28 }} />
+												<span>{notice.memberData?.memberNick ?? '-'}</span>
+											</Stack>
+										</TableCell>
+										<TableCell align="left" sx={{ color: 'var(--color-text-muted)', whiteSpace: 'nowrap' }}>
+											{new Date(notice.createdAt).toLocaleDateString('en-GB')}
+										</TableCell>
+										<TableCell align="center">
+											{notice.noticeStatus === NoticeStatus.DELETE ? (
+												<Button
+													variant="outlined"
+													sx={{ p: '3px', border: 'none', ':hover': { border: '1px solid #000000' } }}
+													onClick={() => removeNoticeHandler(notice._id)}
+												>
+													DELETE
+												</Button>
+											) : (
+												<>
+													<Button onClick={(e: any) => menuIconClickHandler(e, index)} className={'badge success'}>
+														{notice.noticeStatus}
+													</Button>
+													<Menu
+														className={'menu-modal'}
+														MenuListProps={{ 'aria-labelledby': 'fade-button' }}
+														anchorEl={anchorEl[index]}
+														open={Boolean(anchorEl[index])}
+														onClose={menuIconCloseHandler}
+														TransitionComponent={Fade}
+														sx={{ p: 1 }}
+													>
+														{Object.values(NoticeStatus)
+															.filter((s) => s !== notice.noticeStatus)
+															.map((status: string) => (
+																<MenuItem
+																	onClick={() => updateNoticeHandler({ _id: notice._id, noticeStatus: status })}
+																	key={status}
+																>
+																	<Typography variant={'subtitle1'} component={'span'}>
+																		{status}
+																	</Typography>
+																</MenuItem>
+															))}
+													</Menu>
+												</>
+											)}
+										</TableCell>
+									</TableRow>
+								);
+							})
+						)}
 					</TableBody>
 				</Table>
 			</TableContainer>

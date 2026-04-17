@@ -153,6 +153,37 @@ export const GET_ALL_BOARD_ARTICLES_BY_ADMIN = gql`
  *         COMMENT        *
  *************************/
 
+/**************************
+ *         NOTICE         *
+ *************************/
+
+export const GET_ALL_NOTICES_BY_ADMIN = gql`
+  query GetAllNoticesByAdmin($input: NoticesInquiry!) {
+    getAllNoticesByAdmin(input: $input) {
+      list {
+        _id
+        noticeCategory
+        noticeStatus
+        noticeTitle
+        noticeContent
+        memberId
+        createdAt
+        updatedAt
+        memberData {
+          _id
+          memberNick
+          memberImage
+          memberType
+          memberStatus
+        }
+      }
+      metaCounter {
+        total
+      }
+    }
+  }
+`;
+
 export const GET_COMMENTS = gql`
   query GetComments($input: CommentsInquiry!) {
     getComments(input: $input) {

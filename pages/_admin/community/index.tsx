@@ -210,6 +210,7 @@ const AdminCommunity: NextPage = ({ initialInquiry = DEFAULT_COMMUNITY_INQUIRY, 
 						</Box>
 						<CommunityArticleList
 							articles={articles}
+							loading={getAllBoardArticlesByAdminLoading}
 							anchorEl={anchorEl}
 							menuIconClickHandler={menuIconClickHandler}
 							menuIconCloseHandler={menuIconCloseHandler}

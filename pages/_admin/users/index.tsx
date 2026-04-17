@@ -267,6 +267,7 @@ const AdminUsers: NextPage = ({ initialInquiry = DEFAULT_MEMBERS_INQUIRY, ...pro
 							menuIconClickHandler={menuIconClickHandler}
 							menuIconCloseHandler={menuIconCloseHandler}
 							updateMemberHandler={updateMemberHandler}
+							loading={getAllMembersByAdminLoading}
 						/>
 
 						<TablePagination

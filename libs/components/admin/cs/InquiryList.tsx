@@ -7,9 +7,13 @@ import {
 	Table,
 	TableContainer,
 	Button,
+	CircularProgress,
+	Avatar,
+	Stack,
 } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import { Stack } from '@mui/material';
+import { Notice } from '../../../types/notice/notice';
+import { NoticeStatus } from '../../../enums/notice.enum';
+import { REACT_APP_API_URL } from '../../../config';
 
 interface HeadCell {
 	disablePadding: boolean;
@@ -23,75 +27,18 @@ const headCells: readonly HeadCell[] = [
 	{ id: 'title', numeric: true, disablePadding: false, label: 'TITLE' },
 	{ id: 'writer', numeric: true, disablePadding: false, label: 'WRITER' },
 	{ id: 'date', numeric: true, disablePadding: false, label: 'DATE' },
-	{ id: 'qna_case_status', numeric: false, disablePadding: false, label: 'QNA STATUS' },
+	{ id: 'status', numeric: false, disablePadding: false, label: 'STATUS' },
 ];
-
-const HARDCODED_INQUIRIES = [
-	{
-		id: 'INQ-001',
-		category: 'Delivery',
-		title: 'My order has not arrived — it has been 2 weeks',
-		writer: 'Sarah Kim',
-		writerImage: '/icons/user_profile.png',
-		date: '2026-01-10',
-		qnaStatus: 'ANSWERED',
-	},
-	{
-		id: 'INQ-002',
-		category: 'Returns',
-		title: 'Received damaged item, need replacement',
-		writer: 'James Park',
-		writerImage: '/icons/user_profile.png',
-		date: '2026-01-09',
-		qnaStatus: 'PENDING',
-	},
-	{
-		id: 'INQ-003',
-		category: 'Payment',
-		title: 'Double charge on my credit card',
-		writer: 'Emily Chen',
-		writerImage: '/icons/user_profile.png',
-		date: '2026-01-08',
-		qnaStatus: 'ANSWERED',
-	},
-	{
-		id: 'INQ-004',
-		category: 'Product',
-		title: 'Does the Oslo sofa come in dark gray?',
-		writer: 'Mike Johnson',
-		writerImage: '/icons/user_profile.png',
-		date: '2026-01-07',
-		qnaStatus: 'ANSWERED',
-	},
-	{
-		id: 'INQ-005',
-		category: 'Orders',
-		title: 'Can I change the delivery address after ordering?',
-		writer: 'Lena Torres',
-		writerImage: '/icons/user_profile.png',
-		date: '2026-01-06',
-		qnaStatus: 'PENDING',
-	},
-];
-
-const qnaStatusStyle = (status: string) => {
-	if (status === 'ANSWERED') {
-		return { background: '#e8f5e9', color: '#2e7d32' };
-	}
-	return { background: '#fff8e1', color: '#f57f17' };
-};
 
 interface InquiryPanelListType {
-	dense?: boolean;
-	membersData?: any;
-	searchMembers?: any;
-	anchorEl?: any;
-	handleMenuIconClick?: any;
-	handleMenuIconClose?: any;
-	generateMentorTypeHandle?: any;
+	notices: Notice[];
+	loading: boolean;
+	updateNoticeHandler: (updateData: any) => void;
 }
 
 export const InquiryList = (props: InquiryPanelListType) => {
+	const { notices, loading, updateNoticeHandler } = props;
+
 	return (
 		<Stack>
 			<TableContainer>
@@ -110,47 +57,66 @@ export const InquiryList = (props: InquiryPanelListType) => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{HARDCODED_INQUIRIES.map((inquiry) => (
-							<TableRow hover key={inquiry.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-								<TableCell align="left">
-									<span
-										style={{
-											background: '#EDE4D8',
-											color: '#6B4C2A',
-											fontSize: 11,
-											fontWeight: 600,
-											padding: '3px 10px',
-											borderRadius: 20,
-											letterSpacing: 0.4,
-											textTransform: 'uppercase',
-										}}
-									>
-										{inquiry.category}
-									</span>
-								</TableCell>
-								<TableCell align="left" sx={{ fontWeight: 500, maxWidth: 320 }}>
-									{inquiry.title}
-								</TableCell>
-								<TableCell align="left">
-									<Stack direction="row" alignItems="center" gap={1}>
-										<Avatar src={inquiry.writerImage} sx={{ width: 28, height: 28 }} />
-										<span>{inquiry.writer}</span>
-									</Stack>
-								</TableCell>
-								<TableCell align="left" sx={{ color: 'var(--color-text-muted)', whiteSpace: 'nowrap' }}>
-									{inquiry.date}
-								</TableCell>
-								<TableCell align="center">
-									<Button
-										className={inquiry.qnaStatus === 'ANSWERED' ? 'badge success' : 'badge warning'}
-										disableRipple
-										sx={{ cursor: 'default' }}
-									>
-										{inquiry.qnaStatus}
-									</Button>
+						{loading ? (
+							<TableRow>
+								<TableCell align="center" colSpan={5}>
+									<CircularProgress size={24} />
 								</TableCell>
 							</TableRow>
-						))}
+						) : notices.length === 0 ? (
+							<TableRow>
+								<TableCell align="center" colSpan={5}>
+									<span className={'no-data'}>No inquiries found</span>
+								</TableCell>
+							</TableRow>
+						) : (
+							notices.map((notice) => {
+								const writerImage = notice.memberData?.memberImage
+									? `${REACT_APP_API_URL}/${notice.memberData.memberImage}`
+									: '/icons/user_profile.png';
+								return (
+									<TableRow hover key={notice._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+										<TableCell align="left">
+											<span
+												style={{
+													background: '#EDE4D8',
+													color: '#6B4C2A',
+													fontSize: 11,
+													fontWeight: 600,
+													padding: '3px 10px',
+													borderRadius: 20,
+													letterSpacing: 0.4,
+													textTransform: 'uppercase',
+												}}
+											>
+												{notice.noticeCategory}
+											</span>
+										</TableCell>
+										<TableCell align="left" sx={{ fontWeight: 500, maxWidth: 320 }}>
+											{notice.noticeTitle}
+										</TableCell>
+										<TableCell align="left">
+											<Stack direction="row" alignItems="center" gap={1}>
+												<Avatar src={writerImage} alt={notice.memberData?.memberNick} sx={{ width: 28, height: 28 }} />
+												<span>{notice.memberData?.memberNick ?? '-'}</span>
+											</Stack>
+										</TableCell>
+										<TableCell align="left" sx={{ color: 'var(--color-text-muted)', whiteSpace: 'nowrap' }}>
+											{new Date(notice.createdAt).toLocaleDateString('en-GB')}
+										</TableCell>
+										<TableCell align="center">
+											<Button
+												className={notice.noticeStatus === NoticeStatus.ACTIVE ? 'badge success' : 'badge warning'}
+												disableRipple
+												sx={{ cursor: 'default' }}
+											>
+												{notice.noticeStatus}
+											</Button>
+										</TableCell>
+									</TableRow>
+								);
+							})
+						)}
 					</TableBody>
 				</Table>
 			</TableContainer>

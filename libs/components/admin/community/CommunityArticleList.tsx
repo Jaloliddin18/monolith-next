@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {
 	Box,
 	Button,
+	CircularProgress,
 	Fade,
 	Menu,
 	MenuItem,
@@ -13,31 +14,20 @@ import {
 	TableHead,
 	TableRow,
 	Tooltip,
+	IconButton,
+	Avatar,
+	Stack,
+	Typography,
 } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import OpenInBrowserRoundedIcon from '@mui/icons-material/OpenInBrowserRounded';
 import { BoardArticle } from '../../../types/board-article/board-article';
 import { REACT_APP_API_URL } from '../../../config';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Typography from '@mui/material/Typography';
 import { BoardArticleStatus } from '../../../enums/board-article.enum';
-
-interface Data {
-	category: string;
-	title: string;
-	writer: string;
-	register: string;
-	view: number;
-	like: number;
-	status: string;
-	article_id: string;
-}
 
 interface HeadCell {
 	disablePadding: boolean;
-	id: keyof Data;
+	id: string;
 	label: string;
 	numeric: boolean;
 }
@@ -93,14 +83,7 @@ const headCells: readonly HeadCell[] = [
 	},
 ];
 
-interface EnhancedTableProps {
-	numSelected: number;
-	onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-	onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	rowCount: number;
-}
-
-function EnhancedTableHead(props: EnhancedTableProps) {
+function EnhancedTableHead() {
 	return (
 		<TableHead>
 			<TableRow>
@@ -118,15 +101,9 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 	);
 }
 
-const HARDCODED_ARTICLES = [
-	{ _id: '66089ea21669073834aa0001', articleTitle: 'Top 5 Scandinavian Furniture Trends for 2026', articleCategory: 'DESIGN', articleViews: 312, articleLikes: 47, articleStatus: 'ACTIVE', createdAt: '2026-01-10T11:05:00Z', memberData: { _id: 'u1', memberNick: 'Oueen', memberImage: null } },
-	{ _id: '66089ea21669073834aa0002', articleTitle: 'How to Style a Small Living Room', articleCategory: 'INTERIOR', articleViews: 198, articleLikes: 31, articleStatus: 'ACTIVE', createdAt: '2026-01-09T07:46:00Z', memberData: { _id: 'u2', memberNick: 'Oscar', memberImage: null } },
-	{ _id: '66089ea21669073834aa0003', articleTitle: 'The Best Wood Types for Long-Lasting Furniture', articleCategory: 'MATERIAL', articleViews: 87, articleLikes: 14, articleStatus: 'DELETE', createdAt: '2026-01-08T07:34:00Z', memberData: { _id: 'u3', memberNick: 'Justin', memberImage: null } },
-	{ _id: '66089ea21669073834aa0004', articleTitle: 'Minimalism in Modern Home Decor', articleCategory: 'DESIGN', articleViews: 421, articleLikes: 68, articleStatus: 'ACTIVE', createdAt: '2026-01-07T07:32:00Z', memberData: { _id: 'u4', memberNick: 'bayram', memberImage: null } },
-];
-
 interface CommunityArticleListProps {
 	articles: BoardArticle[];
+	loading: boolean;
 	anchorEl: any;
 	menuIconClickHandler: any;
 	menuIconCloseHandler: any;
@@ -135,18 +112,27 @@ interface CommunityArticleListProps {
 }
 
 const CommunityArticleList = (props: CommunityArticleListProps) => {
-	const { articles, anchorEl, menuIconClickHandler, menuIconCloseHandler, updateArticleHandler, removeArticleHandler } =
-		props;
-	const displayArticles: any[] = articles.length > 0 ? articles : HARDCODED_ARTICLES;
+	const { articles, loading, anchorEl, menuIconClickHandler, menuIconCloseHandler, updateArticleHandler, removeArticleHandler } = props;
 
 	return (
 		<Stack>
 			<TableContainer>
 				<Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size={'medium'}>
-					{/*@ts-ignore*/}
 					<EnhancedTableHead />
 					<TableBody>
-						{displayArticles.map((article: any, index: number) => (
+						{loading ? (
+							<TableRow>
+								<TableCell align="center" colSpan={8}>
+									<CircularProgress size={24} />
+								</TableCell>
+							</TableRow>
+						) : articles.length === 0 ? (
+							<TableRow>
+								<TableCell align="center" colSpan={8}>
+									<span className={'no-data'}>No articles found</span>
+								</TableCell>
+							</TableRow>
+						) : articles.map((article, index) => (
 								<TableRow hover key={article._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									<TableCell align="left">{article._id}</TableCell>
 									<TableCell align="left">
