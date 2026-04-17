@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from '../common/ProductCard';
 
@@ -115,23 +117,36 @@ const TrendingNow = ({ trendFurnitures, onLike }: TrendingNowProps) => {
 					<Box component="img" src="/icons/ArrowUpRight.svg" alt="→" width={20} height={20} />
 				</Stack>
 			</Stack>
-			<Stack direction="row" flexWrap="wrap" gap="24px">
-				{products
-					? products.slice(0, 6).map((furniture) => (
-							<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />
-						))
-					: hardcodedProducts.map((item) => (
-							<ProductCard
-								key={item._id}
-								furniture={item as unknown as Furniture}
-								isOutOfStock={item.isOutOfStock}
-								rating={item.rating}
-								reviewCount={item.reviewCount}
-								originalPrice={item.originalPrice}
-								onLike={onLike}
-							/>
-						))}
-			</Stack>
+			<Box className="section-swiper-wrap">
+				<Swiper
+					modules={[Navigation, Pagination]}
+					slidesPerView={4}
+					spaceBetween={24}
+					loop={true}
+					navigation={true}
+					pagination={{ clickable: true }}
+					style={{ width: '100%', paddingBottom: '48px' }}
+				>
+					{products
+						? products.slice(0, 6).map((furniture) => (
+								<SwiperSlide key={furniture._id}>
+									<ProductCard furniture={furniture} onLike={onLike} />
+								</SwiperSlide>
+							))
+						: hardcodedProducts.map((item) => (
+								<SwiperSlide key={item._id}>
+									<ProductCard
+										furniture={item as unknown as Furniture}
+										isOutOfStock={item.isOutOfStock}
+										rating={item.rating}
+										reviewCount={item.reviewCount}
+										originalPrice={item.originalPrice}
+										onLike={onLike}
+									/>
+								</SwiperSlide>
+							))}
+				</Swiper>
+			</Box>
 		</Stack>
 	);
 };

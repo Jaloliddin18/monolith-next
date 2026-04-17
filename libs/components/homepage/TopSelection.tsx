@@ -1,9 +1,7 @@
 import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import WestIcon from '@mui/icons-material/West';
-import EastIcon from '@mui/icons-material/East';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from '../common/ProductCard';
 
@@ -109,27 +107,17 @@ const TopSelection = ({ furnitures, onLike }: TopSelectionProps) => {
 		<Stack className="top-selection-section" alignItems="center" gap="50px">
 			<Stack className="top-selection-header" direction="row" justifyContent="space-between" alignItems="center">
 				<Typography className="section-title-text">Top selection</Typography>
-				<Stack direction="row" gap="14px" alignItems="center">
-					<WestIcon className="swiper-top-selection-prev" sx={{ cursor: 'pointer', fontSize: 24 }} />
-					<EastIcon className="swiper-top-selection-next" sx={{ cursor: 'pointer', fontSize: 24 }} />
-				</Stack>
 			</Stack>
 
-			<Box sx={{ width: '100%' }}>
+			<Box className="section-swiper-wrap">
 				<Swiper
-					modules={[Navigation]}
+					modules={[Navigation, Pagination]}
 					slidesPerView={4}
-					spaceBetween={28}
-					navigation={{
-						nextEl: '.swiper-top-selection-next',
-						prevEl: '.swiper-top-selection-prev',
-					}}
-					breakpoints={{
-						0: { slidesPerView: 1 },
-						600: { slidesPerView: 2 },
-						900: { slidesPerView: 3 },
-						1200: { slidesPerView: 4 },
-					}}
+					spaceBetween={24}
+					loop={true}
+					navigation={true}
+					pagination={{ clickable: true }}
+					style={{ width: '100%', paddingBottom: '48px' }}
 				>
 					{(products ?? (hardcodedTopSelection as unknown as Furniture[])).map((item: any) => (
 						<SwiperSlide key={item._id}>

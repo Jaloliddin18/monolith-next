@@ -1,7 +1,5 @@
 import React from 'react';
 import { Box, Stack } from '@mui/material';
-import WestIcon from '@mui/icons-material/West';
-import EastIcon from '@mui/icons-material/East';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Furniture } from '../../types/furniture/furniture';
@@ -22,29 +20,20 @@ const TopRated = ({ furnitures = [], onLike }: TopRatedProps) => {
 					<span>Top Rated Furniture</span>
 					<p>Check out our top rated items</p>
 				</Box>
-				<Box className="right">
-					<Box className="pagination-box">
-						<WestIcon className="swiper-top-rated-prev" />
-						<div className="swiper-top-rated-pagination" />
-						<EastIcon className="swiper-top-rated-next" />
-					</Box>
-				</Box>
 			</Box>
 
-			<Box className="top-rated-swiper-wrapper">
+			<Box className="section-swiper-wrap">
 				<Swiper
 					modules={[Navigation, Pagination]}
-					slidesPerView={'auto'}
+					slidesPerView={4}
 					spaceBetween={24}
-					watchOverflow={false}
-					navigation={{
-						nextEl: '.swiper-top-rated-next',
-						prevEl: '.swiper-top-rated-prev',
-					}}
-					pagination={{ el: '.swiper-top-rated-pagination', clickable: true, type: 'bullets' }}
+					loop={true}
+					navigation={true}
+					pagination={{ clickable: true }}
+					style={{ width: '100%', paddingBottom: '48px' }}
 				>
 					{furnitures.map((furniture) => (
-						<SwiperSlide key={furniture._id} style={{ width: 'auto' }}>
+						<SwiperSlide key={furniture._id}>
 							<ProductCard furniture={furniture} size="small" onLike={onLike} />
 						</SwiperSlide>
 					))}

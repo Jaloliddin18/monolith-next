@@ -16,9 +16,6 @@ import AspectRatioOutlinedIcon from "@mui/icons-material/AspectRatioOutlined";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
-// import 'swiper/css';
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
 import InstagramSection from "../../libs/components/common/InstagramSection";
 import { addToCart } from "../../libs/utils/cartStorage";
@@ -99,14 +96,10 @@ const FurnitureDetail = () => {
   const { id } = router.query;
   const user = useReactiveVar(userVar);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const swiperRef = useRef<SwiperType | null>(null);
-
   const dimensionsRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
   const [quantity, setQuantity] = useState(1);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const [dimImageIdx, setDimImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(true);
@@ -330,43 +323,17 @@ const FurnitureDetail = () => {
             <img src={heroImage} alt={furniture?.furnitureTitle} />
           </div>
 
-          {/* § 2 — Carousel (white bg, all angles) */}
-          <div className="nvg-carousel-wrap">
-            <Swiper
-              onSwiper={(sw) => {
-                swiperRef.current = sw;
-              }}
-              onSlideChange={(sw) => setCarouselIndex(sw.activeIndex)}
-              slidesPerView={3}
-              spaceBetween={1}
-              className="nvg-swiper"
-            >
-              {galleryImageUrls.map((img, idx) => (
-                <SwiperSlide key={idx}>
-                  <div
-                    className="nvg-slide"
-                    onClick={() => openLightbox(idx + 1)}
-                  >
-                    <img src={img} alt={`View ${idx + 1}`} />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button
-              className="nvg-arr nvg-arr--prev"
-              onClick={() => swiperRef.current?.slidePrev()}
-            >
-              <ArrowBackIcon />
-            </button>
-            <button
-              className="nvg-arr nvg-arr--next"
-              onClick={() => swiperRef.current?.slideNext()}
-            >
-              <ArrowForwardIcon />
-            </button>
-            <div className="nvg-slide-counter">
-              {carouselIndex + 1} / {galleryImageUrls.length}
-            </div>
+          {/* § 2 — Gallery row (white bg, all angles) */}
+          <div className="nvg-gallery-row">
+            {galleryImageUrls.map((img, idx) => (
+              <div
+                key={idx}
+                className="nvg-gallery-item"
+                onClick={() => openLightbox(idx + 1)}
+              >
+                <img src={img} alt={`View ${idx + 1}`} />
+              </div>
+            ))}
           </div>
 
           {/* § 3 — Close-up + video side by side */}
@@ -658,37 +625,14 @@ const FurnitureDetail = () => {
         </div>
         {/* end nvg-acc-list */}
 
-        {/* Right: sticky image panel */}
+        {/* Right: dimension images side by side */}
         <div className="nvg-dim-panel">
-          <div className="nvg-dim-panel-frame">
-            <img
-              src={dimensionImageUrls[dimImageIdx] ?? heroImage}
-              alt={`Dimension view ${dimImageIdx + 1}`}
-              className="nvg-dim-panel-img"
-            />
-          </div>
-          <div className="nvg-dim-panel-footer">
-            <span className="nvg-dim-panel-counter">
-              View {dimImageIdx + 1}/{dimensionImageUrls.length} : Visit
-            </span>
-            <div className="nvg-dim-panel-nav">
-              <button
-                onClick={() => setDimImageIdx((i) => Math.max(0, i - 1))}
-                disabled={dimImageIdx === 0}
-              >
-                <ArrowBackIcon sx={{ fontSize: 14 }} />
-              </button>
-              <button
-                onClick={() =>
-                  setDimImageIdx((i) =>
-                    Math.min(dimensionImageUrls.length - 1, i + 1),
-                  )
-                }
-                disabled={dimImageIdx === dimensionImageUrls.length - 1}
-              >
-                <ArrowForwardIcon sx={{ fontSize: 14 }} />
-              </button>
-            </div>
+          <div className="nvg-dim-images-row">
+            {dimensionImageUrls.map((img, idx) => (
+              <div key={idx} className="nvg-dim-image-item">
+                <img src={img} alt={`Dimension ${idx + 1}`} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
