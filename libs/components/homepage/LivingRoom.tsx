@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { useRouter } from "next/router";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
 
 interface DotProduct {
   id: string;
@@ -11,8 +12,20 @@ interface DotProduct {
 }
 
 const image1Products: DotProduct[] = [
-  { id: "p1", left: "70%", top: "56%", name: "Accent Chair", price: "$ 189.99" },
-  { id: "p2", left: "51%", top: "71%", name: "Coffee Table", price: "$ 129.50" },
+  {
+    id: "p1",
+    left: "70%",
+    top: "56%",
+    name: "Accent Chair",
+    price: "$ 189.99",
+  },
+  {
+    id: "p2",
+    left: "51%",
+    top: "71%",
+    name: "Coffee Table",
+    price: "$ 129.50",
+  },
   { id: "p3", left: "28%", top: "40%", name: "Wall Shelf", price: "$ 64.00" },
 ];
 
@@ -29,7 +42,9 @@ interface DotWithPopupProps {
 }
 
 const DotWithPopup = ({ product, onShop }: DotWithPopupProps) => {
-  const [status, setStatus] = useState<"hidden" | "visible" | "fading">("hidden");
+  const [status, setStatus] = useState<"hidden" | "visible" | "fading">(
+    "hidden",
+  );
   const leaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const topPct = parseFloat(product.top);
@@ -77,12 +92,14 @@ const DotWithPopup = ({ product, onShop }: DotWithPopupProps) => {
           <Typography className="popup-name">{product.name}</Typography>
           <Typography className="popup-price">{product.price}</Typography>
           <Button
-            className="btn-buy-now"
+            className="living-shop-btn"
             variant="contained"
+            disableElevation
+            endIcon={<ArrowOutwardRoundedIcon sx={{ fontSize: 16 }} />}
             onClick={onShop}
             sx={{ whiteSpace: "nowrap" }}
           >
-            SHOP NOW
+            Shop Now
           </Button>
           <Box
             className={`popup-arrow ${isAboveDot ? "popup-arrow-down" : "popup-arrow-up"}`}
