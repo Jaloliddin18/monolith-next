@@ -145,11 +145,20 @@ const FurnitureDetail = () => {
   });
 
   // ─── Derived values ─────────────────────────────────────────
-  // Image slot map (raw paths from furnitureImages array)
-  const mainImage = furniture?.furnitureImages?.[0] ?? "";
-  const galleryImages = furniture?.furnitureImages?.slice(1, 6) ?? [];
-  const zoomedImage = furniture?.furnitureImages?.[6] ?? "";
-  const dimensionImages = furniture?.furnitureImages?.slice(7, 9) ?? [];
+  // Keep upload order and reserve trailing 1-2 images for the dimensions section.
+  const uploadedImages = (furniture?.furnitureImages ?? []).filter(Boolean);
+  const dimensionCount = Math.min(2, Math.max(0, uploadedImages.length - 7));
+  const nonDimensionImages = uploadedImages.slice(
+    0,
+    uploadedImages.length - dimensionCount,
+  );
+
+  const mainImage = nonDimensionImages[0] ?? "";
+  const galleryImages = nonDimensionImages.slice(1, 6);
+  const zoomedImage = nonDimensionImages[6] ?? "";
+  const dimensionImages = uploadedImages.slice(
+    uploadedImages.length - dimensionCount,
+  );
   // videoUrl = furniture?.furnitureVideo (defined below with full URL prefix)
 
   const currentPrice =
