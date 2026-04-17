@@ -1076,12 +1076,41 @@
   margin-left: auto;
   margin-right: auto;
 
+  .homepage-swiper-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .homepage-swiper-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e8e0d8;
+    border-radius: 50%;
+    background: #fff;
+    color: #1c1a17;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #f8f3ed;
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+  }
+
   .sale-info-box {
-    width: 100%;
+    width: 1140px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
 
     .left {
       display: flex;
@@ -1117,6 +1146,9 @@
   }
 
   .countdown-row {
+    width: 100%;
+    justify-content: center;
+
     .countdown-circle {
       width: 60px;
       height: 60px;
@@ -1146,6 +1178,9 @@
   }
 
   .countdown-labels {
+    width: 100%;
+    justify-content: center;
+
     .countdown-label {
       font-family: var(--font-ui);
       font-size: var(--fs-xs);
