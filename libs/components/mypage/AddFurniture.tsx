@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -9,9 +9,10 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
-import { useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { CREATE_FURNITURE, VIDEO_UPLOADER } from "../../../apollo/user/mutation";
+import { CREATE_FURNITURE, UPDATE_FURNITURE, VIDEO_UPLOADER } from "../../../apollo/user/mutation";
+import { GET_FURNITURE } from "../../../apollo/user/query";
 import {
   FurnitureRoom,
   FurnitureCategory,
@@ -41,6 +42,8 @@ const STEP_LABELS = ["Required Info", "Details", "Images & Extras"];
 
 const AddFurniture = () => {
   const router = useRouter();
+  const { furnitureId } = router.query as { furnitureId?: string };
+  const isEditMode = !!furnitureId;
   const token = getJwtToken();
   const imageInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
@@ -84,7 +87,56 @@ const AddFurniture = () => {
   const [videoUploading, setVideoUploading] = useState(false);
 
   const [createFurniture] = useMutation(CREATE_FURNITURE);
+  const [updateFurniture] = useMutation(UPDATE_FURNITURE);
   const [_videoUploaderMutation] = useMutation(VIDEO_UPLOADER);
+
+  const [getFurniture] = useLazyQuery(GET_FURNITURE, {
+    fetchPolicy: 'network-only',
+    onCompleted: (data: T) => {
+      const f = data?.getFurniture;
+      if (!f) return;
+      setForm({
+        furnitureTitle: f.furnitureTitle ?? '',
+        furnitureRoom: f.furnitureRoom ?? '',
+        furnitureCategory: f.furnitureCategory ?? '',
+        furnitureStyle: f.furnitureStyle ?? '',
+        furniturePrice: f.furniturePrice?.toString() ?? '',
+        furnitureWeight: f.furnitureWeight?.toString() ?? '',
+        furnitureMaterial: f.furnitureMaterial ?? '',
+        furnitureColor: f.furnitureColor ?? '',
+        assemblyType: f.assemblyType ?? '',
+        assemblyDifficulty: f.assemblyDifficulty ?? '',
+        assemblyTime: f.assemblyTime?.toString() ?? '',
+        deliveryMethod: f.deliveryMethod ?? '',
+        furnitureDesc: f.furnitureDesc ?? '',
+        furnitureRent: f.furnitureRent ?? false,
+        furnitureOnSale: f.furnitureOnSale ?? false,
+        furnitureBestseller: f.furnitureBestseller ?? false,
+        furnitureDiscount: f.furnitureDiscount?.toString() ?? '',
+        discountStart: f.discountStart ? new Date(f.discountStart).toISOString().split('T')[0] : '',
+        discountEnd: f.discountEnd ? new Date(f.discountEnd).toISOString().split('T')[0] : '',
+        launchedAt: f.launchedAt ? new Date(f.launchedAt).toISOString().split('T')[0] : '',
+        sustainabilityLabel: f.sustainabilityLabel ?? '',
+        width: f.furnitureDimensions?.width?.toString() ?? '',
+        height: f.furnitureDimensions?.height?.toString() ?? '',
+        depth: f.furnitureDimensions?.depth?.toString() ?? '',
+      });
+      if (f.furnitureImages?.length) {
+        setImages(f.furnitureImages);
+        setImagePreviews(f.furnitureImages.map((img: string) => `${REACT_APP_API_URL}/${img}`));
+      }
+      if (f.furnitureVideo) {
+        setVideoPath(f.furnitureVideo);
+        setVideoPreview(`${REACT_APP_API_URL}/${f.furnitureVideo}`);
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (furnitureId) {
+      getFurniture({ variables: { input: furnitureId } });
+    }
+  }, [furnitureId]);
 
   const set = (field: string, value: any) =>
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -218,7 +270,7 @@ const AddFurniture = () => {
       return;
     }
     try {
-      const input: T = {
+      const base: T = {
         furnitureTitle: form.furnitureTitle,
         furnitureRoom: form.furnitureRoom,
         furnitureCategory: form.furnitureCategory,
@@ -232,33 +284,34 @@ const AddFurniture = () => {
         furnitureImages: images,
       };
 
-      if (videoPath) input.furnitureVideo = videoPath;
-      if (form.furnitureDesc) input.furnitureDesc = form.furnitureDesc;
-      if (form.assemblyDifficulty)
-        input.assemblyDifficulty = form.assemblyDifficulty;
-      if (form.assemblyTime) input.assemblyTime = parseInt(form.assemblyTime);
-      if (form.sustainabilityLabel)
-        input.sustainabilityLabel = form.sustainabilityLabel;
-      if (form.furnitureDiscount)
-        input.furnitureDiscount = parseFloat(form.furnitureDiscount);
-      if (form.discountStart)
-        input.discountStart = new Date(form.discountStart);
-      if (form.discountEnd) input.discountEnd = new Date(form.discountEnd);
-      if (form.launchedAt) input.launchedAt = new Date(form.launchedAt);
-      input.furnitureRent = form.furnitureRent;
-      input.furnitureOnSale = form.furnitureOnSale;
-      input.furnitureBestseller = form.furnitureBestseller;
+      if (videoPath) base.furnitureVideo = videoPath;
+      if (form.furnitureDesc) base.furnitureDesc = form.furnitureDesc;
+      if (form.assemblyDifficulty) base.assemblyDifficulty = form.assemblyDifficulty;
+      if (form.assemblyTime) base.assemblyTime = parseInt(form.assemblyTime);
+      if (form.sustainabilityLabel) base.sustainabilityLabel = form.sustainabilityLabel;
+      if (form.furnitureDiscount) base.furnitureDiscount = parseFloat(form.furnitureDiscount);
+      if (form.discountStart) base.discountStart = new Date(form.discountStart);
+      if (form.discountEnd) base.discountEnd = new Date(form.discountEnd);
+      if (form.launchedAt) base.launchedAt = new Date(form.launchedAt);
+      base.furnitureRent = form.furnitureRent;
+      base.furnitureOnSale = form.furnitureOnSale;
+      base.furnitureBestseller = form.furnitureBestseller;
 
       if (form.width || form.height || form.depth) {
-        input.furnitureDimensions = {
+        base.furnitureDimensions = {
           ...(form.width && { width: parseFloat(form.width) }),
           ...(form.height && { height: parseFloat(form.height) }),
           ...(form.depth && { depth: parseFloat(form.depth) }),
         };
       }
 
-      await createFurniture({ variables: { input } });
-      await sweetTopSmallSuccessAlert("Furniture created successfully!", 700);
+      if (isEditMode && furnitureId) {
+        await updateFurniture({ variables: { input: { _id: furnitureId, ...base } } });
+        await sweetTopSmallSuccessAlert("Furniture updated successfully!", 700);
+      } else {
+        await createFurniture({ variables: { input: base } });
+        await sweetTopSmallSuccessAlert("Furniture created successfully!", 700);
+      }
       router.push("/mypage/my-furnitures");
     } catch (err: any) {
       sweetMixinErrorAlert(err?.message ?? "Something went wrong");
@@ -279,10 +332,12 @@ const AddFurniture = () => {
       {/* Page header */}
       <Box className="add-furniture-page-header">
         <Typography className="add-furniture-page-title">
-          Add New Furniture
+          {isEditMode ? "Edit Furniture" : "Add New Furniture"}
         </Typography>
         <Typography className="add-furniture-page-subtitle">
-          Fill in the details to list your furniture on the platform
+          {isEditMode
+            ? "Update the details of your furniture listing"
+            : "Fill in the details to list your furniture on the platform"}
         </Typography>
       </Box>
 
@@ -916,7 +971,7 @@ const AddFurniture = () => {
             </button>
           ) : (
             <button className="af-nav-next-btn" onClick={handleSubmit}>
-              Submit Furniture <ArrowForwardIcon sx={{ fontSize: 16 }} />
+              {isEditMode ? "Update Furniture" : "Submit Furniture"} <ArrowForwardIcon sx={{ fontSize: 16 }} />
             </button>
           )}
         </Box>

@@ -1851,6 +1851,187 @@
     gap: 24px;
   }
 
+  // ── My Furnitures Table Listing ──────────────
+  .mf-listing-box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .mf-listing-header {
+    display: flex;
+    align-items: center;
+    padding: 18px 28px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #efefef;
+  }
+
+  .mf-header-text {
+    font-family: var(--font-ui);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-semibold);
+    color: var(--color-dark);
+  }
+
+  .mf-listing-row {
+    display: flex;
+    align-items: center;
+    padding: 28px 28px;
+    border-bottom: 1px solid #f0f0f0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // Column widths — mirrors reference proportions
+  .mf-col-listing {
+    flex: 2.2;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .mf-col-date {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .mf-col-status {
+    flex: 0 0 160px;
+    display: flex;
+    align-items: center;
+  }
+
+  .mf-col-views {
+    flex: 0 0 80px;
+    text-align: center;
+  }
+
+  .mf-col-action {
+    flex: 0 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  // Info cell
+  .mf-listing-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+  }
+
+  .mf-thumb {
+    width: 140px;
+    min-width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .mf-listing-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+  }
+
+  .mf-listing-name {
+    font-family: var(--font-ui);
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
+    color: var(--color-dark);
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mf-listing-sub {
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-regular);
+    color: #999;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mf-listing-price {
+    font-family: var(--font-ui);
+    font-size: var(--fs-md);
+    color: var(--color-dark);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 4px;
+
+    strong {
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-md);
+    }
+  }
+
+  .mf-price-original {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-regular);
+    color: #bbb;
+  }
+
+  // Date
+  .mf-date-text {
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    color: var(--color-text);
+  }
+
+  // Status pill — rounded like reference
+  .mf-status-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 20px;
+    border-radius: 40px;
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  // Views
+  .mf-views-text {
+    font-family: var(--font-ui);
+    font-size: var(--fs-base);
+    color: var(--color-dark);
+    display: block;
+    text-align: center;
+  }
+
+  // Pagination footer
+  .mf-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-top: 24px;
+  }
+
+  .mf-total-text {
+    font-family: var(--font-ui);
+    font-size: var(--fs-sm);
+    color: var(--color-text-light);
+    margin: 0;
+  }
+
 }
 
 // ═══════════════════════════════════════════
