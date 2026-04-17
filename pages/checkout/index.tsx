@@ -3,8 +3,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import CheckoutForm from '../../libs/components/checkout/CheckoutForm';
 import OrderSummary from '../../libs/components/checkout/OrderSummary';
-import RecentlyViewed from '../../libs/components/furniture/RecentlyViewed';
-
 const CheckoutPage = () => {
 	return (
 		<Stack id="checkout-page">
@@ -12,7 +10,6 @@ const CheckoutPage = () => {
 				<CheckoutForm />
 				<OrderSummary />
 			</Stack>
-			<RecentlyViewed />
 		</Stack>
 	);
 };

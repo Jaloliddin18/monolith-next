@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
+import withLayoutMypage from '../../../libs/components/layout/LayoutMypage';
 import MyCart from "../../../libs/components/mypage/MyCart";
 
 const CartPage = () => {
@@ -29,4 +29,4 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-export default withLayoutBasic(CartPage);
+export default withLayoutMypage(CartPage);

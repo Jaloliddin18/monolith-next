@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
+import withLayoutMypage from '../../../libs/components/layout/LayoutMypage';
 import MyPageLayout from "../../../libs/components/mypage/MyPageLayout";
 
 const OrdersPage = () => {
@@ -19,4 +19,4 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-export default withLayoutBasic(OrdersPage);
+export default withLayoutMypage(OrdersPage);

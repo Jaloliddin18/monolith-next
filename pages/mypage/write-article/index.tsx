@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
+import withLayoutMypage from '../../../libs/components/layout/LayoutMypage';
 import MyPageLayout from "../../../libs/components/mypage/MyPageLayout";
 import WriteArticle from "../../../libs/components/mypage/WriteArticle";
 
@@ -20,4 +20,4 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-export default withLayoutBasic(WriteArticlePage);
+export default withLayoutMypage(WriteArticlePage);

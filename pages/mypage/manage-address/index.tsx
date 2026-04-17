@@ -1,5 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
+import withLayoutMypage from '../../../libs/components/layout/LayoutMypage';
 import MyPageLayout from "../../../libs/components/mypage/MyPageLayout";
 import ManageAddress from "../../../libs/components/mypage/ManageAddress";
 
@@ -17,4 +17,4 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-export default withLayoutBasic(ManageAddressPage);
+export default withLayoutMypage(ManageAddressPage);

@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
+import withLayoutMypage from '../../../libs/components/layout/LayoutMypage';
 import MyOrders from "../../../libs/components/mypage/MyOrders";
 
 const OrdersPage = () => {
@@ -27,4 +27,4 @@ export const getStaticProps = async ({ locale }: any) => ({
   },
 });
 
-export default withLayoutBasic(OrdersPage);
+export default withLayoutMypage(OrdersPage);

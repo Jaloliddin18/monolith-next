@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useReactiveVar } from '@apollo/client';
+import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import CloseIcon from '@mui/icons-material/Close';
@@ -22,6 +24,7 @@ interface MiniCartProps {
 
 const MiniCart = ({ open, onClose }: MiniCartProps) => {
 	const router = useRouter();
+	const user = useReactiveVar(userVar);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 	const [couponCode, setCouponCode] = useState('');
 	const [suggestedProducts, setSuggestedProducts] = useState<Furniture[]>([]);
@@ -159,10 +162,18 @@ const MiniCart = ({ open, onClose }: MiniCartProps) => {
 
 							{/* Action Buttons */}
 							<div className="cart-actions">
-								<Link href="/mypage/cart" className="btn-view-cart" onClick={onClose}>
+								<button
+									className="btn-view-cart"
+									onClick={() => { onClose(); router.push(user?._id ? '/mypage/cart' : '/'); }}
+								>
 									VIEW MY CART
-								</Link>
-								<Link href="/checkout" className="btn-checkout" onClick={onClose}>CHECK OUT</Link>
+								</button>
+								<button
+									className="btn-checkout"
+									onClick={() => { onClose(); router.push(user?._id ? '/checkout' : '/'); }}
+								>
+									CHECK OUT
+								</button>
 							</div>
 						</div>
 					</>
