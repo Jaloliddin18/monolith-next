@@ -82,7 +82,7 @@ export const NoticeList = (props: NoticeListProps) => {
 							notices.map((notice, index) => {
 								const writerImage = notice.memberData?.memberImage
 									? `${REACT_APP_API_URL}/${notice.memberData.memberImage}`
-									: '/icons/user_profile.png';
+									: '/general_images/default_profile.png';
 								return (
 									<TableRow hover key={notice._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 										<TableCell align="left">

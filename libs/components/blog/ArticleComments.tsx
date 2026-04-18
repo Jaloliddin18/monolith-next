@@ -13,7 +13,7 @@ import { REACT_APP_API_URL } from '../../config';
 import { userVar } from '../../../apollo/store';
 import { sweetMixinErrorAlert } from '../../sweetAlert';
 
-const DEFAULT_IMAGE = '/icons/user_profile.png';
+const DEFAULT_IMAGE = '/general_images/default_profile.png';
 const LIMIT = 5;
 
 interface ArticleCommentsProps {

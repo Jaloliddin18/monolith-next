@@ -51,7 +51,7 @@ const withAdminLayout = (Component: ComponentType) => {
 
 		const avatarSrc = user.memberImage && !user.memberImage.startsWith('/icons')
 			? `${REACT_APP_API_URL}/${user.memberImage}`
-			: '/icons/user_profile.png';
+			: '/general_images/default_profile.png';
 
 		return (
 			<Stack id="admin-wrap" direction="row">

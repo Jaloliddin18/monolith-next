@@ -10,9 +10,7 @@ import { getJwtToken, updateUserInfo } from '../libs/auth';
 import { REACT_APP_API_WS } from '../libs/config';
 import '../scss/app.scss';
 import '../scss/pc/main.scss';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import 'swiper/swiper-bundle.css';
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);

@@ -70,7 +70,7 @@ const ArticleContent = ({ articleId }: ArticleContentProps) => {
 	const authorName = author?.memberFullName || author?.memberNick || 'Anonymous';
 	const authorImage = author?.memberImage
 		? `${REACT_APP_API_URL}/${author.memberImage}`
-		: '/icons/user_profile.png';
+		: '/general_images/default_profile.png';
 	const articleImage = article.articleImage
 		? `${REACT_APP_API_URL}/${article.articleImage}`
 		: DEFAULT_IMAGE;

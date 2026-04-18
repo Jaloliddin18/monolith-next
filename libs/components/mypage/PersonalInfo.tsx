@@ -162,7 +162,7 @@ const PersonalInfo = () => {
       ? user.memberImage.startsWith("/img") || user.memberImage.startsWith("/icons")
         ? user.memberImage
         : `${REACT_APP_API_URL}/${user.memberImage}`
-      : "/icons/user_profile.png");
+      : "/general_images/default_profile.png");
 
   return (
     <>

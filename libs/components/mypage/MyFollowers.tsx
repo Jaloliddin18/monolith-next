@@ -72,7 +72,7 @@ const MyFollowers = ({ subscribeHandler, unsubscribeHandler, likeMemberHandler }
 					const member = follower.followerData;
 					const imagePath = member?.memberImage
 						? `${REACT_APP_API_URL}/${member.memberImage}`
-						: '/icons/user_profile.png';
+						: '/general_images/default_profile.png';
 					const isFollowingBack = follower.followedByMe?.[0]?.myFollowing ?? false;
 					const isLiked = follower.likedByMe?.[0]?.myFavorite ?? false;
 					const isMe = user?._id === follower.followerId;

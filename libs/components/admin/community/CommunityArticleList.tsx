@@ -160,7 +160,7 @@ const CommunityArticleList = (props: CommunityArticleListProps) => {
 												src={
 													article?.memberData?.memberImage
 														? `${REACT_APP_API_URL}/${article?.memberData?.memberImage}`
-														: `/icons/user_profile.png`
+														: `/general_images/default_profile.png`
 												}
 												sx={{ ml: '2px', mr: '10px' }}
 											/>

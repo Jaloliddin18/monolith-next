@@ -8,7 +8,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { TabContext } from '@mui/lab';
 import TablePagination from '@mui/material/TablePagination';
-import { FurniturePanelList } from '../../../libs/components/admin/properties/FurnitureList';
+import { FurniturePanelList } from '../../../libs/components/admin/furnitures/FurnitureList';
 import { AllFurnituresInquiry } from '../../../libs/types/furniture/furniture.input';
 import { Furniture } from '../../../libs/types/furniture/furniture';
 import { FurnitureRoom, FurnitureStatus } from '../../../libs/enums/furniture.enum';
@@ -28,7 +28,7 @@ const DEFAULT_FURNITURES_INQUIRY: AllFurnituresInquiry = {
 	search: {},
 };
 
-const AdminProperties: NextPage = ({ initialInquiry = DEFAULT_FURNITURES_INQUIRY, ...props }: any) => {
+const AdminFurnitures: NextPage = ({ initialInquiry = DEFAULT_FURNITURES_INQUIRY, ...props }: any) => {
 	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
 	const [furnituresInquiry, setFurnituresInquiry] = useState<AllFurnituresInquiry>(initialInquiry ?? DEFAULT_FURNITURES_INQUIRY);
 	const [furnitures, setFurnitures] = useState<Furniture[]>([]);
@@ -234,4 +234,4 @@ const AdminProperties: NextPage = ({ initialInquiry = DEFAULT_FURNITURES_INQUIRY
 };
 
 
-export default withAdminLayout(AdminProperties);
+export default withAdminLayout(AdminFurnitures);

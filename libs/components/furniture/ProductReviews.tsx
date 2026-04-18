@@ -119,7 +119,7 @@ const ProductReviews = ({ furnitureId }: ProductReviewsProps) => {
 						const member = comment.memberData;
 						const memberImage = member?.memberImage
 							? `${REACT_APP_API_URL}/${member.memberImage}`
-							: '/icons/user_profile.png';
+							: '/general_images/default_profile.png';
 						const name = member?.memberFullName || member?.memberNick || 'Anonymous';
 						const date = new Date(comment.createdAt).toLocaleDateString('en-GB', {
 							day: '2-digit',

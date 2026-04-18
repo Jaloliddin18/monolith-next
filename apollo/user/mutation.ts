@@ -401,8 +401,8 @@ export const UNSUBSCRIBE = gql`
  *      NOTIFICATION      *
  *************************/
 export const SUBSCRIBE_NEWSLETTER = gql`
-  mutation Subscribe($input: SubscribeInput!) {
-    subscribe(input: $input) {
+  mutation SubscribeNewsletter($input: SubscribeInput!) {
+    subscribeNewsletter(input: $input) {
       _id
       subscriberEmail
       isActive
@@ -411,8 +411,8 @@ export const SUBSCRIBE_NEWSLETTER = gql`
 `;
 
 export const UNSUBSCRIBE_NEWSLETTER = gql`
-  mutation Unsubscribe($input: UnsubscribeInput!) {
-    unsubscribe(input: $input) {
+  mutation UnsubscribeNewsletter($input: UnsubscribeInput!) {
+    unsubscribeNewsletter(input: $input) {
       _id
       subscriberEmail
       isActive

@@ -35,7 +35,7 @@ const MyPageSidebar = () => {
       user.memberImage.startsWith("/icons")
       ? user.memberImage
       : `${REACT_APP_API_URL}/${user.memberImage}`
-    : "/icons/user_profile.png";
+    : "/general_images/default_profile.png";
 
   return (
     <Stack className="mypage-sidebar">
@@ -51,7 +51,11 @@ const MyPageSidebar = () => {
               {user.memberPhone || "—"}
             </Typography>
           </Box>
-          <Typography className="profile-member-type">
+          <Typography
+            className="profile-member-type"
+            onClick={user.memberType === MemberType.ADMIN ? () => router.push("/_admin") : undefined}
+            sx={user.memberType === MemberType.ADMIN ? { cursor: "pointer" } : undefined}
+          >
             {user.memberType || "USER"}
           </Typography>
         </Box>

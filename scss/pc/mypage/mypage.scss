@@ -29,6 +29,7 @@
         min-width: 80px;
         border-radius: 50%;
         object-fit: cover;
+        object-position: top center;
       }
 
       .profile-info {
@@ -237,6 +238,7 @@
           height: 80px;
           border-radius: 50%;
           object-fit: cover;
+          object-position: top center;
         }
 
         .upload-btn {

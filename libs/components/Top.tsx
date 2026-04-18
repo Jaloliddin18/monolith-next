@@ -326,10 +326,11 @@ const Top = () => {
                   src={
                     user.memberImage && !user.memberImage.startsWith("/img/")
                       ? `${process.env.REACT_APP_API_URL}/${user.memberImage}`
-                      : user.memberImage || "/icons/user_profile.png"
+                      : user.memberImage || "/general_images/default_profile.png"
                   }
                   alt={user.memberNick}
                   sx={{ width: 36, height: 36 }}
+                  imgProps={{ style: { objectPosition: "top center" } }}
                 />
               </IconButton>
               <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>

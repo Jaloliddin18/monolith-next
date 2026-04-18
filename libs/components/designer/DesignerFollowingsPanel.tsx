@@ -10,7 +10,7 @@ import { T } from '../../types/common';
 import { REACT_APP_API_URL } from '../../config';
 import { userVar } from '../../../apollo/store';
 
-const DEFAULT_IMAGE = '/icons/user_profile.png';
+const DEFAULT_IMAGE = '/general_images/default_profile.png';
 
 interface DesignerFollowingsPanelProps {
 	memberId: string;

@@ -18,10 +18,14 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "../../../apollo/store";
+import { REACT_APP_API_URL } from "../../config";
 
 const AdminMenuList = (props: any) => {
   const router = useRouter();
   const device = useDeviceDetect();
+  const user = useReactiveVar(userVar);
   const [openMenu, setOpenMenu] = useState(
     typeof window === "object"
       ? localStorage.getItem("admin_menu") === "true"
@@ -35,7 +39,7 @@ const AdminMenuList = (props: any) => {
   /** LIFECYCLES **/
   useEffect(() => {
     switch (pathnames[1]) {
-      case "properties":
+      case "furnitures":
         setClickMenu(["Furnitures"]);
         break;
       case "community":
@@ -105,7 +109,7 @@ const AdminMenuList = (props: any) => {
 
   const sub_menu_set: any = {
     Users: [{ title: "List", url: "/_admin/users" }],
-    Furnitures: [{ title: "List", url: "/_admin/properties" }],
+    Furnitures: [{ title: "List", url: "/_admin/furnitures" }],
     Community: [{ title: "List", url: "/_admin/community" }],
     CS: [
       { title: "1:1 Inquiry", url: "/_admin/cs/inquiry" },
@@ -117,23 +121,33 @@ const AdminMenuList = (props: any) => {
   return (
     <>
       <Box className="admin-logo-wrap">
-        <span
-          style={{
-            fontFamily: "'Jost', sans-serif",
-            fontSize: "18px",
-            fontWeight: 300,
-            letterSpacing: "8px",
-            color: "#1C1A17",
-          }}
-        >
-          MONOLITH
-        </span>
+        <Link href="/mypage" style={{ textDecoration: "none" }}>
+          <span
+            style={{
+              fontFamily: "'Jost', sans-serif",
+              fontSize: "18px",
+              fontWeight: 300,
+              letterSpacing: "8px",
+              color: "#1C1A17",
+              cursor: "pointer",
+            }}
+          >
+            MONOLITH
+          </span>
+        </Link>
       </Box>
       <Box className="admin-info-card">
-        <Avatar src="/icons/user_profile.png" sx={{ width: 40, height: 40 }} />
+        <Avatar
+          src={
+            user.memberImage
+              ? `${REACT_APP_API_URL}/${user.memberImage}`
+              : "/general_images/default_profile.png"
+          }
+          sx={{ width: 40, height: 40 }}
+        />
         <Box className="admin-info-text">
-          <Typography className="brand-name">admin</Typography>
-          <Typography className="brand-sub">010998877622</Typography>
+          <Typography className="brand-name">{user.memberNick || "Admin"}</Typography>
+          <Typography className="brand-sub">{user.memberPhone || ""}</Typography>
         </Box>
       </Box>
       <Divider />

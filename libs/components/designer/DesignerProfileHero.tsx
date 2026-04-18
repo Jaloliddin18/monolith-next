@@ -12,7 +12,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-const DEFAULT_IMAGE = '/icons/user_profile.png';
+const DEFAULT_IMAGE = '/general_images/default_profile.png';
 
 interface DesignerProfileHeroProps {
 	member: Member | null;
