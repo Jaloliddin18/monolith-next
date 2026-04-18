@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
@@ -215,222 +216,234 @@ const Service = () => {
   }, []);
 
   return (
-    <Stack className="service-page">
-      {/* ===== OUR AWESOME SERVICES (6 cards) ===== */}
-      <Stack className="svc-awesome" alignItems="center">
-        <Typography className="svc-awesome-title">
-          Our Awesome Services
-        </Typography>
-        <Box className="svc-awesome-grid">
-          {services.map((svc) => (
-            <Box className="svc-card" key={svc.title}>
-              <Box className="svc-card-icon">
-                <img src={svc.icon} alt={svc.title} />
-              </Box>
-              <Box>
-                <Typography className="svc-card-title">{svc.title}</Typography>
-                <Typography className="svc-card-desc">{svc.desc}</Typography>
-                <Box className="svc-card-link">
-                  <span>Learn more</span>
-                  <ArrowForwardIcon />
+    <>
+      <Head>
+        <title>Customer Service — Monolith</title>
+        <meta
+          name="description"
+          content="Get help with your orders, deliveries and furniture questions at Monolith."
+        />
+        <link rel="canonical" href="https://monolith.com/cs" />
+      </Head>
+      <Stack className="service-page">
+        {/* ===== OUR AWESOME SERVICES (6 cards) ===== */}
+        <Stack className="svc-awesome" alignItems="center">
+          <Typography className="svc-awesome-title">
+            Our Awesome Services
+          </Typography>
+          <Box className="svc-awesome-grid">
+            {services.map((svc) => (
+              <Box className="svc-card" key={svc.title}>
+                <Box className="svc-card-icon">
+                  <img src={svc.icon} alt={svc.title} />
                 </Box>
-              </Box>
-            </Box>
-          ))}
-        </Box>
-      </Stack>
-
-      {/* ===== OUR WORKING PROGRESS ===== */}
-      <Stack className="svc-progress">
-        <Typography className="svc-progress-title">
-          Our working Progress
-        </Typography>
-        <Box className="svc-progress-container">
-          {progressSteps.map((step, idx) => (
-            <Box
-              className={`progress-step ${idx % 2 !== 0 ? "reverse" : ""}`}
-              key={step.number}
-            >
-              <Box className="progress-image">
-                <img src={step.image} alt={step.title} />
-              </Box>
-              <Box className="progress-content">
-                <Typography className="progress-step-title">
-                  {step.number}. {step.title}
-                </Typography>
-                <ul className="progress-bullets">
-                  {step.bullets.map((bullet, i) => (
-                    <li key={i}>{bullet}</li>
-                  ))}
-                </ul>
-              </Box>
-            </Box>
-          ))}
-        </Box>
-      </Stack>
-
-      {/* ===== FEEDBACK FROM CUSTOMER ===== */}
-      <Stack className="about-feedback">
-        <Typography className="feedback-title">
-          Feedback from Customer
-        </Typography>
-        <Box className="feedback-wrapper">
-          <Box className="feedback-track">
-            {[...reviews, ...reviews].map((review, idx) => (
-              <Box key={idx} className="feedback-card">
-                <Stack
-                  className="feedback-user"
-                  direction="row"
-                  alignItems="center"
-                >
-                  <Box className="feedback-avatar">
-                    <img
-                      src={`/img/customer_profile/${customerProfileImages[idx % customerProfileImages.length]}`}
-                      alt={review.name}
-                    />
-                  </Box>
-                  <Stack>
-                    <Typography className="feedback-user-name">
-                      {review.name}
-                    </Typography>
-                    <Typography className="feedback-user-role">
-                      {review.role}
-                    </Typography>
-                  </Stack>
-                </Stack>
-                <Stack gap="8px">
-                  <Stack className="feedback-stars" direction="row">
-                    {[...Array(5)].map((_, i) =>
-                      i < review.stars ? (
-                        <StarIcon key={i} />
-                      ) : (
-                        <StarBorderIcon key={i} />
-                      ),
-                    )}
-                  </Stack>
-                  <Typography className="feedback-text">
-                    {review.text}
+                <Box>
+                  <Typography className="svc-card-title">
+                    {svc.title}
                   </Typography>
-                </Stack>
+                  <Typography className="svc-card-desc">{svc.desc}</Typography>
+                  <Box className="svc-card-link">
+                    <span>Learn more</span>
+                    <ArrowForwardIcon />
+                  </Box>
+                </Box>
               </Box>
             ))}
           </Box>
-        </Box>
-      </Stack>
-
-      {/* ===== SALE BANNER WITH COUNTDOWN ===== */}
-      <Box className="svc-sale-banner">
-        <Box className="sale-bg" />
-        <Box className="sale-content-wrap">
-          <Box className="sale-image">
-            <img src="/img/cs/cs12.jpg" alt="Sale" />
-          </Box>
-          <Stack className="sale-info">
-            <Stack className="sale-top">
-              <Typography className="sale-title">
-                30% Off All Furniture
-                <br />
-                Don&apos;t Miss Out!
-              </Typography>
-              <Box>
-                <Stack
-                  className="countdown-row"
-                  direction="row"
-                  alignItems="center"
-                >
-                  <Box className="countdown-circle">
-                    <span>{String(countdown.days).padStart(2, "0")}</span>
-                  </Box>
-                  <Typography className="countdown-colon">:</Typography>
-                  <Box className="countdown-circle">
-                    <span>{String(countdown.hours).padStart(2, "0")}</span>
-                  </Box>
-                  <Typography className="countdown-colon">:</Typography>
-                  <Box className="countdown-circle">
-                    <span>{String(countdown.mins).padStart(2, "0")}</span>
-                  </Box>
-                  <Typography className="countdown-colon">:</Typography>
-                  <Box className="countdown-circle">
-                    <span>{String(countdown.secs).padStart(2, "0")}</span>
-                  </Box>
-                </Stack>
-                <Stack className="countdown-labels" direction="row">
-                  <span>Days</span>
-                  <span>Hours</span>
-                  <span>Mins</span>
-                  <span>Secs</span>
-                </Stack>
-              </Box>
-              <Button
-                variant="contained"
-                className="btn-shop-now"
-                onClick={() => router.push("/furniture")}
-              >
-                SHOP NOW
-              </Button>
-            </Stack>
-            <Stack className="sale-thumbnails" direction="row">
-              <Box className="sale-thumb">
-                <img src="/img/cs/cs6.webp" alt="Product 1" />
-              </Box>
-              <Box className="sale-thumb">
-                <img src="/img/cs/cs8.webp" alt="Product 2" />
-              </Box>
-            </Stack>
-          </Stack>
-        </Box>
-      </Box>
-
-      {/* ===== FEATURES ROW ===== */}
-      <Stack className="about-features">
-        <Stack
-          className="features-container"
-          direction="row"
-          justifyContent="space-between"
-        >
-          {[
-            {
-              icon: "/icons/Delivery_Truck.svg",
-              title: "Free Shipping",
-              desc: "From all orders over $100",
-            },
-            {
-              icon: "/icons/Badge_Dollar.svg",
-              title: "Free Returns",
-              desc: "Return money within 30 days",
-            },
-            {
-              icon: "/icons/Package.svg",
-              title: "Secure Shopping",
-              desc: "You're in safe hands",
-            },
-            {
-              icon: "/icons/reward_icon.svg",
-              title: "Best Quality",
-              desc: "We have everything you need",
-            },
-          ].map((feature) => (
-            <Box className="feature-box" key={feature.title}>
-              <Box className="feature-box-icon">
-                <img src={feature.icon} alt={feature.title} />
-              </Box>
-              <Typography className="feature-box-title">
-                {feature.title}
-              </Typography>
-              <Typography className="feature-box-desc">
-                {feature.desc}
-              </Typography>
-            </Box>
-          ))}
         </Stack>
+
+        {/* ===== OUR WORKING PROGRESS ===== */}
+        <Stack className="svc-progress">
+          <Typography className="svc-progress-title">
+            Our working Progress
+          </Typography>
+          <Box className="svc-progress-container">
+            {progressSteps.map((step, idx) => (
+              <Box
+                className={`progress-step ${idx % 2 !== 0 ? "reverse" : ""}`}
+                key={step.number}
+              >
+                <Box className="progress-image">
+                  <img src={step.image} alt={step.title} />
+                </Box>
+                <Box className="progress-content">
+                  <Typography className="progress-step-title">
+                    {step.number}. {step.title}
+                  </Typography>
+                  <ul className="progress-bullets">
+                    {step.bullets.map((bullet, i) => (
+                      <li key={i}>{bullet}</li>
+                    ))}
+                  </ul>
+                </Box>
+              </Box>
+            ))}
+          </Box>
+        </Stack>
+
+        {/* ===== FEEDBACK FROM CUSTOMER ===== */}
+        <Stack className="about-feedback">
+          <Typography className="feedback-title">
+            Feedback from Customer
+          </Typography>
+          <Box className="feedback-wrapper">
+            <Box className="feedback-track">
+              {[...reviews, ...reviews].map((review, idx) => (
+                <Box key={idx} className="feedback-card">
+                  <Stack
+                    className="feedback-user"
+                    direction="row"
+                    alignItems="center"
+                  >
+                    <Box className="feedback-avatar">
+                      <img
+                        src={`/img/customer_profile/${customerProfileImages[idx % customerProfileImages.length]}`}
+                        alt={review.name}
+                      />
+                    </Box>
+                    <Stack>
+                      <Typography className="feedback-user-name">
+                        {review.name}
+                      </Typography>
+                      <Typography className="feedback-user-role">
+                        {review.role}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                  <Stack gap="8px">
+                    <Stack className="feedback-stars" direction="row">
+                      {[...Array(5)].map((_, i) =>
+                        i < review.stars ? (
+                          <StarIcon key={i} />
+                        ) : (
+                          <StarBorderIcon key={i} />
+                        ),
+                      )}
+                    </Stack>
+                    <Typography className="feedback-text">
+                      {review.text}
+                    </Typography>
+                  </Stack>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Stack>
+
+        {/* ===== SALE BANNER WITH COUNTDOWN ===== */}
+        <Box className="svc-sale-banner">
+          <Box className="sale-bg" />
+          <Box className="sale-content-wrap">
+            <Box className="sale-image">
+              <img src="/img/cs/cs12.jpg" alt="Sale" />
+            </Box>
+            <Stack className="sale-info">
+              <Stack className="sale-top">
+                <Typography className="sale-title">
+                  30% Off All Furniture
+                  <br />
+                  Don&apos;t Miss Out!
+                </Typography>
+                <Box>
+                  <Stack
+                    className="countdown-row"
+                    direction="row"
+                    alignItems="center"
+                  >
+                    <Box className="countdown-circle">
+                      <span>{String(countdown.days).padStart(2, "0")}</span>
+                    </Box>
+                    <Typography className="countdown-colon">:</Typography>
+                    <Box className="countdown-circle">
+                      <span>{String(countdown.hours).padStart(2, "0")}</span>
+                    </Box>
+                    <Typography className="countdown-colon">:</Typography>
+                    <Box className="countdown-circle">
+                      <span>{String(countdown.mins).padStart(2, "0")}</span>
+                    </Box>
+                    <Typography className="countdown-colon">:</Typography>
+                    <Box className="countdown-circle">
+                      <span>{String(countdown.secs).padStart(2, "0")}</span>
+                    </Box>
+                  </Stack>
+                  <Stack className="countdown-labels" direction="row">
+                    <span>Days</span>
+                    <span>Hours</span>
+                    <span>Mins</span>
+                    <span>Secs</span>
+                  </Stack>
+                </Box>
+                <Button
+                  variant="contained"
+                  className="btn-shop-now"
+                  onClick={() => router.push("/furniture")}
+                >
+                  SHOP NOW
+                </Button>
+              </Stack>
+              <Stack className="sale-thumbnails" direction="row">
+                <Box className="sale-thumb">
+                  <img src="/img/cs/cs6.webp" alt="Product 1" />
+                </Box>
+                <Box className="sale-thumb">
+                  <img src="/img/cs/cs8.webp" alt="Product 2" />
+                </Box>
+              </Stack>
+            </Stack>
+          </Box>
+        </Box>
+
+        {/* ===== FEATURES ROW ===== */}
+        <Stack className="about-features">
+          <Stack
+            className="features-container"
+            direction="row"
+            justifyContent="space-between"
+          >
+            {[
+              {
+                icon: "/icons/Delivery_Truck.svg",
+                title: "Free Shipping",
+                desc: "From all orders over $100",
+              },
+              {
+                icon: "/icons/Badge_Dollar.svg",
+                title: "Free Returns",
+                desc: "Return money within 30 days",
+              },
+              {
+                icon: "/icons/Package.svg",
+                title: "Secure Shopping",
+                desc: "You're in safe hands",
+              },
+              {
+                icon: "/icons/reward_icon.svg",
+                title: "Best Quality",
+                desc: "We have everything you need",
+              },
+            ].map((feature) => (
+              <Box className="feature-box" key={feature.title}>
+                <Box className="feature-box-icon">
+                  <img src={feature.icon} alt={feature.title} />
+                </Box>
+                <Typography className="feature-box-title">
+                  {feature.title}
+                </Typography>
+                <Typography className="feature-box-desc">
+                  {feature.desc}
+                </Typography>
+              </Box>
+            ))}
+          </Stack>
+        </Stack>
+
+        {/* ===== NEWSLETTER BANNER ===== */}
+        <NewsletterBanner variant="cs" />
+
+        {/* ===== INSTAGRAM SECTION ===== */}
+        <InstagramSection />
       </Stack>
-
-      {/* ===== NEWSLETTER BANNER ===== */}
-      <NewsletterBanner variant="cs" />
-
-      {/* ===== INSTAGRAM SECTION ===== */}
-      <InstagramSection />
-    </Stack>
+    </>
   );
 };
 

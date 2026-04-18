@@ -4,11 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link
-          rel="icon"
-          href="/general_images/window.png"
-          type="image/svg+xml"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
+        <link rel="icon" href="/general_images/window.png" />
+        <meta name="theme-color" content="#C46A4A" />
       </Head>
       <body>
         <Main />
