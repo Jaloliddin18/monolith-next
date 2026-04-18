@@ -4,13 +4,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
+import { REACT_APP_API_URL } from '../../config';
 
 interface ChatMsg {
 	role: 'user' | 'assistant';
 	content: string;
 }
 
-const CHAT_API = 'http://localhost:3004/chat/message';
+const CHAT_API = `${REACT_APP_API_URL}/chat/message`;
 
 const SendIcon = () => (
 	<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">

@@ -105,7 +105,7 @@ const PersonalInfo = () => {
       setFormData((prev) => ({ ...prev, memberImage: uploadedImage }));
       setImagePreview(`${REACT_APP_API_URL}/${uploadedImage}`);
     } catch (err) {
-      console.log("Error, uploadImage:", err);
+      console.error("Error, uploadImage:", err);
     }
   };
 

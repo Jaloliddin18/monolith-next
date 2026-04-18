@@ -24,7 +24,6 @@ function App({ Component, pageProps }: AppProps) {
     const ws = new WebSocket(wsUrl);
 
     ws.onopen = () => {
-      console.log('WebSocket connected');
       socketVar(ws);
     };
 
@@ -33,7 +32,6 @@ function App({ Component, pageProps }: AppProps) {
     };
 
     ws.onclose = () => {
-      console.log('WebSocket disconnected');
       socketVar(null);
     };
 

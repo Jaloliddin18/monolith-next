@@ -196,6 +196,7 @@ const Home = () => {
           name="twitter:description"
           content="Discover premium furniture and designer pieces at Monolith."
         />
+        <meta name="twitter:image" content="https://monolith.com/img/og-image.jpg" />
         <link rel="canonical" href="https://monolith.com" />
       </Head>
       <Stack id="home-page">

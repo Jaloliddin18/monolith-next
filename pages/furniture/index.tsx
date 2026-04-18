@@ -149,10 +149,17 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
     <>
       <Head>
         <title>Shop Furniture — Monolith</title>
-        <meta
-          name="description"
-          content="Browse our full collection of luxury furniture. Filter by room, style, material and price."
-        />
+        <meta name="description" content="Browse our full collection of luxury furniture. Filter by room, style, material and price." />
+        <meta name="keywords" content="furniture shop, luxury furniture, sofas, chairs, tables, beds, home decor" />
+        <meta property="og:title" content="Shop Furniture — Monolith" />
+        <meta property="og:description" content="Browse our full collection of luxury furniture. Filter by room, style, material and price." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://monolith.com/furniture" />
+        <meta property="og:image" content="https://monolith.com/img/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Shop Furniture — Monolith" />
+        <meta name="twitter:description" content="Browse our full collection of luxury furniture. Filter by room, style, material and price." />
+        <meta name="twitter:image" content="https://monolith.com/img/og-image.jpg" />
         <link rel="canonical" href="https://monolith.com/furniture" />
       </Head>
       <Stack>

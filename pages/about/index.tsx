@@ -63,10 +63,17 @@ const About = () => {
     <>
       <Head>
         <title>About Us — Monolith</title>
-        <meta
-          name="description"
-          content="Learn about Monolith, our mission, and our commitment to luxury furniture design."
-        />
+        <meta name="description" content="Learn about Monolith, our mission, and our commitment to luxury furniture design." />
+        <meta name="keywords" content="about Monolith, luxury furniture brand, furniture design, our story, mission" />
+        <meta property="og:title" content="About Us — Monolith" />
+        <meta property="og:description" content="Learn about Monolith, our mission, and our commitment to luxury furniture design." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://monolith.com/about" />
+        <meta property="og:image" content="https://monolith.com/img/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us — Monolith" />
+        <meta name="twitter:description" content="Learn about Monolith, our mission, and our commitment to luxury furniture design." />
+        <meta name="twitter:image" content="https://monolith.com/img/og-image.jpg" />
         <link rel="canonical" href="https://monolith.com/about" />
       </Head>
       <Stack className="about-page">

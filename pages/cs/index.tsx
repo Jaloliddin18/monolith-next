@@ -219,10 +219,17 @@ const Service = () => {
     <>
       <Head>
         <title>Customer Service — Monolith</title>
-        <meta
-          name="description"
-          content="Get help with your orders, deliveries and furniture questions at Monolith."
-        />
+        <meta name="description" content="Get help with your orders, deliveries and furniture questions at Monolith." />
+        <meta name="keywords" content="customer service, furniture support, order help, delivery, returns, Monolith" />
+        <meta property="og:title" content="Customer Service — Monolith" />
+        <meta property="og:description" content="Get help with your orders, deliveries and furniture questions at Monolith." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://monolith.com/cs" />
+        <meta property="og:image" content="https://monolith.com/img/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Customer Service — Monolith" />
+        <meta name="twitter:description" content="Get help with your orders, deliveries and furniture questions at Monolith." />
+        <meta name="twitter:image" content="https://monolith.com/img/og-image.jpg" />
         <link rel="canonical" href="https://monolith.com/cs" />
       </Head>
       <Stack className="service-page">

@@ -128,7 +128,7 @@ const AdminUsers: NextPage = ({ initialInquiry = DEFAULT_MEMBERS_INQUIRY, ...pro
 		try {
 			setSearchText(value);
 		} catch (err: any) {
-			console.log('textHandler: ', err.message);
+			console.error('textHandler: ', err.message);
 		}
 	}, []);
 
@@ -142,7 +142,7 @@ const AdminUsers: NextPage = ({ initialInquiry = DEFAULT_MEMBERS_INQUIRY, ...pro
 				},
 			});
 		} catch (err: any) {
-			console.log('searchTextHandler: ', err.message);
+			console.error('searchTextHandler: ', err.message);
 		}
 	};
 
@@ -165,7 +165,7 @@ const AdminUsers: NextPage = ({ initialInquiry = DEFAULT_MEMBERS_INQUIRY, ...pro
 				setMembersInquiry({ ...membersInquiry });
 			}
 		} catch (err: any) {
-			console.log('searchTypeHandler: ', err.message);
+			console.error('searchTypeHandler: ', err.message);
 		}
 	};
 

@@ -307,9 +307,16 @@ const FurnitureDetail = () => {
       <Head>
         <title>{furnitureTitle}</title>
         <meta name="description" content={furnitureDescription} />
+        <meta name="keywords" content={`${furniture?.furnitureTitle ?? "furniture"}, luxury furniture, ${furniture?.furnitureRoom?.replace(/_/g, " ").toLowerCase() ?? ""}, ${furniture?.furnitureCategory?.replace(/_/g, " ").toLowerCase() ?? ""}, Monolith`} />
         <meta property="og:title" content={furnitureTitle} />
         <meta property="og:description" content={furnitureDescription} />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content={furnitureCanonical} />
         <meta property="og:image" content={furnitureImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={furnitureTitle} />
+        <meta name="twitter:description" content={furnitureDescription} />
+        <meta name="twitter:image" content={furnitureImage} />
         <link rel="canonical" href={furnitureCanonical} />
       </Head>
       <div className="nvg-detail">

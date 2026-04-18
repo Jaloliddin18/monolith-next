@@ -127,9 +127,10 @@ const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
             prevEl: prevRef.current,
           }}
           onBeforeInit={(swiper) => {
-            if (typeof swiper.params.navigation !== "boolean") {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
+            const navigation = swiper.params.navigation;
+            if (navigation && typeof navigation !== "boolean") {
+              navigation.prevEl = prevRef.current;
+              navigation.nextEl = nextRef.current;
             }
           }}
           pagination={{ clickable: true }}

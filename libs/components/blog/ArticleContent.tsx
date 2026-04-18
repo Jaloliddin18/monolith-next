@@ -16,7 +16,6 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-const DEFAULT_IMAGE = "/img/furniture/luxury_chair.jpg";
 
 interface ArticleContentProps {
   articleId?: string;
@@ -75,9 +74,6 @@ const ArticleContent = ({ articleId }: ArticleContentProps) => {
   const authorImage = author?.memberImage
     ? `${REACT_APP_API_URL}/${author.memberImage}`
     : "/general_images/default_profile.png";
-  const articleImage = article.articleImage
-    ? `${REACT_APP_API_URL}/${article.articleImage}`
-    : DEFAULT_IMAGE;
   const date = new Date(article.createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",

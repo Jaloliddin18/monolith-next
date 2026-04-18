@@ -44,16 +44,8 @@ class LoggingWebSocket {
     this.socket = new WebSocket(`${url}?token=${getJwtToken()}`);
     socketVar(this.socket);
 
-    this.socket.onopen = () => {
-      console.log("WebSocket connection!");
-    };
-
-    this.socket.onmessage = (msg) => {
-      console.log("WebSocket messgae:", msg.data);
-    };
-
     this.socket.onerror = (err) => {
-      console.log("WebSocket error:", err);
+      console.error("WebSocket error:", err);
     };
   }
 
@@ -79,7 +71,6 @@ function createIsomorphicLink() {
           ...getHeaders(),
         },
       }));
-      console.warn("requesting.. ", operation);
       return forward(operation);
     });
 
@@ -103,13 +94,13 @@ function createIsomorphicLink() {
     const errorLink = onError(({ graphQLErrors, networkError, response }) => {
       if (graphQLErrors) {
         graphQLErrors.map(({ message, locations, path, extensions }) => {
-          console.log(
+          console.error(
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
           );
           if (!message.includes("input") && !message.includes("specific roles") && !message.includes("Allowed only")) sweetErrorAlert(message);
         });
       }
-      if (networkError) console.log(`[Network error]: ${networkError}`);
+      if (networkError) console.error(`[Network error]: ${networkError}`);
       // @ts-ignore
       if (networkError?.statusCode === 401) {
       }

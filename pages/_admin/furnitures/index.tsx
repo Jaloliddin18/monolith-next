@@ -138,7 +138,7 @@ const AdminFurnitures: NextPage = ({ initialInquiry = DEFAULT_FURNITURES_INQUIRY
 				setFurnituresInquiry({ ...furnituresInquiry });
 			}
 		} catch (err: any) {
-			console.log('searchTypeHandler: ', err.message);
+			console.error('searchTypeHandler: ', err.message);
 		}
 	};
 

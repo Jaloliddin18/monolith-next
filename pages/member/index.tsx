@@ -62,10 +62,17 @@ const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
     <>
       <Head>
         <title>Our Designers — Monolith</title>
-        <meta
-          name="description"
-          content="Meet our talented furniture designers and explore their collections."
-        />
+        <meta name="description" content="Meet our talented furniture designers and explore their collections." />
+        <meta name="keywords" content="furniture designers, interior designers, designer collections, Monolith designers" />
+        <meta property="og:title" content="Our Designers — Monolith" />
+        <meta property="og:description" content="Meet our talented furniture designers and explore their collections." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://monolith.com/member" />
+        <meta property="og:image" content="https://monolith.com/img/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Our Designers — Monolith" />
+        <meta name="twitter:description" content="Meet our talented furniture designers and explore their collections." />
+        <meta name="twitter:image" content="https://monolith.com/img/og-image.jpg" />
         <link rel="canonical" href="https://monolith.com/member" />
       </Head>
       <Stack className="designers-page">

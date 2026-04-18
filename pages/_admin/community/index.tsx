@@ -158,13 +158,12 @@ const AdminCommunity: NextPage = ({
         setCommunityInquiry({ ...communityInquiry });
       }
     } catch (err: any) {
-      console.log("searchTypeHandler: ", err.message);
+      console.error("searchTypeHandler: ", err.message);
     }
   };
 
   const updateArticleHandler = async (updateData: BoardArticleUpdate) => {
     try {
-      console.log("+updateData: ", updateData);
       await updateBoardArticleByAdmin({
         variables: {
           input: updateData,
