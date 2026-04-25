@@ -1,5 +1,3 @@
-version: "3.3"
-
 services:
   monolith-next:
     container_name: monolith-next
