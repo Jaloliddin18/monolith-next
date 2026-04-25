@@ -37,8 +37,7 @@ const Top = () => {
   const [langAnchorEl, setLangAnchorEl] = useState<null | HTMLElement>(null);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
-  const [wishlistCount, setWishlistCount] = useState(0);
+  const [cartCount, setCartCount] = useState(() => getCartCount());
   const [lang, setLang] = useState<string>("en");
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -129,10 +128,9 @@ const Top = () => {
     fetchPolicy: "cache-and-network",
   });
 
-  useEffect(() => {
-    if (!user?._id) { setWishlistCount(0); return; }
-    setWishlistCount((favoritesData as T)?.getFavorites?.metaCounter?.[0]?.total ?? 0);
-  }, [favoritesData, user?._id]);
+  const wishlistCount = user?._id
+    ? ((favoritesData as T)?.getFavorites?.metaCounter?.[0]?.total ?? 0)
+    : 0;
 
   useEffect(() => {
     if (!user?._id) return;
