@@ -144,7 +144,7 @@ const ArticleContent = ({ articleId }: ArticleContentProps) => {
       {/* Article Content */}
       <div
         className="article-block"
-        dangerouslySetInnerHTML={{ __html: article.articleContent }}
+        dangerouslySetInnerHTML={{ __html: article.articleContent.replace(/<img[^>]*>/gi, '') }}
       />
 
       {/* Stats + Like */}
