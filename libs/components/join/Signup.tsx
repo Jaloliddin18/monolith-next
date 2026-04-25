@@ -130,8 +130,8 @@ const Signup = ({
                     </div>
                   </div>
 
-                  {/* Member Type */}
-                  <div className="form-group">
+                  {/* Member Type — hidden until designer registration is re-enabled */}
+                  {/* <div className="form-group">
                     <label className="form-label">Account Type</label>
                     <label className="remember-me">
                       <input
@@ -146,7 +146,7 @@ const Signup = ({
                         Register as Designer
                       </span>
                     </label>
-                  </div>
+                  </div> */}
 
                   {/* Terms & Conditions */}
                   <div className="terms-check">
