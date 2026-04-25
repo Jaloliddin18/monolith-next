@@ -10,12 +10,14 @@ import { useQuery } from "@apollo/client";
 import { GET_DESIGNERS } from "../../apollo/user/query";
 import { Member } from "../../libs/types/member/member";
 import { DesignersInquiry } from "../../libs/types/member/member.input";
+import { Direction } from "../../libs/enums/common.enum";
 import { T } from "../../libs/types/common";
 
 const DEFAULT_INQUIRY: DesignersInquiry = {
   page: 1,
   limit: 8,
   sort: "createdAt",
+  direction: Direction.ASC,
   search: {},
 };
 

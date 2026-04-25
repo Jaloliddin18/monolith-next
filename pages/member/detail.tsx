@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Stack } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
 import DesignerProfileHero from '../../libs/components/designer/DesignerProfileHero';
 import DesignerDesignsPanel from '../../libs/components/designer/DesignerDesignsPanel';
@@ -35,7 +36,7 @@ const DesignerDetail = () => {
 		setFollowerEvent({ follower, added });
 	}, []);
 
-	useQuery(GET_MEMBER, {
+	const { loading } = useQuery(GET_MEMBER, {
 		fetchPolicy: 'cache-and-network',
 		variables: { input: memberId },
 		skip: !memberId,
@@ -55,32 +56,41 @@ const DesignerDetail = () => {
 		<Stack className="designer-detail-page">
 			<DesignerProfileHero
 				member={member}
+				loading={loading}
 				activeTab={activeTab}
 				onTabChange={setActiveTab}
 				onMemberUpdate={handleMemberUpdate}
 				onFollowToggle={handleFollowToggle}
 			/>
 			<div className="designer-panel-content">
-				{memberId && (
-					<>
-						{isDesigner && (
-							<div style={{ display: activeTab === 'designs' ? undefined : 'none' }}>
-								<DesignerDesignsPanel memberId={memberId} member={member} />
+				{loading || !member ? (
+					<div style={{ padding: '24px' }}>
+						{[...Array(3)].map((_, i) => (
+							<Skeleton key={i} variant="rectangular" width="100%" height={200} sx={{ mb: 2 }} />
+						))}
+					</div>
+				) : (
+					memberId && (
+						<>
+							{isDesigner && (
+								<div style={{ display: activeTab === 'designs' ? undefined : 'none' }}>
+									<DesignerDesignsPanel memberId={memberId} member={member} />
+								</div>
+							)}
+							<div style={{ display: activeTab === 'blog' ? undefined : 'none' }}>
+								<DesignerBlogPanel memberId={memberId} />
 							</div>
-						)}
-						<div style={{ display: activeTab === 'blog' ? undefined : 'none' }}>
-							<DesignerBlogPanel memberId={memberId} />
-						</div>
-						<div style={{ display: activeTab === 'followers' ? undefined : 'none' }}>
-							<DesignerFollowersPanel memberId={memberId} followerEvent={followerEvent} />
-						</div>
-						<div style={{ display: activeTab === 'followings' ? undefined : 'none' }}>
-							<DesignerFollowingsPanel memberId={memberId} />
-						</div>
-						<div style={{ display: activeTab === 'reviews' ? undefined : 'none' }}>
-							<DesignerReviewsPanel memberId={memberId} />
-						</div>
-					</>
+							<div style={{ display: activeTab === 'followers' ? undefined : 'none' }}>
+								<DesignerFollowersPanel memberId={memberId} followerEvent={followerEvent} />
+							</div>
+							<div style={{ display: activeTab === 'followings' ? undefined : 'none' }}>
+								<DesignerFollowingsPanel memberId={memberId} />
+							</div>
+							<div style={{ display: activeTab === 'reviews' ? undefined : 'none' }}>
+								<DesignerReviewsPanel memberId={memberId} />
+							</div>
+						</>
+					)
 				)}
 			</div>
 		</Stack>

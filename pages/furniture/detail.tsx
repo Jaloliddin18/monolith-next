@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useQuery, useMutation, useReactiveVar } from "@apollo/client";
 import { IconButton } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -111,19 +112,20 @@ const FurnitureDetail = () => {
   const [similarFurnitures, setSimilarFurnitures] = useState<Furniture[]>([]);
 
   // ─── Queries ────────────────────────────────────────────────
-  const { data: furnitureData, refetch: refetchFurniture } = useQuery(
+  const { data: furnitureData, loading, refetch: refetchFurniture } = useQuery(
     GET_FURNITURE,
     {
       variables: { input: id as string },
       skip: !id,
       fetchPolicy: "cache-and-network",
+      notifyOnNetworkStatusChange: true,
     },
   );
   const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 
   const furniture: Furniture | undefined = furnitureData?.getFurniture;
 
-  const similarInquiry: FurnituresInquiry = {
+  const similarInquiry = useMemo<FurnituresInquiry>(() => ({
     page: 1,
     limit: 4,
     sort: "furnitureRank",
@@ -131,12 +133,13 @@ const FurnitureDetail = () => {
     search: furniture?.furnitureCategory
       ? { categoryList: [furniture.furnitureCategory] }
       : {},
-  };
+  }), [furniture?.furnitureCategory]);
 
   useQuery(GET_FURNITURES, {
     fetchPolicy: "cache-and-network",
     variables: { input: similarInquiry },
     skip: !furniture?.furnitureCategory,
+    notifyOnNetworkStatusChange: true,
     onCompleted: (data: T) => {
       const list: Furniture[] = data?.getFurnitures?.list ?? [];
       setSimilarFurnitures(
@@ -147,20 +150,22 @@ const FurnitureDetail = () => {
 
   // ─── Derived values ─────────────────────────────────────────
   // Keep upload order and reserve trailing 1-2 images for the dimensions section.
-  const uploadedImages = (furniture?.furnitureImages ?? []).filter(Boolean);
-  const dimensionCount = Math.min(2, Math.max(0, uploadedImages.length - 7));
-  const nonDimensionImages = uploadedImages.slice(
-    0,
-    uploadedImages.length - dimensionCount,
-  );
-
-  const mainImage = nonDimensionImages[0] ?? "";
-  const galleryImages = nonDimensionImages.slice(1, 6);
-  const zoomedImage = nonDimensionImages[6] ?? "";
-  const dimensionImages = uploadedImages.slice(
-    uploadedImages.length - dimensionCount,
-  );
-  // videoUrl = furniture?.furnitureVideo (defined below with full URL prefix)
+  const {
+    mainImage,
+    galleryImages,
+    zoomedImage,
+    dimensionImages,
+  } = useMemo(() => {
+    const uploaded = (furniture?.furnitureImages ?? []).filter(Boolean);
+    const dimCount = Math.min(2, Math.max(0, uploaded.length - 7));
+    const nonDim = uploaded.slice(0, uploaded.length - dimCount);
+    return {
+      mainImage: nonDim[0] ?? "",
+      galleryImages: nonDim.slice(1, 6),
+      zoomedImage: nonDim[6] ?? "",
+      dimensionImages: uploaded.slice(uploaded.length - dimCount),
+    };
+  }, [furniture?.furnitureImages]);
 
   const currentPrice =
     furniture?.furnitureLastChancePrice &&
@@ -183,25 +188,25 @@ const FurnitureDetail = () => {
     ? `${REACT_APP_API_URL}/${mainImage}`
     : "/img/furniture/luxury_chair.jpg";
 
-  const galleryImageUrls = galleryImages.map(
-    (img) => `${REACT_APP_API_URL}/${img}`,
+  const galleryImageUrls = useMemo(
+    () => galleryImages.map((img) => `${REACT_APP_API_URL}/${img}`),
+    [galleryImages],
   );
 
   const zoomedImageUrl = zoomedImage
     ? `${REACT_APP_API_URL}/${zoomedImage}`
     : "/img/furniture/luxury_chair.jpg";
 
-  const dimensionImageUrls = dimensionImages.map(
-    (img) => `${REACT_APP_API_URL}/${img}`,
+  const dimensionImageUrls = useMemo(
+    () => dimensionImages.map((img) => `${REACT_APP_API_URL}/${img}`),
+    [dimensionImages],
   );
 
   // Flat ordered list used only by the lightbox
-  const allImages = [
-    heroImage,
-    ...galleryImageUrls,
-    zoomedImageUrl,
-    ...dimensionImageUrls,
-  ];
+  const allImages = useMemo(
+    () => [heroImage, ...galleryImageUrls, zoomedImageUrl, ...dimensionImageUrls],
+    [heroImage, galleryImageUrls, zoomedImageUrl, dimensionImageUrls],
+  );
 
   const videoUrl = furniture?.furnitureVideo
     ? `${REACT_APP_API_URL}/${furniture.furnitureVideo}`
@@ -354,30 +359,44 @@ const FurnitureDetail = () => {
           {/* ════ LEFT PANEL ════ */}
           <div className="nvg-left">
             {/* § 1 — Hero lifestyle shot */}
-            <div className="nvg-hero" onClick={() => openLightbox(0)}>
-              <img src={heroImage} alt={furniture?.furnitureTitle} />
+            <div className="nvg-hero" onClick={furniture ? () => openLightbox(0) : undefined}>
+              {loading || !furniture ? (
+                <Skeleton variant="rectangular" width="100%" height={560} />
+              ) : (
+                <img src={heroImage} alt={furniture.furnitureTitle} />
+              )}
             </div>
 
             {/* § 2 — Gallery row (white bg, all angles) */}
             <div className="nvg-gallery-row">
-              {galleryImageUrls.map((img, idx) => (
-                <div
-                  key={idx}
-                  className="nvg-gallery-item"
-                  onClick={() => openLightbox(idx + 1)}
-                >
-                  <img src={img} alt={`View ${idx + 1}`} />
-                </div>
-              ))}
+              {loading || !furniture
+                ? [...Array(5)].map((_, i) => (
+                    <div key={i} className="nvg-gallery-item">
+                      <Skeleton variant="rectangular" width="100%" height={280} />
+                    </div>
+                  ))
+                : galleryImageUrls.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className="nvg-gallery-item"
+                      onClick={() => openLightbox(idx + 1)}
+                    >
+                      <img src={img} alt={`View ${idx + 1}`} />
+                    </div>
+                  ))}
             </div>
 
             {/* § 3 — Close-up + video side by side */}
             <div className="nvg-media-row">
               <div
                 className="nvg-media-item"
-                onClick={() => openLightbox(1 + galleryImageUrls.length)}
+                onClick={furniture ? () => openLightbox(1 + galleryImageUrls.length) : undefined}
               >
-                <img src={zoomedImageUrl} alt="Close-up" />
+                {loading || !furniture ? (
+                  <Skeleton variant="rectangular" width="100%" height={400} />
+                ) : (
+                  <img src={zoomedImageUrl} alt="Close-up" />
+                )}
               </div>
               {videoUrl && (
                 <div className="nvg-media-item nvg-media-item--video">
@@ -426,15 +445,25 @@ const FurnitureDetail = () => {
               </nav>
 
               {/* Product name */}
-              <h1 className="nvg-prod-name">
-                {furniture?.furnitureTitle ?? "Loading…"}
-              </h1>
+              {loading || !furniture ? (
+                <Skeleton variant="text" width="80%" height={40} />
+              ) : (
+                <h1 className="nvg-prod-name">{furniture.furnitureTitle}</h1>
+              )}
 
               {/* Subtitle */}
-              {subtitle && <p className="nvg-prod-sub">{subtitle}</p>}
+              {loading || !furniture ? (
+                <Skeleton variant="text" width="50%" height={24} sx={{ mb: 1 }} />
+              ) : subtitle ? (
+                <p className="nvg-prod-sub">{subtitle}</p>
+              ) : null}
 
               {/* Price */}
-              <p className="nvg-price">${currentPrice.toFixed(2)}</p>
+              {loading || !furniture ? (
+                <Skeleton variant="text" width="40%" height={32} />
+              ) : (
+                <p className="nvg-price">${currentPrice.toFixed(2)}</p>
+              )}
 
               {/* Color swatch — single from backend */}
               {furniture?.furnitureColor && (
@@ -472,18 +501,23 @@ const FurnitureDetail = () => {
               )}
 
               {/* Variant selector */}
-              <div className="nvg-variant-row">
-                <img src={heroImage} alt="" className="nvg-variant-thumb" />
-                <div className="nvg-variant-info">
-                  <p className="nvg-variant-name">
-                    {furniture?.furnitureTitle ?? "—"}
-                  </p>
-                  <p className="nvg-variant-mat">{matLabel}</p>
+              {loading || !furniture ? (
+                <Skeleton variant="rectangular" width="100%" height={64} sx={{ mb: 2 }} />
+              ) : (
+                <div className="nvg-variant-row">
+                  <img src={heroImage} alt="" className="nvg-variant-thumb" />
+                  <div className="nvg-variant-info">
+                    <p className="nvg-variant-name">{furniture.furnitureTitle}</p>
+                    <p className="nvg-variant-mat">{matLabel}</p>
+                  </div>
+                  <span className="nvg-variant-opts">1 option ›</span>
                 </div>
-                <span className="nvg-variant-opts">1 option ›</span>
-              </div>
+              )}
 
               {/* Quantity + CTA + Heart */}
+              {loading || !furniture ? (
+                <Skeleton variant="rectangular" width="100%" height={48} sx={{ mb: 2 }} />
+              ) : (
               <div className="nvg-cta-row">
                 <div className="nvg-qty">
                   <button
@@ -518,6 +552,7 @@ const FurnitureDetail = () => {
                   )}
                 </IconButton>
               </div>
+              )}
 
               {/* Delivery */}
               <div className="nvg-info-row">

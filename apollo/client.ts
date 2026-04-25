@@ -12,7 +12,6 @@ import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { onError } from "@apollo/client/link/error";
 import { getJwtToken } from "../libs/auth";
-import { TokenRefreshLink } from "apollo-link-token-refresh";
 import { sweetErrorAlert } from "../libs/sweetAlert";
 import { socketVar } from "./store";
 let apolloClient: ApolloClient<NormalizedCacheObject>;
@@ -25,18 +24,6 @@ function getHeaders() {
   if (token) headers["Authorization"] = `Bearer ${token}`;
   return headers;
 }
-// STEP 2
-const tokenRefreshLink = new TokenRefreshLink({
-  accessTokenField: "accessToken",
-  isTokenValidOrUndefined: () => {
-    return true;
-  }, // @ts-ignore
-  fetchAccessToken: () => {
-    // execute refresh token
-    return null;
-  },
-});
-
 // Custom WebSocket client
 class LoggingWebSocket {
   private socket: WebSocket;
@@ -121,7 +108,7 @@ function createIsomorphicLink() {
       authLink.concat(link),
     );
 
-    return from([errorLink, tokenRefreshLink, splitLink]); // !errror => token time check => split the request
+    return from([errorLink, splitLink]);
   }
 }
 
@@ -130,7 +117,26 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: createIsomorphicLink(),
-    cache: new InMemoryCache(), //  Creates empty cache, then auto-stores query results
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            getFurnitures: {
+              keyArgs: ["input", ["search", "sort", "direction"]],
+              merge(_existing, incoming) {
+                return incoming;
+              },
+            },
+            getBoardArticles: {
+              keyArgs: ["input", ["search", "sort", "direction"]],
+              merge(_existing, incoming) {
+                return incoming;
+              },
+            },
+          },
+        },
+      },
+    }),
     resolvers: {},
   });
 }

@@ -7,30 +7,13 @@ import ArticleComments from "../../libs/components/blog/ArticleComments";
 import RelatedPostsSection from "../../libs/components/blog/RelatedPostsSection";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { useQuery } from "@apollo/client";
-import { GET_BOARD_ARTICLE } from "../../apollo/user/query";
 
 const CommunityDetail = () => {
   const router = useRouter();
   const articleId = router.query?.articleId as string;
-  const { data } = useQuery(GET_BOARD_ARTICLE, {
-    variables: { input: articleId },
-    skip: !articleId,
-    fetchPolicy: "cache-and-network",
-  });
-
-  const article = data?.getBoardArticle;
-  const articleTitle = `${article?.articleTitle ?? "Community Article"} — Monolith Blog`;
-  const articleDescription =
-    article?.articleContent
-      ?.replace(/<[^>]*>/g, "")
-      .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, 160) ??
-    "Read articles, tips and design inspiration from the Monolith furniture community.";
-  const articleImage = article?.articleImage
-    ? `${process.env.REACT_APP_API_URL}/${article.articleImage}`
-    : "https://monolith.com/img/og-image.jpg";
+  const articleTitle = "Community Article — Monolith Blog";
+  const articleDescription = "Read articles, tips and design inspiration from the Monolith furniture community.";
+  const articleImage = "https://monolith.com/img/og-image.jpg";
   const canonical = `https://monolith.com/community/detail?articleId=${articleId ?? ""}`;
 
   return (
@@ -38,7 +21,7 @@ const CommunityDetail = () => {
       <Head>
         <title>{articleTitle}</title>
         <meta name="description" content={articleDescription} />
-        <meta name="keywords" content={`${article?.articleTitle ?? "article"}, furniture blog, design inspiration, Monolith community`} />
+        <meta name="keywords" content="article, furniture blog, design inspiration, Monolith community" />
         <meta property="og:title" content={articleTitle} />
         <meta property="og:description" content={articleDescription} />
         <meta property="og:type" content="article" />

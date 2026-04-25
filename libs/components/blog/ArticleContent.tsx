@@ -29,6 +29,7 @@ const ArticleContent = ({ articleId }: ArticleContentProps) => {
     fetchPolicy: "cache-and-network",
     variables: { input: articleId },
     skip: !articleId,
+    notifyOnNetworkStatusChange: true,
     onCompleted: (data: T) => {
       setArticle(data?.getBoardArticle ?? null);
     },

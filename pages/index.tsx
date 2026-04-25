@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { Stack } from "@mui/material";
@@ -32,6 +32,7 @@ import StoreFinder from "../libs/components/homepage/StoreFinder";
 const Home = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
+  const refetchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 
@@ -129,14 +130,20 @@ const Home = () => {
 
   useEffect(() => {
     const handler = () => {
-      refetchTrending();
-      refetchTopRated();
-      refetchTopSelection();
-      refetchSuggested();
-      refetchSale();
+      if (refetchDebounceRef.current) clearTimeout(refetchDebounceRef.current);
+      refetchDebounceRef.current = setTimeout(() => {
+        refetchTrending();
+        refetchTopRated();
+        refetchTopSelection();
+        refetchSuggested();
+        refetchSale();
+      }, 300);
     };
     window.addEventListener("wishlistUpdated", handler);
-    return () => window.removeEventListener("wishlistUpdated", handler);
+    return () => {
+      window.removeEventListener("wishlistUpdated", handler);
+      if (refetchDebounceRef.current) clearTimeout(refetchDebounceRef.current);
+    };
   }, [
     refetchTrending,
     refetchTopRated,

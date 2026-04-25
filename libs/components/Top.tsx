@@ -126,7 +126,7 @@ const Top = () => {
   const { data: favoritesData, refetch: refetchWishlistCount } = useQuery(GET_FAVORITES, {
     skip: !user?._id,
     variables: { input: { page: 1, limit: 1 } },
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
   });
 
   useEffect(() => {

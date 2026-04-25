@@ -13,11 +13,19 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost",
+        hostname: "165.22.242.234",
         port: "4001",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3007",
+        pathname: "/uploads/**",
+      },
     ],
+    minimumCacheTTL: 60,
+    formats: ["image/webp", "image/avif"],
   },
 };
 

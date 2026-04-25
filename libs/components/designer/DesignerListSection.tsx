@@ -4,7 +4,7 @@ import DesignerCard from '../common/DesignerCard';
 import { Member } from '../../types/member/member';
 import { REACT_APP_API_URL } from '../../config';
 
-const DEFAULT_IMAGE = '/img/furniture/luxury_chair.jpg';
+const DEFAULT_IMAGE = '/general_images/default_profile.png';
 
 interface DesignerListSectionProps {
 	designers: Member[];

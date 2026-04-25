@@ -36,7 +36,7 @@ const MyWishlist = () => {
 	const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 
 	const { loading: favoritesLoading, refetch: refetchFavorites } = useQuery(GET_FAVORITES, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: { input: searchWishlist },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
@@ -46,7 +46,7 @@ const MyWishlist = () => {
 	});
 
 	const { loading: visitedLoading } = useQuery(GET_VISITED, {
-		fetchPolicy: 'network-only',
+		fetchPolicy: 'cache-and-network',
 		variables: { input: searchVisited },
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {

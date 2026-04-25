@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stack } from '@mui/material';
+import Skeleton from '@mui/material/Skeleton';
 import { useMutation } from '@apollo/client';
 import { SUBSCRIBE, UNSUBSCRIBE, LIKE_TARGET_MEMBER } from '../../../apollo/user/mutation';
 import { Member } from '../../types/member/member';
@@ -16,13 +17,14 @@ const DEFAULT_IMAGE = '/general_images/default_profile.png';
 
 interface DesignerProfileHeroProps {
 	member: Member | null;
+	loading?: boolean;
 	activeTab: string;
 	onTabChange: (tab: string) => void;
 	onMemberUpdate?: (updated: Member) => void;
 	onFollowToggle?: (follower: Member, added: boolean) => void;
 }
 
-const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate, onFollowToggle }: DesignerProfileHeroProps) => {
+const DesignerProfileHero = ({ member, loading, activeTab, onTabChange, onMemberUpdate, onFollowToggle }: DesignerProfileHeroProps) => {
 	const user = useReactiveVar(userVar);
 	const isMyProfile = !!user?._id && user._id === member?._id;
 
@@ -94,54 +96,81 @@ const DesignerProfileHero = ({ member, activeTab, onTabChange, onMemberUpdate, o
 		? `${REACT_APP_API_URL}/${member.memberImage}`
 		: DEFAULT_IMAGE;
 
+	const isLoading = loading || !member;
+
 	return (
 		<Stack className="designer-profile-hero">
 			<div className="designer-profile-cover" />
 			<div className="designer-profile-hero-content">
+				{/* Profile image */}
 				<div className="designer-profile-avatar">
-					<img src={image} alt={member?.memberNick ?? 'Designer'} />
+					{isLoading ? (
+						<Skeleton variant="circular" width={160} height={160} />
+					) : (
+						<img src={image} alt={member.memberNick ?? 'Designer'} />
+					)}
 				</div>
+
+				{/* Name + meta */}
 				<div className="designer-profile-info">
-					<span className="designer-profile-badge">{roleLabel}</span>
-					<h1 className="designer-profile-name">
-						{member?.memberFullName ?? member?.memberNick ?? '—'}
-					</h1>
-					<Stack direction="row" alignItems="center" gap="16px" className="designer-profile-meta">
-						<Stack direction="row" alignItems="center" gap="4px">
-							<VisibilityIcon sx={{ fontSize: 16, color: '#aaa' }} />
-							<span className="designer-profile-meta-text">{member?.memberViews ?? 0}</span>
-						</Stack>
-						{!isMyProfile && (
-							<Stack
-								direction="row"
-								alignItems="center"
-								gap="4px"
-								onClick={handleLike}
-								sx={{ cursor: 'pointer' }}
-							>
-								{isLiked
-									? <FavoriteIcon sx={{ fontSize: 16, color: '#e57373' }} />
-									: <FavoriteBorderIcon sx={{ fontSize: 16, color: '#aaa' }} />
-								}
-								<span className="designer-profile-meta-text">{member?.memberLikes ?? 0}</span>
+					{isLoading ? (
+						<>
+							<Skeleton variant="text" width={120} height={28} />
+							<Skeleton variant="text" width={280} height={48} />
+							<Skeleton variant="text" width={160} height={24} />
+						</>
+					) : (
+						<>
+							<span className="designer-profile-badge">{roleLabel}</span>
+							<h1 className="designer-profile-name">
+								{member.memberFullName ?? member.memberNick ?? '—'}
+							</h1>
+							<Stack direction="row" alignItems="center" gap="16px" className="designer-profile-meta">
+								<Stack direction="row" alignItems="center" gap="4px">
+									<VisibilityIcon sx={{ fontSize: 16, color: '#aaa' }} />
+									<span className="designer-profile-meta-text">{member.memberViews ?? 0}</span>
+								</Stack>
+								{!isMyProfile && (
+									<Stack
+										direction="row"
+										alignItems="center"
+										gap="4px"
+										onClick={handleLike}
+										sx={{ cursor: 'pointer' }}
+									>
+										{isLiked
+											? <FavoriteIcon sx={{ fontSize: 16, color: '#e57373' }} />
+											: <FavoriteBorderIcon sx={{ fontSize: 16, color: '#aaa' }} />
+										}
+										<span className="designer-profile-meta-text">{member.memberLikes ?? 0}</span>
+									</Stack>
+								)}
 							</Stack>
-						)}
-					</Stack>
+						</>
+					)}
 				</div>
-				<div className="designer-profile-stats-row">
-					{statTabs.map((tab) => (
-						<button
-							key={tab.key}
-							type="button"
-							className={`designer-profile-stat-tab ${activeTab === tab.key ? 'active' : ''}`}
-							onClick={() => onTabChange(tab.key)}
-						>
-							<span className="designer-profile-stat-value">{tab.value}</span>
-							<span className="designer-profile-stat-label">{tab.label}</span>
-						</button>
-					))}
-				</div>
-				{!isMyProfile && (
+
+				{/* Stats row */}
+				{isLoading ? (
+					<Skeleton variant="rectangular" width="100%" height={80} />
+				) : (
+					<div className="designer-profile-stats-row">
+						{statTabs.map((tab) => (
+							<button
+								key={tab.key}
+								type="button"
+								className={`designer-profile-stat-tab ${activeTab === tab.key ? 'active' : ''}`}
+								onClick={() => onTabChange(tab.key)}
+							>
+								<span className="designer-profile-stat-value">{tab.value}</span>
+								<span className="designer-profile-stat-label">{tab.label}</span>
+							</button>
+						))}
+					</div>
+				)}
+
+				{/* Action buttons */}
+				{!isLoading && !isMyProfile && (
 					<div className="designer-profile-actions">
 						<button className="designer-follow-btn" type="button" onClick={handleFollow}>
 							{isFollowing ? 'Unfollow' : 'Follow'}

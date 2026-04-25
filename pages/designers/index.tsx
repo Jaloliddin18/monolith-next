@@ -18,6 +18,7 @@ const DEFAULT_INQUIRY: DesignersInquiry = {
 	page: 1,
 	limit: 8,
 	sort: 'createdAt',
+	direction: Direction.ASC,
 	search: {},
 };
 

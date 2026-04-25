@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Stack } from '@mui/material';
 import BlogArticleCard from '../common/BlogArticleCard';
 import { useQuery } from '@apollo/client';
@@ -18,13 +18,13 @@ interface RelatedPostsSectionProps {
 const RelatedPostsSection = ({ articleId }: RelatedPostsSectionProps) => {
 	const [articles, setArticles] = useState<BoardArticle[]>([]);
 
-	const inquiry: BoardArticlesInquiry = {
+	const inquiry = useMemo<BoardArticlesInquiry>(() => ({
 		page: 1,
 		limit: 4,
 		sort: 'createdAt',
 		direction: Direction.DESC,
 		search: {},
-	};
+	}), []);
 
 	useQuery(GET_BOARD_ARTICLES, {
 		fetchPolicy: 'cache-and-network',
