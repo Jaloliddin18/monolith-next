@@ -35,10 +35,10 @@ const DesignerBlogPanel = ({ memberId }: DesignerBlogPanelProps) => {
 		},
 	});
 
+	const stripHtml = (html: string) => html.replace(/<[^>]*>/g, '').slice(0, 100);
+
 	const handleClick = (article: BoardArticle) => {
-		router.push(
-			`/community/detail?articleCategory=${article.articleCategory}&id=${article._id}`,
-		);
+		router.push(`/community/detail?articleId=${article._id}`);
 	};
 
 	return (
@@ -55,7 +55,7 @@ const DesignerBlogPanel = ({ memberId }: DesignerBlogPanelProps) => {
 					});
 
 					return (
-						<div key={post._id} className="blog-panel-item" onClick={() => handleClick(post)}>
+						<div key={post._id} className="blog-panel-item" style={{ cursor: 'pointer' }} onClick={() => handleClick(post)}>
 							<div className="blog-panel-item-image">
 								<img src={image} alt={post.articleTitle} />
 							</div>
@@ -65,7 +65,7 @@ const DesignerBlogPanel = ({ memberId }: DesignerBlogPanelProps) => {
 									<span className="blog-panel-date">{date}</span>
 								</div>
 								<h3 className="blog-panel-title">{post.articleTitle}</h3>
-								<p className="blog-panel-excerpt">{post.articleContent?.slice(0, 160)}...</p>
+								<p className="blog-panel-excerpt">{stripHtml(post.articleContent ?? '')}...</p>
 								<span className="blog-panel-read-more">Read Article →</span>
 							</div>
 						</div>
