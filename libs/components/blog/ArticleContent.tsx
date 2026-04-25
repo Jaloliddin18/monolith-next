@@ -131,6 +131,16 @@ const ArticleContent = ({ articleId }: ArticleContentProps) => {
         <span className="article-author-name">{authorName}</span>
       </div>
 
+      {/* Hero Image */}
+      {article.articleImage && (
+        <div className="article-hero-image">
+          <img
+            src={`${REACT_APP_API_URL}/${article.articleImage}`}
+            alt={article.articleTitle}
+          />
+        </div>
+      )}
+
       {/* Article Content */}
       <div
         className="article-block"
