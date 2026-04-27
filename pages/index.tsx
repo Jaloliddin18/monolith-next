@@ -36,7 +36,7 @@ const Home = () => {
 
   const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
 
-  const { data: trendingData, refetch: refetchTrending } = useQuery(
+  const { data: trendingData, loading: trendingLoading, refetch: refetchTrending } = useQuery(
     GET_FURNITURES,
     {
       fetchPolicy: "cache-and-network",
@@ -53,7 +53,7 @@ const Home = () => {
     },
   );
 
-  const { data: topRatedData, refetch: refetchTopRated } = useQuery(
+  const { data: topRatedData, loading: topRatedLoading, refetch: refetchTopRated } = useQuery(
     GET_FURNITURES,
     {
       fetchPolicy: "cache-and-network",
@@ -70,7 +70,7 @@ const Home = () => {
     },
   );
 
-  const { data: topSelectionData, refetch: refetchTopSelection } = useQuery(
+  const { data: topSelectionData, loading: topSelectionLoading, refetch: refetchTopSelection } = useQuery(
     GET_FURNITURES,
     {
       fetchPolicy: "cache-and-network",
@@ -87,7 +87,7 @@ const Home = () => {
     },
   );
 
-  const { data: suggestedData, refetch: refetchSuggested } = useQuery(
+  const { data: suggestedData, loading: suggestedLoading, refetch: refetchSuggested } = useQuery(
     GET_FURNITURES,
     {
       fetchPolicy: "cache-and-network",
@@ -104,7 +104,7 @@ const Home = () => {
     },
   );
 
-  const { data: saleData, refetch: refetchSale } = useQuery(GET_FURNITURES, {
+  const { data: saleData, loading: saleLoading, refetch: refetchSale } = useQuery(GET_FURNITURES, {
     fetchPolicy: "cache-and-network",
     variables: {
       input: {
@@ -208,20 +208,21 @@ const Home = () => {
       </Head>
       <Stack id="home-page">
         <HeroSection />
-        <TopRated furnitures={topRatedFurnitures} onLike={handleLike} />
+        <TopRated furnitures={topRatedFurnitures} loading={topRatedLoading} onLike={handleLike} />
         <ServicesSection />
         <AwesomeServices />
         <NewestChair />
-        <TrendingNow trendFurnitures={trendingFurnitures} onLike={handleLike} />
+        <TrendingNow trendFurnitures={trendingFurnitures} loading={trendingLoading} onLike={handleLike} />
         <ShopByCategory />
         <SuggestedSection
           furnitures={suggestedFurnitures}
+          loading={suggestedLoading}
           onLike={handleLike}
         />
-        <SaleBanner furnitures={saleFurnitures} onLike={handleLike} />
+        <SaleBanner furnitures={saleFurnitures} loading={saleLoading} onLike={handleLike} />
         <IntroSection />
         <LivingRoom />
-        <TopSelection furnitures={topSelectionFurnitures} onLike={handleLike} />
+        <TopSelection furnitures={topSelectionFurnitures} loading={topSelectionLoading} onLike={handleLike} />
         <StoreFinder />
         <FaqSection />
         <InstagramSection />

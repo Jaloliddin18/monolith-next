@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useReactiveVar } from '@apollo/client';
 import { Box, Stack, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -10,7 +11,8 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { Furniture } from '../../types/furniture/furniture';
 import { REACT_APP_API_URL } from '../../config';
 import { addToCart } from '../../utils/cartStorage';
-import { sweetTopSmallSuccessAlert } from '../../sweetAlert';
+import { sweetTopSmallSuccessAlert, sweetMixinErrorAlert } from '../../sweetAlert';
+import { userVar } from '../../../apollo/store';
 
 interface ProductCardProps {
 	furniture: Furniture;
@@ -24,6 +26,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, reviewCount: reviewCountProp, originalPrice, size = 'default' }: ProductCardProps) => {
 	const router = useRouter();
+	const user = useReactiveVar(userVar);
 	const [liked, setLiked] = useState(furniture?.likedByMe?.[0]?.myFavorite ?? false);
 	const [isHovered, setIsHovered] = useState(false);
 
@@ -138,12 +141,18 @@ const ProductCard = ({ furniture, onLike, isOutOfStock, rating: ratingProp, revi
 
 					<Box
 						className={`like-btn${liked ? ' liked' : ''}`}
-						onClick={(e) => {
+						onClick={async (e) => {
 							e.stopPropagation();
+							e.preventDefault();
+							if (!user?._id) {
+								await sweetMixinErrorAlert('Please login first');
+								router.push('/account/join');
+								return;
+							}
 							const next = !liked;
 							setLiked(next);
 							onLike?.(_id);
-							sweetTopSmallSuccessAlert(next ? 'Added to wishlist' : 'Removed from wishlist', 800);
+							await sweetTopSmallSuccessAlert(next ? 'Added to wishlist' : 'Removed from wishlist', 800);
 						}}
 					>
 						{liked ? (

@@ -86,7 +86,7 @@ const SuggestedSection = ({ furnitures, onLike, loading }: SuggestedSectionProps
 					))}
 				</div>
 			) : (
-			<Stack direction="row" gap="24px">
+			<Stack direction="row" gap="24px" justifyContent="center">
 				{products
 					? products.slice(0, 3).map((furniture) => (
 							<ProductCard key={furniture._id} furniture={furniture} onLike={onLike} />

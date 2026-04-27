@@ -1,9 +1,5 @@
 import React, { useRef } from "react";
-import { Box, Stack, Typography, Skeleton } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import WestIcon from "@mui/icons-material/West";
-import EastIcon from "@mui/icons-material/East";
+import { Stack, Typography, Skeleton } from "@mui/material";
 import { Furniture } from "../../types/furniture/furniture";
 import ProductCard from "../common/ProductCard";
 
@@ -104,12 +100,19 @@ interface TopSelectionProps {
 }
 
 const TopSelection = ({ furnitures, onLike, loading }: TopSelectionProps) => {
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const products = furnitures && furnitures.length > 0 ? furnitures : null;
 
+  const scrollLeft = () => {
+    scrollRef.current?.scrollBy({ left: -320, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 320, behavior: "smooth" });
+  };
+
   return (
-    <Stack className="top-selection-section" alignItems="center" gap="50px">
+    <Stack className="top-selection-section" gap="50px">
       <Stack
         className="top-selection-header"
         direction="row"
@@ -117,70 +120,51 @@ const TopSelection = ({ furnitures, onLike, loading }: TopSelectionProps) => {
         alignItems="center"
       >
         <Typography className="section-title-text">Top selection</Typography>
-        <Box className="homepage-swiper-nav">
+        <div className="section-nav-arrows">
           <button
-            ref={prevRef}
-            type="button"
-            className="homepage-swiper-btn"
+            className="section-arrow section-arrow--prev"
+            onClick={scrollLeft}
             aria-label="Previous top selection products"
           >
-            <WestIcon sx={{ fontSize: 16 }} />
+            ←
           </button>
           <button
-            ref={nextRef}
-            type="button"
-            className="homepage-swiper-btn"
+            className="section-arrow section-arrow--next"
+            onClick={scrollRight}
             aria-label="Next top selection products"
           >
-            <EastIcon sx={{ fontSize: 16 }} />
+            →
           </button>
-        </Box>
+        </div>
       </Stack>
 
-      <Box className="section-swiper-wrap">
-        {loading ? (
-          <div style={{ display: "flex", gap: "24px" }}>
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
-            ))}
+      {loading ? (
+        <div style={{ display: "flex", gap: "24px" }}>
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+          ))}
+        </div>
+      ) : (
+        <div className="section-swiper-wrap">
+          <div ref={scrollRef} className="section-scroll-container">
+            {(products ?? (hardcodedTopSelection as unknown as Furniture[])).map(
+              (item: any) => (
+                <div className="section-scroll-item" key={item._id}>
+                  <ProductCard
+                    furniture={item}
+                    size="small"
+                    isOutOfStock={item.isOutOfStock}
+                    rating={item.rating}
+                    reviewCount={item.reviewCount}
+                    originalPrice={item.originalPrice}
+                    onLike={onLike}
+                  />
+                </div>
+              ),
+            )}
           </div>
-        ) : (
-        <Swiper
-          modules={[Navigation, Pagination]}
-          slidesPerView={4}
-          spaceBetween={24}
-          loop={true}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          onBeforeInit={(swiper) => {
-            const navigation = swiper.params.navigation;
-            if (navigation && typeof navigation !== "boolean") {
-              navigation.prevEl = prevRef.current;
-              navigation.nextEl = nextRef.current;
-            }
-          }}
-          pagination={{ clickable: true }}
-          style={{ width: "100%", paddingBottom: "48px" }}
-        >
-          {(products ?? (hardcodedTopSelection as unknown as Furniture[])).map(
-            (item: any) => (
-              <SwiperSlide key={item._id}>
-                <ProductCard
-                  furniture={item}
-                  isOutOfStock={item.isOutOfStock}
-                  rating={item.rating}
-                  reviewCount={item.reviewCount}
-                  originalPrice={item.originalPrice}
-                  onLike={onLike}
-                />
-              </SwiperSlide>
-            ),
-          )}
-        </Swiper>
-        )}
-      </Box>
+        </div>
+      )}
     </Stack>
   );
 };

@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Box, Stack, Typography, Skeleton } from "@mui/material";
-import WestIcon from "@mui/icons-material/West";
-import EastIcon from "@mui/icons-material/East";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
 import { Furniture } from "../../types/furniture/furniture";
 import ProductCard from "../common/ProductCard";
 
@@ -24,8 +20,15 @@ const getTimeLeft = (target: Date) => {
 };
 
 const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    scrollRef.current?.scrollBy({ left: -320, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 320, behavior: "smooth" });
+  };
 
   const countdownTarget = useMemo(() => {
     const ends = furnitures
@@ -53,7 +56,6 @@ const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
   return (
     <Stack className="sale-banner-section" gap="40px">
       <Stack className="sale-header" gap="16px">
-        {/* Row 1: title left | arrows right */}
         <Box className="sale-info-box">
           <Box className="left">
             <span>
@@ -61,27 +63,24 @@ const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
             </span>
             <p>Limited time deals on premium furniture</p>
           </Box>
-          <Box className="homepage-swiper-nav">
+          <div className="section-nav-arrows">
             <button
-              ref={prevRef}
-              type="button"
-              className="homepage-swiper-btn"
+              className="section-arrow section-arrow--prev"
+              onClick={scrollLeft}
               aria-label="Previous sale products"
             >
-              <WestIcon sx={{ fontSize: 16 }} />
+              ←
             </button>
             <button
-              ref={nextRef}
-              type="button"
-              className="homepage-swiper-btn"
+              className="section-arrow section-arrow--next"
+              onClick={scrollRight}
               aria-label="Next sale products"
             >
-              <EastIcon sx={{ fontSize: 16 }} />
+              →
             </button>
-          </Box>
+          </div>
         </Box>
 
-        {/* Row 2: countdown centered */}
         <Stack className="countdown-wrapper" gap="4px" alignItems="center">
           <Stack
             className="countdown-row"
@@ -117,41 +116,23 @@ const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
         </Stack>
       </Stack>
 
-      <Box className="section-swiper-wrap">
-        {loading ? (
-          <div style={{ display: "flex", gap: "24px" }}>
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+      {loading ? (
+        <div style={{ display: "flex", gap: "24px" }}>
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+          ))}
+        </div>
+      ) : (
+        <div className="section-swiper-wrap">
+          <div ref={scrollRef} className="section-scroll-container">
+            {furnitures.map((furniture) => (
+              <div className="section-scroll-item" key={furniture._id}>
+                <ProductCard furniture={furniture} size="small" onLike={onLike} />
+              </div>
             ))}
           </div>
-        ) : (
-        <Swiper
-          modules={[Navigation, Pagination]}
-          slidesPerView={4}
-          spaceBetween={24}
-          loop={true}
-          navigation={{
-            nextEl: nextRef.current,
-            prevEl: prevRef.current,
-          }}
-          onBeforeInit={(swiper) => {
-            const navigation = swiper.params.navigation;
-            if (navigation && typeof navigation !== "boolean") {
-              navigation.prevEl = prevRef.current;
-              navigation.nextEl = nextRef.current;
-            }
-          }}
-          pagination={{ clickable: true }}
-          style={{ width: "100%", paddingBottom: "48px" }}
-        >
-          {furnitures.map((furniture) => (
-            <SwiperSlide key={furniture._id}>
-              <ProductCard furniture={furniture} onLike={onLike} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        )}
-      </Box>
+        </div>
+      )}
     </Stack>
   );
 };

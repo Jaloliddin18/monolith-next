@@ -1,9 +1,5 @@
 import React, { useRef } from "react";
 import { Box, Stack, Skeleton } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import WestIcon from "@mui/icons-material/West";
-import EastIcon from "@mui/icons-material/East";
 import { Furniture } from "../../types/furniture/furniture";
 import ProductCard from "../common/ProductCard";
 
@@ -14,8 +10,15 @@ interface TopRatedProps {
 }
 
 const TopRated = ({ furnitures = [], onLike, loading }: TopRatedProps) => {
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    scrollRef.current?.scrollBy({ left: -320, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 320, behavior: "smooth" });
+  };
 
   if (!loading && !furnitures.length) return null;
 
@@ -26,61 +29,41 @@ const TopRated = ({ furnitures = [], onLike, loading }: TopRatedProps) => {
           <span>Top Rated Furniture</span>
           <p>Check out our top rated items</p>
         </Box>
-        <Box className="homepage-swiper-nav">
+        <div className="section-nav-arrows">
           <button
-            ref={prevRef}
-            type="button"
-            className="homepage-swiper-btn"
+            className="section-arrow section-arrow--prev"
+            onClick={scrollLeft}
             aria-label="Previous top rated products"
           >
-            <WestIcon sx={{ fontSize: 16 }} />
+            ←
           </button>
           <button
-            ref={nextRef}
-            type="button"
-            className="homepage-swiper-btn"
+            className="section-arrow section-arrow--next"
+            onClick={scrollRight}
             aria-label="Next top rated products"
           >
-            <EastIcon sx={{ fontSize: 16 }} />
+            →
           </button>
-        </Box>
+        </div>
       </Box>
 
-      <Box className="section-swiper-wrap">
-        {loading ? (
-          <div style={{ display: "flex", gap: "24px" }}>
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+      {loading ? (
+        <div style={{ display: "flex", gap: "24px" }}>
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+          ))}
+        </div>
+      ) : (
+        <div className="section-swiper-wrap">
+          <div ref={scrollRef} className="section-scroll-container">
+            {furnitures.map((furniture) => (
+              <div className="section-scroll-item" key={furniture._id}>
+                <ProductCard furniture={furniture} size="small" onLike={onLike} />
+              </div>
             ))}
           </div>
-        ) : (
-        <Swiper
-          modules={[Navigation, Pagination]}
-          slidesPerView={4}
-          spaceBetween={24}
-          loop={true}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          onBeforeInit={(swiper) => {
-            const navigation = swiper.params.navigation;
-            if (navigation && typeof navigation !== "boolean") {
-              navigation.prevEl = prevRef.current;
-              navigation.nextEl = nextRef.current;
-            }
-          }}
-          pagination={{ clickable: true }}
-          style={{ width: "100%", paddingBottom: "48px" }}
-        >
-          {furnitures.map((furniture) => (
-            <SwiperSlide key={furniture._id}>
-              <ProductCard furniture={furniture} size="small" onLike={onLike} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        )}
-      </Box>
+        </div>
+      )}
     </Stack>
   );
 };

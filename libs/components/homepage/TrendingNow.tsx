@@ -1,9 +1,5 @@
 import React, { useRef } from "react";
-import { Box, Stack, Typography, Skeleton } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import WestIcon from "@mui/icons-material/West";
-import EastIcon from "@mui/icons-material/East";
+import { Stack, Typography, Skeleton } from "@mui/material";
 import { Furniture } from "../../types/furniture/furniture";
 import ProductCard from "../common/ProductCard";
 
@@ -107,10 +103,17 @@ interface TrendingNowProps {
 }
 
 const TrendingNow = ({ trendFurnitures, onLike, loading }: TrendingNowProps) => {
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const products =
     trendFurnitures && trendFurnitures.length > 0 ? trendFurnitures : null;
+
+  const scrollLeft = () => {
+    scrollRef.current?.scrollBy({ left: -320, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 320, behavior: "smooth" });
+  };
 
   return (
     <Stack className="trending-section" gap="50px">
@@ -121,73 +124,55 @@ const TrendingNow = ({ trendFurnitures, onLike, loading }: TrendingNowProps) => 
         alignItems="center"
       >
         <Typography className="section-title-text">Trending Now</Typography>
-        <Box className="homepage-swiper-nav">
+        <div className="section-nav-arrows">
           <button
-            ref={prevRef}
-            type="button"
-            className="homepage-swiper-btn"
+            className="section-arrow section-arrow--prev"
+            onClick={scrollLeft}
             aria-label="Previous trending products"
           >
-            <WestIcon sx={{ fontSize: 16 }} />
+            ←
           </button>
           <button
-            ref={nextRef}
-            type="button"
-            className="homepage-swiper-btn"
+            className="section-arrow section-arrow--next"
+            onClick={scrollRight}
             aria-label="Next trending products"
           >
-            <EastIcon sx={{ fontSize: 16 }} />
+            →
           </button>
-        </Box>
+        </div>
       </Stack>
-      <Box className="section-swiper-wrap">
-        {loading ? (
-          <div style={{ display: "flex", gap: "24px" }}>
-            {[...Array(4)].map((_, i) => (
-              <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
-            ))}
+
+      {loading ? (
+        <div style={{ display: "flex", gap: "24px" }}>
+          {[...Array(4)].map((_, i) => (
+            <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+          ))}
+        </div>
+      ) : (
+        <div className="section-swiper-wrap">
+          <div ref={scrollRef} className="section-scroll-container">
+            {products
+              ? products.slice(0, 6).map((furniture) => (
+                  <div className="section-scroll-item" key={furniture._id}>
+                    <ProductCard furniture={furniture} size="small" onLike={onLike} />
+                  </div>
+                ))
+              : hardcodedProducts.map((item) => (
+                  <div className="section-scroll-item" key={item._id}>
+                    <ProductCard
+                      furniture={item as unknown as Furniture}
+                      size="small"
+                      isOutOfStock={item.isOutOfStock}
+                      rating={item.rating}
+                      reviewCount={item.reviewCount}
+                      originalPrice={item.originalPrice}
+                      onLike={onLike}
+                    />
+                  </div>
+                ))}
           </div>
-        ) : (
-        <Swiper
-          modules={[Navigation, Pagination]}
-          slidesPerView={4}
-          spaceBetween={24}
-          loop={true}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          onBeforeInit={(swiper) => {
-            const navigation = swiper.params.navigation;
-            if (navigation && typeof navigation !== "boolean") {
-              navigation.prevEl = prevRef.current;
-              navigation.nextEl = nextRef.current;
-            }
-          }}
-          pagination={{ clickable: true }}
-          style={{ width: "100%", paddingBottom: "48px" }}
-        >
-          {products
-            ? products.slice(0, 6).map((furniture) => (
-                <SwiperSlide key={furniture._id}>
-                  <ProductCard furniture={furniture} onLike={onLike} />
-                </SwiperSlide>
-              ))
-            : hardcodedProducts.map((item) => (
-                <SwiperSlide key={item._id}>
-                  <ProductCard
-                    furniture={item as unknown as Furniture}
-                    isOutOfStock={item.isOutOfStock}
-                    rating={item.rating}
-                    reviewCount={item.reviewCount}
-                    originalPrice={item.originalPrice}
-                    onLike={onLike}
-                  />
-                </SwiperSlide>
-              ))}
-        </Swiper>
-        )}
-      </Box>
+        </div>
+      )}
     </Stack>
   );
 };
