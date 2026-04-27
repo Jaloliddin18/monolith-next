@@ -8,6 +8,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
 import { useTranslation } from "next-i18next";
 import { Furniture } from "../../types/furniture/furniture";
 import { FIsearch } from "../../types/furniture/furniture.input";
@@ -22,6 +23,7 @@ interface FurnitureListPageProps {
   total: number;
   page: number;
   limit: number;
+  loading: boolean;
   sortValue: string;
   searchFilter: FIsearch;
   onPageChange: (page: number) => void;
@@ -31,13 +33,13 @@ interface FurnitureListPageProps {
 }
 
 const sortOptions = [
-  { value: "recommended", label: "Recommended" },
   { value: "createdAt_desc", label: "Newly arrived" },
+  { value: "recommended", label: "Recommended" },
   { value: "furnitureViews_desc", label: "Popularity" },
+  { value: "furnitureLikes_desc", label: "Most Liked" },
   { value: "furnitureDiscount_desc", label: "Best Discount" },
   { value: "furniturePrice_desc", label: "Price: High to Low" },
   { value: "furniturePrice_asc", label: "Price: Low to High" },
-  { value: "furnitureRank_desc", label: "Customer Rating" },
 ];
 
 interface ActiveTag {
@@ -69,6 +71,7 @@ const FurnitureListPage = ({
   total,
   page,
   limit,
+  loading,
   sortValue,
   searchFilter,
   onPageChange,
@@ -77,7 +80,6 @@ const FurnitureListPage = ({
   onLike,
 }: FurnitureListPageProps) => {
   const { t } = useTranslation("common");
-
   const getActiveTags = (): ActiveTag[] => {
     const tags: ActiveTag[] = [];
     searchFilter.categoryList?.forEach((cat) => {
@@ -305,14 +307,31 @@ const FurnitureListPage = ({
           searchFilter={searchFilter}
           onFilterChange={onFilterChange}
         />
-        <ProductGrid
-          furnitures={furnitures}
-          total={total}
-          page={page}
-          limit={limit}
-          onPageChange={onPageChange}
-          onLike={onLike}
-        />
+        {loading ? (
+          <Stack className="product-grid-area">
+            <Stack className="grid-cards" direction="row" flexWrap="wrap">
+              {[...Array(8)].map((_, i) => (
+                <Box key={i} className="grid-card-wrapper">
+                  <Skeleton
+                    variant="rectangular"
+                    width="100%"
+                    height={380}
+                    sx={{ borderRadius: '8px' }}
+                  />
+                </Box>
+              ))}
+            </Stack>
+          </Stack>
+        ) : (
+          <ProductGrid
+            furnitures={furnitures}
+            total={total}
+            page={page}
+            limit={limit}
+            onPageChange={onPageChange}
+            onLike={onLike}
+          />
+        )}
       </Stack>
 
       {/* Popular Products */}

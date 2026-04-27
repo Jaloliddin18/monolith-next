@@ -31,7 +31,7 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
   const router = useRouter();
   const user = useReactiveVar(userVar);
 
-  const [sortValue, setSortValue] = useState("recommended");
+  const [sortValue, setSortValue] = useState("createdAt_desc");
   const [searchFilter, setSearchFilter] = useState<FIsearch>({});
   const [inquiry, setInquiry] = useState<FurnituresInquiry>(initialInput);
   const [furnitures, setFurnitures] = useState<Furniture[]>([]);
@@ -39,7 +39,7 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
 
   /** APOLLO REQUESTS **/
   const [likeTargetFurniture] = useMutation(LIKE_TARGET_FURNITURE);
-  const { refetch: getFurnituresRefetch } = useQuery(GET_FURNITURES, {
+  const { loading, refetch: getFurnituresRefetch } = useQuery(GET_FURNITURES, {
     fetchPolicy: "cache-and-network",
     variables: { input: inquiry },
     notifyOnNetworkStatusChange: true,
@@ -63,6 +63,14 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
     return () => window.removeEventListener("wishlistUpdated", handler);
   }, [getFurnituresRefetch]);
 
+  useEffect(() => {
+    const productSection = document.querySelector('.main-content');
+    if (productSection) {
+      const top = productSection.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'instant' });
+    }
+  }, [inquiry.page]);
+
   /** HANDLERS **/
   const handlePageChange = useCallback(
     async (page: number) => {
@@ -73,7 +81,6 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
         `/furniture?input=${JSON.stringify(updated)}`,
         { scroll: false },
       );
-      window.scrollTo({ top: 0, behavior: "smooth" });
     },
     [inquiry, router],
   );
@@ -84,6 +91,10 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
     let direction = Direction.DESC;
 
     switch (sort) {
+      case "recommended":
+        sortField = "furnitureRank";
+        direction = Direction.DESC;
+        break;
       case "createdAt_desc":
         sortField = "createdAt";
         direction = Direction.DESC;
@@ -92,12 +103,12 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
         sortField = "furnitureViews";
         direction = Direction.DESC;
         break;
-      case "furnitureDiscount_desc":
-        sortField = "furnitureDiscount";
-        direction = Direction.DESC;
-        break;
       case "furnitureLikes_desc":
         sortField = "furnitureLikes";
+        direction = Direction.DESC;
+        break;
+      case "furnitureDiscount_desc":
+        sortField = "furnitureDiscount";
         direction = Direction.DESC;
         break;
       case "furniturePrice_desc":
@@ -107,10 +118,6 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
       case "furniturePrice_asc":
         sortField = "furniturePrice";
         direction = Direction.ASC;
-        break;
-      case "furnitureRank_desc":
-        sortField = "furnitureRank";
-        direction = Direction.DESC;
         break;
       default:
         sortField = "createdAt";
@@ -168,6 +175,7 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
           total={total}
           page={inquiry.page}
           limit={inquiry.limit}
+          loading={loading}
           sortValue={sortValue}
           searchFilter={searchFilter}
           onPageChange={handlePageChange}

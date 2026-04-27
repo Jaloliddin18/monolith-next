@@ -204,7 +204,7 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			</Stack>
 
 			{/* Discount Offer */}
-			<Stack className="filter-section">
+			<Stack className="filter-section filter-section-last">
 				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('discount')}>
 					<Typography className="filter-section-title">Discount offer</Typography>
 					<Chevron sectionKey="discount" />
