@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, Skeleton } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import WestIcon from "@mui/icons-material/West";
@@ -100,9 +100,10 @@ const hardcodedTopSelection: HardcodedTopSelection[] = [
 interface TopSelectionProps {
   furnitures?: Furniture[];
   onLike?: (id: string) => void;
+  loading?: boolean;
 }
 
-const TopSelection = ({ furnitures, onLike }: TopSelectionProps) => {
+const TopSelection = ({ furnitures, onLike, loading }: TopSelectionProps) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const products = furnitures && furnitures.length > 0 ? furnitures : null;
@@ -137,6 +138,13 @@ const TopSelection = ({ furnitures, onLike }: TopSelectionProps) => {
       </Stack>
 
       <Box className="section-swiper-wrap">
+        {loading ? (
+          <div style={{ display: "flex", gap: "24px" }}>
+            {[...Array(4)].map((_, i) => (
+              <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+            ))}
+          </div>
+        ) : (
         <Swiper
           modules={[Navigation, Pagination]}
           slidesPerView={4}
@@ -171,6 +179,7 @@ const TopSelection = ({ furnitures, onLike }: TopSelectionProps) => {
             ),
           )}
         </Swiper>
+        )}
       </Box>
     </Stack>
   );

@@ -75,6 +75,7 @@ export interface FIsearch {
 	dimensionsRange?: DimensionsRange;
 	periodsRange?: PeriodsRange;
 	text?: string;
+	furnitureDiscountMin?: number;
 }
 
 export interface FurnituresInquiry {

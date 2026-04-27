@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography, Skeleton } from '@mui/material';
 import { useRouter } from 'next/router';
 import { Furniture } from '../../types/furniture/furniture';
 import ProductCard from '../common/ProductCard';
@@ -63,9 +63,10 @@ const hardcodedSuggested: HardcodedSuggested[] = [
 interface SuggestedSectionProps {
 	furnitures?: Furniture[];
 	onLike?: (id: string) => void;
+	loading?: boolean;
 }
 
-const SuggestedSection = ({ furnitures, onLike }: SuggestedSectionProps) => {
+const SuggestedSection = ({ furnitures, onLike, loading }: SuggestedSectionProps) => {
 	const router = useRouter();
 	const products = furnitures && furnitures.length > 0 ? furnitures : null;
 
@@ -78,6 +79,13 @@ const SuggestedSection = ({ furnitures, onLike }: SuggestedSectionProps) => {
 					<Box component="img" src="/icons/ArrowUpRight.svg" alt="→" width={20} height={20} />
 				</Stack>
 			</Stack>
+			{loading ? (
+				<div style={{ display: 'flex', gap: '24px' }}>
+					{[...Array(4)].map((_, i) => (
+						<Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: '8px' }} />
+					))}
+				</div>
+			) : (
 			<Stack direction="row" gap="24px">
 				{products
 					? products.slice(0, 3).map((furniture) => (
@@ -95,6 +103,7 @@ const SuggestedSection = ({ furnitures, onLike }: SuggestedSectionProps) => {
 							/>
 						))}
 			</Stack>
+			)}
 		</Stack>
 	);
 };

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Skeleton } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import WestIcon from "@mui/icons-material/West";
@@ -10,13 +10,14 @@ import ProductCard from "../common/ProductCard";
 interface TopRatedProps {
   furnitures?: Furniture[];
   onLike?: (id: string) => void;
+  loading?: boolean;
 }
 
-const TopRated = ({ furnitures = [], onLike }: TopRatedProps) => {
+const TopRated = ({ furnitures = [], onLike, loading }: TopRatedProps) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
-  if (!furnitures.length) return null;
+  if (!loading && !furnitures.length) return null;
 
   return (
     <Stack className="top-rated-section" gap="40px">
@@ -46,6 +47,13 @@ const TopRated = ({ furnitures = [], onLike }: TopRatedProps) => {
       </Box>
 
       <Box className="section-swiper-wrap">
+        {loading ? (
+          <div style={{ display: "flex", gap: "24px" }}>
+            {[...Array(4)].map((_, i) => (
+              <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+            ))}
+          </div>
+        ) : (
         <Swiper
           modules={[Navigation, Pagination]}
           slidesPerView={4}
@@ -71,6 +79,7 @@ const TopRated = ({ furnitures = [], onLike }: TopRatedProps) => {
             </SwiperSlide>
           ))}
         </Swiper>
+        )}
       </Box>
     </Stack>
   );

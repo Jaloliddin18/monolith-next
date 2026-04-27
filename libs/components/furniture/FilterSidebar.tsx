@@ -12,106 +12,88 @@ interface FilterSidebarProps {
 
 const colorMap: Record<FurnitureColor, string> = {
 	[FurnitureColor.WHITE]: '#FFFFFF',
-	[FurnitureColor.BLACK]: '#000000',
-	[FurnitureColor.GREY]: '#808080',
-	[FurnitureColor.BROWN]: '#8B4513',
-	[FurnitureColor.BEIGE]: '#F5F5DC',
-	[FurnitureColor.RED]: '#FF0000',
-	[FurnitureColor.BLUE]: '#0000FF',
-	[FurnitureColor.GREEN]: '#008000',
-	[FurnitureColor.YELLOW]: '#FFD700',
-	[FurnitureColor.ORANGE]: '#FFA500',
-	[FurnitureColor.PINK]: '#FFC0CB',
-	[FurnitureColor.PURPLE]: '#800080',
-	[FurnitureColor.NATURAL_WOOD]: '#DEB887',
-	[FurnitureColor.MULTICOLOR]: '#CDAE79',
+	[FurnitureColor.BLACK]: '#1C1C1C',
+	[FurnitureColor.GREY]: '#8A8A8A',
+	[FurnitureColor.BROWN]: '#6B4226',
+	[FurnitureColor.BEIGE]: '#C8B99A',
+	[FurnitureColor.RED]: '#8B1A1A',
+	[FurnitureColor.BLUE]: '#1B3A6B',
+	[FurnitureColor.GREEN]: '#2D5A27',
+	[FurnitureColor.YELLOW]: '#C9A84C',
+	[FurnitureColor.ORANGE]: '#C46A4A',
+	[FurnitureColor.PINK]: '#C47A8A',
+	[FurnitureColor.PURPLE]: '#4A2D6B',
+	[FurnitureColor.NATURAL_WOOD]: 'linear-gradient(135deg, #8B6340, #C4956A)',
+	[FurnitureColor.MULTICOLOR]: 'linear-gradient(135deg, #C46A4A, #1B3A6B, #2D5A27)',
 };
 
-const VISIBLE_ITEMS = 3;
-const VISIBLE_COLORS = 12;
-
-const discountOptions = [
-	{ label: '10% and above', value: 10 },
-	{ label: '20% and above', value: 20 },
-	{ label: '30% and above', value: 30 },
-	{ label: '40% and above', value: 40 },
-];
 
 const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => {
 	const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
 		room: true,
 		style: true,
 		material: true,
-		rating: true,
 		colors: true,
 		discount: true,
-		availability: true,
 		price: true,
 	});
-	const [showMore, setShowMore] = useState<Record<string, boolean>>({});
-	const [selectedDiscount, setSelectedDiscount] = useState<number>(10);
+	const [selectedDiscount, setSelectedDiscount] = useState<number>(0);
 
 	const toggle = (s: string) => setExpandedSections((p) => ({ ...p, [s]: !p[s] }));
-	const toggleMore = (s: string) => setShowMore((p) => ({ ...p, [s]: !p[s] }));
+
+	const applyFilter = (search: FIsearch) => {
+		const scrollPos = window.scrollY;
+		onFilterChange(search);
+		requestAnimationFrame(() => {
+			window.scrollTo(0, scrollPos);
+		});
+	};
 
 	const clearAll = () => {
-		onFilterChange({});
-		setSelectedDiscount(10);
+		applyFilter({});
+		setSelectedDiscount(0);
 	};
 
 	const toggleRoom = (room: FurnitureRoom) => {
 		const cur = searchFilter.roomList || [];
 		const next = cur.includes(room) ? cur.filter((r) => r !== room) : [...cur, room];
-		onFilterChange({ ...searchFilter, roomList: next.length ? next : undefined });
-	};
-
-	const toggleAllRooms = () => {
-		const all = Object.values(FurnitureRoom);
-		onFilterChange({ ...searchFilter, roomList: searchFilter.roomList?.length === all.length ? undefined : all });
+		applyFilter({ ...searchFilter, roomList: next.length ? next : undefined });
 	};
 
 	const toggleStyle = (style: FurnitureStyle) => {
 		const cur = searchFilter.styleList || [];
 		const next = cur.includes(style) ? cur.filter((s) => s !== style) : [...cur, style];
-		onFilterChange({ ...searchFilter, styleList: next.length ? next : undefined });
-	};
-
-	const toggleAllStyles = () => {
-		const all = Object.values(FurnitureStyle);
-		onFilterChange({ ...searchFilter, styleList: searchFilter.styleList?.length === all.length ? undefined : all });
+		applyFilter({ ...searchFilter, styleList: next.length ? next : undefined });
 	};
 
 	const toggleMaterial = (mat: FurnitureMaterial) => {
 		const cur = searchFilter.materialList || [];
 		const next = cur.includes(mat) ? cur.filter((m) => m !== mat) : [...cur, mat];
-		onFilterChange({ ...searchFilter, materialList: next.length ? next : undefined });
-	};
-
-	const toggleAllMaterials = () => {
-		const all = Object.values(FurnitureMaterial);
-		onFilterChange({ ...searchFilter, materialList: searchFilter.materialList?.length === all.length ? undefined : all });
+		applyFilter({ ...searchFilter, materialList: next.length ? next : undefined });
 	};
 
 	const toggleColor = (color: FurnitureColor) => {
 		const cur = searchFilter.colorList || [];
 		const next = cur.includes(color) ? cur.filter((c) => c !== color) : [...cur, color];
-		onFilterChange({ ...searchFilter, colorList: next.length ? next : undefined });
+		applyFilter({ ...searchFilter, colorList: next.length ? next : undefined });
+	};
+
+	const handleDiscount = (_: Event, v: number | number[]) => {
+		const val = v as number;
+		setSelectedDiscount(val);
+		applyFilter({ ...searchFilter, furnitureDiscountMin: val > 0 ? val : undefined });
 	};
 
 	const handlePrice = (_: Event, v: number | number[]) => {
 		const [start, end] = v as number[];
-		onFilterChange({ ...searchFilter, pricesRange: { start, end } });
+		applyFilter({ ...searchFilter, pricesRange: { start, end } });
 	};
 
-	const price = searchFilter.pricesRange || { start: 25, end: 255 };
+	const price = searchFilter.pricesRange || { start: 0, end: 5000 };
 	const allRooms = Object.values(FurnitureRoom);
-	const visibleRooms = showMore.room ? allRooms : allRooms.slice(0, VISIBLE_ITEMS);
 	const allStyles = Object.values(FurnitureStyle);
-	const visibleStyles = showMore.style ? allStyles : allStyles.slice(0, VISIBLE_ITEMS);
 	const allMats = Object.values(FurnitureMaterial);
-	const visibleMats = showMore.material ? allMats : allMats.slice(0, VISIBLE_ITEMS);
 	const allColors = Object.values(FurnitureColor);
-	const visibleColors = showMore.colors ? allColors : allColors.slice(0, VISIBLE_COLORS);
 
 	const Chevron = ({ sectionKey }: { sectionKey: string }) => (
 		<Box
@@ -126,23 +108,6 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 			}}
 		/>
 	);
-
-	const ShowMoreLink = ({ sectionKey, hasMore }: { sectionKey: string; hasMore: boolean }) =>
-		hasMore ? (
-			<Stack className="show-more-link" direction="row" alignItems="center" gap="10px" onClick={() => toggleMore(sectionKey)}>
-				<Box
-					component="img"
-					src="/icons/ArrowRight.svg"
-					alt="↓"
-					width={20}
-					height={20}
-					sx={{ transform: 'rotate(90deg)' }}
-				/>
-				<Typography className="show-more-text">
-					{showMore[sectionKey] ? 'Show less' : 'Show more'}
-				</Typography>
-			</Stack>
-		) : null;
 
 	const CustomCheckbox = ({ checked }: { checked: boolean }) => (
 		<Box className={`filter-custom-checkbox${checked ? ' checked' : ''}`} />
@@ -167,17 +132,12 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 				</Stack>
 				{expandedSections.room && (
 					<Stack className="filter-section-body">
-						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={toggleAllRooms} sx={{ cursor: 'pointer' }}>
-							<CustomCheckbox checked={searchFilter.roomList?.length === allRooms.length || false} />
-							<Typography className="filter-checkbox-label">All</Typography>
-						</Stack>
-						{visibleRooms.map((room) => (
+						{allRooms.map((room) => (
 							<Stack key={room} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleRoom(room)} sx={{ cursor: 'pointer' }}>
 								<CustomCheckbox checked={searchFilter.roomList?.includes(room) || false} />
 								<Typography className="filter-checkbox-label">{room.replace(/_/g, ' ')}</Typography>
 							</Stack>
 						))}
-						<ShowMoreLink sectionKey="room" hasMore={allRooms.length > VISIBLE_ITEMS} />
 					</Stack>
 				)}
 			</Stack>
@@ -190,17 +150,12 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 				</Stack>
 				{expandedSections.style && (
 					<Stack className="filter-section-body">
-						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={toggleAllStyles} sx={{ cursor: 'pointer' }}>
-							<CustomCheckbox checked={searchFilter.styleList?.length === allStyles.length || false} />
-							<Typography className="filter-checkbox-label">All</Typography>
-						</Stack>
-						{visibleStyles.map((style) => (
+						{allStyles.map((style) => (
 							<Stack key={style} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleStyle(style)} sx={{ cursor: 'pointer' }}>
 								<CustomCheckbox checked={searchFilter.styleList?.includes(style) || false} />
 								<Typography className="filter-checkbox-label">{style.replace(/_/g, ' ')}</Typography>
 							</Stack>
 						))}
-						<ShowMoreLink sectionKey="style" hasMore={allStyles.length > VISIBLE_ITEMS} />
 					</Stack>
 				)}
 			</Stack>
@@ -213,45 +168,12 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 				</Stack>
 				{expandedSections.material && (
 					<Stack className="filter-section-body">
-						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={toggleAllMaterials} sx={{ cursor: 'pointer' }}>
-							<CustomCheckbox checked={searchFilter.materialList?.length === allMats.length || false} />
-							<Stack direction="row" alignItems="center" gap="8px">
-								<Typography className="filter-checkbox-label">All</Typography>
-								<Typography className="filter-checkbox-count">(50505)</Typography>
-							</Stack>
-						</Stack>
-						{visibleMats.map((mat) => (
+						{allMats.map((mat) => (
 							<Stack key={mat} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => toggleMaterial(mat)} sx={{ cursor: 'pointer' }}>
 								<CustomCheckbox checked={searchFilter.materialList?.includes(mat) || false} />
 								<Typography className="filter-checkbox-label">{mat.replace(/_/g, ' ')}</Typography>
 							</Stack>
 						))}
-						<ShowMoreLink sectionKey="material" hasMore={allMats.length > VISIBLE_ITEMS} />
-					</Stack>
-				)}
-			</Stack>
-
-			{/* Customer Rating */}
-			<Stack className="filter-section">
-				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('rating')}>
-					<Typography className="filter-section-title">Customer rating</Typography>
-					<Chevron sectionKey="rating" />
-				</Stack>
-				{expandedSections.rating && (
-					<Stack className="filter-section-body">
-						<Stack direction="row" alignItems="center" gap="14px" sx={{ padding: '4px 0' }}>
-							{Array.from({ length: 5 }, (_, i) => (
-								<Box
-									key={i}
-									component="img"
-									src="/icons/star_icon.svg"
-									alt="star"
-									width={18}
-									height={18}
-									sx={{ opacity: 0.3, cursor: 'pointer', '&:hover': { opacity: 1 } }}
-								/>
-							))}
-						</Stack>
 					</Stack>
 				)}
 			</Stack>
@@ -264,22 +186,19 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 				</Stack>
 				{expandedSections.colors && (
 					<Stack className="filter-section-body">
-						<Stack direction="row" flexWrap="wrap" gap="14px" sx={{ py: '8px' }}>
-							{visibleColors.map((color) => (
+						<Stack direction="row" flexWrap="wrap" gap="14px" sx={{ py: '8px', px: '4px' }}>
+							{allColors.map((color) => (
 								<Box
 									key={color}
 									className={`filter-color-swatch${searchFilter.colorList?.includes(color) ? ' selected' : ''}`}
 									sx={{
 										background: colorMap[color],
-										border: searchFilter.colorList?.includes(color)
-											? '2px solid #A86464'
-											: color === FurnitureColor.WHITE ? '1px solid #e6e6e6' : 'none',
+										border: color === FurnitureColor.WHITE ? '1.5px solid #E8E0D8' : '1.5px solid transparent',
 									}}
 									onClick={() => toggleColor(color)}
 								/>
 							))}
 						</Stack>
-						<ShowMoreLink sectionKey="colors" hasMore={allColors.length > VISIBLE_COLORS} />
 					</Stack>
 				)}
 			</Stack>
@@ -291,33 +210,39 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 					<Chevron sectionKey="discount" />
 				</Stack>
 				{expandedSections.discount && (
-					<Stack className="filter-section-body">
-						{discountOptions.map((opt) => (
-							<Stack key={opt.value} className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" onClick={() => setSelectedDiscount(opt.value)} sx={{ cursor: 'pointer' }}>
-								<Box
-									className={`filter-radio-btn${selectedDiscount === opt.value ? ' selected' : ''}`}
-								/>
-								<Typography className="filter-checkbox-label">{opt.label}</Typography>
-							</Stack>
-						))}
-						<ShowMoreLink sectionKey="discount" hasMore={true} />
-					</Stack>
-				)}
-			</Stack>
-
-			{/* Availability */}
-			<Stack className="filter-section">
-				<Stack className="filter-section-header" direction="row" justifyContent="space-between" alignItems="center" onClick={() => toggle('availability')}>
-					<Typography className="filter-section-title">Availability</Typography>
-					<Chevron sectionKey="availability" />
-				</Stack>
-				{expandedSections.availability && (
-					<Stack className="filter-section-body">
-						<Stack className="filter-checkbox-row" direction="row" alignItems="center" gap="14px" sx={{ py: '12px', cursor: 'pointer' }}>
-							<CustomCheckbox checked={false} />
-							<Typography className="filter-checkbox-label">Include Out of Stock</Typography>
+					<Stack className="filter-price-range">
+						<Slider
+							value={selectedDiscount}
+							onChange={handleDiscount}
+							min={0}
+							max={100}
+							step={5}
+							valueLabelDisplay="off"
+							sx={{
+								color: '#1C1A17',
+								mt: '8px',
+								mb: '4px',
+								'& .MuiSlider-thumb': {
+									width: 14,
+									height: 14,
+									backgroundColor: '#1C1A17',
+									border: '2px solid #fff',
+									boxShadow: '0 1px 4px rgba(0,0,0,0.3)',
+									'&:hover': { boxShadow: '0 1px 4px rgba(0,0,0,0.3)' },
+									'&.Mui-active': { boxShadow: '0 1px 4px rgba(0,0,0,0.3)' },
+									'&.Mui-focusVisible': { boxShadow: '0 1px 4px rgba(0,0,0,0.3)' },
+									'&::before': { display: 'none' },
+								},
+								'& .MuiSlider-track': { backgroundColor: '#1C1A17', border: 'none', height: 2 },
+								'& .MuiSlider-rail': { backgroundColor: '#E8E0D8', height: 2, opacity: 1 },
+							}}
+						/>
+						<Stack direction="row" justifyContent="space-between">
+							<Typography className="price-range-label">
+								{selectedDiscount === 0 ? 'No filter' : `${selectedDiscount}% and above`}
+							</Typography>
+							<Typography className="price-range-label">100%</Typography>
 						</Stack>
-						<ShowMoreLink sectionKey="availability" hasMore={true} />
 					</Stack>
 				)}
 			</Stack>
@@ -335,47 +260,31 @@ const FilterSidebar = ({ searchFilter, onFilterChange }: FilterSidebarProps) => 
 							onChange={handlePrice}
 							min={0}
 							max={5000}
-							step={5}
-							valueLabelDisplay="on"
-							valueLabelFormat={(v) => `$${v}`}
+							step={50}
+							valueLabelDisplay="off"
 							sx={{
-								color: '#000',
-								mt: '44px',
-								mb: '8px',
+								color: '#1C1A17',
+								mt: '8px',
+								mb: '4px',
 								'& .MuiSlider-thumb': {
-									backgroundColor: '#000',
-									width: 10,
-									height: 10,
-									boxShadow: 'none',
-									'&:hover': { boxShadow: 'none' },
-									'&.Mui-active': { boxShadow: 'none' },
-									'&.Mui-focusVisible': { boxShadow: 'none' },
+									width: 14,
+									height: 14,
+									backgroundColor: '#1C1A17',
+									border: '2px solid #fff',
+									boxShadow: '0 1px 4px rgba(0,0,0,0.3)',
+									'&:hover': { boxShadow: '0 1px 4px rgba(0,0,0,0.3)' },
+									'&.Mui-active': { boxShadow: '0 1px 4px rgba(0,0,0,0.3)' },
+									'&.Mui-focusVisible': { boxShadow: '0 1px 4px rgba(0,0,0,0.3)' },
 									'&::before': { display: 'none' },
 								},
-								'& .MuiSlider-track': { backgroundColor: '#000', border: 'none', height: 2 },
-								'& .MuiSlider-rail': { backgroundColor: '#ccc', height: 2, opacity: 1 },
-								'& .MuiSlider-valueLabel': {
-									backgroundColor: '#fff',
-									color: '#000',
-									fontSize: '12px',
-									fontFamily: "'Jost', sans-serif",
-									fontWeight: 500,
-									lineHeight: '18px',
-									border: '1px solid #e6e6e6',
-									borderRadius: '3px',
-									padding: '3px 8px',
-									boxShadow: 'none',
-									top: 2,
-									'&::before': {
-										width: 8,
-										height: 8,
-										backgroundColor: '#fff',
-										borderRight: '1px solid #e6e6e6',
-										borderBottom: '1px solid #e6e6e6',
-									},
-								},
+								'& .MuiSlider-track': { backgroundColor: '#1C1A17', border: 'none', height: 2 },
+								'& .MuiSlider-rail': { backgroundColor: '#E8E0D8', height: 2, opacity: 1 },
 							}}
 						/>
+						<Stack direction="row" justifyContent="space-between">
+							<Typography className="price-range-label">${price.start.toLocaleString()}</Typography>
+							<Typography className="price-range-label">${price.end.toLocaleString()}</Typography>
+						</Stack>
 					</Stack>
 				)}
 			</Stack>

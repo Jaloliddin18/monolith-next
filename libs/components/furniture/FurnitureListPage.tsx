@@ -225,7 +225,7 @@ const FurnitureListPage = ({
               justifyContent="space-between"
             >
               <Stack direction="row" gap="12px" alignItems="center">
-                <Typography className="sort-label">Short by:</Typography>
+                <Typography className="sort-label">Sort by:</Typography>
                 <Typography className="sort-value">
                   {sortOptions.find((o) => o.value === sortValue)?.label ??
                     "Recommended"}

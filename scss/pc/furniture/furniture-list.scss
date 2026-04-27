@@ -207,21 +207,6 @@
     width: 240px;
     flex-shrink: 0;
     gap: 0;
-    position: sticky;
-    top: 20px;
-    align-self: flex-start;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-    overflow-x: visible;
-
-    // Thin scrollbar
-    &::-webkit-scrollbar {
-      width: 3px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: #ddd;
-      border-radius: 3px;
-    }
 
     // Header (Filters + CLEAR ALL)
     .filter-header {
@@ -295,6 +280,21 @@
 
       .filter-section-body {
         margin-top: 14px;
+        max-height: 200px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #C46A4A #f0f0f0;
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #C46A4A;
+          border-radius: 4px;
+        }
+        &::-webkit-scrollbar-track {
+          background: #f0f0f0;
+        }
       }
 
       // Checkbox rows
@@ -377,26 +377,35 @@
 
       // Color swatches
       .filter-color-swatch {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
         flex-shrink: 0;
         cursor: pointer;
-        transition: transform 0.2s;
+        transition: filter 0.15s;
 
         &:hover {
-          transform: scale(1.1);
+          filter: brightness(0.85);
         }
 
         &.selected {
-          outline: 2px solid var(--color-primary);
+          outline: 2px solid #1C1A17;
           outline-offset: 2px;
         }
       }
 
       // Price range slider
       .filter-price-range {
-        padding: 0 6px;
+        padding: 0 4px;
         overflow: visible;
+
+        .price-range-label {
+          font-family: var(--font-ui);
+          font-size: 12px;
+          color: #787878;
+          font-weight: 400;
+          line-height: 18px;
+        }
       }
     }
   }

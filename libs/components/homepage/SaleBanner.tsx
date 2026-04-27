@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, Skeleton } from "@mui/material";
 import WestIcon from "@mui/icons-material/West";
 import EastIcon from "@mui/icons-material/East";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,6 +10,7 @@ import ProductCard from "../common/ProductCard";
 interface SaleBannerProps {
   furnitures: Furniture[];
   onLike: (id: string) => void;
+  loading?: boolean;
 }
 
 const getTimeLeft = (target: Date) => {
@@ -22,7 +23,7 @@ const getTimeLeft = (target: Date) => {
   };
 };
 
-const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
+const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
@@ -47,7 +48,7 @@ const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
 
   const pad = (n: number) => n.toString().padStart(2, "0");
 
-  if (!furnitures.length) return null;
+  if (!loading && !furnitures.length) return null;
 
   return (
     <Stack className="sale-banner-section" gap="40px">
@@ -117,6 +118,13 @@ const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
       </Stack>
 
       <Box className="section-swiper-wrap">
+        {loading ? (
+          <div style={{ display: "flex", gap: "24px" }}>
+            {[...Array(4)].map((_, i) => (
+              <Skeleton key={i} variant="rectangular" width="25%" height={380} sx={{ borderRadius: "8px" }} />
+            ))}
+          </div>
+        ) : (
         <Swiper
           modules={[Navigation, Pagination]}
           slidesPerView={4}
@@ -142,6 +150,7 @@ const SaleBanner = ({ furnitures, onLike }: SaleBannerProps) => {
             </SwiperSlide>
           ))}
         </Swiper>
+        )}
       </Box>
     </Stack>
   );

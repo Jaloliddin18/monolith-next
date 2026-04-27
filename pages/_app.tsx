@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import type { AppProps } from 'next/app';
-import { ApolloProvider } from '@apollo/client';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import { appWithTranslation } from 'next-i18next';
-import { useApollo } from '../apollo/client';
-import { light } from '../scss/MaterialTheme';
-import { socketVar } from '../apollo/store';
-import { getJwtToken, updateUserInfo } from '../libs/auth';
-import { REACT_APP_API_WS } from '../libs/config';
-import '../scss/app.scss';
-import '../scss/pc/main.scss';
-import 'swiper/swiper-bundle.css';
+import { useState, useEffect } from "react";
+import type { AppProps } from "next/app";
+import { ApolloProvider } from "@apollo/client";
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { appWithTranslation } from "next-i18next";
+import { useApollo } from "../apollo/client";
+import { light } from "../scss/MaterialTheme";
+import { socketVar } from "../apollo/store";
+import { getJwtToken, updateUserInfo } from "../libs/auth";
+import { REACT_APP_API_WS } from "../libs/config";
+import "../scss/app.scss";
+import "../scss/pc/main.scss";
+import "swiper/swiper-bundle.css";
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -28,7 +28,7 @@ function App({ Component, pageProps }: AppProps) {
     };
 
     ws.onerror = (err) => {
-      console.warn('WebSocket error', err);
+      console.warn("WebSocket error", err);
     };
 
     ws.onclose = () => {
