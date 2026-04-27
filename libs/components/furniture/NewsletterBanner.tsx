@@ -3,6 +3,7 @@ import { Box, Stack, Typography } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { SUBSCRIBE_NEWSLETTER } from '../../../apollo/user/mutation';
 import { sweetTopSmallSuccessAlert, sweetMixinErrorAlert } from '../../sweetAlert';
+import useDeviceDetect from '../../hooks/useDeviceDetect';
 
 type NewsletterVariant = 'furniture' | 'community' | 'about' | 'cs';
 
@@ -69,6 +70,7 @@ interface NewsletterBannerProps {
 }
 
 const NewsletterBanner = ({ variant = 'furniture' }: NewsletterBannerProps) => {
+	const device = useDeviceDetect();
 	const DecorativeSVG = VARIANT_SVG[variant];
 	const [email, setEmail] = useState('');
 	const [submitted, setSubmitted] = useState(false);
@@ -87,6 +89,40 @@ const NewsletterBanner = ({ variant = 'furniture' }: NewsletterBannerProps) => {
 			await sweetMixinErrorAlert(err.message);
 		}
 	};
+
+	if (device === 'mobile') {
+		return (
+			<Stack className="newsletter-mobile">
+				{submitted ? (
+					<Typography className="newsletter-title-mobile">
+						You are subscribed! Thank you.
+					</Typography>
+				) : (
+					<>
+						<Typography className="newsletter-title-mobile">
+							Get <span className="highlight">30% Discount</span> Buying First Product
+						</Typography>
+						<input
+							type="email"
+							placeholder="example@gmail.com"
+							className="newsletter-input-mobile"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							onKeyDown={(e) => e.key === 'Enter' && handleSubscribe()}
+							disabled={loading}
+						/>
+						<button
+							className="newsletter-btn-mobile"
+							onClick={handleSubscribe}
+							disabled={loading}
+						>
+							{loading ? '...' : 'SUBSCRIBE'}
+						</button>
+					</>
+				)}
+			</Stack>
+		);
+	}
 
 	return (
 		<Stack className="newsletter-banner" alignItems="center">

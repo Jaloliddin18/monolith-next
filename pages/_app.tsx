@@ -10,6 +10,7 @@ import { getJwtToken, updateUserInfo } from "../libs/auth";
 import { REACT_APP_API_WS } from "../libs/config";
 import "../scss/app.scss";
 import "../scss/pc/main.scss";
+import "../scss/mobile/main.scss";
 
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);

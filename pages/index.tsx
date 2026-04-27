@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Stack } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useQuery, useMutation, useReactiveVar } from "@apollo/client";
 import withLayoutHome from "../libs/components/layout/LayoutHome";
@@ -11,6 +11,8 @@ import { userVar } from "../apollo/store";
 import { Furniture } from "../libs/types/furniture/furniture";
 import { Direction } from "../libs/enums/common.enum";
 import { sweetMixinErrorAlert } from "../libs/sweetAlert";
+import useDeviceDetect from "../libs/hooks/useDeviceDetect";
+import NewsletterBanner from "../libs/components/furniture/NewsletterBanner";
 
 import HeroSection from "../libs/components/homepage/HeroSection";
 import IntroSection from "../libs/components/homepage/IntroSection";
@@ -30,6 +32,7 @@ import BlogSection from "../libs/components/homepage/BlogSection";
 import StoreFinder from "../libs/components/homepage/StoreFinder";
 
 const Home = () => {
+  const device = useDeviceDetect();
   const router = useRouter();
   const user = useReactiveVar(userVar);
   const refetchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -170,6 +173,46 @@ const Home = () => {
     },
     [user, router, likeTargetFurniture],
   );
+
+  if (device === 'mobile') {
+    return (
+      <>
+        <Head>
+          <title>Monolith — Luxury Furniture & Designer Marketplace</title>
+          <meta name="description" content="Discover premium furniture and designer pieces at Monolith. Shop luxury sofas, chairs, tables and more from top designers." />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <Stack className="home-page-mobile">
+          {/* Task 1 — Mobile Hero */}
+          <Box className="mobile-hero">
+            <img src="/img/homepage/home_hero.webp" alt="Luxury Furniture" className="mobile-hero-img" />
+            <Box className="mobile-hero-overlay" />
+            <Stack className="mobile-hero-content">
+              <Typography className="mobile-hero-title">Luxury Furniture</Typography>
+              <Typography className="mobile-hero-subtitle">Premium designs for your home</Typography>
+              <button className="mobile-hero-btn" onClick={() => router.push('/furniture')}>
+                Shop Now
+              </button>
+            </Stack>
+          </Box>
+
+          {/* Task 2 — Trending Now */}
+          <TrendingNow trendFurnitures={trendingFurnitures} loading={trendingLoading} onLike={handleLike} />
+
+          {/* Task 3 — Top Rated */}
+          <TopRated furnitures={topRatedFurnitures} loading={topRatedLoading} onLike={handleLike} />
+
+          {/* Task 4 — Sale Banner */}
+          <SaleBanner furnitures={saleFurnitures} loading={saleLoading} onLike={handleLike} />
+
+          {/* Task 5 — Blog Section */}
+          <BlogSection />
+
+          <NewsletterBanner variant="furniture" />
+        </Stack>
+      </>
+    );
+  }
 
   return (
     <>

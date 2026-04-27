@@ -8,9 +8,11 @@ import AiChatBubble from '../common/AiChatBubble';
 import { getJwtToken, updateUserInfo } from '../../auth';
 import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
+import useDeviceDetect from '../../hooks/useDeviceDetect';
 
 const withLayoutMypage = (Component: any) => {
 	return (props: any) => {
+		const device = useDeviceDetect();
 		const router = useRouter();
 		const user = useReactiveVar(userVar);
 		const [loading, setLoading] = useState(true);
@@ -28,6 +30,16 @@ const withLayoutMypage = (Component: any) => {
 		}, [loading, user]);
 
 		if (loading || !user._id) return null;
+
+		if (device === 'mobile') {
+			return (
+				<Stack id="mobile-wrap">
+					<Top />
+					<Component {...props} />
+					<Footer />
+				</Stack>
+			);
+		}
 
 		return (
 			<Stack id="pc-wrap">

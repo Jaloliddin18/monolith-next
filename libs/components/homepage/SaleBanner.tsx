@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Box, Stack, Typography, Skeleton } from "@mui/material";
 import { Furniture } from "../../types/furniture/furniture";
 import ProductCard from "../common/ProductCard";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 interface SaleBannerProps {
   furnitures: Furniture[];
@@ -20,7 +21,9 @@ const getTimeLeft = (target: Date) => {
 };
 
 const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
+  const device = useDeviceDetect();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
     scrollRef.current?.scrollBy({ left: -320, behavior: "smooth" });
@@ -28,6 +31,14 @@ const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
 
   const scrollRight = () => {
     scrollRef.current?.scrollBy({ left: 320, behavior: "smooth" });
+  };
+
+  const scrollMobileLeft = () => {
+    mobileScrollRef.current?.scrollBy({ left: -(window.innerWidth - 32), behavior: "smooth" });
+  };
+
+  const scrollMobileRight = () => {
+    mobileScrollRef.current?.scrollBy({ left: window.innerWidth - 32, behavior: "smooth" });
   };
 
   const countdownTarget = useMemo(() => {
@@ -52,6 +63,60 @@ const SaleBanner = ({ furnitures, onLike, loading }: SaleBannerProps) => {
   const pad = (n: number) => n.toString().padStart(2, "0");
 
   if (!loading && !furnitures.length) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="sale-banner-mobile">
+        {/* Header with title + arrows */}
+        <Stack className="section-header-mobile">
+          <Typography className="section-title-mobile">
+            <em>Sale</em> — Don&apos;t Miss Out!
+          </Typography>
+          <Stack direction="row" gap={1} className="mobile-arrows-row">
+            <button className="mobile-arrow" onClick={scrollMobileLeft} aria-label="Previous">←</button>
+            <button className="mobile-arrow" onClick={scrollMobileRight} aria-label="Next">→</button>
+          </Stack>
+        </Stack>
+        <Typography className="sale-subtitle-mobile">Limited time deals on premium furniture</Typography>
+
+        {/* Countdown */}
+        <Stack className="countdown-row-mobile">
+          {[
+            { value: pad(timeLeft.days), label: 'Days' },
+            { value: pad(timeLeft.hours), label: 'Hrs' },
+            { value: pad(timeLeft.mins), label: 'Min' },
+            { value: pad(timeLeft.secs), label: 'Sec' },
+          ].map((item, i) => (
+            <React.Fragment key={item.label}>
+              <Box className="countdown-circle">
+                <Typography className="countdown-value">{item.value}</Typography>
+              </Box>
+              {i < 3 && <Typography className="countdown-colon">:</Typography>}
+            </React.Fragment>
+          ))}
+        </Stack>
+
+        {/* Products */}
+        {loading ? (
+          <div className="mobile-scroll-container">
+            {[...Array(2)].map((_, i) => (
+              <div className="mobile-card-item" key={i}>
+                <Skeleton variant="rectangular" width="100%" height={280} sx={{ borderRadius: '8px' }} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div ref={mobileScrollRef} className="mobile-scroll-container">
+            {furnitures.map((furniture) => (
+              <div className="mobile-card-item" key={furniture._id}>
+                <ProductCard furniture={furniture} size="small" onLike={onLike} />
+              </div>
+            ))}
+          </div>
+        )}
+      </Stack>
+    );
+  }
 
   return (
     <Stack className="sale-banner-section" gap="40px">

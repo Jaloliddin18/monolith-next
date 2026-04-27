@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
-import { Box, Stack, Skeleton } from "@mui/material";
+import { Box, Stack, Skeleton, Typography } from "@mui/material";
 import { Furniture } from "../../types/furniture/furniture";
 import ProductCard from "../common/ProductCard";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 interface TopRatedProps {
   furnitures?: Furniture[];
@@ -10,7 +11,9 @@ interface TopRatedProps {
 }
 
 const TopRated = ({ furnitures = [], onLike, loading }: TopRatedProps) => {
+  const device = useDeviceDetect();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
     scrollRef.current?.scrollBy({ left: -320, behavior: "smooth" });
@@ -20,7 +23,46 @@ const TopRated = ({ furnitures = [], onLike, loading }: TopRatedProps) => {
     scrollRef.current?.scrollBy({ left: 320, behavior: "smooth" });
   };
 
+  const scrollMobileLeft = () => {
+    mobileScrollRef.current?.scrollBy({ left: -(window.innerWidth - 32), behavior: "smooth" });
+  };
+
+  const scrollMobileRight = () => {
+    mobileScrollRef.current?.scrollBy({ left: window.innerWidth - 32, behavior: "smooth" });
+  };
+
   if (!loading && !furnitures.length) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="top-rated-mobile">
+        <Stack className="section-header-mobile">
+          <Typography className="section-title-mobile">Top Rated</Typography>
+          <Stack direction="row" gap={1} className="mobile-arrows-row">
+            <button className="mobile-arrow" onClick={scrollMobileLeft} aria-label="Previous">←</button>
+            <button className="mobile-arrow" onClick={scrollMobileRight} aria-label="Next">→</button>
+          </Stack>
+        </Stack>
+        {loading ? (
+          <div className="mobile-scroll-container">
+            {[...Array(2)].map((_, i) => (
+              <div className="mobile-card-item" key={i}>
+                <Skeleton variant="rectangular" width="100%" height={280} sx={{ borderRadius: '8px' }} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div ref={mobileScrollRef} className="mobile-scroll-container">
+            {furnitures.map((furniture) => (
+              <div className="mobile-card-item" key={furniture._id}>
+                <ProductCard furniture={furniture} size="small" onLike={onLike} />
+              </div>
+            ))}
+          </div>
+        )}
+      </Stack>
+    );
+  }
 
   return (
     <Stack className="top-rated-section" gap="40px">

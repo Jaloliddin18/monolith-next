@@ -6,8 +6,10 @@ import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
 import { BoardArticle } from '../../types/board-article/board-article';
 import { BoardArticlesInquiry } from '../../types/board-article/board-article.input';
 import { Direction } from '../../enums/common.enum';
+import useDeviceDetect from '../../hooks/useDeviceDetect';
 
 const BlogSection = () => {
+	const device = useDeviceDetect();
 	const router = useRouter();
 	const [searchFilter] = useState<BoardArticlesInquiry>({
 		page: 1,
@@ -35,6 +37,35 @@ const BlogSection = () => {
 		article.articleImage
 			? `${process.env.REACT_APP_API_URL}/${article.articleImage}`
 			: '/img/furniture/luxury_chair.jpg';
+
+	if (device === 'mobile') {
+		const mobileArticles = latestBlogs.slice(0, 2);
+		return (
+			<Stack className="blog-mobile">
+				<Typography className="section-title-mobile">Latest Blog</Typography>
+				<Stack className="blog-cards-mobile">
+					{mobileArticles.map((article) => (
+						<Box
+							key={article._id}
+							className="blog-card-mobile"
+							onClick={() => router.push(`/community/detail?articleId=${article._id}`)}
+						>
+							<Box className="blog-card-img-mobile">
+								<img src={getImage(article)} alt={article.articleTitle} />
+							</Box>
+							<Stack className="blog-card-content-mobile">
+								<Stack className="blog-meta-mobile">
+									<Typography className="blog-category-mobile">{article.articleCategory}</Typography>
+									<Typography className="blog-date-mobile">{formatDate(article.createdAt)}</Typography>
+								</Stack>
+								<Typography className="blog-title-mobile">{article.articleTitle}</Typography>
+							</Stack>
+						</Box>
+					))}
+				</Stack>
+			</Stack>
+		);
+	}
 
 	return (
 		<Stack className="blog-section" alignItems="center" gap="50px">

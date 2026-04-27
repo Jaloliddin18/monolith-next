@@ -8,6 +8,7 @@ import { getJwtToken, updateUserInfo, logOut } from "../auth";
 import {
   Avatar,
   Box,
+  Drawer,
   Stack,
   Typography,
   IconButton,
@@ -21,6 +22,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MenuIcon from "@mui/icons-material/Menu";
 import MiniCart from "./cart/MiniCart";
 import MiniWishlist from "./cart/MiniWishlist";
 import { getCartCount } from "../utils/cartStorage";
@@ -28,8 +30,10 @@ import { GET_FAVORITES, GET_FURNITURES } from "../../apollo/user/query";
 import { T } from "../types/common";
 import { Furniture } from "../types/furniture/furniture";
 import { REACT_APP_API_URL } from "../config";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 
 const Top = () => {
+  const device = useDeviceDetect();
   const router = useRouter();
   const user = useReactiveVar(userVar);
   const { t, i18n } = useTranslation("common");
@@ -37,6 +41,7 @@ const Top = () => {
   const [langAnchorEl, setLangAnchorEl] = useState<null | HTMLElement>(null);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
   const [cartCount, setCartCount] = useState(() => getCartCount());
   const [lang, setLang] = useState<string>("en");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -174,6 +179,60 @@ const Top = () => {
     },
     [router],
   );
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="top-mobile">
+        {/* Logo */}
+        <Link href="/" className="mobile-logo-text">
+          MONOLITH
+        </Link>
+
+        {/* Right side icons */}
+        <Stack direction="row" alignItems="center">
+          <IconButton onClick={() => setOpenCart(true)} size="small">
+            <Badge badgeContent={cartCount} color="primary">
+              <ShoppingCartOutlinedIcon sx={{ fontSize: 22 }} />
+            </Badge>
+          </IconButton>
+          {user?._id && (
+            <IconButton onClick={() => setOpenWishlist(true)} size="small">
+              <Badge badgeContent={wishlistCount} color="primary">
+                <FavoriteBorderIcon sx={{ fontSize: 22 }} />
+              </Badge>
+            </IconButton>
+          )}
+          <IconButton onClick={() => setOpenMenu(true)} size="small">
+            <MenuIcon sx={{ fontSize: 24 }} />
+          </IconButton>
+        </Stack>
+
+        {/* Hamburger Drawer */}
+        <Drawer anchor="right" open={openMenu} onClose={() => setOpenMenu(false)}>
+          <Stack className="mobile-drawer" sx={{ width: 280 }}>
+            <Box className="mobile-drawer-header">
+              <Typography className="mobile-drawer-logo">MONOLITH</Typography>
+            </Box>
+            <Link href="/" onClick={() => setOpenMenu(false)}>{t("Home")}</Link>
+            <Link href="/furniture" onClick={() => setOpenMenu(false)}>{t("Shop")}</Link>
+            <Link href="/designers" onClick={() => setOpenMenu(false)}>{t("Designers")}</Link>
+            <Link href="/community" onClick={() => setOpenMenu(false)}>{t("Blog")}</Link>
+            <Link href="/about" onClick={() => setOpenMenu(false)}>{t("About")}</Link>
+            <Link href="/cs" onClick={() => setOpenMenu(false)}>{t("CS")}</Link>
+            {user?._id ? (
+              <Link href="/mypage" onClick={() => setOpenMenu(false)}>{t("My Page")}</Link>
+            ) : (
+              <Link href="/account/join" onClick={() => setOpenMenu(false)}>{t("Login / Register")}</Link>
+            )}
+          </Stack>
+        </Drawer>
+
+        {/* Mini Cart + Wishlist */}
+        <MiniCart open={openCart} onClose={() => setOpenCart(false)} />
+        <MiniWishlist open={openWishlist} onClose={() => setOpenWishlist(false)} />
+      </Stack>
+    );
+  }
 
   return (
     <Stack id="top">

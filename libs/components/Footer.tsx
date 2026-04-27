@@ -1,8 +1,41 @@
 import React from "react";
 import Link from "next/link";
 import { Box, Stack, Typography } from "@mui/material";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 
 const Footer = () => {
+  const device = useDeviceDetect();
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="footer-mobile">
+        <Stack className="footer-mobile-inner">
+          <Typography className="footer-mobile-logo">MONOLITH</Typography>
+          <Typography className="footer-mobile-tagline">
+            Luxury Furniture &amp; Designer Marketplace
+          </Typography>
+          <Box className="footer-mobile-divider" />
+          <Stack className="footer-mobile-links">
+            <Link href="/furniture">Shop</Link>
+            <Link href="/designers">Designers</Link>
+            <Link href="/community">Blog</Link>
+            <Link href="/about">About</Link>
+            <Link href="/cs">CS</Link>
+          </Stack>
+          <Stack className="footer-mobile-social" direction="row">
+            <img src="/icons/FacebookLogo.svg" alt="Facebook" width={22} height={22} />
+            <img src="/icons/YoutubeLogo.svg" alt="YouTube" width={22} height={22} />
+            <img src="/icons/InstagramLogo2.svg" alt="Instagram" width={22} height={22} />
+            <img src="/icons/TwitterLogo.svg" alt="Twitter" width={22} height={22} />
+          </Stack>
+          <Typography className="footer-mobile-copyright">
+            © 2026 MONOLITH. All rights reserved.
+          </Typography>
+        </Stack>
+      </Stack>
+    );
+  }
+
   return (
     <Stack id="footer">
       <Box className="footer-main">

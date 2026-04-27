@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Stack, Typography, Skeleton } from "@mui/material";
 import { Furniture } from "../../types/furniture/furniture";
 import ProductCard from "../common/ProductCard";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
 
 interface HardcodedProduct {
   _id: string;
@@ -103,7 +104,9 @@ interface TrendingNowProps {
 }
 
 const TrendingNow = ({ trendFurnitures, onLike, loading }: TrendingNowProps) => {
+  const device = useDeviceDetect();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
   const products =
     trendFurnitures && trendFurnitures.length > 0 ? trendFurnitures : null;
 
@@ -114,6 +117,54 @@ const TrendingNow = ({ trendFurnitures, onLike, loading }: TrendingNowProps) => 
   const scrollRight = () => {
     scrollRef.current?.scrollBy({ left: 320, behavior: "smooth" });
   };
+
+  const scrollMobileLeft = () => {
+    mobileScrollRef.current?.scrollBy({ left: -(window.innerWidth - 32), behavior: "smooth" });
+  };
+
+  const scrollMobileRight = () => {
+    mobileScrollRef.current?.scrollBy({ left: window.innerWidth - 32, behavior: "smooth" });
+  };
+
+  if (device === 'mobile') {
+    const displayItems = products ? products.slice(0, 6) : hardcodedProducts;
+    return (
+      <Stack className="trending-mobile">
+        <Stack className="section-header-mobile">
+          <Typography className="section-title-mobile">Trending Now</Typography>
+          <Stack direction="row" gap={1} className="mobile-arrows-row">
+            <button className="mobile-arrow" onClick={scrollMobileLeft} aria-label="Previous">←</button>
+            <button className="mobile-arrow" onClick={scrollMobileRight} aria-label="Next">→</button>
+          </Stack>
+        </Stack>
+        {loading ? (
+          <div className="mobile-scroll-container">
+            {[...Array(2)].map((_, i) => (
+              <div className="mobile-card-item" key={i}>
+                <Skeleton variant="rectangular" width="100%" height={280} sx={{ borderRadius: '8px' }} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div ref={mobileScrollRef} className="mobile-scroll-container">
+            {displayItems.map((item) => (
+              <div className="mobile-card-item" key={item._id}>
+                <ProductCard
+                  furniture={item as unknown as Furniture}
+                  size="small"
+                  onLike={onLike}
+                  isOutOfStock={(item as any).isOutOfStock}
+                  rating={(item as any).rating}
+                  reviewCount={(item as any).reviewCount}
+                  originalPrice={(item as any).originalPrice}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+      </Stack>
+    );
+  }
 
   return (
     <Stack className="trending-section" gap="50px">
