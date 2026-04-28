@@ -1,217 +1,172 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {
-  Box,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-} from "@mui/material";
-import Collapse from "@mui/material/Collapse";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
-import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
-import HeadsetMicOutlinedIcon from "@mui/icons-material/HeadsetMicOutlined";
-import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { Box, Avatar, Typography, Divider, Tooltip } from "@mui/material";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import ChairOutlinedIcon from "@mui/icons-material/ChairOutlined";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
+import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "../../../apollo/store";
 import { REACT_APP_API_URL } from "../../config";
 
-const AdminMenuList = (props: any) => {
-  const router = useRouter();
-  const device = useDeviceDetect();
-  const user = useReactiveVar(userVar);
-  const [openMenu, setOpenMenu] = useState(
-    typeof window === "object"
-      ? localStorage.getItem("admin_menu") === "true"
-      : false,
-  );
-  const [clickMenu, setClickMenu] = useState<any>([]);
-  const [clickSubMenu, setClickSubMenu] = useState("");
+interface NavItem {
+  title: string;
+  icon: React.ReactNode;
+  href?: string;
+  children?: { title: string; href: string }[];
+}
 
-  const pathnames = router.pathname.split("/").filter((x: any) => x);
-
-  /** LIFECYCLES **/
-  useEffect(() => {
-    switch (pathnames[1]) {
-      case "furnitures":
-        setClickMenu(["Furnitures"]);
-        break;
-      case "community":
-        setClickMenu(["Community"]);
-        break;
-      case "cs":
-        setClickMenu(["CS"]);
-        break;
-      default:
-        setClickMenu(["Users"]);
-        break;
-    }
-
-    switch (pathnames[2]) {
-      case "inquiry":
-        setClickSubMenu("1:1 Inquiry");
-        break;
-      case "notice":
-        setClickSubMenu("Notice");
-        break;
-      case "faq":
-        setClickSubMenu("FAQ");
-        break;
-      default:
-        setClickSubMenu("List");
-        break;
-    }
-    // Also auto-open Cs menu when on CS pages
-    if (pathnames[1] === "cs") {
-      setClickMenu(["CS"]);
-    }
-  }, []);
-
-  /** HANDLERS **/
-  const subMenuChangeHandler = (target: string) => {
-    if (clickMenu.find((item: string) => item === target)) {
-      setClickMenu(clickMenu.filter((menu: string) => target !== menu));
-    } else {
-      setClickMenu([...clickMenu, target]);
-    }
-  };
-
-  const menu_set = [
-    {
-      title: "Users",
-      icon: <PersonOutlineIcon sx={{ fontSize: 20, color: "#bdbdbd" }} />,
-      on_click: () => subMenuChangeHandler("Users"),
-    },
-    {
-      title: "Furnitures",
-      icon: (
-        <ManageAccountsOutlinedIcon sx={{ fontSize: 20, color: "#bdbdbd" }} />
-      ),
-      on_click: () => subMenuChangeHandler("Furnitures"),
-    },
-    {
-      title: "Community",
-      icon: <ForumOutlinedIcon sx={{ fontSize: 20, color: "#bdbdbd" }} />,
-      on_click: () => subMenuChangeHandler("Community"),
-    },
-    {
-      title: "CS",
-      icon: <HeadsetMicOutlinedIcon sx={{ fontSize: 20, color: "#bdbdbd" }} />,
-      on_click: () => subMenuChangeHandler("CS"),
-    },
-  ];
-
-  const sub_menu_set: any = {
-    Users: [{ title: "List", url: "/_admin/users" }],
-    Furnitures: [{ title: "List", url: "/_admin/furnitures" }],
-    Community: [{ title: "List", url: "/_admin/community" }],
-    CS: [
-      { title: "1:1 Inquiry", url: "/_admin/cs/inquiry" },
-      { title: "FAQ", url: "/_admin/cs/faq" },
-      { title: "Notice", url: "/_admin/cs/notice" },
+const NAV_ITEMS: NavItem[] = [
+  {
+    title: "Dashboard",
+    icon: <DashboardOutlinedIcon sx={{ fontSize: 18 }} />,
+    href: "/_admin",
+  },
+  {
+    title: "Members",
+    icon: <PeopleOutlineIcon sx={{ fontSize: 18 }} />,
+    href: "/_admin/users",
+  },
+  {
+    title: "Furniture",
+    icon: <ChairOutlinedIcon sx={{ fontSize: 18 }} />,
+    href: "/_admin/furnitures",
+  },
+  {
+    title: "Articles",
+    icon: <ArticleOutlinedIcon sx={{ fontSize: 18 }} />,
+    href: "/_admin/community",
+  },
+  {
+    title: "CS",
+    icon: <SupportAgentOutlinedIcon sx={{ fontSize: 18 }} />,
+    children: [
+      { title: "1:1 Inquiry", href: "/_admin/cs/inquiry" },
+      { title: "FAQ", href: "/_admin/cs/faq" },
+      { title: "Notice", href: "/_admin/cs/notice" },
     ],
+  },
+];
+
+const AdminMenuList = () => {
+  const router = useRouter();
+  const user = useReactiveVar(userVar);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+
+  const avatarSrc =
+    user.memberImage && !user.memberImage.startsWith("/icons")
+      ? `${REACT_APP_API_URL}/${user.memberImage}`
+      : "/general_images/default_profile.png";
+
+  useEffect(() => {
+    // Auto-expand CS menu when on cs pages
+    if (router.pathname.includes("/_admin/cs")) {
+      setExpandedItem("CS");
+    }
+  }, [router.pathname]);
+
+  const isActive = (href?: string) => {
+    if (!href) return false;
+    if (href === "/_admin") return router.pathname === "/_admin";
+    return router.pathname.startsWith(href);
   };
+
+  const isChildActive = (children?: { href: string }[]) =>
+    children?.some((c) => router.pathname.startsWith(c.href)) ?? false;
 
   return (
-    <>
-      <Box className="admin-logo-wrap">
-        <Link href="/mypage" style={{ textDecoration: "none" }}>
-          <span
-            style={{
-              fontFamily: "'Jost', sans-serif",
-              fontSize: "18px",
-              fontWeight: 300,
-              letterSpacing: "8px",
-              color: "#1C1A17",
-              cursor: "pointer",
-            }}
-          >
-            MONOLITH
-          </span>
+    <Box className="admin-sidebar">
+      {/* Logo */}
+      <Box className="admin-sidebar-logo">
+        <Link href="/" style={{ textDecoration: "none" }}>
+          <Typography className="admin-logo-text">MONOLITH</Typography>
         </Link>
+        <Typography className="admin-logo-sub">Admin Console</Typography>
       </Box>
-      <Box className="admin-info-card">
-        <Avatar
-          src={
-            user.memberImage
-              ? `${REACT_APP_API_URL}/${user.memberImage}`
-              : "/general_images/default_profile.png"
+
+      <Box className="admin-sidebar-divider" />
+
+      {/* Navigation */}
+      <Box className="admin-nav" sx={{ flex: 1 }}>
+        {NAV_ITEMS.map((item) => {
+          const active = item.href ? isActive(item.href) : isChildActive(item.children);
+          const expanded = expandedItem === item.title || isChildActive(item.children);
+
+          if (item.children) {
+            return (
+              <Box key={item.title}>
+                <Box
+                  className={`admin-nav-item${active ? " active" : ""}`}
+                  onClick={() =>
+                    setExpandedItem(expanded ? null : item.title)
+                  }
+                >
+                  <span className="admin-nav-icon">{item.icon}</span>
+                  <span className="admin-nav-label">{item.title}</span>
+                  <span
+                    className="admin-nav-chevron"
+                    style={{
+                      transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  >
+                    <ExpandMoreIcon sx={{ fontSize: 16 }} />
+                  </span>
+                </Box>
+                {expanded && (
+                  <Box className="admin-subnav">
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Box
+                          className={`admin-subnav-item${
+                            router.pathname === child.href ? " active" : ""
+                          }`}
+                        >
+                          {child.title}
+                        </Box>
+                      </Link>
+                    ))}
+                  </Box>
+                )}
+              </Box>
+            );
           }
-          sx={{ width: 40, height: 40 }}
-        />
-        <Box className="admin-info-text">
-          <Typography className="brand-name">{user.memberNick || "Admin"}</Typography>
-          <Typography className="brand-sub">{user.memberPhone || ""}</Typography>
+
+          return (
+            <Link
+              key={item.title}
+              href={item.href!}
+              style={{ textDecoration: "none" }}
+            >
+              <Box className={`admin-nav-item${active ? " active" : ""}`}>
+                <span className="admin-nav-icon">{item.icon}</span>
+                <span className="admin-nav-label">{item.title}</span>
+              </Box>
+            </Link>
+          );
+        })}
+      </Box>
+
+      <Box className="admin-sidebar-divider" />
+
+      {/* Admin profile at bottom */}
+      <Box className="admin-sidebar-profile">
+        <Avatar src={avatarSrc} sx={{ width: 34, height: 34, flexShrink: 0 }} />
+        <Box className="admin-profile-text">
+          <Typography className="admin-profile-name">
+            {user.memberNick || "Admin"}
+          </Typography>
+          <Typography className="admin-profile-role">Administrator</Typography>
         </Box>
       </Box>
-      <Divider />
-      {menu_set.map((item, index) => (
-        <List className={"menu_wrap"} key={index} disablePadding>
-          <ListItemButton
-            onClick={item.on_click}
-            component={"li"}
-            className={clickMenu[0] === item.title ? "menu on" : "menu"}
-            sx={{
-              minHeight: 48,
-              justifyContent: openMenu ? "initial" : "center",
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: openMenu ? 3 : "auto",
-                justifyContent: "center",
-              }}
-            >
-              {item.icon}
-            </ListItemIcon>
-            <ListItemText>{item.title}</ListItemText>
-            <ExpandMore
-              sx={{
-                transition: 'transform 0.25s ease',
-                transform: clickMenu.find((menu: string) => item.title === menu)
-                  ? 'rotate(180deg)'
-                  : 'rotate(0deg)',
-              }}
-            />
-          </ListItemButton>
-          <Collapse
-            in={!!clickMenu.find((menu: string) => menu === item.title)}
-            className="menu"
-            timeout={250}
-            component="li"
-          >
-            <List className="menu-list" disablePadding>
-              {sub_menu_set[item.title] &&
-                sub_menu_set[item.title].map((sub: any, i: number) => (
-                  <Link href={sub.url} shallow={true} replace={true} key={i}>
-                    <ListItemButton
-                      component="li"
-                      className={
-                        clickMenu[0] === item.title &&
-                        clickSubMenu === sub.title
-                          ? "li on"
-                          : "li"
-                      }
-                    >
-                      <Typography variant={sub.title} component={"span"}>
-                        {sub.title}
-                      </Typography>
-                    </ListItemButton>
-                  </Link>
-                ))}
-            </List>
-          </Collapse>
-        </List>
-      ))}
-    </>
+    </Box>
   );
 };
 

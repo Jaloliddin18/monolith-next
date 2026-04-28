@@ -1,307 +1,498 @@
-// ==============================
-// ADMIN PANEL — Figma-aligned styles
-// Based on nestar design, adapted for Monolith
-// Accent: Terracotta #C46A4A
-// ==============================
+// ============================================================
+// ADMIN PANEL — Stripe / Linear / Vercel-inspired design system
+// Accent: Terracotta #C46A4A | Sidebar: #1C1A17
+// ============================================================
 
-// ---- ADMIN ROOT WRAPPER ----
+// ---- ROOT WRAPPER ----
 #admin-wrap {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
   width: 100%;
+  background: #F8F7F5;
+  font-family: 'DM Sans', sans-serif;
 }
 
-// ---- TOP HEADER BAR ----
-.admin-header {
-  height: 64px;
-  background: #ffffff;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+// ---- SIDEBAR WRAPPER ----
+.admin-sidebar-wrap {
+  width: 240px;
+  min-height: 100vh;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+// ---- SIDEBAR ----
+.admin-sidebar {
+  width: 240px;
+  height: 100vh;
+  background: #1C1A17;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.admin-sidebar-logo {
+  padding: 24px 20px 20px;
+
+  .admin-logo-text {
+    font-family: 'Jost', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    letter-spacing: 6px !important;
+    color: #FFFFFF !important;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .admin-logo-sub {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.04em !important;
+    color: rgba(255, 255, 255, 0.35) !important;
+    text-transform: uppercase;
+  }
+}
+
+.admin-sidebar-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  margin: 0 20px;
+}
+
+// ---- NAV ITEMS ----
+.admin-nav {
+  padding: 12px 0;
+  flex: 1;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { width: 0; }
+}
+
+.admin-nav-item {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 24px;
-  flex-shrink: 0;
-}
+  gap: 10px;
+  padding: 10px 20px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+  border-left: 2px solid transparent;
+  user-select: none;
+  margin: 1px 0;
 
-// ---- SIDEBAR LOGO (centered circle) ----
-.admin-logo-wrap {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0 16px;
+  &:hover {
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.05);
+  }
 
-  .admin-logo-circle {
-    width: 90px;
-    height: 90px;
-    background: var(--color-primary);
-    border-radius: 50%;
+  &.active {
+    color: #FFFFFF;
+    border-left-color: #C46A4A;
+    background: rgba(196, 106, 74, 0.1);
+
+    .admin-nav-icon { color: #C46A4A; }
+  }
+
+  .admin-nav-icon {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-family: var(--font-heading) !important;
-    font-size: 36px !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    letter-spacing: 0;
+    color: inherit;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+
+  .admin-nav-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 400;
+    flex: 1;
+    line-height: 1;
+  }
+
+  .admin-nav-chevron {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
   }
 }
 
-// ---- ADMIN INFO CARD ----
-.admin-info-card {
+// ---- SUBNAV ----
+.admin-subnav {
+  padding: 2px 0 4px;
+}
+
+.admin-subnav-item {
+  padding: 8px 20px 8px 48px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: color 0.15s ease;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  &.active {
+    color: #C46A4A;
+    font-weight: 500;
+
+    &::before { opacity: 1; }
+  }
+}
+
+// ---- SIDEBAR BOTTOM PROFILE ----
+.admin-sidebar-profile {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: #f5f5f5;
-  border-radius: 8px;
-  margin: 0 14px 14px;
-  padding: 12px 16px;
+  gap: 10px;
+  padding: 16px 20px;
 
-  .admin-info-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-
-    .brand-name {
-      font-family: var(--font-ui) !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
-      color: #212121 !important;
-      line-height: 1.4;
-    }
-
-    .brand-sub {
-      font-family: var(--font-ui) !important;
-      font-size: 13px !important;
-      font-weight: 400 !important;
-      color: #616161 !important;
-      line-height: 1.4;
-    }
-  }
-}
-
-// ---- SIDEBAR COLLAPSE TRANSITION ----
-.MuiCollapse-root {
-  transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-// ---- SIDEBAR MENU ----
-.menu_wrap {
-  padding: 2px 0;
-
-  .menu {
-    padding: 10px 16px !important;
-    color: #212121 !important;
-    transition: all 0.15s ease !important;
-    border-radius: 0 !important;
-
-    &:hover {
-      background: #f5f5f5 !important;
-    }
-
-    &.on {
-      color: #212121 !important;
-      background: transparent !important;
-    }
-
-    .MuiListItemIcon-root {
-      min-width: 0;
-      margin-right: 12px;
-
-      svg {
-        font-size: 20px !important;
-        color: #bdbdbd !important;
-        transition: color 0.15s;
-      }
-    }
-
-    .MuiListItemText-root span,
-    .MuiListItemText-primary {
-      font-family: var(--font-ui) !important;
-      font-size: 16px !important;
-      font-weight: 400 !important;
-    }
-
-    // expand/collapse chevron
-    svg.MuiSvgIcon-root:last-child {
-      font-size: 20px !important;
-      color: #bdbdbd !important;
-    }
+  .admin-profile-text {
+    flex: 1;
+    min-width: 0;
   }
 
-  .menu-list {
-    padding: 4px 0 8px 0 !important;
-    background: transparent;
-
-    .li {
-      margin: 1px 8px 1px 16px !important;
-      padding: 8px 16px 8px 28px !important;
-      border-radius: 4px !important;
-      color: #757575 !important;
-      font-family: var(--font-ui) !important;
-      font-size: 14px !important;
-      font-weight: 400 !important;
-      cursor: pointer;
-      transition: all 0.15s ease !important;
-
-      span {
-        font-family: var(--font-ui) !important;
-        font-size: 14px !important;
-        font-weight: 400 !important;
-        color: inherit !important;
-      }
-
-      &:hover {
-        background: #f5f5f5 !important;
-        color: #212121 !important;
-      }
-
-      &.on {
-        background: #fdf4f4 !important;
-        color: #212121 !important;
-
-        span {
-          color: #212121 !important;
-          font-weight: 600 !important;
-        }
-      }
-    }
-  }
-}
-
-// ---- MAIN CONTENT WRAPPER ----
-.content {
-  font-family: var(--font-ui);
-
-  .tit {
-    font-family: var(--font-heading) !important;
-    font-size: 28px !important;
-    font-weight: 700 !important;
-    color: #212121 !important;
-    letter-spacing: 0;
-    margin-bottom: 16px;
-  }
-
-  .title {
-    margin-bottom: 16px;
-
-    h2,
-    .MuiTypography-h2 {
-      font-family: var(--font-heading) !important;
-      font-size: 28px !important;
-      font-weight: 700 !important;
-      color: #212121 !important;
-      letter-spacing: 0;
-    }
-
-    &.flex_space {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
-
-  .btn_add {
-    background: var(--color-primary) !important;
-    color: #ffffff !important;
-    border-radius: 8px !important;
-    font-family: var(--font-ui) !important;
+  .admin-profile-name {
+    font-family: 'DM Sans', sans-serif !important;
     font-size: 13px !important;
-    font-weight: 600 !important;
-    text-transform: none !important;
-    padding: 8px 20px !important;
-    box-shadow: 0 2px 8px rgba(196, 106, 74, 0.25) !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-    &:hover {
-      background: var(--color-primary-hover) !important;
-    }
+  .admin-profile-role {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 }
 
-// ---- TABLE CARD WRAP ----
-.table-wrap {
-  background: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.2), 0 12px 24px -4px rgba(145, 158, 171, 0.12);
+// ---- MAIN AREA ----
+.admin-main {
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #F8F7F5;
+  min-width: 0;
+}
+
+// ---- TOP BAR ----
+.admin-topbar {
+  height: 56px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #EEEBE6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .admin-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .admin-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .admin-page-title {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #1C1A17 !important;
+    letter-spacing: -0.01em;
+  }
+}
+
+// ---- CONTENT AREA ----
+.admin-content {
+  padding: 32px;
+  flex: 1;
+}
+
+// ---- SECTION TITLE ----
+.admin-section-title {
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #787878 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 16px !important;
+}
+
+// ---- STAT CARDS ----
+.admin-stat-card {
+  background: #FFFFFF;
+  border: 1px solid #EEEBE6;
+  border-radius: 12px;
+  padding: 22px 24px;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(28, 26, 23, 0.06);
+  }
+
+  .stat-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(196, 106, 74, 0.08);
+    margin-bottom: 16px;
+    color: #C46A4A;
+  }
+
+  .stat-number {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    color: #1C1A17 !important;
+    line-height: 1 !important;
+    margin-bottom: 6px !important;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: #787878 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+}
+
+// ---- CHART CARD ----
+.admin-chart-card {
+  background: #FFFFFF;
+  border: 1px solid #EEEBE6;
+  border-radius: 12px;
+  padding: 24px;
   overflow: hidden;
 
-  // Tab navigation (matches Figma: underline active tab)
+  .chart-card-header {
+    margin-bottom: 20px;
+  }
+
+  .chart-card-title {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1C1A17 !important;
+    margin-bottom: 2px !important;
+  }
+
+  .chart-card-subtitle {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #787878 !important;
+  }
+}
+
+// ---- ADMIN TABLE WRAP ----
+.admin-table-card {
+  background: #FFFFFF;
+  border: 1px solid #EEEBE6;
+  border-radius: 12px;
+  overflow: hidden;
+
+  .admin-table-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #EEEBE6;
+
+    .admin-table-card-title {
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 13.5px !important;
+      font-weight: 600 !important;
+      color: #1C1A17 !important;
+    }
+  }
+}
+
+// ---- COMPACT TABLE (top products etc) ----
+.admin-compact-table {
+  width: 100%;
+
+  tr {
+    border-bottom: 1px solid #F5F2EE;
+    transition: background 0.12s;
+
+    &:last-child { border-bottom: none; }
+    &:hover td { background: #FDFCFB; }
+  }
+
+  td {
+    padding: 11px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #1C1A17;
+    vertical-align: middle;
+  }
+
+  .compact-table-rank {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #C0B9B0;
+    width: 28px;
+  }
+
+  .compact-table-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #EEEBE6;
+  }
+
+  .compact-table-name {
+    font-weight: 500;
+    color: #1C1A17;
+    cursor: pointer;
+
+    &:hover { color: #C46A4A; }
+  }
+
+  .compact-table-meta {
+    font-size: 12px;
+    color: #787878;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: flex-end;
+    font-weight: 500;
+  }
+}
+
+// ---- FULL MAIN TABLE ----
+.table-wrap {
+  background: #FFFFFF;
+  border: 1px solid #EEEBE6;
+  border-radius: 12px;
+  overflow: hidden;
+
   .tab-menu {
     display: flex !important;
     flex-direction: row !important;
-    padding: 0 8px !important;
+    padding: 0 !important;
     gap: 0 !important;
     height: 48px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #EEEBE6;
 
     .li {
       display: flex !important;
       align-items: center !important;
-      padding: 0 16px !important;
-      font-family: var(--font-ui) !important;
-      font-size: 14px !important;
+      padding: 0 20px !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 13px !important;
       font-weight: 500 !important;
-      color: #bdbdbd !important;
+      color: #B0A89E !important;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: color 0.15s ease, border-color 0.15s ease;
       white-space: nowrap;
-      width: auto !important;
       height: 100% !important;
 
       &:hover {
-        color: #212121 !important;
+        color: #1C1A17 !important;
         background: transparent !important;
       }
 
       &.on {
-        color: var(--color-primary) !important;
-        border-bottom-color: var(--color-primary) !important;
+        color: #1C1A17 !important;
+        border-bottom-color: #C46A4A !important;
         background: transparent !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
       }
     }
   }
 
-  // Search / filter row (between tabs and table)
   .search-area {
     display: flex !important;
     flex-direction: row !important;
     align-items: center;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #EEEBE6;
+    padding: 16px 20px;
+
+    .MuiOutlinedInput-root {
+      border-radius: 8px !important;
+    }
 
     .MuiSelect-select,
     .MuiOutlinedInput-input {
-      font-family: var(--font-ui) !important;
-      font-size: 14px !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 13px !important;
       padding: 10px 14px !important;
     }
 
     .MuiOutlinedInput-notchedOutline {
-      border-color: #eeeeee !important;
-      border-radius: 4px !important;
+      border-color: #EEEBE6 !important;
+      border-radius: 8px !important;
     }
 
     &:hover .MuiOutlinedInput-notchedOutline {
-      border-color: #bdbdbd !important;
+      border-color: #C0B9B0 !important;
     }
   }
 
   // Table header
   .MuiTableHead-root {
     .MuiTableRow-root {
-      background: #fafafa;
+      background: #FAFAF9;
 
       .MuiTableCell-root {
-        font-family: var(--font-ui) !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
-        color: #374151 !important;
-        letter-spacing: 0.15px;
-        text-transform: none;
-        border-bottom: 1px solid #eeeeee !important;
-        padding: 14px 16px !important;
+        font-family: 'DM Sans', sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #787878 !important;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        border-bottom: 1px solid #EEEBE6 !important;
+        padding: 12px 16px !important;
         white-space: nowrap;
-        background: #fafafa;
+        background: #FAFAF9;
       }
     }
   }
@@ -312,7 +503,7 @@
       transition: background 0.12s;
 
       &:hover {
-        background: #fafafa !important;
+        background: #FDFCFB !important;
       }
 
       &:last-child .MuiTableCell-root {
@@ -320,203 +511,272 @@
       }
 
       .MuiTableCell-root {
-        font-family: var(--font-ui) !important;
-        font-size: 14px !important;
-        color: #616161 !important;
-        border-bottom: 1px solid #eeeeee !important;
-        padding: 12px 16px !important;
-        letter-spacing: 0.15px;
+        font-family: 'DM Sans', sans-serif !important;
+        font-size: 13px !important;
+        color: #444240 !important;
+        border-bottom: 1px solid #F5F2EE !important;
+        padding: 11px 16px !important;
       }
     }
 
-    // Name cell (avatar + text link)
     .name {
       a {
         display: flex;
         align-items: center;
         gap: 8px;
-        color: #212121;
+        color: #1C1A17;
         text-decoration: none;
-        font-weight: 400;
-        font-size: 14px;
+        font-weight: 500;
+        font-size: 13px;
         transition: color 0.15s;
 
-        &:hover {
-          color: var(--color-primary);
-        }
+        &:hover { color: #C46A4A; }
       }
 
-      .MuiStack-root {
-        align-items: center;
-
-        a {
-          display: flex;
-          align-items: center;
-          color: #212121;
-          text-decoration: none;
-
-          &:hover {
-            color: var(--color-primary);
-          }
-        }
-      }
+      .MuiStack-root { align-items: center; }
     }
   }
 
-  // Empty state
   .no-data {
     display: block;
     text-align: center;
     padding: 60px 0;
-    font-family: var(--font-ui) !important;
-    font-size: 14px !important;
-    color: #bdbdbd !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
+    color: #C0B9B0 !important;
   }
 
-  // Pagination
   .MuiTablePagination-root {
-    border-top: 1px solid #eeeeee;
+    border-top: 1px solid #EEEBE6;
 
     .MuiTablePagination-selectLabel,
     .MuiTablePagination-displayedRows,
     .MuiTablePagination-select,
     .MuiTablePagination-input {
-      font-family: var(--font-ui) !important;
-      font-size: 15px !important;
-      color: #212121;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 13px !important;
+      color: #444240;
     }
 
     .MuiTablePagination-actions button {
-      color: #9e9e9e;
+      color: #C0B9B0;
 
       &:hover {
-        color: var(--color-primary);
+        color: #C46A4A;
         background: rgba(196, 106, 74, 0.06);
       }
     }
   }
 
-  // Checkbox
   .MuiCheckbox-root {
-    color: #eeeeee !important;
+    color: #EEEBE6 !important;
 
-    &.Mui-checked {
-      color: var(--color-primary) !important;
-    }
+    &.Mui-checked { color: #C46A4A !important; }
   }
 
-  // Toolbar (bulk actions)
   .MuiToolbar-root {
-    background: rgba(196, 106, 74, 0.05);
+    background: rgba(196, 106, 74, 0.04);
     border-radius: 8px;
     margin: 8px 16px;
     min-height: 48px !important;
 
     .MuiTypography-h6 {
-      font-family: var(--font-ui) !important;
-      font-size: 14px !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 13px !important;
       font-weight: 600 !important;
-      color: var(--color-primary) !important;
+      color: #C46A4A !important;
     }
 
     .MuiButton-text {
-      font-family: var(--font-ui) !important;
+      font-family: 'DM Sans', sans-serif !important;
       font-size: 13px !important;
       color: #d32f2f !important;
     }
   }
+
+  .btn_add {
+    background: #1C1A17 !important;
+    color: #FFFFFF !important;
+    border-radius: 7px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    padding: 7px 16px !important;
+    letter-spacing: 0;
+
+    &:hover { background: #C46A4A !important; }
+  }
 }
 
-// ---- STATUS BADGES (Figma: green pill badges) ----
+// ---- STATUS BADGES ----
 .badge {
-  font-family: var(--font-ui) !important;
-  font-size: 12px !important;
-  font-weight: 400 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
   padding: 3px 10px !important;
-  border-radius: 4px !important;
-  min-width: 0 !important;
-  line-height: 1.5 !important;
-  cursor: pointer;
+  border-radius: 20px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
   border: none !important;
+  cursor: pointer;
+  text-transform: none !important;
 
-  &.success {
-    background: rgba(84, 214, 44, 0.16) !important;
-    color: #229a16 !important;
+  &.success, &.badge-active {
+    background: #EDFAF1 !important;
+    color: #2E7D32 !important;
 
-    &:hover {
-      background: rgba(84, 214, 44, 0.25) !important;
-    }
+    &:hover { background: #D6F5E0 !important; }
   }
 
   &.warning {
-    background: rgba(255, 193, 7, 0.16) !important;
-    color: #b78103 !important;
+    background: #FFF8E1 !important;
+    color: #9B6C00 !important;
 
-    &:hover {
-      background: rgba(255, 193, 7, 0.25) !important;
-    }
+    &:hover { background: #FFF0C0 !important; }
   }
 
-  &.error,
-  &.danger {
-    background: rgba(255, 72, 66, 0.16) !important;
-    color: #b72136 !important;
+  &.error, &.danger, &.badge-block {
+    background: #FEECEC !important;
+    color: #C0392B !important;
+  }
+
+  &.badge-delete {
+    background: #F5F5F5 !important;
+    color: #787878 !important;
+  }
+
+  &.badge-user {
+    background: #EBF3FF !important;
+    color: #1B3A6B !important;
+  }
+
+  &.badge-designer {
+    background: #FDF0EC !important;
+    color: #C46A4A !important;
+  }
+
+  &.badge-admin {
+    background: #F0EDE8 !important;
+    color: #1C1A17 !important;
   }
 }
 
-// ---- STATUS CHANGE DROPDOWN MENU ----
+// ---- STATUS DROPDOWN MENU ----
 .menu-modal {
   .MuiPaper-root {
     border-radius: 8px !important;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1) !important;
-    border: 1px solid #eeeeee;
+    box-shadow: 0 4px 24px rgba(28, 26, 23, 0.1) !important;
+    border: 1px solid #EEEBE6;
     min-width: 140px;
 
     .MuiMenuItem-root {
-      font-family: var(--font-ui) !important;
-      font-size: 14px !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 13px !important;
       font-weight: 400 !important;
-      padding: 10px 20px !important;
-      color: #212121;
+      padding: 9px 20px !important;
+      color: #1C1A17;
       transition: background 0.15s;
 
       &:hover {
-        background: #fdf4f4 !important;
-        color: var(--color-primary);
+        background: #FDF0EC !important;
+        color: #C46A4A;
       }
     }
   }
 }
 
-// ---- SELECT / DROPDOWN ----
+// ---- SELECT DROPDOWN ----
 .MuiMenu-root .MuiPaper-root {
   .MuiMenuItem-root {
-    font-family: var(--font-ui) !important;
-    font-size: 14px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 13px !important;
   }
 }
 
-// ---- ACTION ICON BUTTONS ----
+// ---- ICON BUTTONS ----
 .MuiIconButton-root {
   &:hover {
-    color: var(--color-primary);
+    color: #C46A4A;
     background: rgba(196, 106, 74, 0.06) !important;
   }
 }
 
-// ---- OPEN IN BROWSER BUTTON ----
 .btn_window {
   padding: 4px !important;
   margin-left: 4px;
-  color: #bdbdbd !important;
+  color: #C0B9B0 !important;
 
-  &:hover {
-    color: var(--color-primary) !important;
+  &:hover { color: #C46A4A !important; }
+
+  svg { font-size: 16px !important; }
+}
+
+// ---- DASHBOARD CONTENT SHIM ----
+.content {
+  font-family: 'DM Sans', sans-serif;
+
+  .tit {
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #1C1A17 !important;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
   }
 
-  svg {
-    font-size: 16px !important;
+  .title {
+    margin-bottom: 20px;
+
+    h2,
+    .MuiTypography-h2 {
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 22px !important;
+      font-weight: 700 !important;
+      color: #1C1A17 !important;
+      letter-spacing: -0.01em;
+    }
+
+    &.flex_space {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
+}
+
+// ---- RECENT MEMBERS TABLE ----
+.admin-members-table {
+  width: 100%;
+
+  th {
+    background: #FAFAF9;
+    padding: 11px 20px;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: #787878;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 600;
+    border-bottom: 1px solid #EEEBE6;
+  }
+
+  td {
+    padding: 11px 20px;
+    border-bottom: 1px solid #F5F2EE;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: #1C1A17;
+    vertical-align: middle;
+  }
+
+  tr:hover td { background: #FDFCFB; }
+  tr:last-child td { border-bottom: none; }
+}
+
+// ---- COLLAPSE ANIMATION ----
+.MuiCollapse-root {
+  transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }

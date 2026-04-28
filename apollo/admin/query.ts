@@ -1,6 +1,63 @@
 import { gql } from "@apollo/client";
 
 /**************************
+ *      ADMIN STATS       *
+ *************************/
+
+export const GET_ADMIN_STATS = gql`
+  query GetAdminStats {
+    getAdminStats {
+      totalMembers
+      totalDesigners
+      totalFurnitures
+      totalArticles
+      totalSubscribers
+      totalViews
+      totalLikes
+      topViewedFurnitures {
+        _id
+        furnitureTitle
+        furnitureImages
+        furnitureViews
+      }
+      topLikedFurnitures {
+        _id
+        furnitureTitle
+        furnitureImages
+        furnitureLikes
+      }
+      topDesigners {
+        _id
+        memberNick
+        memberImage
+        memberRank
+        memberDesigns
+      }
+      recentMembers {
+        _id
+        memberNick
+        memberImage
+        memberType
+        memberStatus
+        createdAt
+      }
+      furnitureByCategory {
+        category
+        count
+      }
+      furnitureByRoom {
+        room
+        count
+      }
+      memberGrowth {
+        month
+        count
+      }
+    }
+  }
+`;
+
+/**************************
  *         MEMBER         *
  *************************/
 
