@@ -3,6 +3,7 @@ import { Direction } from '../../enums/common.enum';
 
 export interface NoticeInput {
 	noticeCategory: NoticeCategory;
+	noticeStatus: NoticeStatus;
 	noticeTitle: string;
 	noticeContent: string;
 	memberId?: string;

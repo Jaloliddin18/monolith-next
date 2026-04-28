@@ -184,6 +184,269 @@
 		}
 	}
 
+	// ===== INQUIRY SECTION =====
+	.contact-inquiry-section {
+		padding: 60px 150px;
+		max-width: 1440px;
+		margin: 0 auto;
+		width: 100%;
+		box-sizing: border-box;
+
+		.inquiry-container {
+			display: flex;
+			gap: 48px;
+			align-items: flex-start;
+		}
+
+		.inquiry-form-wrap,
+		.my-inquiries-wrap {
+			flex: 1;
+		}
+
+		.inquiry-section-title {
+			font-family: var(--font-ui);
+			font-size: 22px;
+			font-weight: 600;
+			color: #1C1A17;
+			margin-bottom: 4px;
+		}
+
+		.inquiry-section-sub {
+			font-family: var(--font-ui);
+			font-size: 13px;
+			color: #787878;
+			margin-bottom: 24px;
+		}
+
+		.inquiry-login-prompt {
+			background: #FAF8F5;
+			border: 1px solid #E8E0D8;
+			border-radius: 12px;
+			padding: 40px 32px;
+			text-align: center;
+
+			.login-prompt-text {
+				font-family: var(--font-ui);
+				font-size: 15px;
+				color: #787878;
+				margin-bottom: 20px;
+			}
+
+			.login-prompt-btn {
+				background: #C46A4A;
+				color: #fff;
+				padding: 12px 28px;
+				font-family: var(--font-ui);
+				font-size: 14px;
+				text-transform: none;
+				border-radius: 6px;
+
+				&:hover { background: #a85a3c; }
+			}
+		}
+
+		.inquiry-form {
+			background: white;
+			border: 1px solid #E8E0D8;
+			border-radius: 12px;
+			padding: 32px;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+
+			.inquiry-form-group {
+				display: flex;
+				flex-direction: column;
+				gap: 6px;
+
+				label {
+					font-family: var(--font-ui);
+					font-size: 13px;
+					font-weight: 500;
+					color: #1C1A17;
+
+					span {
+						font-weight: 400;
+						color: #787878;
+					}
+				}
+
+				input,
+				textarea {
+					width: 100%;
+					box-sizing: border-box;
+					padding: 12px 16px;
+					border: 1px solid #E8E0D8;
+					border-radius: 8px;
+					font-family: var(--font-ui);
+					font-size: 14px;
+					outline: none;
+					resize: vertical;
+					color: #1C1A17;
+
+					&:focus { border-color: #C46A4A; }
+					&::placeholder { color: #AAAFB5; }
+				}
+
+				textarea { min-height: 120px; }
+			}
+
+			.inquiry-submit-btn {
+				background: #C46A4A;
+				color: #fff;
+				border: none;
+				padding: 14px 28px;
+				font-family: var(--font-ui);
+				font-size: 14px;
+				font-weight: 500;
+				border-radius: 8px;
+				cursor: pointer;
+				align-self: flex-start;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				transition: background 0.2s;
+
+				&:hover { background: #a85a3c; }
+				&:disabled { background: #d4b4a8; cursor: default; }
+			}
+		}
+
+		.no-inquiries {
+			font-family: var(--font-ui);
+			font-size: 14px;
+			color: #787878;
+			padding: 24px 0;
+		}
+
+		.inquiries-list {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.inquiry-row {
+			border: 1px solid #E8E0D8;
+			border-radius: 10px;
+			overflow: hidden;
+			background: #fff;
+
+			.inquiry-row-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 14px 18px;
+				cursor: pointer;
+				transition: background 0.15s;
+
+				&:hover { background: #FAF8F5; }
+
+				.inquiry-row-left {
+					display: flex;
+					align-items: center;
+					gap: 10px;
+					min-width: 0;
+				}
+
+				.inquiry-badge {
+					flex-shrink: 0;
+					padding: 3px 10px;
+					border-radius: 20px;
+					font-size: 11px;
+					font-weight: 600;
+					text-transform: uppercase;
+
+					&.pending { background: #FEF3E8; color: #E67E22; }
+					&.answered { background: #EDFAF1; color: #2E7D32; }
+					&.closed { background: #F5F5F5; color: #787878; }
+				}
+
+				.inquiry-row-title {
+					font-family: var(--font-ui);
+					font-size: 14px;
+					font-weight: 500;
+					color: #1C1A17;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					max-width: 280px;
+				}
+
+				.inquiry-row-date {
+					font-family: var(--font-ui);
+					font-size: 12px;
+					color: #AAAFB5;
+					white-space: nowrap;
+				}
+			}
+
+			.inquiry-row-detail {
+				padding: 16px 18px;
+				background: #FAF8F5;
+				border-top: 1px solid #E8E0D8;
+
+				.inquiry-detail-label {
+					font-family: var(--font-ui);
+					font-size: 12px;
+					font-weight: 600;
+					color: #1C1A17;
+					margin-bottom: 4px;
+				}
+
+				.inquiry-detail-content {
+					font-family: var(--font-ui);
+					font-size: 14px;
+					color: #555;
+					line-height: 1.6;
+					margin-bottom: 16px;
+				}
+
+				.inquiry-response-box {
+					background: #EDFAF1;
+					border-radius: 8px;
+					padding: 14px 16px;
+					margin-bottom: 16px;
+
+					.inquiry-response-label {
+						font-family: var(--font-ui);
+						font-size: 12px;
+						font-weight: 600;
+						color: #2E7D32;
+						margin-bottom: 4px;
+					}
+
+					.inquiry-response-content {
+						font-family: var(--font-ui);
+						font-size: 14px;
+						color: #1C1A17;
+						line-height: 1.6;
+					}
+
+					.inquiry-response-date {
+						font-family: var(--font-ui);
+						font-size: 11px;
+						color: #787878;
+						margin-top: 6px;
+					}
+				}
+
+				.inquiry-close-btn {
+					background: transparent;
+					border: 1px solid #E8E0D8;
+					color: #787878;
+					padding: 8px 16px;
+					border-radius: 6px;
+					font-family: var(--font-ui);
+					font-size: 12px;
+					cursor: pointer;
+					transition: all 0.2s;
+
+					&:hover { border-color: #C46A4A; color: #C46A4A; }
+				}
+			}
+		}
+	}
+
 	// ===== WE'RE HERE TO HELP =====
 	.here-to-help {
 		padding: 60px 0;

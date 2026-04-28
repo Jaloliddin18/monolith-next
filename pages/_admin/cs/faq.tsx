@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next';
 import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
-import { Box, Button, List, ListItem } from '@mui/material';
+import {
+	Box, Button, List, ListItem,
+	Dialog, DialogTitle, DialogContent, DialogActions,
+	TextField, Select, MenuItem, FormControl, InputLabel,
+} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 import TablePagination from '@mui/material/TablePagination';
 import { TabContext } from '@mui/lab';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { FaqArticlesPanelList } from '../../../libs/components/admin/cs/FaqList';
-import { NoticesInquiry } from '../../../libs/types/notice/notice.input';
+import { NoticesInquiry, NoticeInput } from '../../../libs/types/notice/notice.input';
 import { Notice } from '../../../libs/types/notice/notice';
 import { NoticeCategory, NoticeStatus } from '../../../libs/enums/notice.enum';
 import { NoticeUpdate } from '../../../libs/types/notice/notice.update';
-import { sweetMixinErrorAlert } from '../../../libs/sweetAlert';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../../libs/sweetAlert';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_ALL_NOTICES_BY_ADMIN } from '../../../apollo/admin/query';
-import { UPDATE_NOTICE_BY_ADMIN } from '../../../apollo/admin/mutation';
+import { CREATE_NOTICE_BY_ADMIN, UPDATE_NOTICE_BY_ADMIN } from '../../../apollo/admin/mutation';
 import { T } from '../../../libs/types/common';
 import { Direction } from '../../../libs/enums/common.enum';
 
@@ -29,6 +31,13 @@ const DEFAULT_FAQ_INQUIRY: NoticesInquiry = {
 	search: { noticeCategory: NoticeCategory.FAQ },
 };
 
+const DEFAULT_CREATE_INPUT: NoticeInput = {
+	noticeCategory: NoticeCategory.FAQ,
+	noticeStatus: NoticeStatus.ACTIVE,
+	noticeTitle: '',
+	noticeContent: '',
+};
+
 const FaqArticles: NextPage = ({ initialInquiry = DEFAULT_FAQ_INQUIRY, ...props }: any) => {
 	const [noticesInquiry, setNoticesInquiry] = useState<NoticesInquiry>(initialInquiry ?? DEFAULT_FAQ_INQUIRY);
 	const [notices, setNotices] = useState<Notice[]>([]);
@@ -36,9 +45,12 @@ const FaqArticles: NextPage = ({ initialInquiry = DEFAULT_FAQ_INQUIRY, ...props 
 	const [value, setValue] = useState(
 		noticesInquiry?.search?.noticeStatus ? noticesInquiry?.search?.noticeStatus : 'ALL',
 	);
-	const [searchType, setSearchType] = useState('ALL');
+	const [createDialogOpen, setCreateDialogOpen] = useState(false);
+	const [createInput, setCreateInput] = useState<NoticeInput>({ ...DEFAULT_CREATE_INPUT });
+	const [creating, setCreating] = useState(false);
 
 	/** APOLLO REQUESTS **/
+	const [createNoticeByAdmin] = useMutation(CREATE_NOTICE_BY_ADMIN);
 	const [updateNoticeByAdmin] = useMutation(UPDATE_NOTICE_BY_ADMIN);
 	const {
 		loading: getAllNoticesByAdminLoading,
@@ -101,11 +113,30 @@ const FaqArticles: NextPage = ({ initialInquiry = DEFAULT_FAQ_INQUIRY, ...props 
 		}
 	};
 
+	const handleCreateFaq = async () => {
+		if (!createInput.noticeTitle.trim() || !createInput.noticeContent.trim()) {
+			await sweetMixinErrorAlert('Please fill in title and content');
+			return;
+		}
+		setCreating(true);
+		try {
+			await createNoticeByAdmin({ variables: { input: { ...createInput, noticeCategory: NoticeCategory.FAQ } } });
+			setCreateDialogOpen(false);
+			setCreateInput({ ...DEFAULT_CREATE_INPUT });
+			await sweetTopSmallSuccessAlert('FAQ created!', 800);
+			await getAllNoticesByAdminRefetch({ input: noticesInquiry });
+		} catch (err: any) {
+			await sweetMixinErrorAlert(err?.message ?? 'Something went wrong');
+		} finally {
+			setCreating(false);
+		}
+	};
+
 	return (
 		<Box component={'div'} className={'content'}>
 			<Box component={'div'} className={'title flex_space'}>
 				<Typography variant={'h2'}>FAQ Management</Typography>
-				<Button className="btn_add" variant={'contained'} size={'medium'}>
+				<Button className="btn_add" variant={'contained'} size={'medium'} onClick={() => setCreateDialogOpen(true)}>
 					<AddRoundedIcon sx={{ mr: '8px' }} />
 					ADD
 				</Button>
@@ -139,6 +170,52 @@ const FaqArticles: NextPage = ({ initialInquiry = DEFAULT_FAQ_INQUIRY, ...props 
 					</TabContext>
 				</Box>
 			</Box>
+
+			{/* Create FAQ Dialog */}
+			<Dialog open={createDialogOpen} onClose={() => setCreateDialogOpen(false)} maxWidth="sm" fullWidth>
+				<DialogTitle sx={{ fontWeight: 600, pb: 1 }}>Create FAQ</DialogTitle>
+				<DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2, pt: '16px !important' }}>
+					<FormControl fullWidth size="small">
+						<InputLabel>Status</InputLabel>
+						<Select
+							value={createInput.noticeStatus}
+							label="Status"
+							onChange={(e) => setCreateInput({ ...createInput, noticeStatus: e.target.value as NoticeStatus })}
+						>
+							{[NoticeStatus.ACTIVE, NoticeStatus.HOLD].map((s) => (
+								<MenuItem key={s} value={s}>{s}</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+					<TextField
+						label="Question"
+						fullWidth
+						size="small"
+						value={createInput.noticeTitle}
+						onChange={(e) => setCreateInput({ ...createInput, noticeTitle: e.target.value })}
+						inputProps={{ maxLength: 100 }}
+					/>
+					<TextField
+						label="Answer"
+						fullWidth
+						multiline
+						rows={5}
+						value={createInput.noticeContent}
+						onChange={(e) => setCreateInput({ ...createInput, noticeContent: e.target.value })}
+					/>
+				</DialogContent>
+				<DialogActions sx={{ px: 3, pb: 2, gap: 1 }}>
+					<Button onClick={() => setCreateDialogOpen(false)} sx={{ color: '#787878' }}>Cancel</Button>
+					<Button
+						variant="contained"
+						onClick={handleCreateFaq}
+						disabled={creating}
+						sx={{ background: '#C46A4A', '&:hover': { background: '#a85a3c' } }}
+					>
+						{creating ? 'Creating...' : 'Create FAQ'}
+					</Button>
+				</DialogActions>
+			</Dialog>
 		</Box>
 	);
 };

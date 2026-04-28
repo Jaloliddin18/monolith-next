@@ -6,92 +6,89 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import TablePagination from '@mui/material/TablePagination';
 import { TabContext } from '@mui/lab';
-import { InquiryList } from '../../../libs/components/admin/cs/InquiryList';
-import { NoticesInquiry } from '../../../libs/types/notice/notice.input';
-import { Notice } from '../../../libs/types/notice/notice';
-import { NoticeCategory, NoticeStatus } from '../../../libs/enums/notice.enum';
-import { NoticeUpdate } from '../../../libs/types/notice/notice.update';
-import { sweetMixinErrorAlert } from '../../../libs/sweetAlert';
+import { AdminInquiryList } from '../../../libs/components/admin/cs/AdminInquiryList';
+import { InquiriesInquiry } from '../../../libs/types/inquiry/inquiry.input';
+import { Inquiry } from '../../../libs/types/inquiry/inquiry';
+import { InquiryStatus } from '../../../libs/enums/inquiry.enum';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../../libs/sweetAlert';
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_ALL_NOTICES_BY_ADMIN } from '../../../apollo/admin/query';
-import { UPDATE_NOTICE_BY_ADMIN } from '../../../apollo/admin/mutation';
+import { GET_ALL_INQUIRIES_BY_ADMIN } from '../../../apollo/admin/query';
+import { RESPOND_TO_INQUIRY } from '../../../apollo/admin/mutation';
 import { T } from '../../../libs/types/common';
 import { Direction } from '../../../libs/enums/common.enum';
 
-const DEFAULT_INQUIRY_INQUIRY: NoticesInquiry = {
+const DEFAULT_INQUIRY: InquiriesInquiry = {
 	page: 1,
 	limit: 10,
 	sort: 'createdAt',
 	direction: Direction.DESC,
-	search: { noticeCategory: NoticeCategory.INQUIRY },
+	search: {},
 };
 
-const InquiryArticles: NextPage = ({ initialInquiry = DEFAULT_INQUIRY_INQUIRY, ...props }: any) => {
-	const [noticesInquiry, setNoticesInquiry] = useState<NoticesInquiry>(initialInquiry ?? DEFAULT_INQUIRY_INQUIRY);
-	const [notices, setNotices] = useState<Notice[]>([]);
-	const [noticesTotal, setNoticesTotal] = useState<number>(0);
-	const [value, setValue] = useState(
-		noticesInquiry?.search?.noticeStatus ? noticesInquiry?.search?.noticeStatus : 'ALL',
-	);
+const AdminInquiry: NextPage = ({ initialInquiry = DEFAULT_INQUIRY, ...props }: any) => {
+	const [inquiriesInquiry, setInquiriesInquiry] = useState<InquiriesInquiry>(initialInquiry ?? DEFAULT_INQUIRY);
+	const [inquiries, setInquiries] = useState<Inquiry[]>([]);
+	const [inquiriesTotal, setInquiriesTotal] = useState<number>(0);
+	const [value, setValue] = useState(inquiriesInquiry?.search?.inquiryStatus ?? 'ALL');
 
 	/** APOLLO REQUESTS **/
-	const [updateNoticeByAdmin] = useMutation(UPDATE_NOTICE_BY_ADMIN);
+	const [respondToInquiry] = useMutation(RESPOND_TO_INQUIRY);
 	const {
-		loading: getAllNoticesByAdminLoading,
-		refetch: getAllNoticesByAdminRefetch,
-	} = useQuery(GET_ALL_NOTICES_BY_ADMIN, {
+		loading: getAllInquiriesLoading,
+		refetch: getAllInquiriesRefetch,
+	} = useQuery(GET_ALL_INQUIRIES_BY_ADMIN, {
 		fetchPolicy: 'network-only',
-		variables: { input: noticesInquiry },
-		skip: !noticesInquiry,
+		variables: { input: inquiriesInquiry },
+		skip: !inquiriesInquiry,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
-			setNotices(data?.getAllNoticesByAdmin?.list ?? []);
-			setNoticesTotal(data?.getAllNoticesByAdmin?.metaCounter[0]?.total ?? 0);
+			setInquiries(data?.getAllInquiriesByAdmin?.list ?? []);
+			setInquiriesTotal(data?.getAllInquiriesByAdmin?.metaCounter[0]?.total ?? 0);
 		},
 		onError: () => {},
 	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		getAllNoticesByAdminRefetch({ input: noticesInquiry }).then().catch(() => {});
-	}, [noticesInquiry]);
+		getAllInquiriesRefetch({ input: inquiriesInquiry }).then().catch(() => {});
+	}, [inquiriesInquiry]);
 
 	/** HANDLERS **/
 	const changePageHandler = async (event: unknown, newPage: number) => {
-		noticesInquiry.page = newPage + 1;
-		await getAllNoticesByAdminRefetch({ input: noticesInquiry });
-		setNoticesInquiry({ ...noticesInquiry });
+		inquiriesInquiry.page = newPage + 1;
+		await getAllInquiriesRefetch({ input: inquiriesInquiry });
+		setInquiriesInquiry({ ...inquiriesInquiry });
 	};
 
 	const changeRowsPerPageHandler = async (event: React.ChangeEvent<HTMLInputElement>) => {
-		noticesInquiry.limit = parseInt(event.target.value, 10);
-		noticesInquiry.page = 1;
-		setNoticesInquiry({ ...noticesInquiry });
+		inquiriesInquiry.limit = parseInt(event.target.value, 10);
+		inquiriesInquiry.page = 1;
+		setInquiriesInquiry({ ...inquiriesInquiry });
 	};
 
 	const tabChangeHandler = async (event: any, newValue: string) => {
 		setValue(newValue);
-		setNoticesInquiry({ ...noticesInquiry, page: 1, sort: 'createdAt' });
+		setInquiriesInquiry({ ...inquiriesInquiry, page: 1, sort: 'createdAt' });
 		switch (newValue) {
-			case 'ACTIVE':
-				setNoticesInquiry({ ...noticesInquiry, search: { noticeCategory: NoticeCategory.INQUIRY, noticeStatus: NoticeStatus.ACTIVE } });
+			case 'PENDING':
+				setInquiriesInquiry({ ...inquiriesInquiry, search: { inquiryStatus: InquiryStatus.PENDING } });
 				break;
-			case 'HOLD':
-				setNoticesInquiry({ ...noticesInquiry, search: { noticeCategory: NoticeCategory.INQUIRY, noticeStatus: NoticeStatus.HOLD } });
+			case 'ANSWERED':
+				setInquiriesInquiry({ ...inquiriesInquiry, search: { inquiryStatus: InquiryStatus.ANSWERED } });
 				break;
-			case 'DELETE':
-				setNoticesInquiry({ ...noticesInquiry, search: { noticeCategory: NoticeCategory.INQUIRY, noticeStatus: NoticeStatus.DELETE } });
+			case 'CLOSED':
+				setInquiriesInquiry({ ...inquiriesInquiry, search: { inquiryStatus: InquiryStatus.CLOSED } });
 				break;
 			default:
-				setNoticesInquiry({ ...noticesInquiry, search: { noticeCategory: NoticeCategory.INQUIRY } });
-				break;
+				setInquiriesInquiry({ ...inquiriesInquiry, search: {} });
 		}
 	};
 
-	const updateNoticeHandler = async (updateData: NoticeUpdate) => {
+	const respondHandler = async (inquiryId: string, inquiryResponse: string) => {
 		try {
-			await updateNoticeByAdmin({ variables: { input: updateData } });
-			await getAllNoticesByAdminRefetch({ input: noticesInquiry });
+			await respondToInquiry({ variables: { input: { inquiryId, inquiryResponse } } });
+			await sweetTopSmallSuccessAlert('Response sent!', 800);
+			await getAllInquiriesRefetch({ input: inquiriesInquiry });
 		} catch (err: any) {
 			await sweetMixinErrorAlert(err?.message ?? 'Something went wrong');
 		}
@@ -99,32 +96,32 @@ const InquiryArticles: NextPage = ({ initialInquiry = DEFAULT_INQUIRY_INQUIRY, .
 
 	return (
 		<Box component={'div'} className={'content'}>
-			<Typography variant={'h2'} className={'tit'} sx={{ mb: '24px' }}>
-				1:1 Inquiry Management
-			</Typography>
+			<Box component={'div'} className={'title flex_space'}>
+				<Typography variant={'h2'}>Customer Inquiries</Typography>
+			</Box>
 			<Box component={'div'} className={'table-wrap'}>
 				<Box component={'div'} sx={{ width: '100%', typography: 'body1' }}>
 					<TabContext value={value}>
 						<Box component={'div'}>
 							<List className={'tab-menu'}>
 								<ListItem onClick={(e: any) => tabChangeHandler(e, 'ALL')} value="ALL" className={value === 'ALL' ? 'li on' : 'li'}>All</ListItem>
-								<ListItem onClick={(e: any) => tabChangeHandler(e, 'ACTIVE')} value="ACTIVE" className={value === 'ACTIVE' ? 'li on' : 'li'}>Active</ListItem>
-								<ListItem onClick={(e: any) => tabChangeHandler(e, 'HOLD')} value="HOLD" className={value === 'HOLD' ? 'li on' : 'li'}>Hold</ListItem>
-								<ListItem onClick={(e: any) => tabChangeHandler(e, 'DELETE')} value="DELETE" className={value === 'DELETE' ? 'li on' : 'li'}>Delete</ListItem>
+								<ListItem onClick={(e: any) => tabChangeHandler(e, 'PENDING')} value="PENDING" className={value === 'PENDING' ? 'li on' : 'li'}>Pending</ListItem>
+								<ListItem onClick={(e: any) => tabChangeHandler(e, 'ANSWERED')} value="ANSWERED" className={value === 'ANSWERED' ? 'li on' : 'li'}>Answered</ListItem>
+								<ListItem onClick={(e: any) => tabChangeHandler(e, 'CLOSED')} value="CLOSED" className={value === 'CLOSED' ? 'li on' : 'li'}>Closed</ListItem>
 							</List>
 							<Divider />
 						</Box>
-						<InquiryList
-							notices={notices}
-							loading={getAllNoticesByAdminLoading}
-							updateNoticeHandler={updateNoticeHandler}
+						<AdminInquiryList
+							inquiries={inquiries}
+							loading={getAllInquiriesLoading}
+							respondHandler={respondHandler}
 						/>
 						<TablePagination
 							rowsPerPageOptions={[10, 20, 40, 60]}
 							component="div"
-							count={noticesTotal}
-							rowsPerPage={noticesInquiry?.limit}
-							page={noticesInquiry?.page - 1}
+							count={inquiriesTotal}
+							rowsPerPage={inquiriesInquiry?.limit}
+							page={inquiriesInquiry?.page - 1}
 							onPageChange={changePageHandler}
 							onRowsPerPageChange={changeRowsPerPageHandler}
 						/>
@@ -135,4 +132,4 @@ const InquiryArticles: NextPage = ({ initialInquiry = DEFAULT_INQUIRY_INQUIRY, .
 	);
 };
 
-export default withAdminLayout(InquiryArticles);
+export default withAdminLayout(AdminInquiry);

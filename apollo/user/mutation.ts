@@ -398,6 +398,37 @@ export const UNSUBSCRIBE = gql`
 `;
 
 /**************************
+ *        INQUIRY         *
+ *************************/
+export const CREATE_INQUIRY = gql`
+  mutation CreateInquiry($input: InquiryInput!) {
+    createInquiry(input: $input) {
+      _id
+      memberId
+      inquiryTitle
+      inquiryContent
+      inquiryStatus
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const CLOSE_INQUIRY = gql`
+  mutation CloseInquiry($input: String!) {
+    closeInquiry(inquiryId: $input) {
+      _id
+      memberId
+      inquiryTitle
+      inquiryContent
+      inquiryStatus
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+/**************************
  *      NOTIFICATION      *
  *************************/
 export const SUBSCRIBE_NEWSLETTER = gql`

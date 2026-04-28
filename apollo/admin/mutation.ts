@@ -174,6 +174,21 @@ export const REMOVE_BOARD_ARTICLE_BY_ADMIN = gql`
  *         NOTICE         *
  *************************/
 
+export const CREATE_NOTICE_BY_ADMIN = gql`
+  mutation CreateNoticeByAdmin($input: NoticeInput!) {
+    createNoticeByAdmin(input: $input) {
+      _id
+      noticeCategory
+      noticeStatus
+      noticeTitle
+      noticeContent
+      memberId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const UPDATE_NOTICE_BY_ADMIN = gql`
   mutation UpdateNoticeByAdmin($input: NoticeUpdate!) {
     updateNoticeByAdmin(input: $input) {
@@ -198,6 +213,26 @@ export const REMOVE_NOTICE_BY_ADMIN = gql`
       noticeTitle
       noticeContent
       memberId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+/**************************
+ *        INQUIRY         *
+ *************************/
+
+export const RESPOND_TO_INQUIRY = gql`
+  mutation RespondToInquiry($input: InquiryResponse!) {
+    respondToInquiry(input: $input) {
+      _id
+      memberId
+      inquiryTitle
+      inquiryContent
+      inquiryStatus
+      inquiryResponse
+      respondedAt
       createdAt
       updatedAt
     }

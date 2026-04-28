@@ -241,6 +241,37 @@ export const GET_ALL_NOTICES_BY_ADMIN = gql`
   }
 `;
 
+/**************************
+ *        INQUIRY         *
+ *************************/
+export const GET_ALL_INQUIRIES_BY_ADMIN = gql`
+  query GetAllInquiriesByAdmin($input: InquiriesInquiry!) {
+    getAllInquiriesByAdmin(input: $input) {
+      list {
+        _id
+        memberId
+        inquiryTitle
+        inquiryContent
+        inquiryStatus
+        inquiryResponse
+        respondedAt
+        createdAt
+        updatedAt
+        memberData {
+          _id
+          memberNick
+          memberImage
+          memberType
+          memberStatus
+        }
+      }
+      metaCounter {
+        total
+      }
+    }
+  }
+`;
+
 export const GET_COMMENTS = gql`
   query GetComments($input: CommentsInquiry!) {
     getComments(input: $input) {
