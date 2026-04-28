@@ -29,7 +29,7 @@ const withLayoutMypage = (Component: any) => {
 			}
 		}, [loading, user]);
 
-		if (loading || !user._id) return null;
+		if (!device || loading || !user._id) return null;
 
 		if (device === 'mobile') {
 			return (

@@ -13,6 +13,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 const customerProfileImages = [
   "albert.jpg",
   "charles.jpg",
@@ -56,8 +57,20 @@ const aboutReviews = [
 ];
 
 const About = () => {
+  const device = useDeviceDetect();
   const { t } = useTranslation("common");
   const router = useRouter();
+
+  if (!device) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="mobile-page-placeholder">
+        <Typography className="mobile-page-title">About</Typography>
+        <Typography className="mobile-page-subtitle">Mobile version coming soon</Typography>
+      </Stack>
+    );
+  }
 
   return (
     <>

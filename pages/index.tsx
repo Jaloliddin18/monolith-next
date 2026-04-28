@@ -174,6 +174,8 @@ const Home = () => {
     [user, router, likeTargetFurniture],
   );
 
+  if (!device) return null;
+
   if (device === 'mobile') {
     return (
       <>

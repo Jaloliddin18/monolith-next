@@ -3,7 +3,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useQuery, useMutation, useReactiveVar } from "@apollo/client";
-import { IconButton } from "@mui/material";
+import { IconButton, Stack, Typography } from "@mui/material";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import Skeleton from "@mui/material/Skeleton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -94,6 +95,7 @@ const accordionSections = [
 
 // ─── Component ──────────────────────────────────────────────────
 const FurnitureDetail = () => {
+  const device = useDeviceDetect();
   const router = useRouter();
   const { id } = router.query;
   const user = useReactiveVar(userVar);
@@ -305,6 +307,17 @@ const FurnitureDetail = () => {
       window.removeEventListener("keydown", handleKey);
     };
   }, []);
+
+  if (!device) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="mobile-page-placeholder">
+        <Typography className="mobile-page-title">Product Detail</Typography>
+        <Typography className="mobile-page-subtitle">Mobile version coming soon</Typography>
+      </Stack>
+    );
+  }
 
   // ─── Render ─────────────────────────────────────────────────
   return (

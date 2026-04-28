@@ -16,6 +16,8 @@ const withLayoutHome = (Component: any) => {
 			if (jwt) updateUserInfo(jwt);
 		}, []);
 
+		if (!device) return <div style={{ background: '#FAFAFA', minHeight: '100vh', width: '100%' }} />;
+
 		if (device === 'mobile') {
 			return (
 				<Stack id="mobile-wrap">

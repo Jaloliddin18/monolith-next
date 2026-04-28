@@ -1,14 +1,28 @@
 import React from "react";
 import Head from "next/head";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import BlogListSection from "../../libs/components/blog/BlogListSection";
 import TrendingArticlesSection from "../../libs/components/blog/TrendingArticlesSection";
 import InstagramSection from "../../libs/components/common/InstagramSection";
 import NewsletterBanner from "../../libs/components/furniture/NewsletterBanner";
 
 const Community = () => {
+  const device = useDeviceDetect();
+
+  if (!device) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="mobile-page-placeholder">
+        <Typography className="mobile-page-title">Community</Typography>
+        <Typography className="mobile-page-subtitle">Mobile version coming soon</Typography>
+      </Stack>
+    );
+  }
+
   return (
     <>
       <Head>

@@ -9,6 +9,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 
 const services = [
   {
@@ -182,6 +183,7 @@ const reviews = [
 ];
 
 const Service = () => {
+  const device = useDeviceDetect();
   const router = useRouter();
   const [countdown, setCountdown] = useState({
     days: 10,
@@ -214,6 +216,17 @@ const Service = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+
+  if (!device) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="mobile-page-placeholder">
+        <Typography className="mobile-page-title">Customer Service</Typography>
+        <Typography className="mobile-page-subtitle">Mobile version coming soon</Typography>
+      </Stack>
+    );
+  }
 
   return (
     <>

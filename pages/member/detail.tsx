@@ -1,8 +1,9 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Skeleton from '@mui/material/Skeleton';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
+import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import DesignerProfileHero from '../../libs/components/designer/DesignerProfileHero';
 import DesignerDesignsPanel from '../../libs/components/designer/DesignerDesignsPanel';
 import DesignerBlogPanel from '../../libs/components/designer/DesignerBlogPanel';
@@ -17,6 +18,7 @@ import { T } from '../../libs/types/common';
 import { useRouter } from 'next/router';
 
 const DesignerDetail = () => {
+	const device = useDeviceDetect();
 	const router = useRouter();
 	const memberId = router.query?.memberId as string;
 	const [member, setMember] = useState<Member | null>(null);
@@ -51,6 +53,17 @@ const DesignerDetail = () => {
 			}
 		},
 	});
+
+	if (!device) return null;
+
+	if (device === 'mobile') {
+		return (
+			<Stack className="mobile-page-placeholder">
+				<Typography className="mobile-page-title">Designer Profile</Typography>
+				<Typography className="mobile-page-subtitle">Mobile version coming soon</Typography>
+			</Stack>
+		);
+	}
 
 	return (
 		<Stack className="designer-detail-page">

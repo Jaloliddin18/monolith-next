@@ -2,9 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { useQuery, useMutation, useReactiveVar } from "@apollo/client";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import FurnitureListPage from "../../libs/components/furniture/FurnitureListPage";
 import { GET_FURNITURES } from "../../apollo/user/query";
 import { LIKE_TARGET_FURNITURE } from "../../apollo/user/mutation";
@@ -28,6 +29,7 @@ const DEFAULT_INQUIRY: FurnituresInquiry = {
 };
 
 const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
+  const device = useDeviceDetect();
   const router = useRouter();
   const user = useReactiveVar(userVar);
 
@@ -151,6 +153,17 @@ const FurnitureList = ({ initialInput = DEFAULT_INQUIRY }: any) => {
     },
     [user, router, likeTargetFurniture, getFurnituresRefetch, inquiry],
   );
+
+  if (!device) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="mobile-page-placeholder">
+        <Typography className="mobile-page-title">Shop</Typography>
+        <Typography className="mobile-page-subtitle">Mobile version coming soon</Typography>
+      </Stack>
+    );
+  }
 
   return (
     <>

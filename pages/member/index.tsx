@@ -2,8 +2,9 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import DesignerHero from "../../libs/components/designer/DesignerHero";
 import DesignerListSection from "../../libs/components/designer/DesignerListSection";
 import { useQuery } from "@apollo/client";
@@ -22,6 +23,7 @@ const DEFAULT_INQUIRY: DesignersInquiry = {
 };
 
 const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
+  const device = useDeviceDetect();
   const router = useRouter();
   const [inquiry, setInquiry] = useState<DesignersInquiry>(initialInput);
   const [designers, setDesigners] = useState<Member[]>([]);
@@ -59,6 +61,17 @@ const Designers = ({ initialInput = DEFAULT_INQUIRY }: any) => {
       { scroll: false },
     );
   };
+
+  if (!device) return null;
+
+  if (device === 'mobile') {
+    return (
+      <Stack className="mobile-page-placeholder">
+        <Typography className="mobile-page-title">Designers</Typography>
+        <Typography className="mobile-page-subtitle">Mobile version coming soon</Typography>
+      </Stack>
+    );
+  }
 
   return (
     <>

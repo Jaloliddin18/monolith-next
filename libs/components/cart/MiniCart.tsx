@@ -4,10 +4,12 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../../apollo/store';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
+import { Drawer, Stack, Typography, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import useDeviceDetect from '../../hooks/useDeviceDetect';
 import { GET_FURNITURES } from '../../../apollo/user/query';
 import { CartItem, getCartItems, removeFromCart, updateCartQuantity } from '../../utils/cartStorage';
 import { Furniture } from '../../types/furniture/furniture';
@@ -23,6 +25,7 @@ interface MiniCartProps {
 }
 
 const MiniCart = ({ open, onClose }: MiniCartProps) => {
+	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -62,6 +65,74 @@ const MiniCart = ({ open, onClose }: MiniCartProps) => {
 
 	const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 	const subTotal = cartItems.reduce((sum, item) => sum + getDisplayPrice(item) * item.quantity, 0);
+
+	if (device === 'mobile') {
+		return (
+			<Drawer
+				anchor="bottom"
+				open={open}
+				onClose={onClose}
+				PaperProps={{ sx: { borderRadius: '16px 16px 0 0', maxHeight: '80vh' } }}
+			>
+				<Stack className="mobile-cart-drawer">
+					{/* Header */}
+					<Stack direction="row" justifyContent="space-between" alignItems="center" className="mobile-cart-header">
+						<Typography className="mobile-cart-title">My Cart ({cartItems.length})</Typography>
+						<IconButton onClick={onClose}><CloseIcon /></IconButton>
+					</Stack>
+
+					{/* Cart items */}
+					<Stack className="mobile-cart-items">
+						{cartItems.length === 0 ? (
+							<Typography className="mobile-cart-empty">Your cart is empty</Typography>
+						) : (
+							cartItems.map((item) => (
+								<Stack key={item._id} direction="row" className="mobile-cart-item" gap={2}>
+									<img
+										src={getItemImage(item)}
+										alt={item.furnitureTitle}
+										className="mobile-cart-img"
+									/>
+									<Stack flex={1} gap={0.5}>
+										<Typography className="mobile-cart-item-name">{item.furnitureTitle}</Typography>
+										<Typography className="mobile-cart-item-price">${getDisplayPrice(item).toFixed(2)}</Typography>
+										<Stack direction="row" alignItems="center" gap={1}>
+											<IconButton size="small" onClick={() => handleQuantityChange(item._id, -1)}>
+												<RemoveIcon fontSize="small" />
+											</IconButton>
+											<Typography>{item.quantity}</Typography>
+											<IconButton size="small" onClick={() => handleQuantityChange(item._id, 1)}>
+												<AddIcon fontSize="small" />
+											</IconButton>
+											<IconButton size="small" onClick={() => handleRemoveItem(item._id)}>
+												<DeleteOutlineIcon fontSize="small" />
+											</IconButton>
+										</Stack>
+									</Stack>
+								</Stack>
+							))
+						)}
+					</Stack>
+
+					{/* Footer total + checkout */}
+					{cartItems.length > 0 && (
+						<Stack className="mobile-cart-footer">
+							<Stack direction="row" justifyContent="space-between">
+								<Typography className="mobile-cart-total-label">Total</Typography>
+								<Typography className="mobile-cart-total">${subTotal.toFixed(2)}</Typography>
+							</Stack>
+							<button
+								className="mobile-cart-checkout-btn"
+								onClick={() => { onClose(); router.push(user?._id ? '/checkout' : '/account/join'); }}
+							>
+								Proceed to Checkout
+							</button>
+						</Stack>
+					)}
+				</Stack>
+			</Drawer>
+		);
+	}
 
 	if (!open) return null;
 
