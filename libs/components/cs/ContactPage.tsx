@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Box, Stack, Typography, Checkbox, CircularProgress, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Stack, Typography, CircularProgress } from "@mui/material";
 import PhoneInTalkOutlinedIcon from "@mui/icons-material/PhoneInTalkOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
@@ -58,10 +58,12 @@ const ContactPage = () => {
   const router = useRouter();
   const user = useReactiveVar(userVar) as Member;
   const [openFaq, setOpenFaq] = useState<number>(0);
-  const [saveInfo, setSaveInfo] = useState<boolean>(false);
   const [expandedInquiry, setExpandedInquiry] = useState<string | null>(null);
-  const [inquiryTitle, setInquiryTitle] = useState("");
-  const [inquiryContent, setInquiryContent] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [myInquiries, setMyInquiries] = useState<Inquiry[]>([]);
   const [inquiriesTotal, setInquiriesTotal] = useState(0);
@@ -82,21 +84,33 @@ const ContactPage = () => {
     onError: () => {},
   });
 
-  const handleSubmitInquiry = async () => {
-    if (!inquiryTitle.trim() || !inquiryContent.trim()) {
-      await sweetMixinErrorAlert("Please fill in both title and content");
+  const handleSendMessage = async () => {
+    if (!user?._id) {
+      await sweetMixinErrorAlert("Please login to send a message");
+      router.push("/account/join");
       return;
     }
-    if (inquiryContent.trim().length < 20) {
-      await sweetMixinErrorAlert("Content must be at least 20 characters");
+    if (!message.trim() || message.trim().length < 20) {
+      await sweetMixinErrorAlert("Message must be at least 20 characters");
       return;
     }
+    const title = `Message from ${firstName || "Guest"} ${lastName || ""}`.trim();
+    const content = [
+      email ? `Email: ${email}` : null,
+      phone ? `Phone: ${phone}` : null,
+      `Message: ${message}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
     setSubmitting(true);
     try {
-      await createInquiry({ variables: { input: { inquiryTitle, inquiryContent } } });
-      setInquiryTitle("");
-      setInquiryContent("");
-      await sweetTopSmallSuccessAlert("Inquiry submitted!", 800);
+      await createInquiry({ variables: { input: { inquiryTitle: title, inquiryContent: content } } });
+      setFirstName("");
+      setLastName("");
+      setPhone("");
+      setEmail("");
+      setMessage("");
+      await sweetTopSmallSuccessAlert("Message sent successfully!", 800);
       await refetchMyInquiries();
     } catch (err: any) {
       await sweetMixinErrorAlert(err?.message ?? "Something went wrong");
@@ -127,8 +141,26 @@ const ContactPage = () => {
           <Box className="form-group">
             <Typography className="form-label">Full Name</Typography>
             <Stack className="form-row" direction="row">
-              <Box className="form-input"><input id="contact-first-name" name="firstName" type="text" placeholder="First name" /></Box>
-              <Box className="form-input"><input id="contact-last-name" name="lastName" type="text" placeholder="Last name" /></Box>
+              <Box className="form-input">
+                <input
+                  id="contact-first-name"
+                  name="firstName"
+                  type="text"
+                  placeholder="First name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </Box>
+              <Box className="form-input">
+                <input
+                  id="contact-last-name"
+                  name="lastName"
+                  type="text"
+                  placeholder="Last name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </Box>
             </Stack>
           </Box>
           <Stack className="form-row" direction="row">
@@ -141,22 +173,52 @@ const ContactPage = () => {
                     <path d="M4 6L8 10L12 6" stroke="#999" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </Box>
+                <input
+                  id="contact-phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+1 000 000 0000"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  style={{ border: "none", outline: "none", flex: 1, fontFamily: "var(--font-ui)", fontSize: "var(--fs-base)", background: "transparent" }}
+                />
               </Box>
             </Box>
             <Box className="form-group">
               <Typography className="form-label">Email Address</Typography>
-              <Box className="form-input"><input id="contact-email" name="email" type="email" placeholder="example@gmail.com" /></Box>
+              <Box className="form-input">
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  placeholder="example@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Box>
             </Box>
           </Stack>
           <Box className="form-group">
             <Typography className="form-label">Your Message</Typography>
-            <Box className="form-input message-input"><textarea id="contact-message" name="message" placeholder="Type here..." rows={4} /></Box>
+            <Box className="form-input message-input">
+              <textarea
+                id="contact-message"
+                name="message"
+                placeholder="Type here... (min 20 characters)"
+                rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+              />
+            </Box>
           </Box>
-          <Box className="form-checkbox">
-            <Checkbox checked={saveInfo} onChange={(e) => setSaveInfo(e.target.checked)} sx={{ padding: 0, color: "#000", "&.Mui-checked": { color: "#000" }, "& .MuiSvgIcon-root": { fontSize: 18 } }} />
-            <Typography className="checkbox-label">Save my name, email, and website in this browser for the next time I comment.</Typography>
+          <Box className="send-btn-wrap">
+            <button className="send-btn" onClick={handleSendMessage} disabled={submitting}>
+              {submitting ? <CircularProgress size={16} sx={{ color: "#fff" }} /> : "Submit Question"}
+            </button>
+            {!user?._id && (
+              <Typography className="send-btn-hint">You must be logged in to send a message</Typography>
+            )}
           </Box>
-          <button className="send-btn">SEND MESSAGE</button>
         </Box>
 
         <Box className="contact-info-section">
@@ -164,83 +226,47 @@ const ContactPage = () => {
           <Box className="info-items">
             <Box className="info-item">
               <Stack className="info-header" direction="row" alignItems="center">
-                <PhoneInTalkOutlinedIcon className="info-icon" />
-                <Typography className="info-title">Call Us</Typography>
-              </Stack>
-              <Box className="info-details"><Typography>478-263-6029</Typography><Typography>989-252-2414</Typography></Box>
-            </Box>
-            <Box className="info-item">
-              <Stack className="info-header" direction="row" alignItems="center">
                 <EmailOutlinedIcon className="info-icon" />
                 <Typography className="info-title">Mail Us</Typography>
               </Stack>
-              <Box className="info-details"><Typography>stylecasa@gmail.com</Typography><Typography>stylecasa@help.com</Typography></Box>
+              <Box className="info-details">
+                <Typography>jaloliddin.khonimkulov05@gmail.com</Typography>
+              </Box>
+            </Box>
+            <Box className="info-item">
+              <Stack className="info-header" direction="row" alignItems="center">
+                <PhoneInTalkOutlinedIcon className="info-icon" />
+                <Typography className="info-title">Support Hours</Typography>
+              </Stack>
+              <Box className="info-details">
+                <Typography>Available Monday–Friday</Typography>
+                <Typography>9am–6pm KST</Typography>
+              </Box>
             </Box>
             <Box className="info-item">
               <Stack className="info-header" direction="row" alignItems="center">
                 <LocationOnOutlinedIcon className="info-icon" />
                 <Typography className="info-title">Reach Out</Typography>
               </Stack>
-              <Box className="info-details"><Typography>46 Gregory Lane</Typography><Typography>Louisville, KY 40202</Typography></Box>
+              <Box className="info-details">
+                <Typography>Seoul, South Korea</Typography>
+                <Typography>Response within 24 hours</Typography>
+              </Box>
             </Box>
           </Box>
         </Box>
       </Stack>
 
-      {/* ===== INQUIRY SECTION ===== */}
-      <Stack className="contact-inquiry-section">
-        <Box className="inquiry-container">
-          {/* Left: Inquiry Form */}
-          <Box className="inquiry-form-wrap">
-            <Typography className="inquiry-section-title">Submit a Question</Typography>
-            <Typography className="inquiry-section-sub">Our team responds within 24 hours</Typography>
-
-            {!user?._id ? (
-              <Box className="inquiry-login-prompt">
-                <Typography className="login-prompt-text">Please login to submit an inquiry</Typography>
-                <Button className="login-prompt-btn" onClick={() => router.push("/account/join")}>
-                  Login / Sign Up
-                </Button>
-              </Box>
-            ) : (
-              <Box className="inquiry-form">
-                <Box className="inquiry-form-group">
-                  <label>Title *</label>
-                  <input
-                    type="text"
-                    placeholder="Brief description of your question"
-                    value={inquiryTitle}
-                    onChange={(e) => setInquiryTitle(e.target.value)}
-                  />
-                </Box>
-                <Box className="inquiry-form-group">
-                  <label>Content * <span>(min 20 characters)</span></label>
-                  <textarea
-                    placeholder="Describe your question in detail..."
-                    value={inquiryContent}
-                    onChange={(e) => setInquiryContent(e.target.value)}
-                    rows={5}
-                  />
-                </Box>
-                <button
-                  className="inquiry-submit-btn"
-                  onClick={handleSubmitInquiry}
-                  disabled={submitting}
-                >
-                  {submitting ? <CircularProgress size={16} sx={{ color: "#fff" }} /> : "Submit Inquiry"}
-                </button>
-              </Box>
-            )}
-          </Box>
-
-          {/* Right: My Inquiries */}
-          {user?._id && (
-            <Box className="my-inquiries-wrap">
+      {/* ===== MY INQUIRIES SECTION ===== */}
+      {user?._id && (
+        <Stack className="contact-inquiry-section">
+          <Box className="inquiry-container inquiry-container--single">
+            <Box className="my-inquiries-wrap my-inquiries-wrap--full">
               <Typography className="inquiry-section-title">My Inquiries</Typography>
-              <Typography className="inquiry-section-sub">{inquiriesTotal} total inquiries</Typography>
+              <Typography className="inquiry-section-sub">View your submitted questions and responses — {inquiriesTotal} total</Typography>
 
               {myInquiries.length === 0 ? (
-                <Typography className="no-inquiries">No inquiries yet. Submit your first question above.</Typography>
+                <Typography className="no-inquiries">No inquiries yet. Use the form above to send your first message.</Typography>
               ) : (
                 <Box className="inquiries-list">
                   {myInquiries.map((inq) => {
@@ -295,9 +321,9 @@ const ContactPage = () => {
                 </Box>
               )}
             </Box>
-          )}
-        </Box>
-      </Stack>
+          </Box>
+        </Stack>
+      )}
 
       {/* ===== WE'RE HERE TO HELP ===== */}
       <Stack className="here-to-help">

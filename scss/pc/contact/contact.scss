@@ -76,11 +76,30 @@
 				&.phone-input {
 					display: flex;
 					align-items: center;
+					gap: 8px;
+
+					input {
+						flex: 1;
+						border: none;
+						outline: none;
+						font-family: var(--font-ui);
+						font-size: var(--fs-base);
+						background: transparent;
+						color: var(--color-dark);
+
+						&::placeholder {
+							color: var(--color-text-light);
+						}
+					}
 				}
 
 				&.message-input {
 					width: 672px;
 					min-height: 100px;
+				}
+
+				&:focus-within {
+					border: 1px solid #C46A4A;
 				}
 			}
 
@@ -88,6 +107,7 @@
 				display: flex;
 				align-items: center;
 				gap: 8px;
+				flex-shrink: 0;
 
 				img {
 					width: 24px;
@@ -97,22 +117,22 @@
 				}
 			}
 
-			.form-checkbox {
+			.send-btn-wrap {
 				display: flex;
-				align-items: center;
-				gap: 12px;
+				flex-direction: column;
+				gap: 10px;
+				align-self: flex-start;
 
-				.checkbox-label {
+				.send-btn-hint {
 					font-family: var(--font-ui);
 					font-size: var(--fs-sm);
-					font-weight: var(--fw-regular);
-					line-height: 20px;
-					color: var(--color-text-light);
+					color: #C46A4A;
+					font-style: italic;
 				}
 			}
 
 			.send-btn {
-				background: var(--color-primary);
+				background: #C46A4A;
 				color: #fff;
 				border: none;
 				padding: 14px 32px;
@@ -121,11 +141,18 @@
 				font-weight: var(--fw-medium);
 				line-height: 27px;
 				cursor: pointer;
-				align-self: flex-start;
+				display: flex;
+				align-items: center;
+				gap: 8px;
 				transition: background 0.3s;
 
 				&:hover {
-					background: var(--color-primary-hover);
+					background: #a85a3c;
+				}
+
+				&:disabled {
+					background: #d4b4a8;
+					cursor: default;
 				}
 			}
 		}
@@ -196,11 +223,20 @@
 			display: flex;
 			gap: 48px;
 			align-items: flex-start;
+
+			&.inquiry-container--single {
+				display: block;
+			}
 		}
 
 		.inquiry-form-wrap,
 		.my-inquiries-wrap {
 			flex: 1;
+		}
+
+		.my-inquiries-wrap--full {
+			width: 100%;
+			max-width: 900px;
 		}
 
 		.inquiry-section-title {
