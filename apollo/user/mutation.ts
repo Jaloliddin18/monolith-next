@@ -450,3 +450,18 @@ export const UNSUBSCRIBE_NEWSLETTER = gql`
     }
   }
 `;
+
+export const MARK_NOTIFICATION_READ = gql`
+  mutation MarkNotificationRead($input: MarkNotificationReadInput!) {
+    markNotificationRead(input: $input) {
+      _id
+      notificationStatus
+    }
+  }
+`;
+
+export const MARK_ALL_NOTIFICATIONS_READ = gql`
+  mutation MarkAllNotificationsRead {
+    markAllNotificationsRead
+  }
+`;

@@ -1,13 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useReactiveVar, useQuery, useLazyQuery } from "@apollo/client";
+import {
+  useReactiveVar,
+  useQuery,
+  useLazyQuery,
+  useMutation,
+} from "@apollo/client";
 import { useTranslation } from "next-i18next";
-import { userVar } from "../../apollo/store";
+import { userVar, unreadCountVar } from "../../apollo/store";
 import { getJwtToken, updateUserInfo, logOut } from "../auth";
 import {
   Avatar,
   Box,
+  Button,
   Drawer,
   Stack,
   Typography,
@@ -22,15 +28,28 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import CardGiftcardOutlinedIcon from "@mui/icons-material/CardGiftcardOutlined";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 import MiniCart from "./cart/MiniCart";
 import MiniWishlist from "./cart/MiniWishlist";
 import { getCartCount } from "../utils/cartStorage";
-import { GET_FAVORITES, GET_FURNITURES } from "../../apollo/user/query";
+import {
+  GET_FAVORITES,
+  GET_FURNITURES,
+  GET_MY_NOTIFICATIONS,
+} from "../../apollo/user/query";
+import {
+  MARK_NOTIFICATION_READ,
+  MARK_ALL_NOTIFICATIONS_READ,
+} from "../../apollo/user/mutation";
 import { T } from "../types/common";
 import { Furniture } from "../types/furniture/furniture";
+import { Notification } from "../types/notification/notification";
 import { REACT_APP_API_URL } from "../config";
 import useDeviceDetect from "../hooks/useDeviceDetect";
+import { NotificationStatus } from "../enums/notification.enum";
 
 const Top = () => {
   const device = useDeviceDetect();
@@ -42,6 +61,7 @@ const Top = () => {
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [openNotifications, setOpenNotifications] = useState(false);
   const [cartCount, setCartCount] = useState(() => getCartCount());
   const [lang, setLang] = useState<string>("en");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -51,11 +71,13 @@ const Top = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [searchFurnitures, { data: furnitureData, loading: isSearching }] = useLazyQuery(GET_FURNITURES, {
-    fetchPolicy: "network-only",
-  });
+  const [searchFurnitures, { data: furnitureData, loading: isSearching }] =
+    useLazyQuery(GET_FURNITURES, {
+      fetchPolicy: "network-only",
+    });
 
-  const furnitures: Furniture[] = (furnitureData as T)?.getFurnitures?.list ?? [];
+  const furnitures: Furniture[] =
+    (furnitureData as T)?.getFurnitures?.list ?? [];
   const hasResults = furnitures.length > 0;
 
   useEffect(() => {
@@ -82,39 +104,54 @@ const Top = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleSearchInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    setSearchText(val);
+  const handleSearchInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const val = e.target.value;
+      setSearchText(val);
 
-    if (debounceRef.current) clearTimeout(debounceRef.current);
+      if (debounceRef.current) clearTimeout(debounceRef.current);
 
-    if (val.trim().length < 2) {
-      setShowDropdown(false);
-      return;
-    }
+      if (val.trim().length < 2) {
+        setShowDropdown(false);
+        return;
+      }
 
-    debounceRef.current = setTimeout(() => {
-      const text = val.trim();
-      setShowDropdown(true);
-      searchFurnitures({ variables: { input: { page: 1, limit: 5, search: { text } } } });
-    }, 300);
-  }, [searchFurnitures]);
+      debounceRef.current = setTimeout(() => {
+        const text = val.trim();
+        setShowDropdown(true);
+        searchFurnitures({
+          variables: { input: { page: 1, limit: 5, search: { text } } },
+        });
+      }, 300);
+    },
+    [searchFurnitures],
+  );
 
-  const handleSearchKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Escape") {
+  const handleSearchKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Escape") {
+        setSearchOpen(false);
+      }
+      if (e.key === "Enter" && searchText.trim()) {
+        const input = JSON.stringify({
+          page: 1,
+          limit: 12,
+          search: { text: searchText.trim() },
+        });
+        router.push(`/furniture?input=${input}`);
+        setSearchOpen(false);
+      }
+    },
+    [searchText, router],
+  );
+
+  const handleResultClick = useCallback(
+    (href: string) => {
+      router.push(href);
       setSearchOpen(false);
-    }
-    if (e.key === "Enter" && searchText.trim()) {
-      const input = JSON.stringify({ page: 1, limit: 12, search: { text: searchText.trim() } });
-      router.push(`/furniture?input=${input}`);
-      setSearchOpen(false);
-    }
-  }, [searchText, router]);
-
-  const handleResultClick = useCallback((href: string) => {
-    router.push(href);
-    setSearchOpen(false);
-  }, [router]);
+    },
+    [router],
+  );
 
   useEffect(() => {
     const update = () => setCartCount(getCartCount());
@@ -127,11 +164,14 @@ const Top = () => {
     };
   }, []);
 
-  const { data: favoritesData, refetch: refetchWishlistCount } = useQuery(GET_FAVORITES, {
-    skip: !user?._id,
-    variables: { input: { page: 1, limit: 1 } },
-    fetchPolicy: "cache-and-network",
-  });
+  const { data: favoritesData, refetch: refetchWishlistCount } = useQuery(
+    GET_FAVORITES,
+    {
+      skip: !user?._id,
+      variables: { input: { page: 1, limit: 1 } },
+      fetchPolicy: "cache-and-network",
+    },
+  );
 
   const wishlistCount = user?._id
     ? ((favoritesData as T)?.getFavorites?.metaCounter?.[0]?.total ?? 0)
@@ -143,6 +183,24 @@ const Top = () => {
     window.addEventListener("wishlistUpdated", update);
     return () => window.removeEventListener("wishlistUpdated", update);
   }, [user?._id, refetchWishlistCount]);
+
+  const unreadCount = useReactiveVar(unreadCountVar);
+
+  const { data: notifData, refetch: refetchNotifs } = useQuery(
+    GET_MY_NOTIFICATIONS,
+    {
+      skip: !user?._id || !openNotifications,
+      fetchPolicy: "network-only",
+    },
+  );
+  const notifications: Notification[] = (
+    (notifData as T)?.getMyNotifications?.list ?? []
+  ).filter(
+    (n: Notification) => n.notificationStatus === NotificationStatus.WAIT,
+  );
+
+  const [markRead] = useMutation(MARK_NOTIFICATION_READ);
+  const [markAllRead] = useMutation(MARK_ALL_NOTIFICATIONS_READ);
 
   useEffect(() => {
     const token = getJwtToken();
@@ -170,6 +228,22 @@ const Top = () => {
     setLangAnchorEl(null);
   };
 
+  const handleNotifClick = useCallback(
+    async (notif: Notification) => {
+      unreadCountVar(Math.max(0, unreadCountVar() - 1));
+      try {
+        await markRead({ variables: { input: { notificationId: notif._id } } });
+        refetchNotifs();
+      } catch (_) {}
+      setOpenNotifications(false);
+      const dest = notif.noticeId
+        ? `/cs/privacy?announcementId=${notif.noticeId}`
+        : "/cs";
+      router.push(dest);
+    },
+    [markRead, refetchNotifs, router],
+  );
+
   const handleLangChoice = useCallback(
     async (locale: string) => {
       setLang(locale);
@@ -180,7 +254,7 @@ const Top = () => {
     [router],
   );
 
-  if (device === 'mobile') {
+  if (device === "mobile") {
     return (
       <Stack className="top-mobile">
         {/* Logo */}
@@ -208,28 +282,51 @@ const Top = () => {
         </Stack>
 
         {/* Hamburger Drawer */}
-        <Drawer anchor="right" open={openMenu} onClose={() => setOpenMenu(false)}>
+        <Drawer
+          anchor="right"
+          open={openMenu}
+          onClose={() => setOpenMenu(false)}
+        >
           <Stack className="mobile-drawer" sx={{ width: 280 }}>
             <Box className="mobile-drawer-header">
               <Typography className="mobile-drawer-logo">MONOLITH</Typography>
             </Box>
-            <Link href="/" onClick={() => setOpenMenu(false)}>{t("Home")}</Link>
-            <Link href="/furniture" onClick={() => setOpenMenu(false)}>{t("Shop")}</Link>
-            <Link href="/designers" onClick={() => setOpenMenu(false)}>{t("Designers")}</Link>
-            <Link href="/community" onClick={() => setOpenMenu(false)}>{t("Blog")}</Link>
-            <Link href="/about" onClick={() => setOpenMenu(false)}>{t("About")}</Link>
-            <Link href="/cs" onClick={() => setOpenMenu(false)}>{t("CS")}</Link>
+            <Link href="/" onClick={() => setOpenMenu(false)}>
+              {t("Home")}
+            </Link>
+            <Link href="/furniture" onClick={() => setOpenMenu(false)}>
+              {t("Shop")}
+            </Link>
+            <Link href="/designers" onClick={() => setOpenMenu(false)}>
+              {t("Designers")}
+            </Link>
+            <Link href="/community" onClick={() => setOpenMenu(false)}>
+              {t("Blog")}
+            </Link>
+            <Link href="/about" onClick={() => setOpenMenu(false)}>
+              {t("About")}
+            </Link>
+            <Link href="/cs" onClick={() => setOpenMenu(false)}>
+              {t("CS")}
+            </Link>
             {user?._id ? (
-              <Link href="/mypage" onClick={() => setOpenMenu(false)}>{t("My Page")}</Link>
+              <Link href="/mypage" onClick={() => setOpenMenu(false)}>
+                {t("My Page")}
+              </Link>
             ) : (
-              <Link href="/account/join" onClick={() => setOpenMenu(false)}>{t("Login / Register")}</Link>
+              <Link href="/account/join" onClick={() => setOpenMenu(false)}>
+                {t("Login / Register")}
+              </Link>
             )}
           </Stack>
         </Drawer>
 
         {/* Mini Cart + Wishlist */}
         <MiniCart open={openCart} onClose={() => setOpenCart(false)} />
-        <MiniWishlist open={openWishlist} onClose={() => setOpenWishlist(false)} />
+        <MiniWishlist
+          open={openWishlist}
+          onClose={() => setOpenWishlist(false)}
+        />
       </Stack>
     );
   }
@@ -238,11 +335,14 @@ const Top = () => {
     <Stack id="top">
       {/* Top Banner */}
       <Box className="top-banner">
-        <Stack direction="row" alignItems="center" justifyContent="center" gap={1}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+          gap={1}
+        >
           <CardGiftcardOutlinedIcon sx={{ fontSize: 18 }} />
-          <Typography variant="body2">
-            {t("topBanner")}
-          </Typography>
+          <Typography variant="body2">{t("topBanner")}</Typography>
         </Stack>
       </Box>
 
@@ -258,13 +358,22 @@ const Top = () => {
           <Link href="/" className={router.pathname === "/" ? "active" : ""}>
             {t("Home")}
           </Link>
-          <Link href="/furniture" className={router.pathname.includes("/furniture") ? "active" : ""}>
+          <Link
+            href="/furniture"
+            className={router.pathname.includes("/furniture") ? "active" : ""}
+          >
             {t("Shop")}
           </Link>
-          <Link href="/designers" className={router.pathname.includes("/designers") ? "active" : ""}>
+          <Link
+            href="/designers"
+            className={router.pathname.includes("/designers") ? "active" : ""}
+          >
             {t("Designers")}
           </Link>
-          <Link href="/community" className={router.pathname.includes("/community") ? "active" : ""}>
+          <Link
+            href="/community"
+            className={router.pathname.includes("/community") ? "active" : ""}
+          >
             {t("Blog")}
           </Link>
           <Box
@@ -277,8 +386,12 @@ const Top = () => {
               {t("About")}
             </Link>
             <Box className="nav-dropdown-menu">
-              <Link href="/about" className="dropdown-item">{t("About")}</Link>
-              <Link href="/cs/contact" className="dropdown-item">{t("Contact Us")}</Link>
+              <Link href="/about" className="dropdown-item">
+                {t("About")}
+              </Link>
+              <Link href="/cs/contact" className="dropdown-item">
+                {t("Contact Us")}
+              </Link>
             </Box>
           </Box>
           <Box
@@ -291,23 +404,44 @@ const Top = () => {
               {t("CS")}
             </Link>
             <Box className="nav-dropdown-menu">
-              <Link href="/cs" className="dropdown-item">{t("Customer Service")}</Link>
-              <Link href="/cs/faq" className="dropdown-item">{t("FAQ")}</Link>
-              <Link href="/cs/terms" className="dropdown-item">{t("Terms & Conditions")}</Link>
-              <Link href="/cs/privacy" className="dropdown-item">{t("Privacy Policy")}</Link>
+              <Link href="/cs" className="dropdown-item">
+                {t("Customer Service")}
+              </Link>
+              <Link href="/cs/faq" className="dropdown-item">
+                {t("FAQ")}
+              </Link>
+              <Link href="/cs/terms" className="dropdown-item">
+                {t("Terms & Conditions")}
+              </Link>
+              <Link href="/cs/privacy" className="dropdown-item">
+                {t("Announcements")}
+              </Link>
             </Box>
           </Box>
         </Stack>
 
         {/* Logo — center */}
         <Link href="/" className="logo" style={{ padding: "0 48px" }}>
-          <span style={{ fontFamily: "'Jost', sans-serif", fontSize: "22px", fontWeight: 300, letterSpacing: "8px", color: "#1C1A17" }}>
+          <span
+            style={{
+              fontFamily: "'Jost', sans-serif",
+              fontSize: "22px",
+              fontWeight: 300,
+              letterSpacing: "8px",
+              color: "#1C1A17",
+            }}
+          >
             MONOLITH
           </span>
         </Link>
 
         {/* Search + Actions — right */}
-        <Stack direction="row" alignItems="center" gap={2} sx={{ flex: 1, justifyContent: "flex-end" }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          gap={2}
+          sx={{ flex: 1, justifyContent: "flex-end" }}
+        >
           <Box
             ref={searchRef}
             className={`search-box${searchOpen ? " open" : ""}`}
@@ -329,13 +463,17 @@ const Top = () => {
               <Box className="search-dropdown">
                 {isSearching && !hasResults && (
                   <Box className="search-dropdown-loading">
-                    <Typography className="search-loading-text">Searching...</Typography>
+                    <Typography className="search-loading-text">
+                      Searching...
+                    </Typography>
                   </Box>
                 )}
 
                 {!isSearching && !hasResults && (
                   <Box className="search-dropdown-empty">
-                    <Typography className="search-empty-text">No results for "{searchText}"</Typography>
+                    <Typography className="search-empty-text">
+                      No results for "{searchText}"
+                    </Typography>
                   </Box>
                 )}
 
@@ -354,7 +492,9 @@ const Top = () => {
                       }}
                     />
                     <Box className="search-result-info">
-                      <Typography className="search-result-title">{item.furnitureTitle}</Typography>
+                      <Typography className="search-result-title">
+                        {item.furnitureTitle}
+                      </Typography>
                       <Typography className="search-result-sub">
                         ${item.furniturePrice?.toLocaleString()}
                       </Typography>
@@ -365,7 +505,11 @@ const Top = () => {
                 {hasResults && (
                   <Box
                     className="search-see-all"
-                    onClick={() => handleResultClick(`/furniture?input=${JSON.stringify({ page: 1, limit: 12, search: { text: searchText.trim() } })}`)}
+                    onClick={() =>
+                      handleResultClick(
+                        `/furniture?input=${JSON.stringify({ page: 1, limit: 12, search: { text: searchText.trim() } })}`,
+                      )
+                    }
                   >
                     <Typography className="search-see-all-text">
                       See all results for "{searchText}"
@@ -383,22 +527,35 @@ const Top = () => {
                   src={
                     user.memberImage && !user.memberImage.startsWith("/img/")
                       ? `${process.env.REACT_APP_API_URL}/${user.memberImage}`
-                      : user.memberImage || "/general_images/default_profile.png"
+                      : user.memberImage ||
+                        "/general_images/default_profile.png"
                   }
                   alt={user.memberNick}
                   sx={{ width: 36, height: 36 }}
                   imgProps={{ style: { objectPosition: "top center" } }}
                 />
               </IconButton>
-              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-                <MenuItem onClick={() => { router.push("/mypage"); handleMenuClose(); }}>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+                <MenuItem
+                  onClick={() => {
+                    router.push("/mypage");
+                    handleMenuClose();
+                  }}
+                >
                   {t("My Page")}
                 </MenuItem>
                 <MenuItem onClick={handleLogout}>{t("Logout")}</MenuItem>
               </Menu>
             </>
           ) : (
-            <Box className="login-register-btn" onClick={() => router.push("/account/join")}>
+            <Box
+              className="login-register-btn"
+              onClick={() => router.push("/account/join")}
+            >
               <PersonOutlineIcon sx={{ fontSize: 20 }} />
               <span>{t("Login / Register")}</span>
             </Box>
@@ -418,16 +575,50 @@ const Top = () => {
             </Badge>
           </IconButton>
 
+          {/* Notification Bell */}
+          {user?._id && (
+            <IconButton
+              onClick={() => setOpenNotifications(true)}
+              sx={{ color: "#1C1A17", p: "6px" }}
+            >
+              <Badge
+                badgeContent={unreadCount || null}
+                sx={{
+                  "& .MuiBadge-badge": {
+                    background: "#C46A4A",
+                    color: "white",
+                    fontSize: "10px",
+                    minWidth: "18px",
+                    height: "18px",
+                  },
+                }}
+              >
+                <NotificationsOutlinedIcon sx={{ fontSize: 22 }} />
+              </Badge>
+            </IconButton>
+          )}
+
           {/* Language Switcher */}
           <Box
             className="lang-switcher"
             onClick={handleLangOpen}
-            sx={{ display: "flex", alignItems: "center", gap: "4px", cursor: "pointer", ml: 0.5 }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              cursor: "pointer",
+              ml: 0.5,
+            }}
           >
             <img
               src={`/img/flag/lang${lang}.png`}
               alt={lang}
-              style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }}
+              style={{
+                width: 24,
+                height: 16,
+                objectFit: "cover",
+                borderRadius: 2,
+              }}
             />
             <KeyboardArrowDownIcon sx={{ fontSize: 16, color: "#616161" }} />
           </Box>
@@ -437,16 +628,52 @@ const Top = () => {
             onClose={handleLangClose}
             sx={{ mt: "4px" }}
           >
-            <MenuItem onClick={() => handleLangChoice("en")} sx={{ gap: "10px" }}>
-              <img src="/img/flag/langen.png" alt="English" style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }} />
+            <MenuItem
+              onClick={() => handleLangChoice("en")}
+              sx={{ gap: "10px" }}
+            >
+              <img
+                src="/img/flag/langen.png"
+                alt="English"
+                style={{
+                  width: 24,
+                  height: 16,
+                  objectFit: "cover",
+                  borderRadius: 2,
+                }}
+              />
               {t("English")}
             </MenuItem>
-            <MenuItem onClick={() => handleLangChoice("kr")} sx={{ gap: "10px" }}>
-              <img src="/img/flag/langkr.png" alt="Korean" style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }} />
+            <MenuItem
+              onClick={() => handleLangChoice("kr")}
+              sx={{ gap: "10px" }}
+            >
+              <img
+                src="/img/flag/langkr.png"
+                alt="Korean"
+                style={{
+                  width: 24,
+                  height: 16,
+                  objectFit: "cover",
+                  borderRadius: 2,
+                }}
+              />
               {t("Korean")}
             </MenuItem>
-            <MenuItem onClick={() => handleLangChoice("ru")} sx={{ gap: "10px" }}>
-              <img src="/img/flag/langru.png" alt="Russian" style={{ width: 24, height: 16, objectFit: "cover", borderRadius: 2 }} />
+            <MenuItem
+              onClick={() => handleLangChoice("ru")}
+              sx={{ gap: "10px" }}
+            >
+              <img
+                src="/img/flag/langru.png"
+                alt="Russian"
+                style={{
+                  width: 24,
+                  height: 16,
+                  objectFit: "cover",
+                  borderRadius: 2,
+                }}
+              />
               {t("Russian")}
             </MenuItem>
           </Menu>
@@ -457,7 +684,150 @@ const Top = () => {
       <MiniCart open={openCart} onClose={() => setOpenCart(false)} />
 
       {/* Mini Wishlist Sidebar */}
-      <MiniWishlist open={openWishlist} onClose={() => setOpenWishlist(false)} />
+      <MiniWishlist
+        open={openWishlist}
+        onClose={() => setOpenWishlist(false)}
+      />
+
+      {/* Notification Drawer */}
+      <Drawer
+        anchor="right"
+        open={openNotifications}
+        onClose={() => setOpenNotifications(false)}
+        PaperProps={{ sx: { width: 340 } }}
+      >
+        <Stack height="100%">
+          {/* Header */}
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ padding: "20px 24px", borderBottom: "1px solid #E8E0D8" }}
+          >
+            <Typography
+              sx={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 20,
+                color: "#1C1A17",
+              }}
+            >
+              Announcements
+            </Typography>
+            <Stack direction="row" gap={1} alignItems="center">
+              {unreadCount > 0 && (
+                <Button
+                  size="small"
+                  sx={{
+                    color: "#C46A4A",
+                    fontSize: 12,
+                    textTransform: "none",
+                    fontFamily: "'DM Sans', sans-serif",
+                  }}
+                  onClick={async () => {
+                    unreadCountVar(0);
+                    await markAllRead();
+                    refetchNotifs();
+                  }}
+                >
+                  Mark all read
+                </Button>
+              )}
+              <IconButton
+                size="small"
+                onClick={() => setOpenNotifications(false)}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </Stack>
+          </Stack>
+
+          {/* Notification List */}
+          <Stack flex={1} sx={{ overflow: "auto", padding: "8px 0" }}>
+            {notifications.length === 0 ? (
+              <Stack
+                alignItems="center"
+                justifyContent="center"
+                sx={{ height: 200, gap: 2 }}
+              >
+                <NotificationsOutlinedIcon
+                  sx={{ fontSize: 40, color: "#E8E0D8" }}
+                />
+                <Typography
+                  sx={{
+                    color: "#787878",
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: 14,
+                  }}
+                >
+                  No new announcements
+                </Typography>
+              </Stack>
+            ) : (
+              notifications.map((notif, idx) => (
+                <Stack
+                  key={notif._id}
+                  direction="row"
+                  gap={3}
+                  alignItems="center"
+                  onClick={() => handleNotifClick(notif)}
+                  sx={{
+                    padding: "16px 24px",
+                    cursor: "pointer",
+                    background: "#FDF5F2",
+                    borderLeft: "3px solid #C46A4A",
+                    borderBottom: idx < notifications.length - 1 ? "1px solid #F5F0EA" : "none",
+                    "&:hover": { background: "#F5F0EA" },
+                    transition: "background 0.15s ease",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 8,
+                      height: 8,
+                      borderRadius: "50%",
+                      bgcolor: "#C46A4A",
+                      flexShrink: 0,
+                    }}
+                  />
+                  <Stack flex={1}>
+                    <Typography
+                      sx={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: 14,
+                        color: "#1C1A17",
+                        fontWeight: 600,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {notif.notificationDesc}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        fontSize: 11,
+                        color: "#787878",
+                        mt: 0.5,
+                      }}
+                    >
+                      {new Date(notif.createdAt).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </Typography>
+                  </Stack>
+                  <KeyboardArrowRightIcon
+                    sx={{ fontSize: 16, color: "#C8B99A", flexShrink: 0 }}
+                  />
+                </Stack>
+              ))
+            )}
+          </Stack>
+        </Stack>
+      </Drawer>
     </Stack>
   );
 };

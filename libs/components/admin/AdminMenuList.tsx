@@ -45,9 +45,8 @@ const NAV_ITEMS: NavItem[] = [
     title: "CS",
     icon: <SupportAgentOutlinedIcon sx={{ fontSize: 18 }} />,
     children: [
-      { title: "1:1 Inquiry", href: "/_admin/cs/inquiry" },
-      { title: "FAQ", href: "/_admin/cs/faq" },
-      { title: "Notice", href: "/_admin/cs/notice" },
+      { title: "Announcements", href: "/_admin/cs/notice" },
+      { title: "1:1 Inqury", href: "/_admin/cs/inquiry" },
     ],
   },
 ];
@@ -93,17 +92,18 @@ const AdminMenuList = () => {
       {/* Navigation */}
       <Box className="admin-nav" sx={{ flex: 1 }}>
         {NAV_ITEMS.map((item) => {
-          const active = item.href ? isActive(item.href) : isChildActive(item.children);
-          const expanded = expandedItem === item.title || isChildActive(item.children);
+          const active = item.href
+            ? isActive(item.href)
+            : isChildActive(item.children);
+          const expanded =
+            expandedItem === item.title || isChildActive(item.children);
 
           if (item.children) {
             return (
               <Box key={item.title}>
                 <Box
                   className={`admin-nav-item${active ? " active" : ""}`}
-                  onClick={() =>
-                    setExpandedItem(expanded ? null : item.title)
-                  }
+                  onClick={() => setExpandedItem(expanded ? null : item.title)}
                 >
                   <span className="admin-nav-icon">{item.icon}</span>
                   <span className="admin-nav-label">{item.title}</span>

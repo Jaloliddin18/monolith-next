@@ -109,7 +109,7 @@ const Footer = () => {
               <Link href="/cs">FAQ</Link>
               <Link href="/cs">Shipping</Link>
               <Link href="/cs">Contact us</Link>
-              <Link href="/cs">Privacy policy</Link>
+              <Link href="/cs/privacy">Announcements</Link>
             </Stack>
           </Stack>
 

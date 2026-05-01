@@ -1,7 +1,7 @@
 export enum NoticeCategory {
   FAQ = "FAQ",
   TERMS = "TERMS",
-  INQUIRY = "INQUIRY",
+  ANNOUNCEMENT = "ANNOUNCEMENT",
 }
 
 export enum NoticeStatus {

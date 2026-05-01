@@ -6,6 +6,153 @@
 }
 
 // ==============================
+// ANNOUNCEMENTS — LIST PAGE
+// ==============================
+.announcements-page {
+	max-width: 760px;
+	margin: 0 auto;
+	padding: 60px 24px;
+	background: #FAFAF8;
+	min-height: 70vh;
+
+	.announcements-page-title {
+		font-family: var(--font-ui);
+		font-size: 36px;
+		font-weight: 400;
+		color: #1C1A17;
+		line-height: 1.2;
+		margin-bottom: 6px;
+	}
+
+	.announcements-page-subtitle {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 15px;
+		color: #9E9590;
+		letter-spacing: 0.01em;
+	}
+}
+
+.announcement-row {
+	padding: 28px 0;
+	border-bottom: 1px solid #F0EDE8;
+	cursor: pointer;
+	transition: padding-left 0.18s ease;
+
+	&:last-of-type {
+		border-bottom: none;
+	}
+
+	&:hover {
+		padding-left: 6px;
+
+		.announcement-row-title {
+			color: #C46A4A;
+		}
+
+		.announcement-row-readmore {
+			letter-spacing: 0.02em;
+		}
+	}
+
+	.announcement-row-month {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 12px;
+		font-weight: 500;
+		color: #787878;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		line-height: 1.4;
+	}
+
+	.announcement-row-year {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 11px;
+		color: #B8AFA6;
+		line-height: 1.4;
+	}
+
+	.announcement-row-title {
+		font-family: 'Poppins', sans-serif;
+		font-size: 17px;
+		font-weight: 500;
+		color: #1C1A17;
+		line-height: 1.4;
+		transition: color 0.15s ease;
+		margin-top: 2px;
+	}
+
+	.announcement-row-excerpt {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 14px;
+		color: #787878;
+		line-height: 1.65;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.announcement-row-readmore {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 13px;
+		color: #C46A4A;
+		margin-top: 2px;
+		transition: letter-spacing 0.15s ease;
+	}
+}
+
+// ==============================
+// ANNOUNCEMENT DETAIL PAGE
+// ==============================
+.announcement-detail {
+	max-width: 760px;
+	margin: 0 auto;
+	padding: 56px 24px 80px;
+	background: #FAFAF8;
+	min-height: 70vh;
+
+	.announcement-detail-title {
+		font-family: var(--font-ui);
+		font-size: 36px;
+		font-weight: 400;
+		color: #1C1A17;
+		line-height: 1.2;
+		margin-top: 12px;
+	}
+
+	.announcement-detail-date {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 13px;
+		color: #9E9590;
+		letter-spacing: 0.01em;
+	}
+
+	.announcement-detail-body {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 16px;
+		color: #2D2A27;
+		line-height: 1.9;
+		white-space: pre-wrap;
+	}
+}
+
+.announcement-back-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 13px;
+	color: #9E9590;
+	cursor: pointer;
+	transition: color 0.15s ease;
+	width: fit-content;
+
+	&:hover {
+		color: #1C1A17;
+	}
+}
+
+// ==============================
 // CS HERO
 // ==============================
 .cs-hero {
@@ -14,7 +161,7 @@
   text-align: center;
 
   .cs-hero-title {
-    font-family: 'Playfair Display', 'Georgia', serif;
+    font-family: var(--font-ui);
     font-size: 48px;
     color: #1C1A17;
     font-weight: 400;
@@ -72,7 +219,7 @@
   box-sizing: border-box;
 
   .cs-section-title {
-    font-family: 'Playfair Display', 'Georgia', serif;
+    font-family: var(--font-ui);
     font-size: 32px;
     color: #1C1A17;
     font-weight: 400;
@@ -226,7 +373,7 @@
   text-align: center;
 
   .cs-contact-prompt-title {
-    font-family: 'Playfair Display', 'Georgia', serif;
+    font-family: var(--font-ui);
     font-size: 32px;
     color: #fff;
     font-weight: 400;
@@ -276,8 +423,8 @@
 	.svc-awesome-title {
 		font-family: var(--font-ui);
 		font-size: var(--fs-3xl);
-		font-weight: var(--fw-medium);
-		color: var(--color-dark);
+		font-weight: 400;
+		color: #1C1A17;
 		margin-bottom: 50px;
 	}
 
@@ -360,8 +507,8 @@
 	.svc-progress-title {
 		font-family: var(--font-ui);
 		font-size: var(--fs-3xl);
-		font-weight: var(--fw-medium);
-		color: var(--color-dark);
+		font-weight: 400;
+		color: #1C1A17;
 		text-align: center;
 		margin-bottom: 60px;
 	}
@@ -482,8 +629,8 @@
 		.sale-title {
 			font-family: var(--font-ui);
 			font-size: var(--fs-3xl);
-			font-weight: var(--fw-medium);
-			color: var(--color-dark);
+			font-weight: 400;
+			color: #1C1A17;
 			line-height: 1;
 		}
 	}

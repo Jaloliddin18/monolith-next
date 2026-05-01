@@ -724,6 +724,21 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 /**************************
  *         NOTICE         *
  *************************/
+export const GET_NOTICE_BY_ID = gql`
+  query GetNoticeById($noticeId: String!) {
+    getNoticeById(noticeId: $noticeId) {
+      _id
+      noticeCategory
+      noticeStatus
+      noticeTitle
+      noticeContent
+      memberId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const GET_NOTICES = gql`
   query GetNotices($input: NoticesInquiry!) {
     getNotices(input: $input) {
@@ -784,5 +799,32 @@ export const GET_SUBSCRIBERS = gql`
         total
       }
     }
+  }
+`;
+
+export const GET_MY_NOTIFICATIONS = gql`
+  query GetMyNotifications {
+    getMyNotifications {
+      list {
+        _id
+        notificationType
+        notificationStatus
+        notificationTitle
+        notificationDesc
+        authorId
+        receiverId
+        noticeId
+        createdAt
+      }
+      metaCounter {
+        total
+      }
+    }
+  }
+`;
+
+export const GET_UNREAD_COUNT = gql`
+  query GetUnreadCount {
+    getUnreadCount
   }
 `;

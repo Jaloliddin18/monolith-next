@@ -16,6 +16,7 @@ export interface Notification {
 	receiverId: string;
 	furnitureId?: string;
 	articleId?: string;
+	noticeId?: string;
 	createdAt: Date;
 	updatedAt: Date;
 

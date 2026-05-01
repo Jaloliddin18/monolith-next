@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
-import { Box, Stack, Typography, Button, CircularProgress } from "@mui/material";
+import { Box, Stack, Typography, Button } from "@mui/material";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
 import NewsletterBanner from "../../libs/components/furniture/NewsletterBanner";
@@ -8,17 +8,8 @@ import InstagramSection from "../../libs/components/common/InstagramSection";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import SearchIcon from "@mui/icons-material/Search";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
-import { useQuery } from "@apollo/client";
-import { GET_NOTICES } from "../../apollo/user/query";
-import { T } from "../../libs/types/common";
-import { Direction } from "../../libs/enums/common.enum";
-import { NoticeCategory, NoticeStatus } from "../../libs/enums/notice.enum";
-import { Notice } from "../../libs/types/notice/notice";
 
 const services = [
   {
@@ -125,35 +116,6 @@ const Service = () => {
   const device = useDeviceDetect();
   const router = useRouter();
   const [countdown, setCountdown] = useState({ days: 10, hours: 18, mins: 23, secs: 0 });
-  const [expandedNotice, setExpandedNotice] = useState<string | null>(null);
-  const [expandedFaq, setExpandedFaq] = useState<string | null>(null);
-  const [searchText, setSearchText] = useState("");
-  const [announcements, setAnnouncements] = useState<Notice[]>([]);
-  const [faqs, setFaqs] = useState<Notice[]>([]);
-
-  const { loading: announcementsLoading } = useQuery(GET_NOTICES, {
-    fetchPolicy: "cache-and-network",
-    variables: {
-      input: {
-        page: 1, limit: 10, sort: "createdAt", direction: Direction.DESC,
-        search: { noticeStatus: NoticeStatus.ACTIVE, noticeCategory: NoticeCategory.INQUIRY },
-      },
-    },
-    onCompleted: (data: T) => setAnnouncements(data?.getNotices?.list ?? []),
-    onError: () => {},
-  });
-
-  const { loading: faqsLoading } = useQuery(GET_NOTICES, {
-    fetchPolicy: "cache-and-network",
-    variables: {
-      input: {
-        page: 1, limit: 20, sort: "createdAt", direction: Direction.DESC,
-        search: { noticeStatus: NoticeStatus.ACTIVE, noticeCategory: NoticeCategory.FAQ },
-      },
-    },
-    onCompleted: (data: T) => setFaqs(data?.getNotices?.list ?? []),
-    onError: () => {},
-  });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -168,22 +130,6 @@ const Service = () => {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
-
-  const categoryLabel = (cat: string) => {
-    if (cat === "FAQ") return "faq";
-    if (cat === "INQUIRY") return "inquiry";
-    if (cat === "TERMS") return "terms";
-    return "notice";
-  };
-
-  const filteredFaqs = faqs.filter((f) =>
-    !searchText || f.noticeTitle.toLowerCase().includes(searchText.toLowerCase()) ||
-    f.noticeContent.toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  const filteredAnnouncements = announcements.filter((a) =>
-    !searchText || a.noticeTitle.toLowerCase().includes(searchText.toLowerCase())
-  );
 
   if (!device) return null;
 
@@ -208,107 +154,6 @@ const Service = () => {
         <link rel="canonical" href="https://monolith.com/cs" />
       </Head>
       <Stack className="service-page">
-        {/* ===== CS HERO ===== */}
-        <Box className="cs-hero">
-          <Typography className="cs-hero-title">How can we help you?</Typography>
-          <Typography className="cs-hero-subtitle">
-            Find answers, submit questions, or browse our notices
-          </Typography>
-          <Box className="cs-hero-search">
-            <SearchIcon className="cs-search-icon" />
-            <input
-              type="text"
-              placeholder="Search FAQs and announcements..."
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </Box>
-        </Box>
-
-        {/* ===== ANNOUNCEMENTS SECTION ===== */}
-        <Stack className="cs-section cs-announcements">
-          <Typography className="cs-section-title">Announcements</Typography>
-          {announcementsLoading ? (
-            <Box className="cs-loading"><CircularProgress size={32} sx={{ color: "#C46A4A" }} /></Box>
-          ) : filteredAnnouncements.length === 0 ? (
-            <Typography className="cs-empty">No announcements at this time</Typography>
-          ) : (
-            <Box className="notice-grid">
-              {filteredAnnouncements.map((notice) => (
-                <Box
-                  key={notice._id}
-                  className="notice-card"
-                  onClick={() => setExpandedNotice(expandedNotice === notice._id ? null : notice._id)}
-                >
-                  <span className={`notice-category ${categoryLabel(notice.noticeCategory)}`}>
-                    {notice.noticeCategory}
-                  </span>
-                  <Typography className="notice-title">{notice.noticeTitle}</Typography>
-                  <Typography className="notice-content">{notice.noticeContent}</Typography>
-                  <Stack className="notice-footer" direction="row" justifyContent="space-between" alignItems="center">
-                    <Typography className="notice-date">
-                      {new Date(notice.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                    </Typography>
-                    <KeyboardArrowDownIcon
-                      className="notice-chevron"
-                      sx={{ transform: expandedNotice === notice._id ? "rotate(180deg)" : "rotate(0deg)", transition: "0.2s" }}
-                    />
-                  </Stack>
-                  {expandedNotice === notice._id && (
-                    <Box className="notice-expanded">
-                      <Typography className="notice-expanded-content">{notice.noticeContent}</Typography>
-                    </Box>
-                  )}
-                </Box>
-              ))}
-            </Box>
-          )}
-        </Stack>
-
-        {/* ===== FAQ SECTION ===== */}
-        <Stack className="cs-section cs-faq">
-          <Typography className="cs-section-title">Frequently Asked Questions</Typography>
-          {faqsLoading ? (
-            <Box className="cs-loading"><CircularProgress size={32} sx={{ color: "#C46A4A" }} /></Box>
-          ) : filteredFaqs.length === 0 ? (
-            <Typography className="cs-empty">No FAQs found</Typography>
-          ) : (
-            <Box className="faq-accordion">
-              {filteredFaqs.map((faq) => (
-                <Box key={faq._id} className={`faq-item ${expandedFaq === faq._id ? "open" : ""}`}>
-                  <Box
-                    className="faq-question"
-                    onClick={() => setExpandedFaq(expandedFaq === faq._id ? null : faq._id)}
-                  >
-                    <span>{faq.noticeTitle}</span>
-                    {expandedFaq === faq._id
-                      ? <KeyboardArrowUpIcon sx={{ fontSize: 20 }} />
-                      : <KeyboardArrowDownIcon sx={{ fontSize: 20 }} />
-                    }
-                  </Box>
-                  {expandedFaq === faq._id && (
-                    <Box className="faq-answer">{faq.noticeContent}</Box>
-                  )}
-                </Box>
-              ))}
-            </Box>
-          )}
-        </Stack>
-
-        {/* ===== CONTACT PROMPT ===== */}
-        <Box className="cs-contact-prompt">
-          <Typography className="cs-contact-prompt-title">Didn&apos;t find what you were looking for?</Typography>
-          <Typography className="cs-contact-prompt-sub">Submit a question and our team will get back to you within 24 hours.</Typography>
-          <Stack direction="row" gap="12px" justifyContent="center">
-            <Button className="cs-contact-btn primary" onClick={() => router.push("/cs/contact")}>
-              Submit a Question
-            </Button>
-            <Button className="cs-contact-btn secondary" onClick={() => router.push("/cs/faq")}>
-              View All FAQs
-            </Button>
-          </Stack>
-        </Box>
-
         {/* ===== OUR AWESOME SERVICES (6 cards) ===== */}
         <Stack className="svc-awesome" alignItems="center">
           <Typography className="svc-awesome-title">Our Awesome Services</Typography>

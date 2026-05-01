@@ -23,3 +23,5 @@ export const userVar = makeVar<CustomJwtPayload>({
 });
 
 export const socketVar = makeVar<WebSocket | null>(null);
+
+export const unreadCountVar = makeVar<number>(0);

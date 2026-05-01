@@ -4,7 +4,7 @@ import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
 import {
 	Box, Button, InputAdornment, List, ListItem, Stack,
 	Dialog, DialogTitle, DialogContent, DialogActions,
-	TextField, Select, MenuItem, FormControl, InputLabel,
+	TextField, Select, MenuItem, FormControl, InputLabel, Alert,
 } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -168,7 +168,7 @@ const AdminNotice: NextPage = ({ initialInquiry = DEFAULT_NOTICES_INQUIRY, ...pr
 	return (
 		<Box component={'div'} className={'content'}>
 			<Box component={'div'} className={'title flex_space'}>
-				<Typography variant={'h2'}>Notice Management</Typography>
+				<Typography variant={'h2'}>Announcements</Typography>
 				<Button className="btn_add" variant={'contained'} size={'medium'} onClick={() => setCreateDialogOpen(true)}>
 					<AddRoundedIcon sx={{ mr: '8px' }} />
 					ADD
@@ -246,11 +246,16 @@ const AdminNotice: NextPage = ({ initialInquiry = DEFAULT_NOTICES_INQUIRY, ...pr
 							label="Category"
 							onChange={(e) => setCreateInput({ ...createInput, noticeCategory: e.target.value as NoticeCategory })}
 						>
-							{Object.values(NoticeCategory).map((c) => (
-								<MenuItem key={c} value={c}>{c}</MenuItem>
-							))}
+							<MenuItem value={NoticeCategory.FAQ}>FAQ — shown on /cs/faq page</MenuItem>
+							<MenuItem value={NoticeCategory.TERMS}>TERMS — shown on /cs/terms page</MenuItem>
+							<MenuItem value={NoticeCategory.ANNOUNCEMENT}>ANNOUNCEMENT — sends notification to all members</MenuItem>
 						</Select>
 					</FormControl>
+					{createInput.noticeCategory === NoticeCategory.ANNOUNCEMENT && (
+						<Alert severity="warning" sx={{ fontSize: 13 }}>
+							Publishing this notice will send an in-app notification to all active members.
+						</Alert>
+					)}
 					<FormControl fullWidth size="small">
 						<InputLabel>Status</InputLabel>
 						<Select
