@@ -9,7 +9,7 @@ import { RippleBadge } from '../../scss/MaterialTheme/index';
 import { useReactiveVar } from '@apollo/client';
 import { socketVar, userVar } from '../../apollo/store';
 import { Member } from '../types/member/member';
-import { Messages, REACT_APP_API_URL } from '../config';
+import { Messages, resolveAssetUrl } from '../config';
 import { sweetErrorAlert } from '../sweetAlert';
 
 interface MessagePayload {
@@ -39,7 +39,7 @@ const Chat = () => {
   /** LIFECYCLES **/
   useEffect(() => {
     if (!socket) return;
-    socket.onmessage = (msg: MessageEvent) => {
+    const handleSocketMessage = (msg: MessageEvent) => {
       const data = JSON.parse(msg.data);
 
       switch (data.event) {
@@ -57,8 +57,9 @@ const Chat = () => {
           break;
       }
     };
+    socket.addEventListener('message', handleSocketMessage);
     return () => {
-      socket.onmessage = null;
+      socket.removeEventListener('message', handleSocketMessage);
     };
   }, [socket]);
 
@@ -120,9 +121,7 @@ const Chat = () => {
               </Box>
               {messagesList.map((ele: MessagePayload, index: number) => {
                 const { text, memberData } = ele;
-                const memberImage = memberData?.memberImage
-                  ? `${REACT_APP_API_URL}/${memberData.memberImage}`
-                  : '/general_images/default_profile.png';
+                const memberImage = resolveAssetUrl(memberData?.memberImage, '/general_images/default_profile.png');
 
                 return memberData?._id === user?._id ? (
                   <Box

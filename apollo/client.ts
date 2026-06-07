@@ -3,17 +3,13 @@ import {
   ApolloClient,
   ApolloLink,
   InMemoryCache,
-  split,
   from,
   NormalizedCacheObject,
 } from "@apollo/client";
 import createUploadLink from "apollo-upload-client/public/createUploadLink.js";
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { getMainDefinition } from "@apollo/client/utilities";
 import { onError } from "@apollo/client/link/error";
 import { getJwtToken } from "../libs/auth";
 import { sweetErrorAlert } from "../libs/sweetAlert";
-import { socketVar } from "./store";
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 // global variable: apolloClients
 
@@ -23,28 +19,6 @@ function getHeaders() {
   // @ts-ignore
   if (token) headers["Authorization"] = `Bearer ${token}`;
   return headers;
-}
-// Custom WebSocket client
-class LoggingWebSocket {
-  private socket: WebSocket;
-  constructor(url: string) {
-    this.socket = new WebSocket(`${url}?token=${getJwtToken()}`);
-    socketVar(this.socket);
-
-    this.socket.onerror = (err) => {
-      console.error("WebSocket error:", err);
-    };
-  }
-
-  send(
-    data: string | ArrayBuffer | SharedArrayBuffer | Blob | ArrayBufferView,
-  ) {
-    this.socket.send(data);
-  }
-
-  close() {
-    this.socket.close();
-  }
 }
 
 function createIsomorphicLink() {
@@ -65,19 +39,6 @@ function createIsomorphicLink() {
       uri: process.env.REACT_APP_API_GRAPHQL_URL,
     });
 
-    /* WEBSOCKET SUBSCRIPTION LINK */
-    const wsLink = new WebSocketLink({
-      uri: process.env.REACT_APP_API_WS ?? "ws://127.0.0.1:3007",
-      options: {
-        reconnect: false,
-        timeout: 30000,
-        connectionParams: () => {
-          return { headers: getHeaders() };
-        },
-      },
-      webSocketImpl: LoggingWebSocket,
-    });
-    // STEP 1
     const errorLink = onError(({ graphQLErrors, networkError, response }) => {
       if (graphQLErrors) {
         graphQLErrors.map(({ message, locations, path, extensions }) => {
@@ -92,23 +53,8 @@ function createIsomorphicLink() {
       if (networkError?.statusCode === 401) {
       }
     });
-    // STEP 3
-    const splitLink = split(
-      ({ query }) => {
-        const definition = getMainDefinition(query);
-        // getMainDefinition() is a helper function that extracts the main operation from it.
-        return (
-          definition.kind === "OperationDefinition" &&
-          definition.operation === "subscription"
-        );
-        // 'OperationDefinition' - a query, mutation, OR subscription
-        // In GraphQL, there are 3 types of operations: query, mutation, and subscription - listen for real-time updates
-      },
-      wsLink,
-      authLink.concat(link),
-    );
 
-    return from([errorLink, splitLink]);
+    return from([errorLink, authLink.concat(link)]);
   }
 }
 

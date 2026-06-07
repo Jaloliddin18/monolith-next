@@ -8,7 +8,7 @@ import {
   useMutation,
 } from "@apollo/client";
 import { useTranslation } from "next-i18next";
-import { userVar, unreadCountVar } from "../../apollo/store";
+import { socketVar, userVar, unreadCountVar } from "../../apollo/store";
 import { getJwtToken, updateUserInfo, logOut } from "../auth";
 import {
   Avatar,
@@ -50,11 +50,13 @@ import { Notification } from "../types/notification/notification";
 import { REACT_APP_API_URL } from "../config";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 import { NotificationStatus } from "../enums/notification.enum";
+import { NoticeCategory } from "../enums/notice.enum";
 
 const Top = () => {
   const device = useDeviceDetect();
   const router = useRouter();
   const user = useReactiveVar(userVar);
+  const socket = useReactiveVar(socketVar);
   const { t, i18n } = useTranslation("common");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [langAnchorEl, setLangAnchorEl] = useState<null | HTMLElement>(null);
@@ -207,6 +209,22 @@ const Top = () => {
     if (token) updateUserInfo(token);
   }, []);
 
+  useEffect(() => {
+    if (!socket || !openNotifications) return;
+
+    const handleSocketMessage = (msg: MessageEvent) => {
+      const data = JSON.parse(msg.data) as { event?: string };
+      if (data.event === "notification") {
+        refetchNotifs();
+      }
+    };
+
+    socket.addEventListener("message", handleSocketMessage);
+    return () => {
+      socket.removeEventListener("message", handleSocketMessage);
+    };
+  }, [openNotifications, refetchNotifs, socket]);
+
   const handleMenuOpen = useCallback((e: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(e.currentTarget);
   }, []);
@@ -230,15 +248,19 @@ const Top = () => {
 
   const handleNotifClick = useCallback(
     async (notif: Notification) => {
-      unreadCountVar(Math.max(0, unreadCountVar() - 1));
       try {
         await markRead({ variables: { input: { notificationId: notif._id } } });
+        unreadCountVar(Math.max(0, unreadCountVar() - 1));
         refetchNotifs();
       } catch (_) {}
       setOpenNotifications(false);
-      const dest = notif.noticeId
-        ? `/cs/privacy?announcementId=${notif.noticeId}`
-        : "/cs";
+      const dest = !notif.noticeId
+        ? "/cs"
+        : notif.noticeCategory === NoticeCategory.FAQ
+          ? `/cs/faq?noticeId=${notif.noticeId}`
+          : notif.noticeCategory === NoticeCategory.TERMS
+            ? `/cs/terms?noticeId=${notif.noticeId}`
+            : `/cs/privacy?announcementId=${notif.noticeId}`;
       router.push(dest);
     },
     [markRead, refetchNotifs, router],

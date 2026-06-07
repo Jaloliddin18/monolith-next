@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, CircularProgress, Stack, Typography } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
 import { GET_NOTICES } from '../../../apollo/user/query';
 import { Direction } from '../../enums/common.enum';
 import { NoticeCategory, NoticeStatus } from '../../enums/notice.enum';
@@ -9,6 +10,8 @@ import { T } from '../../types/common';
 import { Notice } from '../../types/notice/notice';
 
 const TermsPage = () => {
+	const router = useRouter();
+	const noticeId = typeof router.query.noticeId === 'string' ? router.query.noticeId : null;
 	const [activeIndex, setActiveIndex] = useState<number>(0);
 	const [sections, setSections] = useState<Notice[]>([]);
 
@@ -33,6 +36,14 @@ const TermsPage = () => {
 		},
 		onError: () => {},
 	});
+
+	useEffect(() => {
+		if (!noticeId) return;
+		const nextIndex = sections.findIndex((section) => section._id === noticeId);
+		if (nextIndex >= 0) {
+			setActiveIndex(nextIndex);
+		}
+	}, [noticeId, sections]);
 
 	const active = sections[activeIndex];
 

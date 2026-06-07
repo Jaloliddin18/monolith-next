@@ -248,14 +248,12 @@ const AdminNotice: NextPage = ({ initialInquiry = DEFAULT_NOTICES_INQUIRY, ...pr
 						>
 							<MenuItem value={NoticeCategory.FAQ}>FAQ — shown on /cs/faq page</MenuItem>
 							<MenuItem value={NoticeCategory.TERMS}>TERMS — shown on /cs/terms page</MenuItem>
-							<MenuItem value={NoticeCategory.ANNOUNCEMENT}>ANNOUNCEMENT — sends notification to all members</MenuItem>
+							<MenuItem value={NoticeCategory.ANNOUNCEMENT}>ANNOUNCEMENT — shown on /cs/privacy page</MenuItem>
 						</Select>
 					</FormControl>
-					{createInput.noticeCategory === NoticeCategory.ANNOUNCEMENT && (
-						<Alert severity="warning" sx={{ fontSize: 13 }}>
-							Publishing this notice will send an in-app notification to all active members.
-						</Alert>
-					)}
+					<Alert severity="warning" sx={{ fontSize: 13 }}>
+						Publishing an ACTIVE notice will send an in-app notification to all active members.
+					</Alert>
 					<FormControl fullWidth size="small">
 						<InputLabel>Status</InputLabel>
 						<Select

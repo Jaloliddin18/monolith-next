@@ -13,8 +13,14 @@ import "../scss/app.scss";
 import "../scss/pc/main.scss";
 import "../scss/mobile/main.scss";
 
+interface NotificationSocketPayload {
+  event: string;
+  receiverId?: string;
+}
+
 function AppInner({ Component, pageProps }: Pick<AppProps, "Component" | "pageProps">) {
   const user = useReactiveVar(userVar);
+  const socket = useReactiveVar(socketVar);
 
   const { data: unreadData, startPolling, stopPolling } = useQuery(GET_UNREAD_COUNT, {
     skip: !user?._id,
@@ -35,6 +41,22 @@ function AppInner({ Component, pageProps }: Pick<AppProps, "Component" | "pagePr
       unreadCountVar(unreadData.getUnreadCount);
     }
   }, [unreadData]);
+
+  useEffect(() => {
+    if (!socket || !user?._id) return;
+
+    const handleSocketMessage = (msg: MessageEvent) => {
+      const data = JSON.parse(msg.data) as NotificationSocketPayload;
+      if (data.event !== "notification") return;
+      if (data.receiverId && data.receiverId !== user._id) return;
+      unreadCountVar(unreadCountVar() + 1);
+    };
+
+    socket.addEventListener("message", handleSocketMessage);
+    return () => {
+      socket.removeEventListener("message", handleSocketMessage);
+    };
+  }, [socket, user?._id]);
 
   return <Component {...pageProps} />;
 }

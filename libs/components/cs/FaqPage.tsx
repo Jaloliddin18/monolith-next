@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -13,6 +13,7 @@ import { Notice } from '../../types/notice/notice';
 
 const FaqPage = () => {
 	const router = useRouter();
+	const noticeId = typeof router.query.noticeId === 'string' ? router.query.noticeId : null;
 	const [openFaq, setOpenFaq] = useState<string | null>(null);
 	const [searchQuery, setSearchQuery] = useState<string>('');
 	const [faqs, setFaqs] = useState<Notice[]>([]);
@@ -42,6 +43,13 @@ const FaqPage = () => {
 					f.noticeContent.toLowerCase().includes(searchQuery.toLowerCase()),
 		  )
 		: faqs;
+
+	useEffect(() => {
+		if (!noticeId) return;
+		if (faqs.some((faq) => faq._id === noticeId)) {
+			setOpenFaq(noticeId);
+		}
+	}, [faqs, noticeId]);
 
 	return (
 		<Stack className="faq-page">

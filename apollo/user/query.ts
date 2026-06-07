@@ -814,6 +814,7 @@ export const GET_MY_NOTIFICATIONS = gql`
         authorId
         receiverId
         noticeId
+        noticeCategory
         createdAt
       }
       metaCounter {

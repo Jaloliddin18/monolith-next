@@ -3,6 +3,7 @@ import {
 	NotificationStatus,
 	NotificationType,
 } from '../../enums/notification.enum';
+import { NoticeCategory } from '../../enums/notice.enum';
 import { Member, TotalCounter } from '../member/member';
 
 export interface Notification {
@@ -17,6 +18,7 @@ export interface Notification {
 	furnitureId?: string;
 	articleId?: string;
 	noticeId?: string;
+	noticeCategory?: NoticeCategory;
 	createdAt: Date;
 	updatedAt: Date;
 
